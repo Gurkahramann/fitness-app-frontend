@@ -18,7 +18,6 @@ const baseStyles = StyleSheet.create({
   },
 });
 
-// 📌 Light Mode Stilleri
 export const lightStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -50,10 +49,9 @@ export const lightStyles = StyleSheet.create({
     width: '100%',
     maxWidth: 400,
   } ,
-  ...baseStyles, // ✅ Sorunsuz birleştirme
+  ...baseStyles, 
 });
 
-// 📌 Dark Mode Stilleri
 export const darkStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -85,5 +83,5 @@ export const darkStyles = StyleSheet.create({
     width: '100%',
     maxWidth: 400,
   } ,
-  ...baseStyles, // ✅ Sorunsuz birleştirme
+  ...baseStyles, 
 });
