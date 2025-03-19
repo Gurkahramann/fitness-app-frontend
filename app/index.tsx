@@ -1,7 +1,13 @@
 import React from 'react';
 import { useNavigation } from 'expo-router';
 import HomeScreen from './screens/HomeScreen';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 
 export default function Index() {
-  return <HomeScreen />;
+  return (
+    <SafeAreaProvider>
+      <HomeScreen />
+    </SafeAreaProvider>
+  );
 }

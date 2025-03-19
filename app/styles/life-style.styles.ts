@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-// 📌 Ortak stiller
 const baseStyles = {
   container: {
     flex: 1,
@@ -13,18 +12,13 @@ const baseStyles = {
     fontWeight: '700',
     marginBottom: 10,
   } as const,
-  subtitle: {
-    fontSize: 14,
-    fontWeight: '400',
-    marginBottom: 30,
-  } as const,
   input: {
     width: '100%',
     maxWidth: 400,
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 15,
-    fontSize: 16,
+    fontSize: 16,           // Metin stili
     borderWidth: 1,
     marginBottom: 10,
   } as const,
@@ -42,8 +36,8 @@ const baseStyles = {
   } as const,
 };
 
-// 📌 Light Mode Stilleri
 export const lightStyles = StyleSheet.create({
+  // Ana container
   container: {
     ...baseStyles.container,
     backgroundColor: '#FFF',
@@ -52,16 +46,16 @@ export const lightStyles = StyleSheet.create({
     ...baseStyles.title,
     color: '#000',
   },
-  subtitle: {
-    ...baseStyles.subtitle,
-    color: '#666',
-  },
+  
+  // TextInput
   input: {
     ...baseStyles.input,
     backgroundColor: '#FFF',
     borderColor: '#ccc',
     color: '#000',
   },
+
+  // Kaydet butonu
   button: {
     ...baseStyles.button,
     backgroundColor: '#000',
@@ -70,9 +64,33 @@ export const lightStyles = StyleSheet.create({
     ...baseStyles.buttonText,
     color: '#FFF',
   },
+
+  // ModalSelector container - VIEW stili, input benzeri
+  modalContainer: {
+    backgroundColor: '#FFF',
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 15,
+    width: '100%',
+    maxWidth: 400,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  // ModalSelector'da metin stili
+  modalText: {
+    color: '#000',
+    fontSize: 16,
+  },
+  // Seçenek listesi
+  modalOptionContainer: {
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+  },
 });
 
-// 📌 Dark Mode Stilleri
 export const darkStyles = StyleSheet.create({
   container: {
     ...baseStyles.container,
@@ -82,16 +100,16 @@ export const darkStyles = StyleSheet.create({
     ...baseStyles.title,
     color: '#FFF',
   },
-  subtitle: {
-    ...baseStyles.subtitle,
-    color: '#ccc',
-  },
+
+  // TextInput
   input: {
     ...baseStyles.input,
     backgroundColor: '#222',
     borderColor: '#555',
     color: '#FFF',
   },
+
+  // Kaydet butonu
   button: {
     ...baseStyles.button,
     backgroundColor: '#FFF',
@@ -99,5 +117,30 @@ export const darkStyles = StyleSheet.create({
   buttonText: {
     ...baseStyles.buttonText,
     color: '#000',
+  },
+
+  // ModalSelector container
+  modalContainer: {
+    backgroundColor: '#000',
+    borderColor: '#555',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 15,
+    width: '100%',
+    maxWidth: 400,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  // Metin stili
+  modalText: {
+    color: '#FFF',
+    fontSize: 16,
+  },
+  // Seçenek listesi
+  modalOptionContainer: {
+    backgroundColor: '#333',
+    borderRadius: 8,
   },
 });
