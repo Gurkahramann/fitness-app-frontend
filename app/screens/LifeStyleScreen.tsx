@@ -25,6 +25,15 @@ export default function LifestyleScreen() {
 
   // Seçim
   const handleSelectActivity = (option: { key: string; label: string }) => {
+    // Sadece key saklıyoruz (ör. "light"), ekranda bu görünecek
+    setFormData((prev) => ({ ...prev, activityLevel: option.key }));
+  };
+
+  // Ekranda gösterilecek metin
+  const initValue = formData.activityLevel || 'Seçiniz';
+
+  // Seçim
+  const handleSelectActivity = (option: { key: string; label: string }) => {
     // Sadece key sakliyoruz (ör. "light"), ekranda bu görünecek
     setFormData((prev) => ({ ...prev, activityLevel: option.key }));
   };
