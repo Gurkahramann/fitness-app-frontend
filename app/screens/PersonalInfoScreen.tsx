@@ -10,7 +10,7 @@ import ModalSelector from 'react-native-modal-selector';
 import { useRouter } from 'expo-router';
 
 import { useFormData } from '../context/FormContext';
-import { lightStyles, darkStyles } from '../styles/personal-info.styles';
+import { lightStyles, darkStyles } from '../styles/PersonalInfo.styles';
 
 // Cinsiyet seçenekleri (ModalSelector, key/label formatı kullanır)
 const GENDER_OPTIONS = [
@@ -24,23 +24,19 @@ export default function PersonalInfo() {
   const router = useRouter();
   const colorScheme = useColorScheme();
 
-  // Temaya göre lightStyles veya darkStyles
   const styles = colorScheme === 'dark' ? darkStyles : lightStyles;
 
-  // “İleri” butonuna basılınca
   const handleNext = () => {
     if (!formData.firstName || !formData.lastName || !formData.gender) {
       alert('Lütfen tüm alanları doldurunuz.');
       return;
     }
-    router.push('/body-info');
+    router.push('./body-info');
   };
 
-  // Seçili cinsiyetin “label”'ını bulalım (Arayüzde gösterim için)
   const selectedGenderLabel =
     GENDER_OPTIONS.find((opt) => opt.key === formData.gender)?.label || 'Seçiniz';
 
-  // ModalSelector onChange callback’i
   const handleSelectGender = (option: { key: string; label: string }) => {
     setFormData((prev) => ({ ...prev, gender: option.key }));
   };

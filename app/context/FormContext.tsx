@@ -2,6 +2,8 @@
 import React, { createContext, useState, useContext } from 'react';
 
 type FormData = {
+  email: string;
+  password: string;
   firstName: string;
   lastName: string;
   gender: string;
@@ -13,6 +15,8 @@ type FormData = {
 };
 
 const defaultFormData: FormData = {
+  email: '',
+  password: '',
   firstName: '',
   lastName: '',
   gender: '',

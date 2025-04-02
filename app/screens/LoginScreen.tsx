@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard,ActivityIndicator } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from '../styles/LoginScreen.styles';
+import { useRouter } from "expo-router";
+import { useAuth } from '@/hooks/useAuth';
+
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { login, isLoading } = useAuth(); // AuthContext'ten login ve yüklenme durumunu alıyoruz
+  const router = useRouter();
 
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   // 📌 E-posta doğrulama regex fonksiyonu
   const isValidEmail = (email: string) => {
@@ -32,11 +38,14 @@ export default function LoginScreen() {
   };
 
   // 📌 Giriş işlemi
-  const handleLogin = () => {
-    if (!email || !password || emailError || passwordError) {
-      return;
+  const handleLogin = async () => {
+    if (!email || !password || emailError || passwordError) return;
+
+    const success = await login({ email, password });
+
+    if (success !== undefined) {
+      router.push("./index"); // Giriş başarılı olursa ana ekrana yönlendir
     }
-    console.log('Giriş başarılı!');
   };
 
   return (
