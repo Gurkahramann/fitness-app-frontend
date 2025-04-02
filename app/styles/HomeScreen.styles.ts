@@ -46,13 +46,18 @@
 
 // app/styles/homeScreen.styles.ts
 // app/styles/homeScreen.styles.ts
+// app/styles/homeScreen.styles.ts
+// app/styles/homeScreen.styles.ts
+// app/styles/HomeScreen.styles.ts
 import { StyleSheet } from 'react-native';
 
 export const lightStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
   },
+
+  // Üst header
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -67,7 +72,6 @@ export const lightStyles = StyleSheet.create({
   },
   headerRight: {
     flex: 1,
-    justifyContent: 'center',
   },
   helloText: {
     fontSize: 14,
@@ -86,6 +90,60 @@ export const lightStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#000',
     borderRadius: 8,
+  },
+
+  // Bölüm başlığı
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    marginTop: 8,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#000',
+  },
+  viewAllText: {
+    fontSize: 14,
+    color: '#666',
+  },
+
+  // Yatay kaydırma container
+  workoutProgramsContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  workoutCard: {
+    width: 100,
+    marginRight: 12,
+    borderRadius: 8,
+    overflow: 'hidden',
+    backgroundColor: '#ddd',
+    alignItems: 'center',
+  },
+  workoutImage: {
+    width: '100%',
+    height: 70,
+  },
+  workoutTitle: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#000',
+    marginVertical: 8,
+  },
+
+  // Mini takvim container
+  miniCalendarContainer: {
+    borderRadius: 16,
+    overflow: 'hidden',
+    marginTop: 8,
+  },
+  miniCalendar: {
+    height: 200,
+    borderRadius: 16,
+    overflow: 'hidden',
   },
 });
 
@@ -108,7 +166,6 @@ export const darkStyles = StyleSheet.create({
   },
   headerRight: {
     flex: 1,
-    justifyContent: 'center',
   },
   helloText: {
     fontSize: 14,
@@ -127,5 +184,55 @@ export const darkStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     borderRadius: 8,
+  },
+
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    marginTop: 8,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#fff',
+  },
+  viewAllText: {
+    fontSize: 14,
+    color: '#888',
+  },
+  workoutProgramsContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  workoutCard: {
+    width: 100,
+    marginRight: 12,
+    borderRadius: 8,
+    overflow: 'hidden',
+    backgroundColor: '#333',
+    alignItems: 'center',
+  },
+  workoutImage: {
+    width: '100%',
+    height: 70,
+  },
+  workoutTitle: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#fff',
+    marginVertical: 8,
+  },
+
+  miniCalendarContainer: {
+    borderRadius: 16,
+    overflow: 'hidden',
+    marginTop: 8,
+  },
+  miniCalendar: {
+    height: 200,
+    borderRadius: 16,
+    overflow: 'hidden',
   },
 });
