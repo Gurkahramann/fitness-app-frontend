@@ -23,12 +23,6 @@ export default function LifestyleScreen() {
   const {register,isLoading} = useAuth();
   const styles = colorScheme === 'dark' ? darkStyles : lightStyles;
 
-  // Seçim
-  const handleSelectActivity = (option: { key: string; label: string }) => {
-    // Sadece key saklıyoruz (ör. "light"), ekranda bu görünecek
-    setFormData((prev) => ({ ...prev, activityLevel: option.key }));
-  };
-
   // Ekranda gösterilecek metin
   const initValue = formData.activityLevel || 'Seçiniz';
 
@@ -39,7 +33,6 @@ export default function LifestyleScreen() {
   };
 
   // Ekranda gösterilecek metin
-  const initValue = formData.activityLevel || 'Seçiniz';
 
   const handleSave = async () => {
     if (!formData.activityLevel || !formData.interestArea) {
