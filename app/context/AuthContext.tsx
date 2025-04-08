@@ -20,7 +20,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   register: (formData: RegisterForm) => Promise<{ success: boolean; message?: string }>;
-  login: (formData: LoginForm) => Promise<void>;
+  login: (formData: LoginForm) => Promise<{ success: boolean; message?: string }>;
   logout: () => Promise<void>;
 }
 
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   
 
   // **📌 Kullanici Giris Yapma (Login)**
-  const login = async (formData: LoginForm) => {
+  const login = async (formData: LoginForm): Promise<{ success: boolean; message?: string }> => {
     try {
       setIsLoading(true);
       const response = await fetch(`${apiUrl}/auth/login`, {
@@ -96,12 +96,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       });
   
       const data = await response.json();
+      console.log("Login response data:", data);
   
       if (response.ok) {
         await AsyncStorage.setItem("accessToken", data.accessToken);
         await AsyncStorage.setItem("refreshToken", data.refreshToken);
   
-        // 🔹 accessToken ile kullanıcı bilgisi çekiliyor
         const userInfo = await fetch(`${springUrl}/auth/me`, {
           method: "GET",
           headers: {
@@ -114,15 +114,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (userInfo.ok) {
           setUser(userData);
           await AsyncStorage.setItem("user", JSON.stringify(userData));
+          return { success: true }; // ✅ başarıyı döndür
         } else {
-          console.error("Kullanıcı bilgisi alınamadı:", userData.message);
+          return { success: false, message: userData.message || "Kullanıcı bilgisi alınamadı" };
         }
       } else {
-        alert(`⚠️ Giriş başarısız: ${data.message}`);
+        return { success: false, message: data.message || "Giriş başarısız" };
       }
     } catch (error) {
-      alert("❌ Bağlantı hatası. Lütfen tekrar deneyin.");
-      console.log(error);
+      console.log("🚨 Login error:", error);
+      return { success: false, message: "Sunucu hatası" };
     } finally {
       setIsLoading(false);
     }

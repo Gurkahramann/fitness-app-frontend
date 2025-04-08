@@ -49,18 +49,17 @@
 // app/styles/homeScreen.styles.ts
 // app/styles/homeScreen.styles.ts
 // app/styles/HomeScreen.styles.ts
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native"
 
 export const lightStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: "#f5f5f5",
   },
-
-  // Üst header
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
@@ -68,93 +67,81 @@ export const lightStyles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    marginRight: 12,
   },
   headerRight: {
     flex: 1,
+    marginLeft: 12,
   },
   helloText: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
   },
   userNameText: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#000',
+    fontWeight: "bold",
+    color: "#000",
   },
   menuButton: {
-    width: 32,
-    height: 32,
-    marginLeft: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000',
-    borderRadius: 8,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#f0f0f0",
+    alignItems: "center",
+    justifyContent: "center",
   },
-
-  // Bölüm başlığı
   sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 16,
-    marginTop: 8,
+    marginTop: 16,
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: '600',
-    color: '#000',
+    fontWeight: "bold",
+    color: "#000",
   },
   viewAllText: {
     fontSize: 14,
-    color: '#666',
+    color: "#3DCC85",
+    fontWeight: "500",
   },
-
-  // Yatay kaydırma container
   workoutProgramsContainer: {
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
   workoutCard: {
-    width: 100,
+    width: 120,
+    height: 160,
     marginRight: 12,
-    borderRadius: 8,
-    overflow: 'hidden',
-    backgroundColor: '#ddd',
-    alignItems: 'center',
+    borderRadius: 12,
+    overflow: "hidden",
   },
   workoutImage: {
-    width: '100%',
-    height: 70,
+    width: "100%",
+    height: "100%",
   },
   workoutTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#000',
-    marginVertical: 8,
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "rgba(0,0,0,0.6)",
+    color: "#fff",
+    padding: 8,
+    textAlign: "center",
   },
-
-  // Mini takvim container
-  miniCalendarContainer: {
-    borderRadius: 16,
-    overflow: 'hidden',
-    marginTop: 8,
-  },
-  miniCalendar: {
-    height: 200,
-    borderRadius: 16,
-    overflow: 'hidden',
-  },
-});
+})
 
 export const darkStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: "#121212",
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
@@ -162,77 +149,69 @@ export const darkStyles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    marginRight: 12,
   },
   headerRight: {
     flex: 1,
+    marginLeft: 12,
   },
   helloText: {
     fontSize: 14,
-    color: '#ccc',
+    color: "#ccc",
   },
   userNameText: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#fff',
+    fontWeight: "bold",
+    color: "#fff",
   },
   menuButton: {
-    width: 32,
-    height: 32,
-    marginLeft: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 8,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#444",
+    alignItems: "center",
+    justifyContent: "center",
   },
-
   sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 16,
-    marginTop: 8,
+    marginTop: 16,
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: '600',
-    color: '#fff',
+    fontWeight: "bold",
+    color: "#fff",
   },
   viewAllText: {
     fontSize: 14,
-    color: '#888',
+    color: "#3DCC85",
+    fontWeight: "500",
   },
   workoutProgramsContainer: {
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
   workoutCard: {
-    width: 100,
+    width: 120,
+    height: 160,
     marginRight: 12,
-    borderRadius: 8,
-    overflow: 'hidden',
-    backgroundColor: '#333',
-    alignItems: 'center',
+    borderRadius: 12,
+    overflow: "hidden",
   },
   workoutImage: {
-    width: '100%',
-    height: 70,
+    width: "100%",
+    height: "100%",
   },
   workoutTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#fff',
-    marginVertical: 8,
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "rgba(0,0,0,0.6)",
+    color: "#fff",
+    padding: 8,
+    textAlign: "center",
   },
+})
 
-  miniCalendarContainer: {
-    borderRadius: 16,
-    overflow: 'hidden',
-    marginTop: 8,
-  },
-  miniCalendar: {
-    height: 200,
-    borderRadius: 16,
-    overflow: 'hidden',
-  },
-});

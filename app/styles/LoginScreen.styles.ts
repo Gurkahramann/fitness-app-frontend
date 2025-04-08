@@ -1,55 +1,88 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
-    justifyContent: 'center', // 📌 Ekranı ortalamak için ekledik
-    alignItems: 'center',
   },
-  content: {
-    width: '100%',
-    maxWidth: 400,
-    alignItems: 'center', // 📌 İçeriği ortalamak için
+  keyboardAvoidingView: {
+    flex: 1,
+  },
+  innerContainer: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 24,
+  },
+  headerContainer: {
+    marginBottom: 40,
   },
   title: {
     fontSize: 32,
-    fontWeight: '700',
-    color: '#fff',
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+  },
+  formContainer: {
+    width: "100%",
+  },
+  inputContainer: {
     marginBottom: 20,
-    textAlign: 'center',
+  },
+  inputWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderRadius: 12,
+    height: 56,
+    paddingHorizontal: 16,
+  },
+  inputIcon: {
+    marginRight: 12,
   },
   input: {
-    width: '100%',
-    backgroundColor: '#222',
-    color: '#fff',
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    marginBottom: 10,
+    flex: 1,
+    height: "100%",
     fontSize: 16,
-    borderWidth: 1,
-    borderColor: '#444',
+  },
+  eyeIcon: {
+    padding: 4,
   },
   errorText: {
-    color: '#ff4d4d',
+    color: "#ff4d4f",
+    fontSize: 12,
+    marginTop: 4,
+    marginLeft: 4,
+  },
+  forgotPasswordContainer: {
+    alignSelf: "flex-end",
+    marginBottom: 24,
+  },
+  forgotPasswordText: {
     fontSize: 14,
-    marginBottom: 10,
-    textAlign: 'left',
   },
-  button: {
-    width: '100%',
-    backgroundColor: '#fff',
-    borderRadius: 25,
-    paddingVertical: 14,
-    marginTop: 20,
-    alignItems: 'center',
+  loginButton: {
+    height: 56,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 24,
   },
-  buttonText: {
-    color: '#000',
+  loginButtonText: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
-});
-
-export default styles;
+  registerContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  registerText: {
+    fontSize: 14,
+    marginRight: 4,
+  },
+  registerLink: {
+    fontSize: 14,
+    fontWeight: "600",
+  },
+})

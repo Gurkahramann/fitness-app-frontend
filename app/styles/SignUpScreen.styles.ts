@@ -1,55 +1,83 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native"
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
-    justifyContent: 'center', // Ekranın ortasında sabit kalmasını sağlar
-    alignItems: 'center',
-    paddingHorizontal: 20,
   },
-  content: {
-    width: '100%',
-    maxWidth: 400,
+  keyboardAvoidingView: {
+    flex: 1,
+  },
+  innerContainer: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 24,
+  },
+  headerContainer: {
+    marginBottom: 40,
   },
   title: {
     fontSize: 32,
-    fontWeight: '700',
-    color: '#fff',
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+  },
+  formContainer: {
+    width: "100%",
+  },
+  inputContainer: {
     marginBottom: 20,
-    textAlign: 'center',
+  },
+  inputWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderRadius: 12,
+    height: 56,
+    paddingHorizontal: 16,
+  },
+  inputIcon: {
+    marginRight: 12,
   },
   input: {
-    width: '100%',
-    backgroundColor: '#222',
-    color: '#fff',
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    marginBottom: 10,
+    flex: 1,
+    height: "100%",
     fontSize: 16,
-    borderWidth: 1,
-    borderColor: '#444',
+  },
+  eyeIcon: {
+    padding: 4,
   },
   errorText: {
-    color: '#ff4d4d', // Kırmızı hata mesajı
-    fontSize: 14,
-    marginBottom: 10,
-    textAlign: 'left',
+    color: "#ff4d4f",
+    fontSize: 12,
+    marginTop: 4,
+    marginLeft: 4,
   },
-  button: {
-    width: '100%',
-    backgroundColor: '#fff',
-    borderRadius: 25,
-    paddingVertical: 14,
-    marginTop: 20,
-    alignItems: 'center',
+  signUpButton: {
+    height: 56,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 8,
+    marginBottom: 24,
   },
-  buttonText: {
-    color: '#000',
+  signUpButtonText: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
-});
+  loginContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  loginText: {
+    fontSize: 14,
+    marginRight: 4,
+  },
+  loginLink: {
+    fontSize: 14,
+    fontWeight: "600",
+  },
+})
 
-export default styles;

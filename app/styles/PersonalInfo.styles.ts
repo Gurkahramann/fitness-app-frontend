@@ -1,87 +1,95 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native"
 
-// 📌 Temel buton stilleri
-const baseStyles = StyleSheet.create({
-  button: {
-    width: '100%',
-    maxWidth: 400,
-    backgroundColor: '#fff',
-    borderRadius: 25,
-    paddingVertical: 14,
-    marginVertical: 10,
-    alignItems: 'center',
-  }, // 💡 Tip uyuşmazlığı yaşanmaması için ekledik
-  buttonText: {
-    color: '#000',
-    fontSize: 16,
-    fontWeight: '600',
+export default StyleSheet.create({
+  container: {
+    flex: 1,
   },
-});
-
-export const lightStyles = StyleSheet.create({
-  container: {
+  content: {
     flex: 1,
-    padding: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFF',
-  } ,
-  label: {
-    color: '#000',
-    marginBottom: 4,
-  } ,
+    padding: 24,
+    justifyContent: "center",
+  },
+  headerContainer: {
+    marginBottom: 40,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+  },
+  formContainer: {
+    width: "100%",
+  },
+  inputContainer: {
+    marginBottom: 20,
+  },
+  inputWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderRadius: 12,
+    height: 56,
+    paddingHorizontal: 16,
+  },
+  selectorWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderRadius: 12,
+    height: 56,
+    paddingLeft: 16,
+    paddingRight: 8,
+  },
+  inputIcon: {
+    marginRight: 12,
+  },
+  selectorIcon: {
+    marginLeft: "auto",
+  },
   input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginBottom: 12,
-    padding: 12,
-    color: '#000',
-    width: '100%',
-    maxWidth: 400,
-    borderRadius: 8,
-  } ,
-  modalSelector: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-    marginBottom: 12,
-    padding: 8,
-    width: '100%',
-    maxWidth: 400,
-  } ,
-  ...baseStyles, 
-});
-
-export const darkStyles = StyleSheet.create({
-  container: {
     flex: 1,
-    padding: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000',
-  } ,
-  label: {
-    color: '#FFF',
-    marginBottom: 4,
-  } ,
-  input: {
-    borderWidth: 1,
-    borderColor: '#555',
-    marginBottom: 12,
-    padding: 12,
-    color: '#FFF',
-    width: '100%',
-    maxWidth: 400,
-    borderRadius: 8,
-  } ,
+    height: "100%",
+    fontSize: 16,
+  },
   modalSelector: {
-    borderWidth: 1,
-    borderColor: '#555',
-    borderRadius: 4,
-    marginBottom: 12,
-    padding: 8,
-    width: '100%',
-    maxWidth: 400,
-  } ,
-  ...baseStyles, 
-});
+    flex: 1,
+    height: "100%",
+  },
+  selectStyle: {
+    borderWidth: 0,
+    height: "100%",
+    justifyContent: "center",
+    backgroundColor: "transparent",
+  },
+  selectTextStyle: {
+    fontSize: 16,
+    textAlign: "left",
+  },
+  initValueTextStyle: {
+    fontSize: 16,
+    textAlign: "left",
+  },
+  errorText: {
+    color: "#ff4d4f",
+    fontSize: 12,
+    marginTop: 4,
+    marginLeft: 4,
+  },
+  nextButton: {
+    flexDirection: "row",
+    height: 56,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  nextButtonText: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginRight: 8,
+  },
+})
+

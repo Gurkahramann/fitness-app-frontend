@@ -1,146 +1,99 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native"
 
-const baseStyles = {
+export default StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-  } as const,
-  title: {
-    fontSize: 36,
-    fontWeight: '700',
-    marginBottom: 10,
-  } as const,
-  input: {
-    width: '100%',
-    maxWidth: 400,
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    fontSize: 16,           // Metin stili
-    borderWidth: 1,
-    marginBottom: 10,
-  } as const,
-  button: {
-    width: '100%',
-    maxWidth: 400,
-    borderRadius: 25,
-    paddingVertical: 14,
-    marginVertical: 10,
-    alignItems: 'center',
-  } as const,
-  buttonText: {
-    fontSize: 16,
-    fontWeight: '600',
-  } as const,
-};
-
-export const lightStyles = StyleSheet.create({
-  // Ana container
-  container: {
-    ...baseStyles.container,
-    backgroundColor: '#FFF',
+  },
+  content: {
+    flex: 1,
+    padding: 24,
+  },
+  headerContainer: {
+    marginBottom: 32,
   },
   title: {
-    ...baseStyles.title,
-    color: '#000',
+    fontSize: 32,
+    fontWeight: "bold",
+    marginBottom: 8,
   },
-  
-  // TextInput
-  input: {
-    ...baseStyles.input,
-    backgroundColor: '#FFF',
-    borderColor: '#ccc',
-    color: '#000',
-  },
-
-  // Kaydet butonu
-  button: {
-    ...baseStyles.button,
-    backgroundColor: '#000',
-  },
-  buttonText: {
-    ...baseStyles.buttonText,
-    color: '#FFF',
-  },
-
-  // ModalSelector container - VIEW stili, input benzeri
-  modalContainer: {
-    backgroundColor: '#FFF',
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    width: '100%',
-    maxWidth: 400,
-    alignSelf: 'center',
-    justifyContent: 'center',
-  },
-  // ModalSelector'da metin stili
-  modalText: {
-    color: '#000',
+  subtitle: {
     fontSize: 16,
   },
-  // Seçenek listesi
-  modalOptionContainer: {
-    backgroundColor: '#FFF',
-    borderRadius: 8,
+  sectionContainer: {
+    marginBottom: 24,
   },
-});
-
-export const darkStyles = StyleSheet.create({
-  container: {
-    ...baseStyles.container,
-    backgroundColor: '#000',
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    marginBottom: 16,
   },
-  title: {
-    ...baseStyles.title,
-    color: '#FFF',
+  optionsContainer: {
+    width: "100%",
   },
-
-  // TextInput
-  input: {
-    ...baseStyles.input,
-    backgroundColor: '#222',
-    borderColor: '#555',
-    color: '#FFF',
-  },
-
-  // Kaydet butonu
-  button: {
-    ...baseStyles.button,
-    backgroundColor: '#FFF',
-  },
-  buttonText: {
-    ...baseStyles.buttonText,
-    color: '#000',
-  },
-
-  // ModalSelector container
-  modalContainer: {
-    backgroundColor: '#000',
-    borderColor: '#555',
+  optionItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 16,
+    borderRadius: 12,
     borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    width: '100%',
-    maxWidth: 400,
-    alignSelf: 'center',
-    justifyContent: 'center',
+    marginBottom: 12,
   },
-  // Metin stili
-  modalText: {
-    color: '#FFF',
+  optionIconContainer: {
+    width: 40,
+    alignItems: "center",
+  },
+  optionTextContainer: {
+    flex: 1,
+    marginLeft: 8,
+  },
+  optionText: {
     fontSize: 16,
   },
-  // Seçenek listesi
-  modalOptionContainer: {
-    backgroundColor: '#333',
-    borderRadius: 8,
+  checkIcon: {
+    marginLeft: 8,
   },
-});
+  goalsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  goalItem: {
+    width: "48%",
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    marginBottom: 12,
+    alignItems: "center",
+    position: "relative",
+    overflow: "hidden",
+  },
+  goalIcon: {
+    marginBottom: 8,
+  },
+  goalText: {
+    fontSize: 14,
+    fontWeight: "500",
+    textAlign: "center",
+  },
+  selectedIndicator: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: 20,
+    height: 20,
+    borderBottomLeftRadius: 10,
+  },
+  saveButton: {
+    height: 56,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "auto",
+    marginBottom: 24,
+  },
+  saveButtonText: {
+    fontSize: 16,
+    fontWeight: "600",
+  },
+})
+

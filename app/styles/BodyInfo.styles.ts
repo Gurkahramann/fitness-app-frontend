@@ -1,103 +1,78 @@
-import { StyleSheet } from 'react-native';
+// app/styles/BodyInfo.styles.ts
+import { StyleSheet, Platform, StatusBar } from "react-native"
 
-// 📌 Temel stiller (Hem Light hem Dark için ortak kullanılan stiller)
-const baseStyles = {
+export const bodyInfoStyles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingHorizontal: 16,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight || 0 : 0,
+    paddingBottom: 24,
+  },
+  header: {
+    marginTop: 20,
+    marginBottom: 24,
+    paddingHorizontal: 8,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+  },
+  card: {
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 24,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  dateSection: {
+    marginTop: 16,
     paddingHorizontal: 20,
-  } as const,
-  title: {
-    fontSize: 36,
-    fontWeight: '700',
-    marginBottom: 10,
-  } as const,
-  subtitle: {
-    fontSize: 14,
-    fontWeight: '400',
-    marginBottom: 30,
-  } as const,
-  input: {
-    width: '100%',
-    maxWidth: 400,
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
+    marginBottom: 8,
+  },
+  dateLabelContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  dateIcon: {
+    marginRight: 8,
+  },
+  dateLabel: {
     fontSize: 16,
-    borderWidth: 1,
-    marginBottom: 10,
-  } as const,
-  button: {
-    width: '100%',
-    maxWidth: 400,
-    borderRadius: 25,
-    paddingVertical: 14,
-    marginVertical: 10,
-    alignItems: 'center',
-  } as const,
-  buttonText: {
+    fontWeight: "500",
+  },
+  dateButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 2,
+  },
+  dateButtonText: {
     fontSize: 16,
-    fontWeight: '600',
-  } as const,
-};
-
-// 📌 Light Mode Stilleri
-export const lightStyles = StyleSheet.create({
-  container: {
-    ...baseStyles.container,
-    backgroundColor: '#FFF',
   },
-  title: {
-    ...baseStyles.title,
-    color: '#000',
+  nextButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 16,
+    borderRadius: 12,
+    marginTop: "auto",
   },
-  subtitle: {
-    ...baseStyles.subtitle,
-    color: '#666',
+  nextButtonText: {
+    fontSize: 18,
+    fontWeight: "600",
+    marginRight: 8,
   },
-  input: {
-    ...baseStyles.input,
-    backgroundColor: '#FFF',
-    borderColor: '#ccc',
-    color: '#000',
-  },
-  button: {
-    ...baseStyles.button,
-    backgroundColor: '#000',
-  },
-  buttonText: {
-    ...baseStyles.buttonText,
-    color: '#FFF',
-  },
-});
-
-// 📌 Dark Mode Stilleri
-export const darkStyles = StyleSheet.create({
-  container: {
-    ...baseStyles.container,
-    backgroundColor: '#000',
-  },
-  title: {
-    ...baseStyles.title,
-    color: '#FFF',
-  },
-  subtitle: {
-    ...baseStyles.subtitle,
-    color: '#ccc',
-  },
-  input: {
-    ...baseStyles.input,
-    backgroundColor: '#222',
-    borderColor: '#555',
-    color: '#FFF',
-  },
-  button: {
-    ...baseStyles.button,
-    backgroundColor: '#FFF',
-  },
-  buttonText: {
-    ...baseStyles.buttonText,
-    color: '#000',
-  },
-});
+})
