@@ -1,23 +1,14 @@
 "use client"
 
-import { useState, useCallback } from "react"
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  useColorScheme,
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Platform,
-} from "react-native"
-import DateTimePickerModal from "react-native-modal-datetime-picker"
-import { MaterialCommunityIcons,FontAwesome6 } from "@expo/vector-icons"
+import { useState, useCallback, useEffect } from "react"
+import { View, Text, TouchableOpacity, useColorScheme, SafeAreaView, ScrollView, StatusBar, Alert } from "react-native"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { useFormData } from "../context/FormContext"
 import { useRouter } from "expo-router"
 import OptimizedSlider from "../../components/BodyInfoSliders"
 import { bodyInfoStyles as styles } from "../styles/BodyInfo.styles"
+import CustomDateTimeModal from "../../components/CustomDateTimeModal"
+import React from "react"
 
 export default function BodyInfoScreen() {
   const { formData, setFormData } = useFormData()
@@ -26,7 +17,7 @@ export default function BodyInfoScreen() {
   const router = useRouter()
   const isDark = colorScheme === "dark"
 
-  // Varsayılan slider değerleri
+  // Default slider values
   const heightValue = Number(formData.height) || 170
   const weightValue = Number(formData.weight) || 70
 
@@ -45,25 +36,67 @@ export default function BodyInfoScreen() {
     [setFormData],
   )
 
-  // Modal aç/kapa
-  const showDatePicker = () => setDatePickerVisible(true)
-  const hideDatePicker = () => setDatePickerVisible(false)
+  const showDatePicker = () => {
+    console.log("Opening date picker")
+    setDatePickerVisible(true)
+  }
 
-  // Tarih seçildikten sonra
-  const handleConfirm = (selectedDate: Date) => {
-    const offsetFixedDate = removeTimeOffset(selectedDate)
-    const formatted = formatDate(offsetFixedDate)
-    setFormData((prev) => ({ ...prev, birthDate: formatted }))
-    hideDatePicker()
+  const hideDatePicker = () => {
+    console.log("Closing date picker")
+    setDatePickerVisible(false)
+  }
+
+  const handleDateSelect = (date: Date) => {
+    try {
+      console.log("Selected date:", date)
+      
+      // Format date as DD/MM/YYYY
+      const day = String(date.getDate()).padStart(2, '0')
+      const month = String(date.getMonth() + 1).padStart(2, '0')
+      const year = date.getFullYear()
+      const formattedDate = `${day}/${month}/${year}`
+      
+      console.log("Formatted date:", formattedDate)
+      setFormData((prev) => ({ ...prev, birthDate: formattedDate }))
+    } catch (error) {
+      console.error("Error handling date selection:", error)
+      Alert.alert("Error", "An error occurred while selecting the date. Please try again.")
+    }
+  }
+
+  const getSelectedDate = (): Date => {
+    try {
+      if (formData.birthDate) {
+        const [day, month, year] = formData.birthDate.split("/")
+        return new Date(Number(year), Number(month) - 1, Number(day))
+      }
+    } catch (error) {
+      console.error("Error parsing date:", error)
+    }
+    return new Date() // Return today's date as fallback
+  }
+
+  const getMaxDate = (): Date => {
+    return new Date() // Today's date as maximum
   }
 
   const handleNext = () => {
     if (!formData.height || !formData.weight || !formData.birthDate) {
-      alert("Boy, Kilo ve Doğum Tarihi alanlarını doldurunuz.")
+      Alert.alert("Warning", "Please fill in all fields: Height, Weight, and Birth Date.")
       return
     }
     router.push("/life-style")
   }
+
+  // Set default height and weight if empty
+  useEffect(() => {
+    if (!formData.height) {
+      setFormData((prev) => ({ ...prev, height: '170' }))
+    }
+    if (!formData.weight) {
+      setFormData((prev) => ({ ...prev, weight: '70' }))
+    }
+  }, [])
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#121212" : "#f8f9fa" }]}>
@@ -71,16 +104,16 @@ export default function BodyInfoScreen() {
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Vücut Bilgileri</Text>
+          <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Body Information</Text>
           <Text style={[styles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>
-            Fitness hedefleriniz için bilgilerinizi giriniz
+            Enter your information for fitness goals
           </Text>
         </View>
 
         <View style={[styles.card, { backgroundColor: isDark ? "#1e1e1e" : "#fff" }]}>
-          {/* Boy Slider - Optimized */}
+          {/* Height Slider */}
           <OptimizedSlider
-            label="Boy"
+            label="Height"
             value={heightValue}
             minimumValue={100}
             maximumValue={220}
@@ -90,9 +123,9 @@ export default function BodyInfoScreen() {
             icon={{ name: "human-male-height", library: "MaterialCommunityIcons" }}
           />
 
-          {/* Kilo Slider - Optimized */}
+          {/* Weight Slider */}
           <OptimizedSlider
-            label="Kilo"
+            label="Weight"
             value={weightValue}
             minimumValue={30}
             maximumValue={200}
@@ -102,7 +135,7 @@ export default function BodyInfoScreen() {
             icon={{ name: "weight-scale", library: "FontAwesome6" }}
           />
 
-          {/* Doğum Tarihi */}
+          {/* Birth Date */}
           <View style={styles.dateSection}>
             <View style={styles.dateLabelContainer}>
               <MaterialCommunityIcons
@@ -111,7 +144,7 @@ export default function BodyInfoScreen() {
                 color={isDark ? "#fff" : "#000"}
                 style={styles.dateIcon}
               />
-              <Text style={[styles.dateLabel, { color: isDark ? "#fff" : "#000" }]}>Doğum Tarihi</Text>
+              <Text style={[styles.dateLabel, { color: isDark ? "#fff" : "#000" }]}>Birth Date</Text>
             </View>
 
             <TouchableOpacity
@@ -123,6 +156,7 @@ export default function BodyInfoScreen() {
                 },
               ]}
               onPress={showDatePicker}
+              activeOpacity={0.7}
             >
               <Text
                 style={[
@@ -132,61 +166,32 @@ export default function BodyInfoScreen() {
                   },
                 ]}
               >
-                {formData.birthDate || "Tarih Seçiniz"}
+                {formData.birthDate || "Select Date"}
               </Text>
               <MaterialCommunityIcons name="chevron-right" size={20} color={isDark ? "#aaa" : "#888"} />
             </TouchableOpacity>
           </View>
         </View>
 
-        {/* Modal DateTimePicker */}
-        <DateTimePickerModal
-          isVisible={isDatePickerVisible}
-          mode="date"
-          onConfirm={handleConfirm}
-          onCancel={hideDatePicker}
-          date={parseDate(formData.birthDate)}
-          maximumDate={new Date()} // Bugünden ileri tarih seçilemesin
-        />
-
-        {/* İleri Butonu */}
+        {/* Next Button */}
         <TouchableOpacity
           style={[styles.nextButton, { backgroundColor: isDark ? "#fff" : "#000" }]}
           onPress={handleNext}
         >
-          <Text style={[styles.nextButtonText, { color: isDark ? "#000" : "#fff" }]}>İleri</Text>
+          <Text style={[styles.nextButtonText, { color: isDark ? "#000" : "#fff" }]}>Next</Text>
           <MaterialCommunityIcons name="arrow-right" size={20} color={isDark ? "#000" : "#fff"} />
         </TouchableOpacity>
       </ScrollView>
+
+      {/* Use the new CustomDateTimeModal */}
+      <CustomDateTimeModal
+        isVisible={isDatePickerVisible}
+        onClose={hideDatePicker}
+        onSelect={handleDateSelect}
+        isDark={isDark}
+        selectedDate={getSelectedDate()}
+        maximumDate={getMaxDate()}
+      />
     </SafeAreaView>
   )
 }
-
-
-
-/** "GG/AA/YYYY" string -> Date objesi. Yoksa new Date() (bugün) döndürür. */
-function parseDate(dateStr?: string): Date {
-  if (!dateStr) return new Date()
-  // 29/06/2002 => [29, 06, 2002]
-  const [dd, mm, yyyy] = dateStr.split("/")
-  const day = Number.parseInt(dd, 10)
-  const month = Number.parseInt(mm, 10) - 1
-  const year = Number.parseInt(yyyy, 10)
-  return new Date(year, month, day)
-}
-
-/** Timezone offset'i sıfırlayarak "gün kayması"nı önlemeye çalışır. */
-function removeTimeOffset(date: Date): Date {
-  // date'in UTC'sini alıp local offset'i çıkar
-  const userOffset = date.getTimezoneOffset() * 60000 // milisaniye
-  return new Date(date.getTime() + userOffset)
-}
-
-/** Date -> "DD/MM/YYYY" */
-function formatDate(d: Date): string {
-  const day = String(d.getDate()).padStart(2, "0")
-  const month = String(d.getMonth() + 1).padStart(2, "0")
-  const year = d.getFullYear()
-  return `${day}/${month}/${year}`
-}
-

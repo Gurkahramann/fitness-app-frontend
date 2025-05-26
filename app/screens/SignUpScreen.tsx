@@ -19,6 +19,7 @@ import { useRouter } from "expo-router"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import styles from "../styles/SignUpScreen.styles"
 import { useFormData } from "../context/FormContext"
+import React from "react"
 
 export default function SignUpScreen() {
   const router = useRouter()

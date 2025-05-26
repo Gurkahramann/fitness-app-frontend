@@ -11,10 +11,19 @@ import {
 } from "react-native"
 import { useRouter } from "expo-router"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+import React from "react"
+import { useAuth } from "../../hooks/useAuth"
 
 export default function WelcomePage() {
   const router = useRouter()
   const isDark = useColorScheme() === "dark"
+  const { user, isLoading } = useAuth()
+
+  React.useEffect(() => {
+    if (!isLoading && user) {
+      router.replace("/home-page")
+    }
+  }, [user, isLoading])
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#121212" : "#f8f9fa" }]}>

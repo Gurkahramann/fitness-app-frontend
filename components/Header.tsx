@@ -1,68 +1,80 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet, useColorScheme } from "react-native"
+"use client"
+
+import { View, Text, TouchableOpacity, Image, StyleSheet, Platform, StatusBar, useColorScheme } from "react-native"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { useRouter } from "expo-router"
+import React from "react"
 
 type HeaderProps = {
   userName: string
-  profileImageUrl: string
-  onMenuPress: () => void
+  profileImageUrl?: string // Opsiyonel hale getirdik
 }
 
-export default function Header({ userName, profileImageUrl, onMenuPress }: HeaderProps) {
+export default function Header({ userName, profileImageUrl }: HeaderProps) {
   const isDark = useColorScheme() === "dark"
+  const router = useRouter()
+  const topPadding = Platform.OS === "android" ? (StatusBar.currentHeight || 24) + 16 : 50
+
+  const handleProfilePress = () => {
+    console.log("Profile pressed")
+     router.push("/profile-page") // Profil sayfası hazırsa burayı açarsın
+  }
+
+  const hasValidProfileImage = profileImageUrl && profileImageUrl.trim() !== ""
 
   return (
-    <View style={styles.header}>
-      <View style={styles.headerLeft}>
-        <Image source={{ uri: profileImageUrl || "https://via.placeholder.com/50" }} style={styles.profileImage} />
-        <View style={styles.headerTextContainer}>
-          <Text style={[styles.helloText, { color: isDark ? "#ccc" : "#666" }]}>Hello!</Text>
-          <Text style={[styles.userNameText, { color: isDark ? "#fff" : "#000" }]}>{userName}</Text>
-        </View>
+    <View style={[styles.container, { paddingTop: topPadding }]}>
+      <View>
+        <Text style={[styles.helloText, { color: isDark ? "#aaa" : "#666" }]}>Hello!</Text>
+        <Text style={[styles.userName, { color: isDark ? "#fff" : "#000" }]}>{userName}</Text>
       </View>
 
-      <TouchableOpacity
-        style={[styles.menuButton, { backgroundColor: isDark ? "#444" : "#f0f0f0" }]}
-        onPress={onMenuPress}
-      >
-        <Text style={{ color: isDark ? "#fff" : "#000", fontSize: 18 }}>☰</Text>
+      <TouchableOpacity onPress={handleProfilePress} style={styles.profileButton}>
+        {hasValidProfileImage ? (
+          <Image
+            source={{ uri: profileImageUrl }}
+            style={styles.profileImage}
+          />
+        ) : (
+          <View style={[styles.profileFallback, { backgroundColor: isDark ? "#333" : "#ddd" }]}>
+            <MaterialCommunityIcons name="account" size={30} color={isDark ? "#fff" : "#000"} />
+          </View>
+        )}
       </TouchableOpacity>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  header: {
+  container: {
+    paddingHorizontal: 16,
+    paddingBottom: 16,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    marginBottom: 8,
+    backgroundColor: "transparent",
   },
-  headerLeft: {
-    flexDirection: "row",
-    alignItems: "center",
+  helloText: {
+    fontSize: 14,
+  },
+  userName: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  profileButton: {
+    borderRadius: 25,
+    overflow: "hidden",
   },
   profileImage: {
     width: 50,
     height: 50,
     borderRadius: 25,
   },
-  headerTextContainer: {
-    marginLeft: 12,
-  },
-  helloText: {
-    fontSize: 14,
-  },
-  userNameText: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  menuButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: "center",
+  profileFallback: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     justifyContent: "center",
+    alignItems: "center",
   },
 })
-

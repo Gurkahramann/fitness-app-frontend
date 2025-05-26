@@ -10,6 +10,9 @@ import 'react-native-reanimated';
 import { FormProvider } from './context/FormContext'; // FormContext konumuna dikkat edin
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AuthProvider } from './context/AuthContext';
+import { CalorieProvider } from './context/CalorieContext';
+import { ToastProvider, useToast } from './context/ToastContext';
+import { UserProfileProvider } from "./context/UserProfileContext"
 
 SplashScreen.preventAutoHideAsync();
 
@@ -31,23 +34,30 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      {/* FormProvider: Tüm ekranların form verilerine erişebilmesi için */}
-      <AuthProvider>
-        <FormProvider>
-          <Stack>
-            {/* index, login, signup ekranları */}
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen name="login" options={{ headerShown: false }} />
-            <Stack.Screen name="signup" options={{ headerShown: false }} />
-            <Stack.Screen name="home-page" options={{ headerShown: false }} />
-            <Stack.Screen name="personal-info" options={{ headerShown: false }} />
-            <Stack.Screen name="life-style" options={{ headerShown: false }} />
-            <Stack.Screen name="body-info" options={{ headerShown: false }} />
-          </Stack>
-          <StatusBar style="auto" />
-        </FormProvider>
-      </AuthProvider>
-    </ThemeProvider>
+    <AuthProvider>
+    <UserProfileProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <FormProvider>
+          <ToastProvider>
+            <CalorieProvider>
+            <Stack>
+              {/* index, login, signup ekranları */}
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen name="login" options={{ headerShown: false }} />
+              <Stack.Screen name="signup" options={{ headerShown: false }} />
+              <Stack.Screen name="home-page" options={{ headerShown: false }} />
+              <Stack.Screen name="personal-info" options={{ headerShown: false }} />
+              <Stack.Screen name="life-style" options={{ headerShown: false }} />
+              <Stack.Screen name="body-info" options={{ headerShown: false }} />
+              <Stack.Screen name="profile-page" options={{ headerShown: false }} />
+              <Stack.Screen name="profile-edit" options={{ headerShown: false }} />
+            </Stack>
+            <StatusBar style="auto" />
+            </CalorieProvider>
+          </ToastProvider>
+          </FormProvider>
+      </ThemeProvider>
+    </UserProfileProvider>
+    </AuthProvider>
   );
 }

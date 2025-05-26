@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import { View, Text, StyleSheet, Platform, useColorScheme } from "react-native"
 import Slider from "@react-native-community/slider"
 import { MaterialCommunityIcons, Feather,FontAwesome6} from "@expo/vector-icons"
+import React from "react"
 
 type IconLibrary = "MaterialCommunityIcons" | "Feather" |"FontAwesome6"
 

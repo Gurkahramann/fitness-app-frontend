@@ -20,6 +20,10 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { useFormData } from "../context/FormContext"
 import { useAuth } from "@/hooks/useAuth"
 import { useRouter } from "expo-router"
+import { useToast } from "../context/ToastContext"
+import { defaultFormData } from "../context/FormContext"
+
+import React from "react"
 
 const ACTIVITY_OPTIONS = [
   { key: "sedentary", label: "Sedentary: little or no exercise", icon: "seat-outline" },
@@ -41,6 +45,7 @@ const GOALS = [
 export default function LifestyleScreen() {
   const { formData, setFormData } = useFormData()
   const router = useRouter()
+  const { showToast } = useToast()
   const isDark = useColorScheme() === "dark"
   const { register, isLoading } = useAuth()
 
@@ -60,7 +65,7 @@ export default function LifestyleScreen() {
 
   const handleSave = async () => {
     if (!formData.activityLevel || !selectedGoal) {
-      alert("Lütfen aktivite seviyesi ve hedef seçiniz.")
+      showToast("Lütfen aktivite seviyesi ve hedef seçiniz.",'error')
       return
     }
 
@@ -72,6 +77,7 @@ export default function LifestyleScreen() {
       gender: (formData.gender === "male" ? "Male" : "Female") as "Male" | "Female",
       height: Number(formData.height),
       weight: Number(formData.weight),
+      birthDate: convertToISODate(formData.birthDate),
       age: calculateAge(formData.birthDate),
       activityLevel: formData.activityLevel,
       goal: selectedGoal,
@@ -83,16 +89,16 @@ export default function LifestyleScreen() {
       const response = await register(registerData)
 
       console.log("✅ Register yaniti:", response)
-
       if (response?.success) {
-        alert("🎉 Kayit basarili!")
+        setFormData(defaultFormData)
+        showToast("🎉 Kayit basarili!", 'success')
         router.push("/login")
       } else {
-        alert(`❌ Kayit basarisiz: ${response?.message || "Bilinmeyen hata"}`)
+        showToast(`❌ Kayit basarisiz: ${response?.message || "Bilinmeyen hata"}`, 'error')
       }
     } catch (error) {
       console.log("💥 Kayit hatasi:", error)
-      alert("❌ Bir hata oluitu, lütfen tekrar deneyin.")
+      showToast("❌ Bir hata olustu, lütfen tekrar deneyin.",'error')
     }
   }
 
@@ -338,5 +344,9 @@ function calculateAge(birthDateStr: string): number {
   }
 
   return age
+}
+function convertToISODate(dateStr: string): string {
+  const [day, month, year] = dateStr.split("/");
+  return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`; // "YYYY-MM-DD"
 }
 

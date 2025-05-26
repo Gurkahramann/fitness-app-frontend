@@ -1,3 +1,4 @@
+import React from "react"
 import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet, useColorScheme } from "react-native"
 
 type WorkoutProgram = {

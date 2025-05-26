@@ -21,6 +21,7 @@ import { useRouter } from "expo-router"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 
 import { useFormData } from "../context/FormContext"
+import React from "react"
 
 // Gender options for ModalSelector
 const GENDER_OPTIONS = [
@@ -67,7 +68,7 @@ export default function PersonalInfoScreen() {
   const handleSelectGender = (option: { key: string; label: string }) => {
     setFormData((prev) => ({ ...prev, gender: option.key }))
     if (option.key === "") {
-      setGenderError("Cinsiyet seçimi yapmalısınız")
+      setGenderError("Cinsiyet seçimi yapmalisınız")
     } else {
       setGenderError("")
     }
