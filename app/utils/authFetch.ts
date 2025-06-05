@@ -1,5 +1,5 @@
 // utils/authFetch.ts
-import { getAccessToken, getRefreshToken, saveTokens } from "./tokenStorage";
+import { getAccessToken, getRefreshToken, saveTokens,removeTokens } from "./tokenStorage";
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
@@ -12,13 +12,10 @@ export const isTokenExpired = (token: string): boolean => {
     }
   };
   
-  export const renewTokenIfNeeded = async (): Promise<string | null> => {
+  export const renewTokenIfNeeded = async (onForceLogout?: () => void): Promise<string | null> => {
     let accessToken = await getAccessToken();
-    console.log("accessToken", accessToken)
-  
     if (!accessToken || isTokenExpired(accessToken)) {
       const refreshToken = await getRefreshToken();
-      console.log("refreshToken", refreshToken)
       if (!refreshToken) return null;
   
       const res = await fetch(`${apiUrl}/auth/refresh-token`, {
@@ -26,7 +23,13 @@ export const isTokenExpired = (token: string): boolean => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ refreshToken }),
       });
-      console.log("res", res)
+  
+      if (res.status === 403) {
+        await removeTokens();
+        if (onForceLogout) onForceLogout();
+        return null;
+      }
+  
       if (!res.ok) return null;
   
       const data = await res.json();
@@ -35,7 +38,6 @@ export const isTokenExpired = (token: string): boolean => {
         await saveTokens(accessToken, refreshToken);
       }
     }
-  
     return accessToken;
   };
 

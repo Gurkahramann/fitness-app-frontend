@@ -16,7 +16,6 @@ export default function Header({ userName, profileImageUrl }: HeaderProps) {
   const topPadding = Platform.OS === "android" ? (StatusBar.currentHeight || 24) + 16 : 50
 
   const handleProfilePress = () => {
-    console.log("Profile pressed")
      router.push("/profile-page") // Profil sayfası hazırsa burayı açarsın
   }
 

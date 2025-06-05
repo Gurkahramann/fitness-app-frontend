@@ -13,6 +13,7 @@ import {
   StatusBar,
   Platform,
 } from "react-native"
+import { SafeAreaInsetsContext, useSafeAreaInsets } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { useRouter } from "expo-router"
 import { useAuth } from "../../hooks/useAuth"
@@ -22,6 +23,7 @@ import CustomDateModal from "../../components/CustomDateModal"
 import React from "react"
 import type { User } from "../context/AuthContext"
 import { authFetch } from "../utils/authFetch"
+import OptimizedSlider from "../../components/BodyInfoSliders"
 
 export default function ProfileEditScreen() {
   const isDark = useColorScheme() === "dark"
@@ -30,8 +32,8 @@ export default function ProfileEditScreen() {
   const { user, setUser } = useAuth()
   const { showToast } = useToast()
   const [isDatePickerVisible, setDatePickerVisible] = useState(false)
-
-  // Form state
+  const insets = useSafeAreaInsets();
+    // Form state
   const [name, setName] = useState("")
   const [height, setHeight] = useState(170)
   const [weight, setWeight] = useState(70)
@@ -102,19 +104,28 @@ export default function ProfileEditScreen() {
       showToast("İsim alanı boş bırakılamaz", "error")
       return
     }
-
+    let isoBirthDate = birthDate;
+    if (birthDate && birthDate.includes("/")) {
+      const [day, month, year] = birthDate.split("/");
+      if (day && month && year) {
+        isoBirthDate = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+      } else {
+        isoBirthDate = ""; // veya null gönder
+      }
+    }
+    console.log("Gidecek doğum tarihi:", isoBirthDate);
     try {
       const updatedData = {
         ...user,
         name,
         height,
         weight,
-        birthDate,
+        birthDate: isoBirthDate,
         activityLevel,
         fitnessGoal,
       }
       const response = await authFetch(
-        `${process.env.EXPO_PUBLIC_SPRING_API}/auth/update-profile`,
+        `${process.env.EXPO_PUBLIC_API_URL}/auth/update-profile`,
         {
           method: "PUT",
           headers: {
@@ -123,6 +134,7 @@ export default function ProfileEditScreen() {
           body: JSON.stringify(updatedData),
         }
       );
+      console.log("response", response) 
       if (response.ok) {
         // Backend'den dönen güncel kullanıcı bilgisini state'e kaydet
         if (setUser) setUser(updatedData as User);
@@ -150,7 +162,7 @@ export default function ProfileEditScreen() {
       <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
 
       {/* Header */}
-      <View style={styles.header}>
+      <View style={[styles.header, { paddingTop: insets.top }]}>
         <TouchableOpacity onPress={handleCancel}>
           <Text style={[styles.cancelButton, { color: isDark ? "#fff" : "#000" }]}>İptal</Text>
         </TouchableOpacity>
@@ -180,88 +192,28 @@ export default function ProfileEditScreen() {
         </View>
 
         {/* Height Slider */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <MaterialCommunityIcons name="human-male-height" size={20} color={isDark ? "#fff" : "#000"} />
-            <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Boy</Text>
-            <Text style={[styles.valueText, { color: isDark ? "#fff" : "#000" }]}>{height} cm</Text>
-          </View>
-          <View style={styles.sliderContainer}>
-            <Text style={[styles.sliderMin, { color: isDark ? "#aaa" : "#666" }]}>100cm</Text>
-            <View style={styles.sliderWrapper}>
-              <View
-                style={[
-                  styles.sliderTrack,
-                  {
-                    backgroundColor: isDark ? "#444" : "#e0e0e0",
-                  },
-                ]}
-              />
-              <View
-                style={[
-                  styles.sliderFill,
-                  {
-                    width: `${((height - 100) / 120) * 100}%`,
-                    backgroundColor: isDark ? "#fff" : "#000",
-                  },
-                ]}
-              />
-              <TouchableOpacity
-                style={[
-                  styles.sliderThumb,
-                  {
-                    left: `${((height - 100) / 120) * 100}%`,
-                    backgroundColor: isDark ? "#fff" : "#000",
-                  },
-                ]}
-                onLayout={() => {}}
-              />
-            </View>
-            <Text style={[styles.sliderMax, { color: isDark ? "#aaa" : "#666" }]}>220cm</Text>
-          </View>
-        </View>
+        <OptimizedSlider
+          label="Boy"
+          value={height}
+          minimumValue={100}
+          maximumValue={220}
+          step={1}
+          onValueChange={setHeight}
+          unit="cm"
+          icon={{ name: "human-male-height", library: "MaterialCommunityIcons" }}
+        />
 
         {/* Weight Slider */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <MaterialCommunityIcons name="weight" size={20} color={isDark ? "#fff" : "#000"} />
-            <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Kilo</Text>
-            <Text style={[styles.valueText, { color: isDark ? "#fff" : "#000" }]}>{weight.toFixed(1)} kg</Text>
-          </View>
-          <View style={styles.sliderContainer}>
-            <Text style={[styles.sliderMin, { color: isDark ? "#aaa" : "#666" }]}>30kg</Text>
-            <View style={styles.sliderWrapper}>
-              <View
-                style={[
-                  styles.sliderTrack,
-                  {
-                    backgroundColor: isDark ? "#444" : "#e0e0e0",
-                  },
-                ]}
-              />
-              <View
-                style={[
-                  styles.sliderFill,
-                  {
-                    width: `${((weight - 30) / 170) * 100}%`,
-                    backgroundColor: isDark ? "#fff" : "#000",
-                  },
-                ]}
-              />
-              <TouchableOpacity
-                style={[
-                  styles.sliderThumb,
-                  {
-                    left: `${((weight - 30) / 170) * 100}%`,
-                    backgroundColor: isDark ? "#fff" : "#000",
-                  },
-                ]}
-                onLayout={() => {}}
-              />
-            </View>
-            <Text style={[styles.sliderMax, { color: isDark ? "#aaa" : "#666" }]}>200kg</Text>
-          </View>
-        </View>
+        <OptimizedSlider
+          label="Kilo"
+          value={weight}
+          minimumValue={30}
+          maximumValue={200}
+          step={0.1}
+          onValueChange={setWeight}
+          unit="kg"
+          icon={{ name: "weight", library: "MaterialCommunityIcons" }}
+        />
 
         {/* Birth Date */}
         <View style={styles.section}>
@@ -284,7 +236,7 @@ export default function ProfileEditScreen() {
         </View>
 
         {/* Activity Level */}
-        <View style={styles.section}>
+        {/* <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Aktivite Seviyesi</Text>
 
           <View style={styles.activityOptions}>
@@ -352,7 +304,7 @@ export default function ProfileEditScreen() {
               />
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
 
         {/* Activity Level Details */}
         <View style={styles.activityLevelDetails}>
@@ -617,10 +569,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight || 0 : 0,
-    height: 60,
+    // paddingTop kaldırıldı, dinamik olarak yukarıda ekleniyor
+    //height: 60, // istersen kaldırabilirsin, sadece minHeight bırakabilirsin
     borderBottomWidth: 1,
     borderBottomColor: "#333",
+    backgroundColor: "transparent", // SafeAreaView ile çakışmasın
   },
   headerTitle: {
     fontSize: 18,

@@ -51,6 +51,8 @@ export default function RootLayout() {
               <Stack.Screen name="body-info" options={{ headerShown: false }} />
               <Stack.Screen name="profile-page" options={{ headerShown: false }} />
               <Stack.Screen name="profile-edit" options={{ headerShown: false }} />
+              <Stack.Screen name="workout-detail" options={{ headerShown: false }} />
+              <Stack.Screen name="create-program" options={{ headerShown: false }} />
             </Stack>
             <StatusBar style="auto" />
             </CalorieProvider>

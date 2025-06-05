@@ -1,5 +1,9 @@
-import React from "react"
+"use client"
+
 import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet, useColorScheme } from "react-native"
+import { useRouter } from "expo-router"
+import React from "react"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 
 type WorkoutProgram = {
   id: string
@@ -9,12 +13,23 @@ type WorkoutProgram = {
 
 type WorkoutProgramsCardProps = {
   programs: WorkoutProgram[]
-  onProgramPress: (programId: string) => void
   onViewAllPress: () => void
 }
 
-export default function WorkoutProgramsCard({ programs, onProgramPress, onViewAllPress }: WorkoutProgramsCardProps) {
+export default function WorkoutProgramsCard({ programs, onViewAllPress }: WorkoutProgramsCardProps) {
   const isDark = useColorScheme() === "dark"
+  const router = useRouter()
+
+  const handleProgramPress = (programId: string) => {
+    router.push({
+      pathname: "/workout-detail",
+      params: { id: programId }
+    })
+  }
+
+  const handleCreatePress = () => {
+    router.push("/create-program")
+  }
 
   return (
     <View style={[styles.container, { backgroundColor: isDark ? "#222" : "#fff" }]}>
@@ -26,8 +41,16 @@ export default function WorkoutProgramsCard({ programs, onProgramPress, onViewAl
       </View>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.programsContainer}>
+        <TouchableOpacity style={[styles.programCard, styles.createCard]} onPress={handleCreatePress}>
+          <View style={styles.createIconContainer}>
+            <MaterialCommunityIcons name="plus" size={40} color="#3DCC85" />
+          </View>
+          <View style={styles.programTitleContainer}>
+            <Text style={styles.createText}>Create Your Own{"\n"}Program</Text>
+          </View>
+        </TouchableOpacity>
         {programs.map((program) => (
-          <TouchableOpacity key={program.id} style={styles.programCard} onPress={() => onProgramPress(program.id)}>
+          <TouchableOpacity key={program.id} style={styles.programCard} onPress={() => handleProgramPress(program.id)}>
             <Image source={{ uri: program.image }} style={styles.programImage} resizeMode="cover" />
             <View style={styles.programTitleContainer}>
               <Text style={styles.programTitle}>{program.title}</Text>
@@ -93,5 +116,26 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     textAlign: "center",
   },
+  createCard: {
+    backgroundColor: "#111",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "#3DCC85",
+    marginRight: 16,
+  },
+  createIconContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: 100,
+  },
+  createText: {
+    color: "#3DCC85",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 8,
+  },
 })
-

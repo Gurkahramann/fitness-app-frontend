@@ -12,12 +12,13 @@ import CalendarCard from "../../components/CalendarCard"
 import CaloriesCard from "../../components/CaloriesCard"
 
 // Import data
-import { WORKOUT_PROGRAMS } from "../../constants/workoutData"
+import { WORKOUT_PROGRAMS, WorkoutProgram, RECOMMENDATION_MATRIX } from "../../constants/workoutData"
 
 // Import auth context
 import { useAuth } from "@/hooks/useAuth"
 import { useCalorie } from "../context/CalorieContext"
 import React from "react"
+import { useUserProfile } from "../context/UserProfileContext"
 
 export default function HomeScreen() {
   const isDark = useColorScheme() === "dark"
@@ -26,6 +27,7 @@ export default function HomeScreen() {
   const { user, logout } = useAuth();
   const router = useRouter();
   const navState = useNavigationState(state => state);
+  const { userProfile } = useUserProfile();
 
   // Event handlers
   const handleDayPress = (day: DateData) => {
@@ -39,6 +41,34 @@ export default function HomeScreen() {
 
   const handleViewAllPress = () => {
     console.log("View all programs pressed")
+  }
+
+  // Kullanıcıya göre önerilen programları bul
+  let recommendedPrograms: WorkoutProgram[] = [];
+  if (userProfile) {
+    const activity = userProfile.activityLevel || "*";
+    const goal = userProfile.goal || "*";
+    // Matrix'te eşleşen satırı bul
+    const match = RECOMMENDATION_MATRIX.find(row => (row.activity === activity || row.activity === "*") && (row.goal === goal || row.goal === "*"));
+    if (match) {
+      // Sıralı öneri: her slug için programı bul ve sırayla ekle (aynı program birden fazla öneride varsa tekrar etmesin)
+      const seen = new Set();
+      recommendedPrograms = match.recommend
+        .map(slug => WORKOUT_PROGRAMS.find(p => p.slug.toUpperCase().replace(/-/g, '_') === slug))
+        .filter((p): p is WorkoutProgram => {
+          if (!p) return false;
+          if (seen.has(p.id)) return false;
+          seen.add(p.id);
+          return true;
+        });
+    }
+    // Eğer hiç eşleşme yoksa fallback olarak tüm programları göster
+    if (recommendedPrograms.length === 0) {
+      recommendedPrograms = WORKOUT_PROGRAMS;
+    }
+  } else {
+    // Kullanıcı profili yüklenmediyse tüm programları göster
+    recommendedPrograms = WORKOUT_PROGRAMS;
   }
 
   useEffect(() => {
@@ -80,11 +110,14 @@ export default function HomeScreen() {
       )}
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-        <WorkoutProgramsCard
-          programs={WORKOUT_PROGRAMS}
-          onProgramPress={handleProgramPress}
-          onViewAllPress={handleViewAllPress}
-        />
+      <WorkoutProgramsCard
+        programs={recommendedPrograms.map(p => ({
+          id: p.id.toString(),
+          title: p.title,
+          image: p.coverImageUrl // veya thumbnailUrl
+        }))}
+        onViewAllPress={handleViewAllPress}
+      />
 
         <CalendarCard selectedDate={selectedDate} onDayPress={handleDayPress} />
 
