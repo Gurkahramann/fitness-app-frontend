@@ -12,14 +12,15 @@ type WorkoutProgram = {
 }
 
 type WorkoutProgramsCardProps = {
-  programs: WorkoutProgram[]
-  onViewAllPress: () => void
+  title: string;
+  programs: WorkoutProgram[];
+  showCreate?: boolean;
+  onViewAllPress?: () => void;
 }
 
-export default function WorkoutProgramsCard({ programs, onViewAllPress }: WorkoutProgramsCardProps) {
+export default function WorkoutProgramsCard({ title, programs, showCreate = true, onViewAllPress }: WorkoutProgramsCardProps) {
   const isDark = useColorScheme() === "dark"
   const router = useRouter()
-
   const handleProgramPress = (programId: string) => {
     router.push({
       pathname: "/workout-detail",
@@ -34,21 +35,25 @@ export default function WorkoutProgramsCard({ programs, onViewAllPress }: Workou
   return (
     <View style={[styles.container, { backgroundColor: isDark ? "#222" : "#fff" }]}>
       <View style={styles.header}>
-        <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Workout Programs</Text>
-        <TouchableOpacity onPress={onViewAllPress}>
-          <Text style={[styles.viewAllText, { color: "#3DCC85" }]}>View All</Text>
-        </TouchableOpacity>
+        <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>{title}</Text>
+        {onViewAllPress && (
+          <TouchableOpacity onPress={onViewAllPress}>
+            <Text style={[styles.viewAllText, { color: "#3DCC85" }]}>View All</Text>
+          </TouchableOpacity>
+        )}
       </View>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.programsContainer}>
-        <TouchableOpacity style={[styles.programCard, styles.createCard]} onPress={handleCreatePress}>
-          <View style={styles.createIconContainer}>
-            <MaterialCommunityIcons name="plus" size={40} color="#3DCC85" />
-          </View>
-          <View style={styles.programTitleContainer}>
-            <Text style={styles.createText}>Create Your Own{"\n"}Program</Text>
-          </View>
-        </TouchableOpacity>
+        {showCreate && (
+          <TouchableOpacity style={[styles.programCard, styles.createCard]} onPress={handleCreatePress}>
+            <View style={styles.createIconContainer}>
+              <MaterialCommunityIcons name="plus" size={40} color="#3DCC85" />
+            </View>
+            <View style={styles.programTitleContainer}>
+              <Text style={styles.createText}>Create Your Own{"\n"}Program</Text>
+            </View>
+          </TouchableOpacity>
+        )}
         {programs.map((program) => (
           <TouchableOpacity key={program.id} style={styles.programCard} onPress={() => handleProgramPress(program.id)}>
             <Image source={{ uri: program.image }} style={styles.programImage} resizeMode="cover" />

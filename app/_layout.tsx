@@ -13,6 +13,9 @@ import { AuthProvider } from './context/AuthContext';
 import { CalorieProvider } from './context/CalorieContext';
 import { ToastProvider, useToast } from './context/ToastContext';
 import { UserProfileProvider } from "./context/UserProfileContext"
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { WorkoutProgramProvider } from "./context/WorkoutProgramContext";
+import { ExerciseProvider } from "./context/ExerciseContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -34,32 +37,38 @@ export default function RootLayout() {
   }
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <AuthProvider>
     <UserProfileProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
           <FormProvider>
           <ToastProvider>
-            <CalorieProvider>
-            <Stack>
-              {/* index, login, signup ekranları */}
-              <Stack.Screen name="index" options={{ headerShown: false }} />
-              <Stack.Screen name="login" options={{ headerShown: false }} />
-              <Stack.Screen name="signup" options={{ headerShown: false }} />
-              <Stack.Screen name="home-page" options={{ headerShown: false }} />
-              <Stack.Screen name="personal-info" options={{ headerShown: false }} />
-              <Stack.Screen name="life-style" options={{ headerShown: false }} />
-              <Stack.Screen name="body-info" options={{ headerShown: false }} />
-              <Stack.Screen name="profile-page" options={{ headerShown: false }} />
-              <Stack.Screen name="profile-edit" options={{ headerShown: false }} />
-              <Stack.Screen name="workout-detail" options={{ headerShown: false }} />
-              <Stack.Screen name="create-program" options={{ headerShown: false }} />
-            </Stack>
-            <StatusBar style="auto" />
-            </CalorieProvider>
+            <WorkoutProgramProvider>
+              <ExerciseProvider>
+                <CalorieProvider>
+                  <Stack>
+                    {/* index, login, signup ekranları */}
+                    <Stack.Screen name="index" options={{ headerShown: false }} />
+                    <Stack.Screen name="login" options={{ headerShown: false }} />
+                    <Stack.Screen name="signup" options={{ headerShown: false }} />
+                    <Stack.Screen name="home-page" options={{ headerShown: false }} />
+                    <Stack.Screen name="personal-info" options={{ headerShown: false }} />
+                    <Stack.Screen name="life-style" options={{ headerShown: false }} />
+                    <Stack.Screen name="body-info" options={{ headerShown: false }} />
+                    <Stack.Screen name="profile-page" options={{ headerShown: false }} />
+                    <Stack.Screen name="profile-edit" options={{ headerShown: false }} />
+                    <Stack.Screen name="workout-detail" options={{ headerShown: false }} />
+                    <Stack.Screen name="create-program" options={{ headerShown: false }} />
+                  </Stack>
+                  <StatusBar style="auto" />
+                </CalorieProvider>
+              </ExerciseProvider>
+            </WorkoutProgramProvider>
           </ToastProvider>
           </FormProvider>
       </ThemeProvider>
     </UserProfileProvider>
     </AuthProvider>
+    </GestureHandlerRootView>
   );
 }

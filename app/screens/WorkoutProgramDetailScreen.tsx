@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import {
   View,
   Text,
@@ -10,74 +10,19 @@ import {
   Platform,
   Image,
   FlatList,
+  Modal,
 } from "react-native"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { useRouter, useLocalSearchParams } from "expo-router"
 import ExerciseDetailModal from "../../components/ExerciseDetailModal"
 import { WORKOUT_PROGRAMS, EXERCISES } from "../../constants/workoutData"
+import WorkoutProgramEditModal from "../../components/WorkoutProgramEditModal"
+import { useWorkoutPrograms } from "../context/WorkoutProgramContext"
+import { Exercise, useExercises } from "../context/ExerciseContext"
+import { useAuth } from "../context/AuthContext"
+
 // Types matching your backend models
-export interface Exercise {
-    id: number
-    name: string
-    type: "cardio" | "strength"
-    muscleGroup: string
-    videoUrl: string
-  }
-  
-  export interface ExerciseSet {
-    id: number
-    setNo: number
-    reps?: number
-    weight?: number
-    rpe?: number
-    durationSec?: number
-  }
-  
-  export interface ExerciseEntry {
-    id: number
-    exercise: Exercise
-    orderIndex: number
-    exerciseSets: ExerciseSet[]
-  }
-  
-  export interface WorkoutDay {
-    id: number
-    userId: string
-    date: string // YYYY-MM-DD
-    exerciseEntries: ExerciseEntry[]
-  }
-  
-  export interface WorkoutProgram {
-    id: number
-    title: string
-    slug: string
-    description: string
-    difficulty: "BEGINNER" | "INTERMEDIATE" | "ADVANCED"
-    durationWeeks: number
-    coverImageUrl: string
-    thumbnailUrl: string
-    tags: string[]
-    days: WorkoutDay[]
-    createdBy: string
-    likes: string[]
-    isPublic: boolean
-    exercises: Exercise[]
-    createdAt: string
-    updatedAt: string
-  }
-  
-  // Mock exercises database
- 
-  
-  // Helper function to get program by ID
-  export const getProgramById = (id: string): WorkoutProgram | undefined => {
-    return WORKOUT_PROGRAMS.find((program) => program.id.toString() === id)
-  }
-  
-  // Helper function to get exercise by ID
-  export const getExerciseById = (id: number): Exercise | undefined => {
-    return EXERCISES.find((exercise) => exercise.id === id)
-  }
+
   
   // Helper function to format difficulty
   export const formatDifficulty = (difficulty: string): string => {
@@ -109,34 +54,56 @@ export interface Exercise {
   
   // Add a default export for a placeholder or main component
   const WorkoutProgramDetailScreen = () => {
+    
     const isDark = useColorScheme() === "dark"
+    const { workoutPrograms, loading: programsLoading } = useWorkoutPrograms();
+    const { exercises, loading: exercisesLoading } = useExercises();
+    const { user } = useAuth();
     const router = useRouter()
     const { id } = useLocalSearchParams()
     const [selectedExercise, setSelectedExercise] = useState<any>(null)
     const [isModalVisible, setIsModalVisible] = useState(false)
+    const [editModalVisible, setEditModalVisible] = useState(false)
+    const isThreeDayProgram = WORKOUT_PROGRAMS.find(p => p.id.toString() === id)?.days.length === 3 || WORKOUT_PROGRAMS[0].days.length === 3
+    const [selectedDay, setSelectedDay] = useState<any>(null);
+    const [daysState, setDaysState] = useState<any[]>([]);
 
-    // Yeni veri kaynağından programı bul
-    const workoutData = WORKOUT_PROGRAMS.find(p => p.id.toString() === id) || WORKOUT_PROGRAMS[0]
-
-    // İlk günün egzersizlerini gösteriyoruz (örnek)
-    const exercises = Array.from(
-      new Map(
-        workoutData.days
-          .flatMap(day => day.exerciseEntries.map(e => e.exercise))
-          .map(ex => [ex.id, ex])
-      ).values()
+    // Programı bul
+    const workoutData = useMemo(
+      () => workoutPrograms.find(p => p.id.toString() === id),
+      [workoutPrograms, id]
     );
-        const handleExercisePress = (exercise: any) => {
-            // id ile tam mock veriyi bul
-            const fullExercise = EXERCISES.find(e => e.id === exercise.id) || exercise;
-            setSelectedExercise(fullExercise);
-            setIsModalVisible(true);
-          }
+
+    // Programdaki egzersizleri bul (id dizisi ise context'ten bul)
+    const programExercises = useMemo(() => {
+      if (!workoutData) return [];
+      // Eğer exercises bir dizi id ise:
+      if (Array.isArray(workoutData.exercises) && typeof workoutData.exercises[0] === "number") {
+        return workoutData.exercises
+          .map(eid => exercises.find(e => e.id === eid))
+          .filter(Boolean);
+      }
+      // Eğer exercises doğrudan egzersiz objeleri ise:
+      return workoutData.exercises || [];
+    }, [workoutData, exercises]);
+
+    React.useEffect(() => {
+      if (workoutData) {
+        setDaysState(workoutData.days || []);
+        setSelectedDay((workoutData.days && workoutData.days[0]) || null);
+      }
+    }, [workoutData]);
+
+    const handleExercisePress = (exercise: any) => {
+      setSelectedExercise(exercise);
+      setIsModalVisible(true);
+    }
 
     const handleCloseModal = () => {
       setIsModalVisible(false)
       setSelectedExercise(null)
     }
+
 
     const renderExerciseItem = ({ item }: { item: any }) => (
       <TouchableOpacity
@@ -149,7 +116,7 @@ export interface Exercise {
             <Text style={[styles.exerciseName, { color: isDark ? "#fff" : "#000" }]}>{item.name}</Text>
           </View>
           <View style={styles.exerciseImageContainer}>
-            <Image source={{ uri: item.videoUrl }} style={styles.exerciseImage} />
+            <Image source={{ uri: item.imageUrl || item.image }} style={styles.exerciseImage} />
             <View style={styles.playIconOverlay}>
               <MaterialCommunityIcons name="play" size={20} color="#fff" />
             </View>
@@ -159,6 +126,14 @@ export interface Exercise {
       </TouchableOpacity>
     )
 
+    if (programsLoading || exercisesLoading || !workoutData) {
+      return (
+        <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#121212" : "#f8f9fa" }]}>
+          <Text style={{ textAlign: "center", marginTop: 32 }}>Yükleniyor...</Text>
+        </SafeAreaView>
+      )
+    }
+
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#121212" : "#f8f9fa" }]}> 
         <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
@@ -167,32 +142,59 @@ export interface Exercise {
           <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
             <MaterialCommunityIcons name="arrow-left" size={24} color={isDark ? "#fff" : "#000"} />
           </TouchableOpacity>
-          <Text style={[styles.headerTitle, { color: isDark ? "#fff" : "#000" }]}>{workoutData.title}</Text>
+          <Text style={[styles.headerTitle, { color: isDark ? "#fff" : "#000" }]}>{workoutData?.title}</Text>
           <TouchableOpacity style={styles.favoriteButton}>
             <MaterialCommunityIcons name="heart-outline" size={24} color={isDark ? "#fff" : "#000"} />
           </TouchableOpacity>
         </View>
         {/* Workout Info Card */}
         <View style={[styles.workoutInfoCard, { backgroundColor: isDark ? "#222" : "#fff" }]}> 
-          <Text style={[styles.workoutDescription, { color: isDark ? "#aaa" : "#666" }]}>{workoutData.description}</Text>
+          <Text style={[styles.workoutDescription, { color: isDark ? "#aaa" : "#666" }]}>{workoutData?.description}</Text>
         </View>
         {/* Exercises List */}
         <View style={styles.exercisesSection}>
           <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Exercises</Text>
           <FlatList
-            data={exercises}
+            data={programExercises}
             renderItem={renderExerciseItem}
             keyExtractor={(item) => item.id.toString()}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.exercisesList}
           />
         </View>
+        
         {/* Exercise Detail Modal */}
         <ExerciseDetailModal
           visible={isModalVisible}
           exercise={selectedExercise}
           onClose={handleCloseModal}
           isDark={isDark}
+          showActions={false}
+        />
+
+        {/* Takvime Ekle Butonu */}
+        <TouchableOpacity
+          style={{
+            margin: 16,
+            backgroundColor: "#3DCC85",
+            borderRadius: 12,
+            padding: 16,
+            alignItems: "center"
+          }}
+          onPress={() => setEditModalVisible(true)}
+        >
+          <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }}>Takvime Ekle</Text>
+        </TouchableOpacity>
+
+        {/* Workout Program Edit Modal */}
+        <WorkoutProgramEditModal
+          visible={editModalVisible}
+          onClose={() => setEditModalVisible(false)}
+          durationWeeks={workoutData.durationWeeks || 1}
+          days={workoutData.days || []}
+          exercises={programExercises as any}
+          userId={user?.id || "user123"}
+          workoutProgramId={workoutData.id}
         />
       </SafeAreaView>
     )
@@ -294,6 +296,18 @@ export interface Exercise {
       borderRadius: 8,
       justifyContent: "center",
       alignItems: "center",
+    },
+    overlay: {
+      flex: 1,
+      backgroundColor: "rgba(0,0,0,0.5)",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    modal: {
+      width: "80%",
+      maxHeight: "80%",
+      borderRadius: 16,
+      padding: 20,
     },
   })
   

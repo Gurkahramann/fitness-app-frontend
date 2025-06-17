@@ -1,34 +1,38 @@
 "use client"
 
-import { useState } from "react"
-import { View, Text, TouchableOpacity, StyleSheet, useColorScheme } from "react-native"
+import React from "react"
+import { View, Text, StyleSheet, useColorScheme } from "react-native"
 import { Calendar, type DateData } from "react-native-calendars"
 
 type CalendarCardProps = {
   onDayPress: (day: DateData) => void
   selectedDate: string
+  markedDates?: { [date: string]: any }
 }
 
-export default function CalendarCard({ onDayPress, selectedDate }: CalendarCardProps) {
+export default function CalendarCard({ onDayPress, selectedDate, markedDates }: CalendarCardProps) {
   const isDark = useColorScheme() === "dark"
-  const [expanded, setExpanded] = useState(false)
-
   const backgroundColor = isDark ? "#222" : "#fff"
   const textColor = isDark ? "#fff" : "#000"
   const subTextColor = isDark ? "#ccc" : "#666"
 
-  return (
-    <View style={[styles.container, { backgroundColor }]}>
-      <Text style={[styles.title, { color: textColor }]}>Calendar</Text>
-      <Text style={[styles.hint, { color: subTextColor }]}>
-        {expanded ? "Tap to collapse calendar" : "Tap to expand calendar"}
-      </Text>
+  // Merge selectedDte into markedDates for selection highlight
+  const mergedMarkedDates = {
+    ...(markedDates || {}),
+    [selectedDate]: {
+      ...(markedDates?.[selectedDate] || {}),
+      selected: true,
+      selectedColor: "#3DCC85",
+    },
+  }
 
-      <TouchableOpacity activeOpacity={1} onPress={() => setExpanded(!expanded)} style={styles.calendarWrapper}>
+  return (
+    <View style={[styles.container, { backgroundColor }]}> 
+      <Text style={[styles.title, { color: textColor }]}>Calendar</Text>
       <Calendar
-        key={isDark ? "dark" : "light"} // 👈 Zorunlu yeniden render için
+        key={isDark ? "dark" : "light"}
         style={{
-          height: expanded ? 350 : 220,
+          height: 350,
           borderRadius: 12,
         }}
         onDayPress={onDayPress}
@@ -44,14 +48,8 @@ export default function CalendarCard({ onDayPress, selectedDate }: CalendarCardP
           selectedDayTextColor: "#FFF",
           textDisabledColor: isDark ? "#444" : "#ccc",
         }}
-        markedDates={{
-          [selectedDate]: {
-            selected: true,
-            selectedColor: "#3DCC85",
-          },
-        }}
+        markedDates={mergedMarkedDates}
       />
-      </TouchableOpacity>
     </View>
   )
 }
@@ -72,10 +70,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 4,
-  },
-  hint: {
-    fontSize: 12,
-    marginBottom: 8,
   },
   calendarWrapper: {
     borderRadius: 12,

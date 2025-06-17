@@ -50,12 +50,16 @@ export const UserProfileProvider = ({ children }: { children: ReactNode }) => {
         authFetch(`${baseUrl}/auth/me`, { method: "GET" }),
         authFetch(`${baseUrl}/auth/userinfo`, { method: "GET" }),
       ])
+
       if (!meRes.ok || !userInfoRes.ok) {
         throw new Error("Failed to fetch user profile data.")
       }
+
       const me = await meRes.json()
       const userInfo = await userInfoRes.json()
-      console.log(userInfo)
+
+      console.log("User data fetched:", { me, userInfo })
+
       setUserProfile({
         ...me,
         ...userInfo,

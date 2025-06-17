@@ -1,23 +1,99 @@
 "use client"
 
 import { useState } from "react"
-import { View, Text, Modal, TouchableOpacity, StyleSheet, ScrollView, Image, Dimensions } from "react-native"
+import { View, Text, Modal, TouchableOpacity, StyleSheet, ScrollView, Image, Dimensions, TextInput } from "react-native"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import React from "react"
+
+// Gün isimleri sabiti
+const DAYS = [
+  { label: "Pzt", fullName: "Pazartesi", value: 1 },
+  { label: "Sal", fullName: "Salı", value: 2 },
+  { label: "Çar", fullName: "Çarşamba", value: 3 },
+  { label: "Per", fullName: "Perşembe", value: 4 },
+  { label: "Cum", fullName: "Cuma", value: 5 },
+  { label: "Cmt", fullName: "Cumartesi", value: 6 },
+  { label: "Paz", fullName: "Pazar", value: 0 },
+]
 
 interface ExerciseDetailModalProps {
   visible: boolean
   exercise: any
   onClose: () => void
   isDark: boolean
+  showConfig?: boolean
+  onAddToWorkout?: (config: any) => void
+  selectedDaysPerWeek?: { [week: number]: number[] }
+  weeks?: number
+  onNoDaySelected?: () => void
+  showActions?: boolean // yeni prop, default true
 }
 
 const { width } = Dimensions.get("window")
 
-export default function ExerciseDetailModal({ visible, exercise, onClose, isDark }: ExerciseDetailModalProps) {
+export default function ExerciseDetailModal({
+  visible,
+  exercise,
+  onClose,
+  isDark,
+  showConfig = false,
+  onAddToWorkout,
+  selectedDaysPerWeek,
+  weeks = 1,
+  onNoDaySelected,
+  showActions = true,
+}: ExerciseDetailModalProps) {
   const [activeTab, setActiveTab] = useState("instructions")
+  // Config state'leri
+  const [sets, setSets] = useState("3")
+  const [reps, setReps] = useState("12")
+  const [weight, setWeight] = useState("0")
+  const [duration, setDuration] = useState("30")
+  const [selectedSchedule, setSelectedSchedule] = useState<{ [week: number]: number[] }>({})
+
+  React.useEffect(() => {
+    if (visible && showConfig) {
+      setSets("3")
+      setReps("12")
+      setWeight("0")
+      setDuration("30")
+      setSelectedSchedule({})
+    }
+  }, [visible, showConfig, exercise])
 
   if (!exercise) return null
+
+  const isCardio = exercise.type === "cardio"
+
+  const handleScheduleToggle = (week: number, day: number) => {
+    setSelectedSchedule((prev) => {
+      const weekDays = prev[week] || []
+      const isSelected = weekDays.includes(day)
+      const updatedWeekDays = isSelected ? weekDays.filter((d) => d !== day) : [...weekDays, day]
+      return { ...prev, [week]: updatedWeekDays }
+    })
+  }
+
+  const handleAddToWorkout = () => {
+    if (showConfig) {
+      // Gün seçimi validasyonu
+      const anyDaySelected = Object.values(selectedSchedule).some(days => days.length > 0)
+      if (selectedDaysPerWeek && !anyDaySelected && onNoDaySelected) {
+        onNoDaySelected()
+        onClose()
+        return
+      }
+      // Diğer validasyonlar (ör: ağırlık)
+      if (!isCardio && (Number.parseFloat(weight) <= 0 || isNaN(Number.parseFloat(weight)))) {
+        if (onAddToWorkout) onAddToWorkout({ error: "Please enter a weight greater than 0." })
+        return
+      }
+      onAddToWorkout?.({ sets, reps, weight, duration, selectedSchedule })
+    } else {
+      onAddToWorkout?.({})
+    }
+    onClose()
+  }
 
   return (
     <Modal visible={visible} animationType="slide" presentationStyle="pageSheet">
@@ -117,17 +193,139 @@ export default function ExerciseDetailModal({ visible, exercise, onClose, isDark
             )}
           </View>
 
+          {/* Config Alanları */}
+          {showConfig && (
+            <View style={[styles.contentContainer, { backgroundColor: isDark ? "#222" : "#fff" }]}>
+              <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Exercise Configuration</Text>
+              <View style={styles.configGrid}>
+                <View style={styles.configItem}>
+                  <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Sets</Text>
+                  <TextInput
+                    style={[
+                      styles.configInput,
+                      {
+                        backgroundColor: isDark ? "#2A2A2A" : "#F8FAFC",
+                        color: isDark ? "#fff" : "#1E293B",
+                        borderColor: isDark ? "#374151" : "#E2E8F0",
+                      },
+                    ]}
+                    value={sets}
+                    onChangeText={setSets}
+                    keyboardType="numeric"
+                  />
+                </View>
+                {!isCardio ? (
+                  <>
+                    <View style={styles.configItem}>
+                      <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Reps</Text>
+                      <TextInput
+                        style={[
+                          styles.configInput,
+                          {
+                            backgroundColor: isDark ? "#2A2A2A" : "#F8FAFC",
+                            color: isDark ? "#fff" : "#1E293B",
+                            borderColor: isDark ? "#374151" : "#E2E8F0",
+                          },
+                        ]}
+                        value={reps}
+                        onChangeText={setReps}
+                        keyboardType="numeric"
+                      />
+                    </View>
+                    <View style={styles.configItem}>
+                      <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Weight (kg)</Text>
+                      <TextInput
+                        style={[
+                          styles.configInput,
+                          {
+                            backgroundColor: isDark ? "#2A2A2A" : "#F8FAFC",
+                            color: isDark ? "#fff" : "#1E293B",
+                            borderColor: isDark ? "#374151" : "#E2E8F0",
+                          },
+                        ]}
+                        value={weight}
+                        onChangeText={setWeight}
+                        keyboardType="numeric"
+                      />
+                    </View>
+                  </>
+                ) : (
+                  <View style={styles.configItem}>
+                    <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Duration (sec)</Text>
+                    <TextInput
+                      style={[
+                        styles.configInput,
+                        {
+                          backgroundColor: isDark ? "#2A2A2A" : "#F8FAFC",
+                          color: isDark ? "#fff" : "#1E293B",
+                          borderColor: isDark ? "#374151" : "#E2E8F0",
+                        },
+                      ]}
+                      value={duration}
+                      onChangeText={setDuration}
+                      keyboardType="numeric"
+                    />
+                  </View>
+                )}
+              </View>
+              {/* Gün seçimi alanı */}
+              {selectedDaysPerWeek && weeks > 0 && (
+                <View style={styles.scheduleSection}>
+                  <Text style={[styles.scheduleTitle, { color: isDark ? "#fff" : "#1E293B" }]}>📅 Add to Schedule</Text>
+                  <Text style={[styles.scheduleSubtitle, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Select which days to add this exercise</Text>
+                  {[...Array(weeks)].map((_, weekIdx) =>
+                    selectedDaysPerWeek[weekIdx + 1]?.length > 0 && (
+                      <View key={weekIdx} style={styles.modalWeekContainer}>
+                        <Text style={[styles.modalWeekTitle, { color: isDark ? "#E2E8F0" : "#475569" }]}>Week {weekIdx + 1}</Text>
+                        <View style={styles.modalDaysGrid}>
+                          {selectedDaysPerWeek[weekIdx + 1].map((day: number) => {
+                            const isSelected = selectedSchedule[weekIdx + 1]?.includes(day)
+                            const dayObj = DAYS.find(d => d.value === day)
+                            return (
+                              <TouchableOpacity
+                                key={day}
+                                style={[
+                                  styles.modalDayButton,
+                                  {
+                                    backgroundColor: isSelected ? "#3DCC85" : isDark ? "#2A2A2A" : "#F8FAFC",
+                                    borderColor: isSelected ? "#3DCC85" : isDark ? "#374151" : "#E2E8F0",
+                                  },
+                                ]}
+                                onPress={() => handleScheduleToggle(weekIdx + 1, day)}
+                              >
+                                <Text
+                                  style={[
+                                    styles.modalDayLabel,
+                                    { color: isSelected ? "#fff" : isDark ? "#E2E8F0" : "#64748B" },
+                                  ]}
+                                >
+                                  {dayObj ? dayObj.label : day}
+                                </Text>
+                              </TouchableOpacity>
+                            )
+                          })}
+                        </View>
+                      </View>
+                    )
+                  )}
+                </View>
+              )}
+            </View>
+          )}
+
           {/* Action Buttons */}
-          <View style={styles.actionButtons}>
-            <TouchableOpacity style={[styles.actionButton, { backgroundColor: "#3DCC85" }]}>
-              <MaterialCommunityIcons name="play" size={20} color="#fff" />
-              <Text style={styles.actionButtonText}>Start Exercise</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.actionButton, { backgroundColor: isDark ? "#333" : "#eee" }]}>
-              <MaterialCommunityIcons name="plus" size={20} color={isDark ? "#fff" : "#000"} />
-              <Text style={[styles.actionButtonText, { color: isDark ? "#fff" : "#000" }]}>Add to Workout</Text>
-            </TouchableOpacity>
-          </View>
+          {showActions && onAddToWorkout && (
+            <View style={styles.actionButtons}>
+              <TouchableOpacity
+                style={[styles.actionButton, { backgroundColor: isDark ? "#333" : "#eee" }]}
+                onPress={handleAddToWorkout}
+                disabled={!onAddToWorkout}
+              >
+                <MaterialCommunityIcons name="plus" size={20} color={isDark ? "#fff" : "#000"} />
+                <Text style={[styles.actionButtonText, { color: isDark ? "#fff" : "#000" }]}>Add to Workout</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </ScrollView>
       </View>
     </Modal>
@@ -298,5 +496,59 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     marginLeft: 8,
+  },
+  configGrid: {
+    flexDirection: "row",
+    gap: 12,
+  },
+  configItem: {
+    flex: 1,
+  },
+  configLabel: {
+    fontSize: 12,
+    marginBottom: 4,
+  },
+  configInput: {
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    borderRadius: 8,
+  },
+  scheduleSection: {
+    marginTop: 16,
+  },
+  scheduleTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    marginBottom: 8,
+  },
+  scheduleSubtitle: {
+    fontSize: 12,
+    marginBottom: 16,
+  },
+  modalWeekContainer: {
+    marginBottom: 16,
+  },
+  modalWeekTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 8,
+  },
+  modalDaysGrid: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  modalDayButton: {
+    width: 32,
+    height: 32,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    borderRadius: 16,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalDayLabel: {
+    fontSize: 12,
+    fontWeight: "600",
   },
 })

@@ -10,6 +10,10 @@ export type ToastType = "success" | "error" | "info" | "warning"
 interface ToastContextType {
   showToast: (message: string, type?: ToastType, duration?: number) => void
   hideToast: () => void
+  visible: boolean
+  message: string
+  type: ToastType
+  duration: number
 }
 
 // Create the context with undefined default value
@@ -27,10 +31,11 @@ export function useToast() {
 // Props for the ToastProvider component
 interface ToastProviderProps {
   children: ReactNode
+  suppressGlobalToast?: boolean
 }
 
 // ToastProvider component
-export function ToastProvider({ children }: ToastProviderProps) {
+export function ToastProvider({ children, suppressGlobalToast = false }: ToastProviderProps) {
   const [visible, setVisible] = useState(false)
   const [message, setMessage] = useState("")
   const [type, setType] = useState<ToastType>("success")
@@ -50,15 +55,17 @@ export function ToastProvider({ children }: ToastProviderProps) {
   }
 
   return (
-    <ToastContext.Provider value={{ showToast, hideToast }}>
+    <ToastContext.Provider value={{ showToast, hideToast, visible, message, type, duration }}>
       {children}
-      <Toast
-        visible={visible}
-        message={message}
-        type={type}
-        duration={duration}
-        onDismiss={hideToast}
-      />
+      {!suppressGlobalToast && (
+        <Toast
+          visible={visible}
+          message={message}
+          type={type}
+          duration={duration}
+          onDismiss={hideToast}
+        />
+      )}
     </ToastContext.Provider>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { SafeAreaView, ScrollView, StyleSheet, useColorScheme, Text, BackHandler, Alert } from "react-native"
 import type { DateData } from "react-native-calendars"
 import { useRouter } from "expo-router"
@@ -10,9 +10,12 @@ import Header from "../../components/Header"
 import WorkoutProgramsCard from "../../components/WorkoutProgramsCard"
 import CalendarCard from "../../components/CalendarCard"
 import CaloriesCard from "../../components/CaloriesCard"
+import UserWorkoutDayCard from '../../components/UserWorkoutDayCard'; 
+import ActiveWorkoutProgramsCard from "../../components/ActiveWorkoutProgramsCard"
 
 // Import data
-import { WORKOUT_PROGRAMS, WorkoutProgram, RECOMMENDATION_MATRIX } from "../../constants/workoutData"
+import { RECOMMENDATION_MATRIX } from "../../constants/workoutData"
+import { useWorkoutPrograms } from "../context/WorkoutProgramContext"
 
 // Import auth context
 import { useAuth } from "@/hooks/useAuth"
@@ -28,6 +31,8 @@ export default function HomeScreen() {
   const router = useRouter();
   const navState = useNavigationState(state => state);
   const { userProfile } = useUserProfile();
+  const { workoutPrograms, loading: programsLoading, userWorkoutPrograms, fetchUserWorkoutPrograms } = useWorkoutPrograms();
+  const [markedDates, setMarkedDates] = useState<{ [date: string]: { marked: boolean; dotColor: string } }>({});
 
   // Event handlers
   const handleDayPress = (day: DateData) => {
@@ -43,33 +48,64 @@ export default function HomeScreen() {
     console.log("View all programs pressed")
   }
 
-  // Kullanıcıya göre önerilen programları bul
-  let recommendedPrograms: WorkoutProgram[] = [];
-  if (userProfile) {
+  // Kullanıcı programlarını yükle
+  useEffect(() => {
+    if (user?.id) {
+      fetchUserWorkoutPrograms(user.id);
+    }
+  }, [user?.id]);
+
+  // Tarihleri işaretle
+  useEffect(() => {
+    if (userWorkoutPrograms.length > 0) {
+      const newMarkedDates: { [date: string]: { marked: boolean; dotColor: string } } = {};
+
+      userWorkoutPrograms.forEach(program => {
+        const startDate = new Date(program.startDate);
+        program.savedDays.forEach((day, idx) => {
+          // Kaçıncı tekrar olduğunu bul: aynı dayNumber kaç kez geçmiş?
+          const sameDayIndex = program.savedDays
+            .slice(0, idx + 1)
+            .filter(d => d.dayNumber === day.dayNumber).length - 1;
+          // Hafta numarası = kaçıncı tekrar
+          const weekNumber = sameDayIndex;
+          // Tarihi hesapla
+          const workoutDate = new Date(startDate);
+          workoutDate.setDate(startDate.getDate() + (day.dayNumber - 1) + (weekNumber * 7));
+          const dateString = workoutDate.toISOString().split('T')[0];
+          newMarkedDates[dateString] = {
+            marked: true,
+            dotColor: '#3DCC85'
+          };
+        });
+      });
+
+      setMarkedDates(newMarkedDates);
+    }
+  }, [userWorkoutPrograms]);
+
+  // Kullanıcıya göre önerilen programları bul (backend'den gelen programlar üzerinden)
+  const recommendedPrograms = useMemo(() => {
+    if (!userProfile || !workoutPrograms.length) return workoutPrograms;
     const activity = userProfile.activityLevel || "*";
     const goal = userProfile.goal || "*";
-    // Matrix'te eşleşen satırı bul
     const match = RECOMMENDATION_MATRIX.find(row => (row.activity === activity || row.activity === "*") && (row.goal === goal || row.goal === "*"));
+
     if (match) {
-      // Sıralı öneri: her slug için programı bul ve sırayla ekle (aynı program birden fazla öneride varsa tekrar etmesin)
       const seen = new Set();
-      recommendedPrograms = match.recommend
-        .map(slug => WORKOUT_PROGRAMS.find(p => p.slug.toUpperCase().replace(/-/g, '_') === slug))
-        .filter((p): p is WorkoutProgram => {
+      const recs = match.recommend
+        .map(slug => workoutPrograms.find(p => p.slug.toUpperCase().replace(/-/g, '_') === slug))
+        .filter((p): p is typeof workoutPrograms[0] => {
           if (!p) return false;
           if (seen.has(p.id)) return false;
           seen.add(p.id);
           return true;
         });
+      if (recs.length > 0) return recs;
     }
-    // Eğer hiç eşleşme yoksa fallback olarak tüm programları göster
-    if (recommendedPrograms.length === 0) {
-      recommendedPrograms = WORKOUT_PROGRAMS;
-    }
-  } else {
-    // Kullanıcı profili yüklenmediyse tüm programları göster
-    recommendedPrograms = WORKOUT_PROGRAMS;
-  }
+
+    return workoutPrograms;
+  }, [userProfile, workoutPrograms]);
 
   useEffect(() => {
     const onBackPress = () => {
@@ -98,8 +134,38 @@ export default function HomeScreen() {
     return () => subscription.remove();
   }, [navState]);
 
+  if (programsLoading) {
+    return (
+      <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#121212" : "#f5f5f5" }]}> 
+        <Text style={{ textAlign: "center", marginTop: 32 }}>Programlar yükleniyor...</Text>
+      </SafeAreaView>
+    )
+  }
+  const selectedWorkoutDay = React.useMemo(() => {
+    if (!selectedDate || userWorkoutPrograms.length === 0) return null;
+  
+    // Tüm programlarda, seçili tarihe denk gelen workoutDay'i bul
+    for (const program of userWorkoutPrograms) {
+      const startDate = new Date(program.startDate);
+      for (let i = 0; i < program.savedDays.length; i++) {
+        const day = program.savedDays[i];
+        // Kaçıncı tekrar olduğunu bul
+        const sameDayIndex = program.savedDays
+          .slice(0, i + 1)
+          .filter(d => d.dayNumber === day.dayNumber).length - 1;
+        const weekNumber = sameDayIndex;
+        const workoutDate = new Date(startDate);
+        workoutDate.setDate(startDate.getDate() + (day.dayNumber - 1) + (weekNumber * 7));
+        const dateString = workoutDate.toISOString().split('T')[0];
+        if (dateString === selectedDate) {
+          return day;
+        }
+      }
+    }
+    return null;
+  }, [selectedDate, userWorkoutPrograms]);
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#121212" : "#f5f5f5" }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#121212" : "#f5f5f5" }]}> 
       {/* Kullanıcı varsa adını gönderiyoruz, yoksa fallback */}
       {user ? (
         <Header userName={user.name} />
@@ -111,16 +177,46 @@ export default function HomeScreen() {
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
       <WorkoutProgramsCard
-        programs={recommendedPrograms.map(p => ({
-          id: p.id.toString(),
-          title: p.title,
-          image: p.coverImageUrl // veya thumbnailUrl
-        }))}
+        title="Workout Programs"
+        programs={recommendedPrograms
+          .filter(p => p && p.id !== undefined && p.title)
+          .map(p => ({
+            id: p.id.toString(),
+            title: p.title,
+            image: p.coverImageUrl || ""
+          }))
+        }
+        showCreate={true}
         onViewAllPress={handleViewAllPress}
       />
 
-        <CalendarCard selectedDate={selectedDate} onDayPress={handleDayPress} />
+      {/* Aktif Antrenman Programlarım Card'ı */}
+      <WorkoutProgramsCard
+        title="Aktif Antrenman Programlarım"
+        programs={userWorkoutPrograms.map(up => {
+          const program = workoutPrograms.find(wp => wp.id === up.workoutProgramId);
+          return {
+            id: up.workoutProgramId.toString(),
+            title: program ? program.title : `Program #${up.workoutProgramId}`,
+            image: program?.coverImageUrl || ""
+          };
+        })}
+        showCreate={false}
+      />
 
+        <CalendarCard 
+          selectedDate={selectedDate} 
+          onDayPress={handleDayPress}
+          markedDates={markedDates}
+        />
+        <UserWorkoutDayCard
+        date={selectedDate}
+        workoutDay={selectedWorkoutDay}
+        onStartWorkout={() => {
+          // Burada antrenman başlatma logic'i ekleyebilirsin
+          alert('Antrenman başlatılıyor!');
+        }}
+/>
         {!loading && calorieGoal ? (
         <CaloriesCard remaining={calorieGoal} goal={calorieGoal} consumed={0} />
       ) : (

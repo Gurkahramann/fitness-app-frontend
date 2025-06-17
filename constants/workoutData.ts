@@ -4,12 +4,13 @@ export interface Exercise {
   name: string
   type: "cardio" | "strength"
   muscleGroup: string
-  videoUrl: string
   instructions: string[]
   tips: string[]
   duration: string
   calories: string
   image: string
+  sets?: number
+  reps?: number
 }
 
 export interface ExerciseSet {
@@ -31,8 +32,10 @@ export interface ExerciseEntry {
 export interface WorkoutDay {
   id: number
   userId: string
-  date: string // YYYY-MM-DD
-  exerciseEntries: ExerciseEntry[]
+  dayOfWeek: number; // 👈 YENİ ALAN: 1=Pazartesi, 2=Salı, ..., 7=Pazar
+  date: string;      // Başlangıçta boş olacak: "". Kullanıcı takvime ekleyince doldurulacak.
+  exerciseEntries: ExerciseEntry[];
+
 }
 
 export interface WorkoutProgram {
@@ -46,7 +49,7 @@ export interface WorkoutProgram {
   thumbnailUrl: string
   tags: string[]
   days: WorkoutDay[]
-  createdBy: string
+  createdById: string
   likes: string[]
   isPublic: boolean
   exercises: Exercise[]
@@ -61,7 +64,6 @@ export const EXERCISES: Exercise[] = [
     name: "Push-ups",
     type: "strength",
     muscleGroup: "Chest",
-    videoUrl: "https://example.com/pushups.mp4",
     instructions: [
       "Start in a plank position with hands slightly wider than shoulders",
       "Keep your body in a straight line from head to heels",
@@ -75,6 +77,8 @@ export const EXERCISES: Exercise[] = [
       "Modify on knees if needed"
     ],
     duration: "3 sets x 10-15 reps",
+    sets: 3,
+    reps: 10,
     calories: "5-8 cal/min",
     image: "https://via.placeholder.com/80x80/33A8FF/FFFFFF?text=PU"
   },
@@ -83,7 +87,6 @@ export const EXERCISES: Exercise[] = [
     name: "Squats",
     type: "strength",
     muscleGroup: "Legs",
-    videoUrl: "https://example.com/squats.mp4",
     instructions: [
       "Stand with feet shoulder-width apart",
       "Keep your chest up and core engaged",
@@ -98,6 +101,8 @@ export const EXERCISES: Exercise[] = [
       "Go only as low as comfortable"
     ],
     duration: "3 sets x 15-20 reps",
+    sets: 3,
+    reps: 15,
     calories: "6-10 cal/min",
     image: "https://via.placeholder.com/80x80/33A8FF/FFFFFF?text=SQ"
   },
@@ -106,7 +111,6 @@ export const EXERCISES: Exercise[] = [
     name: "Jumping Jacks",
     type: "cardio",
     muscleGroup: "Full Body",
-    videoUrl: "https://example.com/jumpingjacks.mp4",
     instructions: [
       "Stand upright with your legs together, arms at your sides",
       "Bend your knees slightly, and jump into the air",
@@ -121,6 +125,8 @@ export const EXERCISES: Exercise[] = [
       "Maintain a steady rhythm"
     ],
     duration: "3 sets x 30 seconds",
+    sets: 3,
+    reps: 0,
     calories: "8-12 cal/min",
     image: "https://via.placeholder.com/80x80/FF5733/FFFFFF?text=JJ"
   },
@@ -129,7 +135,6 @@ export const EXERCISES: Exercise[] = [
     name: "Plank",
     type: "strength",
     muscleGroup: "Core",
-    videoUrl: "https://example.com/plank.mp4",
     instructions: [
       "Start in a push-up position",
       "Lower down to your forearms",
@@ -144,6 +149,8 @@ export const EXERCISES: Exercise[] = [
       "Focus on quality over duration"
     ],
     duration: "3 sets x 30-60 seconds",
+    sets: 3,
+    reps: 0,
     calories: "3-5 cal/min",
     image: "https://via.placeholder.com/80x80/33A8FF/FFFFFF?text=PL"
   },
@@ -152,7 +159,6 @@ export const EXERCISES: Exercise[] = [
     name: "Burpees",
     type: "cardio",
     muscleGroup: "Full Body",
-    videoUrl: "https://example.com/burpees.mp4",
     instructions: [
       "Start in a standing position",
       "Drop into a squat position with hands on the ground",
@@ -167,6 +173,8 @@ export const EXERCISES: Exercise[] = [
       "Modify by stepping back instead of jumping"
     ],
     duration: "3 sets x 10 reps",
+    sets: 3,
+    reps: 10,
     calories: "15-20 cal/min",
     image: "https://via.placeholder.com/80x80/FF5733/FFFFFF?text=BP"
   },
@@ -175,7 +183,6 @@ export const EXERCISES: Exercise[] = [
     name: "Mountain Climbers",
     type: "cardio",
     muscleGroup: "Core",
-    videoUrl: "https://example.com/mountainclimbers.mp4",
     instructions: [
       "Start in a plank position",
       "Drive your knees toward your chest one at a time",
@@ -187,6 +194,8 @@ export const EXERCISES: Exercise[] = [
       "Move as fast as possible while maintaining form"
     ],
     duration: "3 sets x 30 seconds",
+    sets: 3,
+    reps: 0,
     calories: "10-14 cal/min",
     image: "https://via.placeholder.com/80x80/FF5733/FFFFFF?text=MC"
   },
@@ -195,7 +204,6 @@ export const EXERCISES: Exercise[] = [
     name: "Lunges",
     type: "strength",
     muscleGroup: "Legs",
-    videoUrl: "https://example.com/lunges.mp4",
     instructions: [
       "Stand upright, step forward with one leg",
       "Lower your hips until both knees are bent at about 90 degrees",
@@ -206,6 +214,8 @@ export const EXERCISES: Exercise[] = [
       "Don't let your knee go past your toes"
     ],
     duration: "3 sets x 10 reps",
+    sets: 3,
+    reps: 10,
     calories: "6-9 cal/min",
     image: "https://via.placeholder.com/80x80/33A8FF/FFFFFF?text=LU"
   },
@@ -214,7 +224,6 @@ export const EXERCISES: Exercise[] = [
     name: "High Knees",
     type: "cardio",
     muscleGroup: "Legs",
-    videoUrl: "https://example.com/highknees.mp4",
     instructions: [
       "Stand tall with feet hip-width apart",
       "Place hands in front of you at hip level",
@@ -229,6 +238,8 @@ export const EXERCISES: Exercise[] = [
       "Drive knees up as high as possible"
     ],
     duration: "3 sets x 30 seconds",
+    sets: 3,
+    reps: 0,
     calories: "10-15 cal/min",
     image: "https://via.placeholder.com/80x80/FF5733/FFFFFF?text=HK"
   },
@@ -237,7 +248,6 @@ export const EXERCISES: Exercise[] = [
     name: "Steady-State Cardio",
     type: "cardio",
     muscleGroup: "Cardiovascular",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/steady.jpg",
     instructions: [
       "30 dk orta tempoda yürüyüş veya hafif koşu. RPE ~5/10.",
       "Hafta ilerledikçe süreyi artır."
@@ -247,6 +257,8 @@ export const EXERCISES: Exercise[] = [
       "Dik dur, nefesini kontrol et."
     ],
     duration: "30-40 dk",
+    sets: 3,
+    reps: 0,
     calories: "200-350 cal",
     image: "https://storage.googleapis.com/fitness-app-photos/steady.jpg"
   },
@@ -255,7 +267,6 @@ export const EXERCISES: Exercise[] = [
     name: "Interval Cardio",
     type: "cardio",
     muscleGroup: "Cardiovascular",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/interval.jpg",
     instructions: [
       "3 dk orta tempo + 1 dk hızlı ×6-8 set.",
       "Toplam süreyi ve set sayısını haftalara göre artır."
@@ -265,6 +276,8 @@ export const EXERCISES: Exercise[] = [
       "Hızlı kısımlarda formunu bozma."
     ],
     duration: "30-40 dk",
+    sets: 3,
+    reps: 0,
     calories: "250-400 cal",
     image: "https://storage.googleapis.com/fitness-app-photos/interval.jpg"
   },
@@ -273,7 +286,6 @@ export const EXERCISES: Exercise[] = [
     name: "Incline Walk",
     type: "cardio",
     muscleGroup: "Cardiovascular",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/incline.jpg",
     instructions: [
       "30 dk %5 eğimde yürüyüş. RPE ~5-6/10.",
       "Hafta ilerledikçe süreyi artır."
@@ -283,6 +295,8 @@ export const EXERCISES: Exercise[] = [
       "Dik dur, nefesini kontrol et."
     ],
     duration: "30-40 dk",
+    sets: 3,
+    reps: 0,
     calories: "220-370 cal",
     image: "https://storage.googleapis.com/fitness-app-photos/incline.jpg"
   },
@@ -291,7 +305,6 @@ export const EXERCISES: Exercise[] = [
     name: "Dumbbell Bench Press",
     type: "strength",
     muscleGroup: "Chest",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/db_bench.mp4",
     instructions: [
       "Bench'e sırt üstü uzan, dumbbell'ları göğüs hizasında tut.",
       "Dirsekleri 2 sn'de indir, 2 sn'de yukarı it.",
@@ -302,6 +315,8 @@ export const EXERCISES: Exercise[] = [
       "Ağırlıkları kontrollü indir/kaldır."
     ],
     duration: "3-4 set x 10-14 reps",
+    sets: 3,
+    reps: 10,
     calories: "6-10 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/db_bench.jpg"
   },
@@ -310,7 +325,6 @@ export const EXERCISES: Exercise[] = [
     name: "Goblet Squat",
     type: "strength",
     muscleGroup: "Legs",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/goblet.mp4",
     instructions: [
       "Dumbbell veya kettlebell'i göğüs hizasında tut.",
       "Topuk yerde, core sıkı, dizler dışarı.",
@@ -321,6 +335,8 @@ export const EXERCISES: Exercise[] = [
       "Sırtı düz tut."
     ],
     duration: "3-4 set x 10-14 reps",
+    sets: 3,
+    reps: 10,
     calories: "7-11 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/goblet.jpg"
   },
@@ -329,7 +345,6 @@ export const EXERCISES: Exercise[] = [
     name: "Bent-Over Row",
     type: "strength",
     muscleGroup: "Back",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/row.mp4",
     instructions: [
       "Dizleri hafif bük, öne eğil, sırt düz.",
       "Dumbbell veya bandı karına doğru çek.",
@@ -340,6 +355,8 @@ export const EXERCISES: Exercise[] = [
       "Hareketi kontrollü yap."
     ],
     duration: "3-4 set x 10-14 reps",
+    sets: 3,
+    reps: 10,
     calories: "6-9 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/row.jpg"
   },
@@ -348,7 +365,6 @@ export const EXERCISES: Exercise[] = [
     name: "Dumbbell Romanian Deadlift",
     type: "strength",
     muscleGroup: "Hamstrings/Glutes",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/rdl.mp4",
     instructions: [
       "Dumbbell'ları uyluk önünde tut.",
       "Kalçayı geriye vererek öne eğil.",
@@ -359,6 +375,8 @@ export const EXERCISES: Exercise[] = [
       "Bel çukurunu koru."
     ],
     duration: "2-4 set x 10-12 reps",
+    sets: 2,
+    reps: 10,
     calories: "6-10 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/rdl.jpg"
   },
@@ -367,7 +385,6 @@ export const EXERCISES: Exercise[] = [
     name: "Dumbbell Shoulder Press",
     type: "strength",
     muscleGroup: "Shoulders",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/shoulder_press.mp4",
     instructions: [
       "Dumbbell'ları omuz hizasında tut.",
       "Dirsekleri düz yukarı it.",
@@ -378,6 +395,8 @@ export const EXERCISES: Exercise[] = [
       "Ağırlıkları kontrollü indir."
     ],
     duration: "2-4 set x 10-12 reps",
+    sets: 2,
+    reps: 10,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/shoulder_press.jpg"
   },
@@ -386,7 +405,6 @@ export const EXERCISES: Exercise[] = [
     name: "Barbell Bench Press",
     type: "strength",
     muscleGroup: "Chest",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/bench.mp4",
     instructions: [
       "Bench'e sırt üstü uzan, barı göğüs hizasında tut.",
       "Dirsekleri 2 sn'de indir, 2 sn'de yukarı it.",
@@ -397,6 +415,8 @@ export const EXERCISES: Exercise[] = [
       "Ağırlıkları kontrollü indir/kaldır."
     ],
     duration: "4 set x 8-10 reps",
+    sets: 4,
+    reps: 8,
     calories: "7-12 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/bench.jpg"
   },
@@ -405,7 +425,6 @@ export const EXERCISES: Exercise[] = [
     name: "Bent-Over Barbell Row",
     type: "strength",
     muscleGroup: "Back",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/row.mp4",
     instructions: [
       "Dizleri hafif bük, öne eğil, sırt düz.",
       "Barı karına doğru çek.",
@@ -416,6 +435,8 @@ export const EXERCISES: Exercise[] = [
       "Hareketi kontrollü yap."
     ],
     duration: "4 set x 8-10 reps",
+    sets: 4,
+    reps: 8,
     calories: "7-11 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/row.jpg"
   },
@@ -424,7 +445,6 @@ export const EXERCISES: Exercise[] = [
     name: "Dumbbell Incline Press",
     type: "strength",
     muscleGroup: "Chest",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/incline.mp4",
     instructions: [
       "Bench'i 30-45° eğime ayarla.",
       "Dumbbell'ları göğüs hizasında tut, yukarı it."
@@ -434,6 +454,8 @@ export const EXERCISES: Exercise[] = [
       "Ağırlıkları kontrollü indir."
     ],
     duration: "3 set x 10-12 reps",
+    sets: 3,
+    reps: 10,
     calories: "6-10 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/incline.jpg"
   },
@@ -442,7 +464,6 @@ export const EXERCISES: Exercise[] = [
     name: "Seated Cable Row",
     type: "strength",
     muscleGroup: "Back",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/cablerow.mp4",
     instructions: [
       "Makinede otur, kolları öne uzat.",
       "Kolları karına doğru çek, sırtı düz tut."
@@ -452,6 +473,8 @@ export const EXERCISES: Exercise[] = [
       "Hareketi kontrollü yap."
     ],
     duration: "3 set x 10-12 reps",
+    sets: 3,
+    reps: 10,
     calories: "6-9 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/cablerow.jpg"
   },
@@ -460,7 +483,6 @@ export const EXERCISES: Exercise[] = [
     name: "Dumbbell Lateral Raise",
     type: "strength",
     muscleGroup: "Shoulders",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/lateralraise.mp4",
     instructions: [
       "Dumbbell'ları yanlara doğru kaldır.",
       "Dirsekleri hafif bükülü tut."
@@ -470,6 +492,8 @@ export const EXERCISES: Exercise[] = [
       "Omuzları sıkıştırma."
     ],
     duration: "3 set x 12-15 reps",
+    sets: 3,
+    reps: 12,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/lateralraise.jpg"
   },
@@ -478,7 +502,6 @@ export const EXERCISES: Exercise[] = [
     name: "Face-Pull",
     type: "strength",
     muscleGroup: "Upper Back",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/facepull.mp4",
     instructions: [
       "Kabloyu yüz hizasına çek.",
       "Dirsekleri dışarı aç."
@@ -488,6 +511,8 @@ export const EXERCISES: Exercise[] = [
       "Hareketi kontrollü yap."
     ],
     duration: "3 set x 12-15 reps",
+    sets: 3,
+    reps: 12,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/facepull.jpg"
   },
@@ -496,7 +521,6 @@ export const EXERCISES: Exercise[] = [
     name: "Plank Shoulder Tap",
     type: "strength",
     muscleGroup: "Core",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/planktap.mp4",
     instructions: [
       "Plank pozisyonunda, bir elinle karşı omuza dokun.",
       "Core'u sıkı tut, kalçayı sabit tut."
@@ -506,6 +530,8 @@ export const EXERCISES: Exercise[] = [
       "Nefesini kontrol et."
     ],
     duration: "2 set x 40 sn",
+    sets: 2,
+    reps: 0,
     calories: "4-6 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/planktap.jpg"
   },
@@ -514,7 +540,6 @@ export const EXERCISES: Exercise[] = [
     name: "Back Squat",
     type: "strength",
     muscleGroup: "Quads",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/squat.mp4",
     instructions: [
       "Barı trapez kasına yerleştir.",
       "Kalçayı geriye ve aşağıya indir, topuk yerde."
@@ -524,6 +549,8 @@ export const EXERCISES: Exercise[] = [
       "Sırtı düz tut."
     ],
     duration: "4 set x 6-8 reps",
+    sets: 4,
+    reps: 6,
     calories: "7-12 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/squat.jpg"
   },
@@ -532,7 +559,6 @@ export const EXERCISES: Exercise[] = [
     name: "Romanian Deadlift",
     type: "strength",
     muscleGroup: "Hamstrings/Glutes",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/rdl.mp4",
     instructions: [
       "Barı uyluk önünde tut.",
       "Kalçayı geriye vererek öne eğil."
@@ -542,6 +568,8 @@ export const EXERCISES: Exercise[] = [
       "Bel çukurunu koru."
     ],
     duration: "4 set x 8-10 reps",
+    sets: 4,
+    reps: 8,
     calories: "6-10 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/rdl.jpg"
   },
@@ -550,7 +578,6 @@ export const EXERCISES: Exercise[] = [
     name: "Walking Lunge",
     type: "strength",
     muscleGroup: "Legs",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/lunge.mp4",
     instructions: [
       "Dumbbell'ları elinde tut, ileri adım at."
     ],
@@ -559,6 +586,8 @@ export const EXERCISES: Exercise[] = [
       "Gövde dik olsun."
     ],
     duration: "3 set x 12 adım",
+    sets: 3,
+    reps: 12,
     calories: "6-9 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/lunge.jpg"
   },
@@ -567,7 +596,6 @@ export const EXERCISES: Exercise[] = [
     name: "Hip Thrust",
     type: "strength",
     muscleGroup: "Glutes",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/hipthrust.mp4",
     instructions: [
       "Sırtını bench'e yasla, barı kalçanın üstüne yerleştir.",
       "Kalçayı yukarı it."
@@ -577,6 +605,8 @@ export const EXERCISES: Exercise[] = [
       "Topuklardan güç al."
     ],
     duration: "3 set x 10-12 reps",
+    sets: 3,
+    reps: 10,
     calories: "7-11 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/hipthrust.jpg"
   },
@@ -585,7 +615,6 @@ export const EXERCISES: Exercise[] = [
     name: "Leg Curl",
     type: "strength",
     muscleGroup: "Hamstrings",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/legcurl.mp4",
     instructions: [
       "Makinede veya band ile bacak bük."
     ],
@@ -593,6 +622,8 @@ export const EXERCISES: Exercise[] = [
       "Hareketi kontrollü yap."
     ],
     duration: "3 set x 12-15 reps",
+    sets: 3,
+    reps: 12,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/legcurl.jpg"
   },
@@ -601,7 +632,6 @@ export const EXERCISES: Exercise[] = [
     name: "Standing Calf Raise",
     type: "strength",
     muscleGroup: "Calves",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/calfraise.mp4",
     instructions: [
       "Ayak parmak ucunda yüksel."
     ],
@@ -609,6 +639,8 @@ export const EXERCISES: Exercise[] = [
       "Üstte 1 sn bekle."
     ],
     duration: "3 set x 15-20 reps",
+    sets: 3,
+    reps: 15,
     calories: "4-7 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/calfraise.jpg"
   },
@@ -617,7 +649,6 @@ export const EXERCISES: Exercise[] = [
     name: "Hollow Hold",
     type: "strength",
     muscleGroup: "Core",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/hollowhold.mp4",
     instructions: [
       "Sırtını yere yapıştır, bacak ve kolları kaldır."
     ],
@@ -625,6 +656,8 @@ export const EXERCISES: Exercise[] = [
       "Bel boşluğunu kapat."
     ],
     duration: "3 set x 30 sn",
+    sets: 3,
+    reps:0,
     calories: "4-6 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/hollowhold.jpg"
   },
@@ -633,7 +666,6 @@ export const EXERCISES: Exercise[] = [
     name: "HIIT Intervals",
     type: "cardio",
     muscleGroup: "Cardiovascular",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/hiit.mp4",
     instructions: [
       "5 tur: 40 sn yüksek tempo, 80 sn düşük tempo."
     ],
@@ -641,6 +673,8 @@ export const EXERCISES: Exercise[] = [
       "Yüksek tempoda formu bozma."
     ],
     duration: "5 set x 40 sn",
+    sets: 5,
+    reps: 0,
     calories: "12-18 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/hiit.jpg"
   },
@@ -649,7 +683,6 @@ export const EXERCISES: Exercise[] = [
     name: "Standing Military Press",
     type: "strength",
     muscleGroup: "Shoulders",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/militarypress.mp4",
     instructions: [
       "Barı omuz hizasında tut, baş üstüne it.",
       "Core'u sıkı tut."
@@ -659,6 +692,8 @@ export const EXERCISES: Exercise[] = [
       "Ağırlıkları kontrollü indir."
     ],
     duration: "4 set x 6-8 reps",
+    sets: 4,
+    reps: 6,
     calories: "6-10 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/militarypress.jpg"
   },
@@ -667,7 +702,6 @@ export const EXERCISES: Exercise[] = [
     name: "Weighted Dip",
     type: "strength",
     muscleGroup: "Chest/Triceps",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/dip.mp4",
     instructions: [
       "Paralel barlarda vücut ağırlığıyla veya ek ağırlıkla dip yap.",
       "Dirsekleri geriye bük, gövde hafif öne."
@@ -677,6 +711,8 @@ export const EXERCISES: Exercise[] = [
       "Tam kilitleme yapma."
     ],
     duration: "3 set x 8-10 reps",
+    sets: 3,
+    reps: 8,
     calories: "7-12 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/dip.jpg"
   },
@@ -685,7 +721,6 @@ export const EXERCISES: Exercise[] = [
     name: "Cable Fly",
     type: "strength",
     muscleGroup: "Chest",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/cablefly.mp4",
     instructions: [
       "Kabloyu göğüs hizasında birleştir.",
       "Kollar hafif bükülü."
@@ -695,6 +730,8 @@ export const EXERCISES: Exercise[] = [
       "Omuzları sıkıştırma."
     ],
     duration: "3 set x 12-15 reps",
+    sets: 3,
+    reps: 12,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/cablefly.jpg"
   },
@@ -703,7 +740,6 @@ export const EXERCISES: Exercise[] = [
     name: "Overhead Rope Triceps Extension",
     type: "strength",
     muscleGroup: "Triceps",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/ropeext.mp4",
     instructions: [
       "Kabloyu baş üstünde tut, dirsekten aç."
     ],
@@ -712,6 +748,8 @@ export const EXERCISES: Exercise[] = [
       "Hareketi kontrollü yap."
     ],
     duration: "3 set x 12-15 reps",
+    sets: 3,
+    reps: 12,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/ropeext.jpg"
   },
@@ -720,7 +758,6 @@ export const EXERCISES: Exercise[] = [
     name: "Copenhagen Plank",
     type: "strength",
     muscleGroup: "Core",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/copenhagen.mp4",
     instructions: [
       "Yan plank pozisyonunda üst bacağı yükselt.",
       "Core'u sıkı tut."
@@ -730,6 +767,8 @@ export const EXERCISES: Exercise[] = [
       "Nefesini kontrol et."
     ],
     duration: "3 set x 40 sn",
+    sets: 3,
+    reps: 0,
     calories: "4-7 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/copenhagen.jpg"
   },
@@ -738,7 +777,6 @@ export const EXERCISES: Exercise[] = [
     name: "Deadlift",
     type: "strength",
     muscleGroup: "Back/Glutes",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/deadlift.mp4",
     instructions: [
       "Barı yerden kaldır, sırt düz, core sıkı."
     ],
@@ -747,6 +785,8 @@ export const EXERCISES: Exercise[] = [
       "Hareketi kontrollü yap."
     ],
     duration: "4 set x 4-6 reps",
+    sets: 4,
+    reps: 4,
     calories: "10-16 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/deadlift.jpg"
   },
@@ -755,7 +795,6 @@ export const EXERCISES: Exercise[] = [
     name: "Weighted Pull-Up",
     type: "strength",
     muscleGroup: "Back/Biceps",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/pullup.mp4",
     instructions: [
       "Barfiks barında ağırlıkla veya vücut ağırlığıyla çekiş yap."
     ],
@@ -764,6 +803,8 @@ export const EXERCISES: Exercise[] = [
       "Kontrollü in."
     ],
     duration: "4 set x 6-8 reps",
+    sets: 4,
+    reps: 6,
     calories: "8-13 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/pullup.jpg"
   },
@@ -772,7 +813,6 @@ export const EXERCISES: Exercise[] = [
     name: "Pendlay Row",
     type: "strength",
     muscleGroup: "Back",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/pendlay.mp4",
     instructions: [
       "Barı yerden çek, her tekrarda yere bırak."
     ],
@@ -781,6 +821,8 @@ export const EXERCISES: Exercise[] = [
       "Patlayıcı çek."
     ],
     duration: "4 set x 8-10 reps",
+    sets: 4,
+    reps: 8,
     calories: "7-11 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/pendlay.jpg"
   },
@@ -789,7 +831,6 @@ export const EXERCISES: Exercise[] = [
     name: "Chest-Supported DB Row",
     type: "strength",
     muscleGroup: "Back",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/dbrow.mp4",
     instructions: [
       "Eğimli bench'te göğüs destekli dumbbell row yap."
     ],
@@ -798,6 +839,8 @@ export const EXERCISES: Exercise[] = [
       "Kontrollü indir."
     ],
     duration: "3 set x 10-12 reps",
+    sets: 3,
+    reps: 10,
     calories: "6-9 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/dbrow.jpg"
   },
@@ -806,7 +849,6 @@ export const EXERCISES: Exercise[] = [
     name: "Barbell Curl",
     type: "strength",
     muscleGroup: "Biceps",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/curl.mp4",
     instructions: [
       "Barı alt koldan bükerek kaldır."
     ],
@@ -815,6 +857,8 @@ export const EXERCISES: Exercise[] = [
       "Hareketi kontrollü yap."
     ],
     duration: "3 set x 10-12 reps",
+    sets: 3,
+    reps: 10,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/curl.jpg"
   },
@@ -823,7 +867,6 @@ export const EXERCISES: Exercise[] = [
     name: "Hanging Leg Raise",
     type: "strength",
     muscleGroup: "Core",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/legraise.mp4",
     instructions: [
       "Barfiks barında asılıyken bacakları yukarı kaldır."
     ],
@@ -832,6 +875,8 @@ export const EXERCISES: Exercise[] = [
       "Kontrollü indir."
     ],
     duration: "3 set x 12-15 reps",
+    sets: 3,
+    reps: 12,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/legraise.jpg"
   },
@@ -840,7 +885,6 @@ export const EXERCISES: Exercise[] = [
     name: "Bulgarian Split Squat",
     type: "strength",
     muscleGroup: "Legs",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/bulgarian.mp4",
     instructions: [
       "Bir ayağı bench'e koy, diğeriyle squat yap."
     ],
@@ -849,6 +893,8 @@ export const EXERCISES: Exercise[] = [
       "Dengeyi koru."
     ],
     duration: "3 set x 10 reps",
+    sets: 3,
+    reps: 10,
     calories: "6-10 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/bulgarian.jpg"
   },
@@ -857,7 +903,6 @@ export const EXERCISES: Exercise[] = [
     name: "Leg Press",
     type: "strength",
     muscleGroup: "Legs",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/legpress.mp4",
     instructions: [
       "Makinede bacakları it."
     ],
@@ -866,6 +911,8 @@ export const EXERCISES: Exercise[] = [
       "Sırtı makineye yapıştır."
     ],
     duration: "3 set x 12 reps",
+    sets: 3,
+    reps: 12,
     calories: "7-12 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/legpress.jpg"
   },
@@ -874,7 +921,6 @@ export const EXERCISES: Exercise[] = [
     name: "Seated Leg Curl",
     type: "strength",
     muscleGroup: "Hamstrings",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/seatedcurl.mp4",
     instructions: [
       "Makinede otur, bacakları bük."
     ],
@@ -882,6 +928,8 @@ export const EXERCISES: Exercise[] = [
       "Hareketi kontrollü yap."
     ],
     duration: "3 set x 12-15 reps",
+    sets: 3,
+    reps: 12,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/seatedcurl.jpg"
   },
@@ -890,7 +938,6 @@ export const EXERCISES: Exercise[] = [
     name: "Ab-Wheel Roll-Out",
     type: "strength",
     muscleGroup: "Core",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/abwheel.mp4",
     instructions: [
       "Ab-wheel ile ileriye doğru açıl."
     ],
@@ -899,6 +946,8 @@ export const EXERCISES: Exercise[] = [
       "Core'u sıkı tut."
     ],
     duration: "3 set x 10-12 reps",
+    sets: 3,
+    reps: 10,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/abwheel.jpg"
   },
@@ -907,7 +956,6 @@ export const EXERCISES: Exercise[] = [
     name: "Close-Grip Bench Press",
     type: "strength",
     muscleGroup: "Chest/Triceps",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/closegrip.mp4",
     instructions: [
       "Bench'te elleri dar tutarak press yap."
     ],
@@ -916,6 +964,8 @@ export const EXERCISES: Exercise[] = [
       "Kontrollü indir."
     ],
     duration: "4 set x 8-10 reps",
+    sets: 4,
+    reps: 8,
     calories: "7-12 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/closegrip.jpg"
   },
@@ -924,7 +974,6 @@ export const EXERCISES: Exercise[] = [
     name: "Arnold Press",
     type: "strength",
     muscleGroup: "Shoulders",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/arnold.mp4",
     instructions: [
       "Dumbbell'ları önde başlat, yukarı çevirerek press yap."
     ],
@@ -933,6 +982,8 @@ export const EXERCISES: Exercise[] = [
       "Kontrollü indir."
     ],
     duration: "4 set x 8-10 reps",
+    sets: 4,
+    reps: 8,
     calories: "6-10 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/arnold.jpg"
   },
@@ -941,7 +992,6 @@ export const EXERCISES: Exercise[] = [
     name: "Rack Pull",
     type: "strength",
     muscleGroup: "Back/Glutes",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/rackpull.mp4",
     instructions: [
       "Barı diz hizasından kaldır."
     ],
@@ -950,6 +1000,8 @@ export const EXERCISES: Exercise[] = [
       "Kontrollü yap."
     ],
     duration: "3 set x 3 reps",
+    sets: 3,
+    reps: 3,
     calories: "10-16 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/rackpull.jpg"
   },
@@ -958,7 +1010,6 @@ export const EXERCISES: Exercise[] = [
     name: "Meadows Row",
     type: "strength",
     muscleGroup: "Back",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/meadows.mp4",
     instructions: [
       "Landmine bar ile tek kol row yap."
     ],
@@ -967,6 +1018,8 @@ export const EXERCISES: Exercise[] = [
       "Kontrollü çek."
     ],
     duration: "3 set x 10 reps",
+    sets: 3,
+    reps: 10,
     calories: "7-11 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/meadows.jpg"
   },
@@ -975,7 +1028,6 @@ export const EXERCISES: Exercise[] = [
     name: "HIIT Sprint",
     type: "cardio",
     muscleGroup: "Cardio",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/hiit.mp4",
     instructions: [
       "8 tur: 30 sn sprint, 60 sn yürüyüş."
     ],
@@ -983,6 +1035,8 @@ export const EXERCISES: Exercise[] = [
       "Yüksek tempoda formu bozma."
     ],
     duration: "8 set x 30 sn",
+    sets: 8,
+    reps: 0,
     calories: "14-20 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/hiit.jpg"
   },
@@ -991,7 +1045,6 @@ export const EXERCISES: Exercise[] = [
     name: "Cable Wood-Chop",
     type: "strength",
     muscleGroup: "Core",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/woodchop.mp4",
     instructions: [
       "Kabloyu çapraz çekerek core'u çalıştır."
     ],
@@ -999,6 +1052,8 @@ export const EXERCISES: Exercise[] = [
       "Bel boşluğunu koru."
     ],
     duration: "3 set x 15 reps",
+    sets: 3,
+    reps: 15,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/woodchop.jpg"
   },
@@ -1007,7 +1062,6 @@ export const EXERCISES: Exercise[] = [
     name: "Swiss-Ball Crunch",
     type: "strength",
     muscleGroup: "Core",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/swisscrunch.mp4",
     instructions: [
       "Swiss ball üzerinde crunch yap."
     ],
@@ -1015,6 +1069,8 @@ export const EXERCISES: Exercise[] = [
       "Core'u sıkı tut."
     ],
     duration: "3 set x 20 reps",
+    sets: 3,
+    reps: 20,
     calories: "4-7 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/swisscrunch.jpg"
   },
@@ -1023,7 +1079,6 @@ export const EXERCISES: Exercise[] = [
     name: "Skull Crusher",
     type: "strength",
     muscleGroup: "Triceps",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/skullcrusher.mp4",
     instructions: [
       "Bench'e sırt üstü uzan, barı baş hizasında tut.",
       "Dirsekten bükerek barı başa doğru indir.",
@@ -1034,6 +1089,8 @@ export const EXERCISES: Exercise[] = [
       "Ağırlığı kontrollü indir/kaldır."
     ],
     duration: "3 set x 10-12 reps",
+    sets: 3,
+    reps: 10,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/skullcrusher.jpg"
   },
@@ -1042,7 +1099,6 @@ export const EXERCISES: Exercise[] = [
     name: "Pallof Press",
     type: "strength",
     muscleGroup: "Core",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/pallof.mp4",
     instructions: [
       "Kabloyu göğüs hizasında iki elle tut.",
       "Kolları öne doğru uzat, core'u sıkı tut.",
@@ -1053,6 +1109,8 @@ export const EXERCISES: Exercise[] = [
       "Nefesini kontrol et."
     ],
     duration: "3 set x 15 sn",
+    sets: 3,
+    reps: 0,
     calories: "3-5 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/pallof.jpg"
   },
@@ -1061,7 +1119,6 @@ export const EXERCISES: Exercise[] = [
     name: "Lat-Pulldown",
     type: "strength",
     muscleGroup: "Back",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/latpulldown.mp4",
     instructions: [
       "Makinede barı geniş tutuşla kavra.",
       "Barı göğüs hizasına çek.",
@@ -1072,6 +1129,8 @@ export const EXERCISES: Exercise[] = [
       "Sırtı düz tut."
     ],
     duration: "3 set x 12-15 reps",
+    sets: 3,
+    reps: 12,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/latpulldown.jpg"
   },
@@ -1080,7 +1139,6 @@ export const EXERCISES: Exercise[] = [
     name: "Hanging Knee Raise",
     type: "strength",
     muscleGroup: "Core",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/kneeraise.mp4",
     instructions: [
       "Barfiks barında asılıyken dizleri yukarı çek.",
       "Kontrollü indir."
@@ -1090,6 +1148,8 @@ export const EXERCISES: Exercise[] = [
       "Sallanmadan yap."
     ],
     duration: "3 set x 15 reps",
+    sets: 3,
+    reps: 15,
     calories: "5-8 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/kneeraise.jpg"
   },
@@ -1098,7 +1158,6 @@ export const EXERCISES: Exercise[] = [
     name: "Continuous Run",
     type: "cardio",
     muscleGroup: "Cardio",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/run.mp4",
     instructions: [
       "Koşu bandında/parkurda 45 dk orta tempoda koş.",
       "%70 HR_max hedefle."
@@ -1108,6 +1167,8 @@ export const EXERCISES: Exercise[] = [
       "Nefesini kontrol et."
     ],
     duration: "1 set x 45 dk",
+    sets: 1,
+    reps: 0,
     calories: "350-600 cal",
     image: "https://storage.googleapis.com/fitness-app-photos/run.jpg"
   },
@@ -1116,7 +1177,6 @@ export const EXERCISES: Exercise[] = [
     name: "DB Thruster",
     type: "strength",
     muscleGroup: "Full Body",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/thruster.mp4",
     instructions: [
       "Dumbbell'ları omuzda tut, squat yap ve yukarı kalkarken press yap."
     ],
@@ -1125,6 +1185,8 @@ export const EXERCISES: Exercise[] = [
       "Hareketi akıcı yap."
     ],
     duration: "4 set x 8-10 reps",
+    sets: 4,
+    reps: 8,
     calories: "8-12 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/thruster.jpg"
   },
@@ -1133,7 +1195,6 @@ export const EXERCISES: Exercise[] = [
     name: "Push-up (plate)",
     type: "strength",
     muscleGroup: "Chest",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/pushup_plate.mp4",
     instructions: [
       "Sırtına plate koyarak şınav çek."
     ],
@@ -1142,6 +1203,7 @@ export const EXERCISES: Exercise[] = [
       "Plate'i sabit tut."
     ],
     duration: "4 set x AMRAP",
+    sets: 4,
     calories: "6-10 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/pushup_plate.jpg"
   },
@@ -1150,7 +1212,6 @@ export const EXERCISES: Exercise[] = [
     name: "Renegade Row",
     type: "strength",
     muscleGroup: "Back/Core",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/renegade.mp4",
     instructions: [
       "Plank pozisyonunda dumbbell ile tek kolla row yap."
     ],
@@ -1159,6 +1220,8 @@ export const EXERCISES: Exercise[] = [
       "Kalçayı sabit tut."
     ],
     duration: "4 set x 12 reps",
+    sets: 4,
+    reps: 12,
     calories: "7-11 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/renegade.jpg"
   },
@@ -1167,7 +1230,6 @@ export const EXERCISES: Exercise[] = [
     name: "Battle Rope Slam",
     type: "cardio",
     muscleGroup: "Full Body",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/battlerope.mp4",
     instructions: [
       "Battle rope'u iki elle yere vur."
     ],
@@ -1176,6 +1238,8 @@ export const EXERCISES: Exercise[] = [
       "Core'u sıkı tut."
     ],
     duration: "4 set x 30 sn",
+    sets: 4,
+    reps: 0,
     calories: "10-16 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/battlerope.jpg"
   },
@@ -1184,7 +1248,6 @@ export const EXERCISES: Exercise[] = [
     name: "V-Sit",
     type: "strength",
     muscleGroup: "Core",
-    videoUrl: "https://storage.googleapis.com/fitness-app-photos/vsit.mp4",
     instructions: [
       "Yere otur, bacakları ve gövdeyi V pozisyonunda kaldır."
     ],
@@ -1193,6 +1256,8 @@ export const EXERCISES: Exercise[] = [
       "Dizleri bükmeden yap."
     ],
     duration: "3 set x 20 reps",
+    sets: 3,
+    reps: 20,
     calories: "4-7 cal/min",
     image: "https://storage.googleapis.com/fitness-app-photos/vsit.jpg"
   }
@@ -1218,6 +1283,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 1,
         userId: "user123",
         date: "2024-01-01", // Week 1, Day 1
+        dayOfWeek: 1,
         exerciseEntries: [
           {
             id: 1,
@@ -1255,6 +1321,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 2,
         userId: "user123",
         date: "2024-01-03", // Week 1, Day 3
+        dayOfWeek: 3,
         exerciseEntries: [
           {
             id: 4,
@@ -1279,7 +1346,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         ],
       },
     ],
-    createdBy: "trainer123",
+    createdById: "trainer123",
     likes: ["user1", "user2", "user3"],
     isPublic: true,
     exercises: [EXERCISES[0], EXERCISES[1], EXERCISES[2], EXERCISES[3], EXERCISES[6]],
@@ -1288,59 +1355,361 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
   },
   {
     id: 2,
-    title: "Cardio Blast",
-    slug: "cardio-blast",
-    description: "High-intensity cardio workouts to boost your cardiovascular health and burn calories effectively.",
-    difficulty: "INTERMEDIATE",
-    durationWeeks: 6,
-    coverImageUrl: "https://via.placeholder.com/400x300/FF5733/FFFFFF?text=Cardio",
-    thumbnailUrl: "https://via.placeholder.com/120x160/FF5733/FFFFFF?text=Cardio",
-    tags: ["cardio", "hiit", "fat-burn", "endurance"],
+    title: "Cardio Beginner",
+    slug: "cardio-beginner",
+    description: "Sedanter / hafif aktif kişiler için 4 haftalık kilo kaybı – kardiyovasküler adaptasyon programı.",
+    difficulty: "BEGINNER",
+    durationWeeks: 4,
+    coverImageUrl: "https://storage.googleapis.com/fitness-app-photos/cardio_cover.jpg",
+    thumbnailUrl: "https://storage.googleapis.com/fitness-app-photos/cardio_thumb.jpg",
+    tags: ["cardio", "beginner", "weightloss"],
     days: [
+      // Hafta 1
       {
-        id: 3,
-        userId: "user123",
-        date: "2024-01-01",
+        id: 201,
+        userId: "system",
+        date: "2024-01-01", // Monday
+        dayOfWeek: 1,
         exerciseEntries: [
           {
-            id: 6,
-            exercise: EXERCISES[2], // Jumping Jacks
+            id: 301,
+            exercise: {
+              id: 9,
+              name: "Steady-State Cardio",
+              type: "cardio",
+              muscleGroup: "Cardiovascular",
+              instructions: ["30 dk orta tempoda yürüyüş veya hafif koşu. RPE ~5/10."],
+              tips: [],
+              duration: "30 dk",
+              calories: "-",
+              image: "https://storage.googleapis.com/fitness-app-photos/steady.jpg"
+            },
             orderIndex: 1,
             exerciseSets: [
-              { id: 16, setNo: 1, reps: 30, weight: 0, rpe: 7, durationSec: 0 },
-              { id: 17, setNo: 2, reps: 30, weight: 0, rpe: 8, durationSec: 0 },
-              { id: 18, setNo: 3, reps: 25, weight: 0, rpe: 9, durationSec: 0 },
-            ],
-          },
-          {
-            id: 7,
-            exercise: EXERCISES[4], // Burpees
-            orderIndex: 2,
-            exerciseSets: [
-              { id: 19, setNo: 1, reps: 8, weight: 0, rpe: 8, durationSec: 0 },
-              { id: 20, setNo: 2, reps: 8, weight: 0, rpe: 9, durationSec: 0 },
-              { id: 21, setNo: 3, reps: 6, weight: 0, rpe: 9, durationSec: 0 },
-            ],
-          },
-          {
-            id: 8,
-            exercise: EXERCISES[7], // High Knees
-            orderIndex: 3,
-            exerciseSets: [
-              { id: 22, setNo: 1, reps: 0, weight: 0, rpe: 7, durationSec: 45 },
-              { id: 23, setNo: 2, reps: 0, weight: 0, rpe: 8, durationSec: 45 },
-              { id: 24, setNo: 3, reps: 0, weight: 0, rpe: 8, durationSec: 40 },
-            ],
-          },
-        ],
+              { id: 401, setNo: 1, durationSec: 1800 }
+            ]
+          }
+        ]
       },
+      {
+        id: 202,
+        userId: "system",
+        date: "2024-01-03", // Wednesday
+        dayOfWeek: 3,
+        exerciseEntries: [
+          {
+            id: 302,
+            exercise: {
+              id: 10,
+              name: "Interval Cardio",
+              type: "cardio",
+              muscleGroup: "Cardiovascular",
+              instructions: ["3 dk orta tempo + 1 dk hızlı ×6. Toplam 30 dk."],
+              tips: [],
+              duration: "30 dk",
+              calories: "-",
+              image: "https://storage.googleapis.com/fitness-app-photos/interval.jpg"
+            },
+            orderIndex: 1,
+            exerciseSets: [
+              { id: 402, setNo: 1, durationSec: 300 },
+              { id: 403, setNo: 2, durationSec: 300 },
+              { id: 404, setNo: 3, durationSec: 300 },
+              { id: 405, setNo: 4, durationSec: 300 },
+              { id: 406, setNo: 5, durationSec: 300 },
+              { id: 407, setNo: 6, durationSec: 300 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 203,
+        userId: "system",
+        date: "2024-01-05", // Friday
+        dayOfWeek: 5,
+        exerciseEntries: [
+          {
+            id: 303,
+            exercise: {
+              id: 11,
+              name: "Incline Walk",
+              type: "cardio",
+              muscleGroup: "Cardiovascular",
+              instructions: ["30 dk %5 eğimde yürüyüş. RPE ~5-6/10."],
+              tips: [],
+              duration: "30 dk",
+              calories: "-",
+              image: "https://storage.googleapis.com/fitness-app-photos/incline.jpg"
+            },
+            orderIndex: 1,
+            exerciseSets: [
+              { id: 408, setNo: 1, durationSec: 1800 }
+            ]
+          }
+        ]
+      },
+      // Hafta 2
+      {
+        id: 204,
+        userId: "system",
+        date: "",
+        dayOfWeek: 1,
+        exerciseEntries: [
+          {
+            id: 304,
+            exercise: {
+              id: 9,
+              name: "Steady-State Cardio",
+              type: "cardio",
+              muscleGroup: "Cardiovascular",
+              instructions: ["32 dk orta tempoda yürüyüş veya hafif koşu. RPE ~5/10."],
+              tips: [],
+              duration: "32 dk",
+              calories: "-",
+              image: "https://storage.googleapis.com/fitness-app-photos/steady.jpg"
+            },
+            orderIndex: 1,
+            exerciseSets: [
+              { id: 409, setNo: 1, durationSec: 1920 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 205,
+        userId: "system",
+        date: "2024-01-10", // Wednesday
+        dayOfWeek: 3,
+        exerciseEntries: [
+          {
+            id: 305,
+            exercise: {
+              id: 10,
+              name: "Interval Cardio",
+              type: "cardio",
+              muscleGroup: "Cardiovascular",
+              instructions: ["3 dk orta tempo + 1 dk hızlı ×6. Toplam 32 dk."],
+              tips: [],
+              duration: "32 dk",
+              calories: "-",
+              image: "https://storage.googleapis.com/fitness-app-photos/interval.jpg"
+            },
+            orderIndex: 1,
+            exerciseSets: [
+              { id: 410, setNo: 1, durationSec: 320 },
+              { id: 411, setNo: 2, durationSec: 320 },
+              { id: 412, setNo: 3, durationSec: 320 },
+              { id: 413, setNo: 4, durationSec: 320 },
+              { id: 414, setNo: 5, durationSec: 320 },
+              { id: 415, setNo: 6, durationSec: 320 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 206,
+        userId: "system",
+        date: "", // Friday
+        dayOfWeek: 5,
+        exerciseEntries: [
+          {
+            id: 306,
+            exercise: {
+              id: 11,
+              name: "Incline Walk",
+              type: "cardio",
+              muscleGroup: "Cardiovascular",
+              instructions: ["32 dk %5 eğimde yürüyüş. RPE ~5-6/10."],
+              tips: [],
+              duration: "32 dk",
+              calories: "-",
+              image: "https://storage.googleapis.com/fitness-app-photos/incline.jpg"
+            },
+            orderIndex: 1,
+            exerciseSets: [
+              { id: 416, setNo: 1, durationSec: 1920 }
+            ]
+          }
+        ]
+      },
+      // Hafta 3
+      {
+        id: 207,
+        userId: "system",
+        date: "", // Monday
+        dayOfWeek: 1,
+        exerciseEntries: [
+          {
+            id: 307,
+            exercise: {
+              id: 9,
+              name: "Steady-State Cardio",
+              type: "cardio",
+              muscleGroup: "Cardiovascular",
+              instructions: ["35 dk orta tempoda yürüyüş veya hafif koşu. RPE ~5/10."],
+              tips: [],
+              duration: "35 dk",
+              calories: "-",
+              image: "https://storage.googleapis.com/fitness-app-photos/steady.jpg"
+            },
+            orderIndex: 1,
+            exerciseSets: [
+              { id: 417, setNo: 1, durationSec: 2100 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 208,
+        userId: "system",
+        date: "2024-01-17", // Wednesday
+        dayOfWeek: 3,
+        exerciseEntries: [
+          {
+            id: 308,
+            exercise: {
+              id: 10,
+              name: "Interval Cardio",
+              type: "cardio",
+              muscleGroup: "Cardiovascular",
+              instructions: ["3 dk orta tempo + 1 dk hızlı ×7. Toplam 35 dk."],
+              tips: [],
+              duration: "35 dk",
+              calories: "-",
+              image: "https://storage.googleapis.com/fitness-app-photos/interval.jpg"
+            },
+            orderIndex: 1,
+            exerciseSets: [
+              { id: 418, setNo: 1, durationSec: 300 },
+              { id: 419, setNo: 2, durationSec: 300 },
+              { id: 420, setNo: 3, durationSec: 300 },
+              { id: 421, setNo: 4, durationSec: 300 },
+              { id: 422, setNo: 5, durationSec: 300 },
+              { id: 423, setNo: 6, durationSec: 300 },
+              { id: 424, setNo: 7, durationSec: 300 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 209,
+        userId: "system",
+        date: "2024-01-19", // Friday
+        dayOfWeek: 5,
+        exerciseEntries: [
+          {
+            id: 309,
+            exercise: {
+              id: 11,
+              name: "Incline Walk",
+              type: "cardio",
+              muscleGroup: "Cardiovascular",
+              instructions: ["35 dk %5 eğimde yürüyüş. RPE ~5-6/10."],
+              tips: [],
+              duration: "35 dk",
+              calories: "-",
+              image: "https://storage.googleapis.com/fitness-app-photos/incline.jpg"
+            },
+            orderIndex: 1,
+            exerciseSets: [
+              { id: 425, setNo: 1, durationSec: 2100 }
+            ]
+          }
+        ]
+      },
+      // Hafta 4
+      {
+        id: 210,
+        userId: "system",
+        date: "2024-01-22", // Monday
+        dayOfWeek: 1,
+        exerciseEntries: [
+          {
+            id: 310,
+            exercise: {
+              id: 9,
+              name: "Steady-State Cardio",
+              type: "cardio",
+              muscleGroup: "Cardiovascular",
+              instructions: ["40 dk orta tempoda yürüyüş veya hafif koşu. RPE ~5/10."],
+              tips: [],
+              duration: "40 dk",
+              calories: "-",
+              image: "https://storage.googleapis.com/fitness-app-photos/steady.jpg"
+            },
+            orderIndex: 1,
+            exerciseSets: [
+              { id: 426, setNo: 1, durationSec: 2400 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 211,
+        userId: "system",
+        date: "2024-01-24", // Wednesday
+        dayOfWeek: 3,
+        exerciseEntries: [
+          {
+            id: 311,
+            exercise: {
+              id: 10,
+              name: "Interval Cardio",
+              type: "cardio",
+              muscleGroup: "Cardiovascular",
+              instructions: ["3 dk orta tempo + 1 dk hızlı ×8. Toplam 40 dk."],
+              tips: [],
+              duration: "40 dk",
+              calories: "-",
+              image: "https://storage.googleapis.com/fitness-app-photos/interval.jpg"
+            },
+            orderIndex: 1,
+            exerciseSets: [
+              { id: 427, setNo: 1, durationSec: 300 },
+              { id: 428, setNo: 2, durationSec: 300 },
+              { id: 429, setNo: 3, durationSec: 300 },
+              { id: 430, setNo: 4, durationSec: 300 },
+              { id: 431, setNo: 5, durationSec: 300 },
+              { id: 432, setNo: 6, durationSec: 300 },
+              { id: 433, setNo: 7, durationSec: 300 },
+              { id: 434, setNo: 8, durationSec: 300 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 212,
+        userId: "system",
+        date: "2024-01-26", // Friday
+        dayOfWeek: 5,
+        exerciseEntries: [
+          {
+            id: 312,
+            exercise: {
+              id: 11,
+              name: "Incline Walk",
+              type: "cardio",
+              muscleGroup: "Cardiovascular",
+              instructions: ["40 dk %5 eğimde yürüyüş. RPE ~5-6/10."],
+              tips: [],
+              duration: "40 dk",
+              calories: "-",
+              image: "https://storage.googleapis.com/fitness-app-photos/incline.jpg"
+            },
+            orderIndex: 1,
+            exerciseSets: [
+              { id: 435, setNo: 1, durationSec: 2400 }
+            ]
+          }
+        ]
+      }
     ],
-    createdBy: "trainer456",
-    likes: ["user4", "user5"],
+    createdById: "system",
+    likes: [],
     isPublic: true,
-    exercises: [EXERCISES[2], EXERCISES[4], EXERCISES[5], EXERCISES[7]],
+    exercises: [],
     createdAt: "2024-01-01T00:00:00Z",
-    updatedAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z"
   },
   {
     id: 3,
@@ -1357,6 +1726,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 4,
         userId: "user123",
         date: "2024-01-01",
+        dayOfWeek: 1,
         exerciseEntries: [
           {
             id: 9,
@@ -1383,7 +1753,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         ],
       },
     ],
-    createdBy: "trainer789",
+    createdById: "trainer789",
     likes: ["user6", "user7", "user8", "user9"],
     isPublic: true,
     exercises: [EXERCISES[0], EXERCISES[1], EXERCISES[3], EXERCISES[6]],
@@ -1406,6 +1776,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 1,
         userId: "system",
         date: "",
+        dayOfWeek: 1,
         exerciseEntries: [
           { id: 1, exercise: EXERCISES[11], orderIndex: 1, exerciseSets: [ { id: 1, setNo: 1, reps: 12 }, { id: 2, setNo: 2, reps: 12 }, { id: 3, setNo: 3, reps: 12 } ] },
           { id: 2, exercise: EXERCISES[12], orderIndex: 2, exerciseSets: [ { id: 4, setNo: 1, reps: 12 }, { id: 5, setNo: 2, reps: 12 }, { id: 6, setNo: 3, reps: 12 } ] },
@@ -1420,6 +1791,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 2,
         userId: "system",
         date: "",
+        dayOfWeek: 3,
         exerciseEntries: [
           { id: 15, exercise: EXERCISES[11], orderIndex: 1, exerciseSets: [ { id: 16, setNo: 1, reps: 12 }, { id: 17, setNo: 2, reps: 12 }, { id: 18, setNo: 3, reps: 12 } ] },
           { id: 16, exercise: EXERCISES[12], orderIndex: 2, exerciseSets: [ { id: 19, setNo: 1, reps: 12 }, { id: 20, setNo: 2, reps: 12 }, { id: 21, setNo: 3, reps: 12 } ] },
@@ -1434,6 +1806,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 3,
         userId: "system",
         date: "",
+        dayOfWeek: 5,
         exerciseEntries: [
           { id: 30, exercise: EXERCISES[11], orderIndex: 1, exerciseSets: [ { id: 31, setNo: 1, reps: 12 }, { id: 32, setNo: 2, reps: 12 }, { id: 33, setNo: 3, reps: 12 } ] },
           { id: 31, exercise: EXERCISES[12], orderIndex: 2, exerciseSets: [ { id: 34, setNo: 1, reps: 12 }, { id: 35, setNo: 2, reps: 12 }, { id: 36, setNo: 3, reps: 12 } ] },
@@ -1448,6 +1821,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 4,
         userId: "system",
         date: "",
+        dayOfWeek: 1,
         exerciseEntries: [
           { id: 36, exercise: EXERCISES[11], orderIndex: 1, exerciseSets: [ { id: 37, setNo: 1, reps: 14 }, { id: 38, setNo: 2, reps: 14 }, { id: 39, setNo: 3, reps: 12 } ] },
           { id: 37, exercise: EXERCISES[12], orderIndex: 2, exerciseSets: [ { id: 40, setNo: 1, reps: 14 }, { id: 41, setNo: 2, reps: 14 }, { id: 42, setNo: 3, reps: 12 } ] },
@@ -1462,6 +1836,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 5,
         userId: "system",
         date: "",
+        dayOfWeek: 3,
         exerciseEntries: [
           { id: 42, exercise: EXERCISES[11], orderIndex: 1, exerciseSets: [ { id: 43, setNo: 1, reps: 14 }, { id: 44, setNo: 2, reps: 14 }, { id: 45, setNo: 3, reps: 12 } ] },
           { id: 43, exercise: EXERCISES[12], orderIndex: 2, exerciseSets: [ { id: 46, setNo: 1, reps: 14 }, { id: 47, setNo: 2, reps: 14 }, { id: 48, setNo: 3, reps: 12 } ] },
@@ -1476,6 +1851,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 6,
         userId: "system",
         date: "",
+        dayOfWeek: 5,
         exerciseEntries: [
           { id: 48, exercise: EXERCISES[11], orderIndex: 1, exerciseSets: [ { id: 49, setNo: 1, reps: 14 }, { id: 50, setNo: 2, reps: 14 }, { id: 51, setNo: 3, reps: 12 } ] },
           { id: 49, exercise: EXERCISES[12], orderIndex: 2, exerciseSets: [ { id: 52, setNo: 1, reps: 14 }, { id: 53, setNo: 2, reps: 14 }, { id: 54, setNo: 3, reps: 12 } ] },
@@ -1490,6 +1866,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 7,
         userId: "system",
         date: "",
+        dayOfWeek: 1,
         exerciseEntries: [
           { id: 54, exercise: EXERCISES[11], orderIndex: 1, exerciseSets: [ { id: 55, setNo: 1, reps: 10 }, { id: 56, setNo: 2, reps: 10 }, { id: 57, setNo: 3, reps: 10 }, { id: 58, setNo: 4, reps: 10 } ] },
           { id: 55, exercise: EXERCISES[12], orderIndex: 2, exerciseSets: [ { id: 59, setNo: 1, reps: 10 }, { id: 60, setNo: 2, reps: 10 }, { id: 61, setNo: 3, reps: 10 }, { id: 62, setNo: 4, reps: 10 } ] },
@@ -1504,6 +1881,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 8,
         userId: "system",
         date: "",
+        dayOfWeek: 3,
         exerciseEntries: [
           { id: 60, exercise: EXERCISES[11], orderIndex: 1, exerciseSets: [ { id: 61, setNo: 1, reps: 10 }, { id: 62, setNo: 2, reps: 10 }, { id: 63, setNo: 3, reps: 10 }, { id: 64, setNo: 4, reps: 10 } ] },
           { id: 61, exercise: EXERCISES[12], orderIndex: 2, exerciseSets: [ { id: 65, setNo: 1, reps: 10 }, { id: 66, setNo: 2, reps: 10 }, { id: 67, setNo: 3, reps: 10 }, { id: 68, setNo: 4, reps: 10 } ] },
@@ -1518,6 +1896,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 9,
         userId: "system",
         date: "",
+        dayOfWeek: 5,
         exerciseEntries: [
           { id: 66, exercise: EXERCISES[11], orderIndex: 1, exerciseSets: [ { id: 67, setNo: 1, reps: 10 }, { id: 68, setNo: 2, reps: 10 }, { id: 69, setNo: 3, reps: 10 }, { id: 70, setNo: 4, reps: 10 } ] },
           { id: 67, exercise: EXERCISES[12], orderIndex: 2, exerciseSets: [ { id: 71, setNo: 1, reps: 10 }, { id: 72, setNo: 2, reps: 10 }, { id: 73, setNo: 3, reps: 10 }, { id: 74, setNo: 4, reps: 10 } ] },
@@ -1532,6 +1911,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 10,
         userId: "system",
         date: "",
+        dayOfWeek: 1,
         exerciseEntries: [
           { id: 72, exercise: EXERCISES[11], orderIndex: 1, exerciseSets: [ { id: 73, setNo: 1, reps: 12 }, { id: 74, setNo: 2, reps: 12 }, { id: 75, setNo: 3, reps: 12 }, { id: 76, setNo: 4, reps: 12 } ] },
           { id: 73, exercise: EXERCISES[12], orderIndex: 2, exerciseSets: [ { id: 77, setNo: 1, reps: 12 }, { id: 78, setNo: 2, reps: 12 }, { id: 79, setNo: 3, reps: 12 }, { id: 80, setNo: 4, reps: 12 } ] },
@@ -1546,6 +1926,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 11,
         userId: "system",
         date: "",
+        dayOfWeek: 3,
         exerciseEntries: [
           { id: 78, exercise: EXERCISES[11], orderIndex: 1, exerciseSets: [ { id: 79, setNo: 1, reps: 12 }, { id: 80, setNo: 2, reps: 12 }, { id: 81, setNo: 3, reps: 12 }, { id: 82, setNo: 4, reps: 12 } ] },
           { id: 79, exercise: EXERCISES[12], orderIndex: 2, exerciseSets: [ { id: 83, setNo: 1, reps: 12 }, { id: 84, setNo: 2, reps: 12 }, { id: 85, setNo: 3, reps: 12 }, { id: 86, setNo: 4, reps: 12 } ] },
@@ -1560,6 +1941,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 12,
         userId: "system",
         date: "",
+        dayOfWeek: 5,
         exerciseEntries: [
           { id: 84, exercise: EXERCISES[11], orderIndex: 1, exerciseSets: [ { id: 85, setNo: 1, reps: 12 }, { id: 86, setNo: 2, reps: 12 }, { id: 87, setNo: 3, reps: 12 }, { id: 88, setNo: 4, reps: 12 } ] },
           { id: 85, exercise: EXERCISES[12], orderIndex: 2, exerciseSets: [ { id: 89, setNo: 1, reps: 12 }, { id: 90, setNo: 2, reps: 12 }, { id: 91, setNo: 3, reps: 12 }, { id: 92, setNo: 4, reps: 12 } ] },
@@ -1570,7 +1952,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         ]
       }
     ],
-    createdBy: "system",
+    createdById: "system",
     likes: [],
     isPublic: true,
     exercises: [EXERCISES[11], EXERCISES[12], EXERCISES[13], EXERCISES[15], EXERCISES[3], EXERCISES[8]],
@@ -1593,6 +1975,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 1,
         userId: "system",
         date: "",
+        dayOfWeek: 1,
         exerciseEntries: [
           { id: 1, exercise: EXERCISES[16], orderIndex: 1, exerciseSets: [ { id: 1, setNo: 1, reps: 10 }, { id: 2, setNo: 2, reps: 10 }, { id: 3, setNo: 3, reps: 10 }, { id: 4, setNo: 4, reps: 10 } ] },
           { id: 2, exercise: EXERCISES[17], orderIndex: 2, exerciseSets: [ { id: 5, setNo: 1, reps: 10 }, { id: 6, setNo: 2, reps: 10 }, { id: 7, setNo: 3, reps: 10 }, { id: 8, setNo: 4, reps: 10 } ] },
@@ -1608,6 +1991,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 2,
         userId: "system",
         date: "",
+        dayOfWeek: 2,
         exerciseEntries: [
           { id: 23, exercise: EXERCISES[23], orderIndex: 1, exerciseSets: [ { id: 23, setNo: 1, reps: 8 }, { id: 24, setNo: 2, reps: 8 }, { id: 25, setNo: 3, reps: 8 }, { id: 26, setNo: 4, reps: 8 } ] },
           { id: 24, exercise: EXERCISES[24], orderIndex: 2, exerciseSets: [ { id: 27, setNo: 1, reps: 10 }, { id: 28, setNo: 2, reps: 10 }, { id: 29, setNo: 3, reps: 10 }, { id: 30, setNo: 4, reps: 10 } ] },
@@ -1623,6 +2007,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 3,
         userId: "system",
         date: "",
+        dayOfWeek: 3,
         exerciseEntries: [
           { id: 46, exercise: EXERCISES[30], orderIndex: 1, exerciseSets: [ { id: 46, setNo: 1, durationSec: 40 }, { id: 47, setNo: 2, durationSec: 40 }, { id: 48, setNo: 3, durationSec: 40 }, { id: 49, setNo: 4, durationSec: 40 }, { id: 50, setNo: 5, durationSec: 40 } ] }
         ]
@@ -1632,6 +2017,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 4,
         userId: "system",
         date: "",
+        dayOfWeek: 4,
         exerciseEntries: [
           { id: 51, exercise: EXERCISES[18], orderIndex: 1, exerciseSets: [ { id: 51, setNo: 1, reps: 12 }, { id: 52, setNo: 2, reps: 12 }, { id: 53, setNo: 3, reps: 12 } ] },
           { id: 52, exercise: EXERCISES[19], orderIndex: 2, exerciseSets: [ { id: 54, setNo: 1, reps: 12 }, { id: 55, setNo: 2, reps: 12 }, { id: 56, setNo: 3, reps: 12 } ] },
@@ -1647,6 +2033,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 5,
         userId: "system",
         date: "",
+        dayOfWeek: 5,
         exerciseEntries: [
           { id: 73, exercise: EXERCISES[24], orderIndex: 1, exerciseSets: [ { id: 73, setNo: 1, reps: 10 }, { id: 74, setNo: 2, reps: 10 }, { id: 75, setNo: 3, reps: 10 }, { id: 76, setNo: 4, reps: 10 } ] },
           { id: 74, exercise: EXERCISES[25], orderIndex: 2, exerciseSets: [ { id: 77, setNo: 1, reps: 12 }, { id: 78, setNo: 2, reps: 12 }, { id: 79, setNo: 3, reps: 12 } ] },
@@ -1658,7 +2045,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
       }
       // Hafta 2-4 için günler çoğaltılıp set/rep/duration ilerleme matrisine göre güncellenebilir.
     ],
-    createdBy: "system",
+    createdById: "system",
     likes: [],
     isPublic: true,
     exercises: [EXERCISES[16], EXERCISES[17], EXERCISES[18], EXERCISES[19], EXERCISES[20], EXERCISES[21], EXERCISES[22], EXERCISES[23], EXERCISES[24], EXERCISES[25], EXERCISES[26], EXERCISES[27], EXERCISES[28], EXERCISES[29], EXERCISES[30]],
@@ -1681,6 +2068,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 1,
         userId: "system",
         date: "",
+        dayOfWeek: 1,
         exerciseEntries: [
           { id: 1, exercise: getExerciseById(17)!, orderIndex: 1, exerciseSets: [ { id: 1, setNo: 1, reps: 6 }, { id: 2, setNo: 2, reps: 6 }, { id: 3, setNo: 3, reps: 6 }, { id: 4, setNo: 4, reps: 6 }, { id: 5, setNo: 5, reps: 6 } ] },
           { id: 2, exercise: getExerciseById(19)!, orderIndex: 2, exerciseSets: [ { id: 6, setNo: 1, reps: 10 }, { id: 7, setNo: 2, reps: 10 }, { id: 8, setNo: 3, reps: 10 }, { id: 9, setNo: 4, reps: 10 } ] },
@@ -1696,6 +2084,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 2,
         userId: "system",
         date: "",
+        dayOfWeek: 2,
         exerciseEntries: [
           { id: 26, exercise: getExerciseById(37)!, orderIndex: 1, exerciseSets: [ { id: 26, setNo: 1, reps: 5 }, { id: 27, setNo: 2, reps: 5 }, { id: 28, setNo: 3, reps: 5 }, { id: 29, setNo: 4, reps: 5 } ] },
           { id: 27, exercise: getExerciseById(38)!, orderIndex: 2, exerciseSets: [ { id: 30, setNo: 1, reps: 8 }, { id: 31, setNo: 2, reps: 8 }, { id: 32, setNo: 3, reps: 8 }, { id: 33, setNo: 4, reps: 8 } ] },
@@ -1711,6 +2100,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 3,
         userId: "system",
         date: "",
+        dayOfWeek: 3,
         exerciseEntries: [
           { id: 50, exercise: getExerciseById(24)!, orderIndex: 1, exerciseSets: [ { id: 50, setNo: 1, reps: 6 }, { id: 51, setNo: 2, reps: 6 }, { id: 52, setNo: 3, reps: 6 }, { id: 53, setNo: 4, reps: 6 }, { id: 54, setNo: 5, reps: 6 } ] },
           { id: 51, exercise: getExerciseById(25)!, orderIndex: 2, exerciseSets: [ { id: 55, setNo: 1, reps: 10 }, { id: 56, setNo: 2, reps: 10 }, { id: 57, setNo: 3, reps: 10 }, { id: 58, setNo: 4, reps: 10 } ] },
@@ -1726,6 +2116,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 4,
         userId: "system",
         date: "",
+        dayOfWeek: 4,
         exerciseEntries: [
           { id: 57, exercise: getExerciseById(47)!, orderIndex: 1, exerciseSets: [ { id: 75, setNo: 1, reps: 10 }, { id: 76, setNo: 2, reps: 10 }, { id: 77, setNo: 3, reps: 10 }, { id: 78, setNo: 4, reps: 10 } ] },
           { id: 58, exercise: getExerciseById(48)!, orderIndex: 2, exerciseSets: [ { id: 79, setNo: 1, reps: 10 }, { id: 80, setNo: 2, reps: 10 }, { id: 81, setNo: 3, reps: 10 }, { id: 82, setNo: 4, reps: 10 } ] },
@@ -1739,7 +2130,8 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
       {
         id: 5,
         userId: "system",
-        date: "",
+        date: "", 
+        dayOfWeek: 5,
         exerciseEntries: [
           { id: 63, exercise: getExerciseById(49)!, orderIndex: 1, exerciseSets: [ { id: 96, setNo: 1, reps: 3 }, { id: 97, setNo: 2, reps: 3 }, { id: 98, setNo: 3, reps: 3 } ] },
           { id: 64, exercise: getExerciseById(50)!, orderIndex: 2, exerciseSets: [ { id: 99, setNo: 1, reps: 10 }, { id: 100, setNo: 2, reps: 10 }, { id: 101, setNo: 3, reps: 10 } ] },
@@ -1755,6 +2147,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 6,
         userId: "system",
         date: "",
+        dayOfWeek: 6,
         exerciseEntries: [
           { id: 70, exercise: getExerciseById(51)!, orderIndex: 1, exerciseSets: [ { id: 117, setNo: 1, durationSec: 30 }, { id: 118, setNo: 2, durationSec: 30 }, { id: 119, setNo: 3, durationSec: 30 }, { id: 120, setNo: 4, durationSec: 30 }, { id: 121, setNo: 5, durationSec: 30 }, { id: 122, setNo: 6, durationSec: 30 }, { id: 123, setNo: 7, durationSec: 30 }, { id: 124, setNo: 8, durationSec: 30 } ] },
           { id: 71, exercise: getExerciseById(52)!, orderIndex: 2, exerciseSets: [ { id: 125, setNo: 1, reps: 15 }, { id: 126, setNo: 2, reps: 15 }, { id: 127, setNo: 3, reps: 15 } ] },
@@ -1763,7 +2156,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
       }
       // Hafta 2-4 için günler çoğaltılıp set/rep/duration ilerleme matrisine göre güncellenebilir.
     ],
-    createdBy: "system",
+    createdById: "system",
     likes: [],
     isPublic: true,
     exercises: [getExerciseById(17)!, getExerciseById(19)!, getExerciseById(32)!, getExerciseById(33)!, getExerciseById(34)!, getExerciseById(35)!, getExerciseById(36)!, getExerciseById(37)!, getExerciseById(38)!, getExerciseById(39)!, getExerciseById(40)!, getExerciseById(22)!, getExerciseById(41)!, getExerciseById(42)!, getExerciseById(24)!, getExerciseById(25)!, getExerciseById(43)!, getExerciseById(44)!, getExerciseById(45)!, getExerciseById(29)!, getExerciseById(46)!, getExerciseById(47)!, getExerciseById(48)!, getExerciseById(49)!, getExerciseById(50)!, getExerciseById(51)!, getExerciseById(52)!, getExerciseById(53)!],
@@ -1786,6 +2179,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 1,
         userId: "system",
         date: "",
+        dayOfWeek: 1,
         exerciseEntries: [
           { id: 1, exercise: getExerciseById(17)!, orderIndex: 1, exerciseSets: [ { id: 1, setNo: 1, reps: 6 }, { id: 2, setNo: 2, reps: 6 }, { id: 3, setNo: 3, reps: 6 }, { id: 4, setNo: 4, reps: 6 }, { id: 5, setNo: 5, reps: 6 } ] }, // Barbell Bench Press
           { id: 2, exercise: getExerciseById(19)!, orderIndex: 2, exerciseSets: [ { id: 6, setNo: 1, reps: 10 }, { id: 7, setNo: 2, reps: 10 }, { id: 8, setNo: 3, reps: 10 }, { id: 9, setNo: 4, reps: 10 } ] }, // Incline DB Press
@@ -1801,6 +2195,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 2,
         userId: "system",
         date: "",
+        dayOfWeek: 2,
         exerciseEntries: [
           { id: 8, exercise: getExerciseById(38)!, orderIndex: 1, exerciseSets: [ { id: 26, setNo: 1, reps: 8 }, { id: 27, setNo: 2, reps: 8 }, { id: 28, setNo: 3, reps: 8 }, { id: 29, setNo: 4, reps: 8 } ] }, // Weighted Pull-Up
           { id: 9, exercise: getExerciseById(39)!, orderIndex: 2, exerciseSets: [ { id: 30, setNo: 1, reps: 10 }, { id: 31, setNo: 2, reps: 10 }, { id: 32, setNo: 3, reps: 10 }, { id: 33, setNo: 4, reps: 10 } ] }, // Pendlay Row
@@ -1816,6 +2211,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 3,
         userId: "system",
         date: "",
+        dayOfWeek: 3,
         exerciseEntries: [
           { id: 15, exercise: getExerciseById(24)!, orderIndex: 1, exerciseSets: [ { id: 49, setNo: 1, reps: 6 }, { id: 50, setNo: 2, reps: 6 }, { id: 51, setNo: 3, reps: 6 }, { id: 52, setNo: 4, reps: 6 }, { id: 53, setNo: 5, reps: 6 } ] }, // Back Squat
           { id: 16, exercise: getExerciseById(25)!, orderIndex: 2, exerciseSets: [ { id: 54, setNo: 1, reps: 10 }, { id: 55, setNo: 2, reps: 10 }, { id: 56, setNo: 3, reps: 10 }, { id: 57, setNo: 4, reps: 10 } ] }, // Romanian Deadlift
@@ -1831,6 +2227,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 4,
         userId: "system",
         date: "",
+        dayOfWeek: 4,
         exerciseEntries: [
           { id: 22, exercise: getExerciseById(58)!, orderIndex: 1, exerciseSets: [ { id: 74, setNo: 1, durationSec: 2700 } ] } // Continuous Run (45 dk)
         ]
@@ -1840,6 +2237,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 5,
         userId: "system",
         date: "",
+        dayOfWeek: 5,
         exerciseEntries: [
           { id: 23, exercise: getExerciseById(59)!, orderIndex: 1, exerciseSets: [ { id: 75, setNo: 1, reps: 10 }, { id: 76, setNo: 2, reps: 10 }, { id: 77, setNo: 3, reps: 10 }, { id: 78, setNo: 4, reps: 10 } ] }, // DB Thruster
           { id: 24, exercise: getExerciseById(18)!, orderIndex: 2, exerciseSets: [ { id: 79, setNo: 1, reps: 10 }, { id: 80, setNo: 2, reps: 10 }, { id: 81, setNo: 3, reps: 10 }, { id: 82, setNo: 4, reps: 10 } ] }, // Barbell Bent-over Row
@@ -1853,6 +2251,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         id: 6,
         userId: "system",
         date: "",
+        dayOfWeek: 6,
         exerciseEntries: [
           { id: 28, exercise: getExerciseById(51)!, orderIndex: 1, exerciseSets: [ { id: 92, setNo: 1, durationSec: 30 }, { id: 93, setNo: 2, durationSec: 30 }, { id: 94, setNo: 3, durationSec: 30 }, { id: 95, setNo: 4, durationSec: 30 }, { id: 96, setNo: 5, durationSec: 30 }, { id: 97, setNo: 6, durationSec: 30 }, { id: 98, setNo: 7, durationSec: 30 }, { id: 99, setNo: 8, durationSec: 30 }, { id: 100, setNo: 9, durationSec: 30 }, { id: 101, setNo: 10, durationSec: 30 } ] }, // HIIT Sprint
           { id: 29, exercise: getExerciseById(52)!, orderIndex: 2, exerciseSets: [ { id: 102, setNo: 1, reps: 15 }, { id: 103, setNo: 2, reps: 15 }, { id: 104, setNo: 3, reps: 15 } ] }, // Cable Wood-Chop
@@ -1860,7 +2259,7 @@ export const WORKOUT_PROGRAMS: WorkoutProgram[] = [
         ]
       }
     ],
-    createdBy: "system",
+    createdById: "system",
     likes: [],
     isPublic: true,
     exercises: [
@@ -1919,38 +2318,38 @@ export interface Rule {
 
 export const RECOMMENDATION_MATRIX: Rule[] = [
   // --- Sedentary & Light ----------------------------------------------------
-  { activity: "sedentary", goal: "loseWeight",      recommend: ["CARDIO_BLAST",        "FULLBODY_BEGINNER"] },
+  { activity: "sedentary", goal: "loseWeight",      recommend: ["CARDIO_BEGINNER",        "FULLBODY_BEGINNER"] },
   { activity: "sedentary", goal: "gainMuscle",      recommend: ["FULLBODY_BEGINNER"] },
   { activity: "sedentary", goal: "stayFit",         recommend: ["FULLBODY_BEGINNER"] },
-  { activity: "sedentary", goal: "improveHealth",   recommend: ["CARDIO_BLAST"] },
+  { activity: "sedentary", goal: "improveHealth",   recommend: ["CARDIO_BEGINNER"] },
 
-  { activity: "light",     goal: "loseWeight",      recommend: ["CARDIO_BLAST",        "FULLBODY_BEGINNER"] },
+  { activity: "light",     goal: "loseWeight",      recommend: ["CARDIO_BEGINNER",        "FULLBODY_BEGINNER"] },
   { activity: "light",     goal: "gainMuscle",      recommend: ["FULLBODY_BEGINNER"] },
   { activity: "light",     goal: "stayFit",         recommend: ["FULLBODY_BEGINNER"] },
-  { activity: "light",     goal: "improveHealth",   recommend: ["CARDIO_BLAST"] },
+  { activity: "light",     goal: "improveHealth",   recommend: ["CARDIO_BEGINNER"] },
 
   // --- Moderate -------------------------------------------------------------
-  { activity: "moderate",  goal: "loseWeight",      recommend: ["CARDIO_BLAST",        "ADV_SPLIT_CARDIO"] },   // alt + üst
+  { activity: "moderate",  goal: "loseWeight",      recommend: ["CARDIO_BEGINNER",        "ADV_SPLIT_CARDIO"] },   // alt + üst
   { activity: "moderate",  goal: "gainMuscle",      recommend: ["SPLIT_INTERMEDIATE",     "FULLBODY_BEGINNER"] },
   { activity: "moderate",  goal: "stayFit",         recommend: ["FULLBODY_BEGINNER",      "SPLIT_INTERMEDIATE"] },
-  { activity: "moderate",  goal: "improveHealth",   recommend: ["CARDIO_BLAST"] },
+  { activity: "moderate",  goal: "improveHealth",   recommend: ["CARDIO_BEGINNER"] },
 
   // --- Active ---------------------------------------------------------------
-  { activity: "active",    goal: "loseWeight",      recommend: ["ADV_SPLIT_CARDIO",       "CARDIO_BLAST"] },
+  { activity: "active",    goal: "loseWeight",      recommend: ["ADV_SPLIT_CARDIO",       "CARDIO_BEGINNER"] },
   { activity: "active",    goal: "gainMuscle",      recommend: ["SPLIT_ADVANCED",         "SPLIT_INTERMEDIATE"] },
   { activity: "active",    goal: "stayFit",         recommend: ["SPLIT_INTERMEDIATE",     "FULLBODY_BEGINNER"] },
-  { activity: "active",    goal: "improveHealth",   recommend: ["ADV_SPLIT_CARDIO",       "CARDIO_BLAST"] },
+  { activity: "active",    goal: "improveHealth",   recommend: ["ADV_SPLIT_CARDIO",       "CARDIO_BEGINNER"] },
 
   // --- Very / Extra Active --------------------------------------------------
   { activity: "veryActive",goal: "loseWeight",      recommend: ["ADV_SPLIT_CARDIO",       "SPLIT_INTERMEDIATE"] },
   { activity: "veryActive",goal: "gainMuscle",      recommend: ["SPLIT_ADVANCED",         "SPLIT_INTERMEDIATE"] },
   { activity: "veryActive",goal: "stayFit",         recommend: ["SPLIT_ADVANCED",         "SPLIT_INTERMEDIATE"] },
-  { activity: "veryActive",goal: "improveHealth",   recommend: ["ADV_SPLIT_CARDIO",       "CARDIO_BLAST"] },
+  { activity: "veryActive",goal: "improveHealth",   recommend: ["ADV_SPLIT_CARDIO",       "CARDIO_BEGINNER"] },
 
   { activity: "extraActive",goal:"loseWeight",      recommend: ["ADV_SPLIT_CARDIO",       "SPLIT_INTERMEDIATE"] },
   { activity: "extraActive",goal:"gainMuscle",      recommend: ["SPLIT_ADVANCED",         "SPLIT_INTERMEDIATE"] },
   { activity: "extraActive",goal:"stayFit",         recommend: ["SPLIT_ADVANCED",         "SPLIT_INTERMEDIATE"] },
-  { activity: "extraActive",goal:"improveHealth",   recommend: ["ADV_SPLIT_CARDIO",       "CARDIO_BLAST"] },
+  { activity: "extraActive",goal:"improveHealth",   recommend: ["ADV_SPLIT_CARDIO",       "CARDIO_BEGINNER"] },
 
   // --- Fallback -------------------------------------------------------------
   { activity: "*", goal: "*",                       recommend: ["CUSTOM"] }
