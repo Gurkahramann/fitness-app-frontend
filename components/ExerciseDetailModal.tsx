@@ -4,6 +4,7 @@ import { useState } from "react"
 import { View, Text, Modal, TouchableOpacity, StyleSheet, ScrollView, Image, Dimensions, TextInput } from "react-native"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import React from "react"
+import { Image as ExpoImage } from 'expo-image'
 
 // Gün isimleri sabiti
 const DAYS = [
@@ -50,6 +51,7 @@ export default function ExerciseDetailModal({
   const [weight, setWeight] = useState("0")
   const [duration, setDuration] = useState("30")
   const [selectedSchedule, setSelectedSchedule] = useState<{ [week: number]: number[] }>({})
+  const [isGifPlaying, setIsGifPlaying] = useState(true)
 
   React.useEffect(() => {
     if (visible && showConfig) {
@@ -64,6 +66,16 @@ export default function ExerciseDetailModal({
   if (!exercise) return null
 
   const isCardio = exercise.type === "cardio"
+
+  // Determine which image/gif to show
+  const imageUrl = exercise.imageUrl || exercise.coverImageUrl || exercise.gifUrl || exercise.image;
+  const isGif = imageUrl && imageUrl.toLowerCase().endsWith('.gif');
+  // Durdurulduğunda GIF'in ilk karesi için jpg/png fallback
+  let staticImageUrl = undefined;
+  if (isGif && imageUrl) {
+    staticImageUrl = imageUrl.replace(/\.gif$/i, '.jpg');
+  }
+  console.log('ExerciseDetailModal imageUrl:', imageUrl, 'isGif:', isGif);
 
   const handleScheduleToggle = (week: number, day: number) => {
     setSelectedSchedule((prev) => {
@@ -112,22 +124,35 @@ export default function ExerciseDetailModal({
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* Exercise Image/Video */}
           <View style={styles.mediaContainer}>
-            <Image source={{ uri: exercise.image }} style={styles.exerciseImage} />
-            <TouchableOpacity style={styles.playButton}>
-              <MaterialCommunityIcons name="play" size={40} color="#fff" />
-            </TouchableOpacity>
+            {isGif ? (
+              <ExpoImage
+                source={imageUrl}
+                style={styles.exerciseImage}
+                contentFit="contain"
+                onLoad={() => console.log('ExpoImage loaded:', imageUrl)}
+                onError={(e) => console.log('ExpoImage error:', e, imageUrl)}
+              />
+            ) : (
+              <ExpoImage
+                source={imageUrl}
+                style={styles.exerciseImage}
+                contentFit="contain"
+                onLoad={() => console.log('ExpoImage loaded:', imageUrl)}
+                onError={(e) => console.log('ExpoImage error:', e, imageUrl)}
+              />
+            )}
           </View>
 
           {/* Exercise Stats */}
           <View style={[styles.statsContainer, { backgroundColor: isDark ? "#222" : "#fff" }]}>
             <View style={styles.statItem}>
               <MaterialCommunityIcons name="clock-outline" size={20} color="#3DCC85" />
-              <Text style={[styles.statLabel, { color: isDark ? "#aaa" : "#666" }]}>Duration</Text>
+              <Text style={[styles.statLabel, { color: isDark ? "#aaa" : "#666" }]}>Süre</Text>
               <Text style={[styles.statValue, { color: isDark ? "#fff" : "#000" }]}>{exercise.duration || ''}</Text>
             </View>
             <View style={styles.statItem}>
               <MaterialCommunityIcons name="fire" size={20} color="#FF6347" />
-              <Text style={[styles.statLabel, { color: isDark ? "#aaa" : "#666" }]}>Calories</Text>
+              <Text style={[styles.statLabel, { color: isDark ? "#aaa" : "#666" }]}>Kalori</Text>
               <Text style={[styles.statValue, { color: isDark ? "#fff" : "#000" }]}>{exercise.calories || ''}</Text>
             </View>
           </View>
@@ -146,7 +171,7 @@ export default function ExerciseDetailModal({
                   },
                 ]}
               >
-                Instructions
+                Talimatlar
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -161,7 +186,7 @@ export default function ExerciseDetailModal({
                   },
                 ]}
               >
-                Tips
+                İpuçları
               </Text>
             </TouchableOpacity>
           </View>
@@ -170,7 +195,7 @@ export default function ExerciseDetailModal({
           <View style={[styles.contentContainer, { backgroundColor: isDark ? "#222" : "#fff" }]}>
             {activeTab === "instructions" ? (
               <View>
-                <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>How to perform</Text>
+                <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Nasıl Yapılır?</Text>
                 {(exercise.instructions || []).map((instruction: string, index: number) => (
                   <View key={index} style={styles.instructionItem}>
                     <View style={[styles.stepNumber, { backgroundColor: "#3DCC85" }]}>
@@ -182,7 +207,7 @@ export default function ExerciseDetailModal({
               </View>
             ) : (
               <View>
-                <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Pro Tips</Text>
+                <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>İpuçları</Text>
                 {(exercise.tips || []).map((tip: string, index: number) => (
                   <View key={index} style={styles.tipItem}>
                     <MaterialCommunityIcons name="lightbulb-outline" size={20} color="#FFD700" />
@@ -196,10 +221,10 @@ export default function ExerciseDetailModal({
           {/* Config Alanları */}
           {showConfig && (
             <View style={[styles.contentContainer, { backgroundColor: isDark ? "#222" : "#fff" }]}>
-              <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Exercise Configuration</Text>
+              <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Egzersiz Ayarları</Text>
               <View style={styles.configGrid}>
                 <View style={styles.configItem}>
-                  <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Sets</Text>
+                  <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Set</Text>
                   <TextInput
                     style={[
                       styles.configInput,
@@ -217,7 +242,7 @@ export default function ExerciseDetailModal({
                 {!isCardio ? (
                   <>
                     <View style={styles.configItem}>
-                      <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Reps</Text>
+                      <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Tekrar</Text>
                       <TextInput
                         style={[
                           styles.configInput,
@@ -233,7 +258,7 @@ export default function ExerciseDetailModal({
                       />
                     </View>
                     <View style={styles.configItem}>
-                      <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Weight (kg)</Text>
+                      <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Ağırlık (kg)</Text>
                       <TextInput
                         style={[
                           styles.configInput,
@@ -251,7 +276,7 @@ export default function ExerciseDetailModal({
                   </>
                 ) : (
                   <View style={styles.configItem}>
-                    <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Duration (sec)</Text>
+                    <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Süre (sn)</Text>
                     <TextInput
                       style={[
                         styles.configInput,
@@ -271,12 +296,12 @@ export default function ExerciseDetailModal({
               {/* Gün seçimi alanı */}
               {selectedDaysPerWeek && weeks > 0 && (
                 <View style={styles.scheduleSection}>
-                  <Text style={[styles.scheduleTitle, { color: isDark ? "#fff" : "#1E293B" }]}>📅 Add to Schedule</Text>
-                  <Text style={[styles.scheduleSubtitle, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Select which days to add this exercise</Text>
+                  <Text style={[styles.scheduleTitle, { color: isDark ? "#fff" : "#1E293B" }]}>📅 Programa Ekle</Text>
+                  <Text style={[styles.scheduleSubtitle, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Bu egzersizi eklemek istediğiniz günleri seçin</Text>
                   {[...Array(weeks)].map((_, weekIdx) =>
                     selectedDaysPerWeek[weekIdx + 1]?.length > 0 && (
                       <View key={weekIdx} style={styles.modalWeekContainer}>
-                        <Text style={[styles.modalWeekTitle, { color: isDark ? "#E2E8F0" : "#475569" }]}>Week {weekIdx + 1}</Text>
+                        <Text style={[styles.modalWeekTitle, { color: isDark ? "#E2E8F0" : "#475569" }]}>Hafta {weekIdx + 1}</Text>
                         <View style={styles.modalDaysGrid}>
                           {selectedDaysPerWeek[weekIdx + 1].map((day: number) => {
                             const isSelected = selectedSchedule[weekIdx + 1]?.includes(day)
@@ -322,7 +347,7 @@ export default function ExerciseDetailModal({
                 disabled={!onAddToWorkout}
               >
                 <MaterialCommunityIcons name="plus" size={20} color={isDark ? "#fff" : "#000"} />
-                <Text style={[styles.actionButtonText, { color: isDark ? "#fff" : "#000" }]}>Add to Workout</Text>
+                <Text style={[styles.actionButtonText, { color: isDark ? "#fff" : "#000" }]}>Programa Ekle</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -366,18 +391,6 @@ const styles = StyleSheet.create({
   exerciseImage: {
     width: "100%",
     height: "100%",
-  },
-  playButton: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: [{ translateX: -30 }, { translateY: -30 }],
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: "rgba(0,0,0,0.6)",
-    justifyContent: "center",
-    alignItems: "center",
   },
   statsContainer: {
     flexDirection: "row",

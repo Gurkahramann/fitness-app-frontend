@@ -42,7 +42,6 @@ export default function ProfileEditScreen() {
   const [fitnessGoal, setFitnessGoal] = useState("stayFit")
   // Initialize form with user data
   useEffect(() => {
-    console.log("User Profile:", userProfile)
     if (userProfile) {
       setName(userProfile.name || "")
       setHeight(userProfile.height || 170)
@@ -78,17 +77,32 @@ export default function ProfileEditScreen() {
   // Modern DatePicker için mevcut tarihi YYYY/MM/DD formatına çevir
   const getCurrentDateForPicker = (): string => {
     try {
-      if (birthDate) {
-        const [day, month, year] = birthDate.split("/")
-        return `${year}/${month}/${day}`
+      if (birthDate && birthDate.includes("/")) {
+        const parts = birthDate.split('/');
+        if (parts.length === 3) {
+          const [day, month, year] = parts;
+          if (day && month && year) {
+            // Tarih formatını YYYY-MM-DD olarak birleştir
+            return `${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+          }
+        }
+      } else if (birthDate) {
+        // Zaten ISO formatında veya başka bir formatta ise olduğu gibi döndür
+        // Veya new Date() ile ayrıştırıp formatla
+        const date = new Date(birthDate);
+        if(!isNaN(date.getTime())) {
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          const day = String(date.getDate()).padStart(2, "0");
+          return `${year}-${month}-${day}`;
+        }
       }
-      const today = new Date()
-      return `${today.getFullYear()}/${String(today.getMonth() + 1).padStart(2, "0")}/${String(today.getDate()).padStart(2, "0")}`
+      const today = new Date();
+      return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
     } catch (error) {
-      console.error("Error getting current date for picker:", error)
-      // Return today's date as fallback
-      const today = new Date()
-      return `${today.getFullYear()}/${String(today.getMonth() + 1).padStart(2, "0")}/${String(today.getDate()).padStart(2, "0")}`
+      console.error("Error getting current date for picker:", error);
+      const today = new Date();
+      return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
     }
   }
 
@@ -113,7 +127,6 @@ export default function ProfileEditScreen() {
         isoBirthDate = ""; // veya null gönder
       }
     }
-    console.log("Gidecek doğum tarihi:", isoBirthDate);
     try {
       const updatedData = {
         ...user,
@@ -134,7 +147,6 @@ export default function ProfileEditScreen() {
           body: JSON.stringify(updatedData),
         }
       );
-      console.log("response", response) 
       if (response.ok) {
         // Backend'den dönen güncel kullanıcı bilgisini state'e kaydet
         if (setUser) setUser(updatedData as User);
@@ -156,6 +168,23 @@ export default function ProfileEditScreen() {
   const handleCancel = () => {
     router.back()
   }
+
+  const formatDateForDisplay = (dateString: string): string => {
+    if (!dateString) return "";
+
+    if (dateString.includes("T")) {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) {
+        return dateString;
+      }
+      const day = String(date.getDate()).padStart(2, "0");
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
+
+    return dateString;
+  };
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#121212" : "#f8f9fa" }]}>
@@ -229,7 +258,7 @@ export default function ProfileEditScreen() {
             onPress={showDatePicker}
           >
             <Text style={[styles.dateButtonText, { color: isDark ? "#fff" : "#000" }]}>
-              {birthDate || "Tarih Seçin"}
+              {formatDateForDisplay(birthDate) || "Tarih Seçin"}
             </Text>
             <MaterialCommunityIcons name="calendar" size={20} color={isDark ? "#aaa" : "#666"} />
           </TouchableOpacity>
@@ -324,9 +353,7 @@ export default function ProfileEditScreen() {
               color={isDark ? "#fff" : "#000"}
               style={styles.activityLevelIcon}
             />
-            <Text style={[styles.activityLevelText, { color: isDark ? "#fff" : "#000" }]}>
-              Sedentary: little or no exercise
-            </Text>
+            <Text style={[styles.activityLevelText, { color: isDark ? "#fff" : "#000" }]}>Hareketsiz: çok az veya hiç egzersiz yok</Text>
             {activityLevel === "sedentary" && (
               <MaterialCommunityIcons name="check" size={20} color="#3DCC85" style={styles.checkIcon} />
             )}
@@ -348,9 +375,7 @@ export default function ProfileEditScreen() {
               color={isDark ? "#fff" : "#000"}
               style={styles.activityLevelIcon}
             />
-            <Text style={[styles.activityLevelText, { color: isDark ? "#fff" : "#000" }]}>
-              Light: exercise 1-3 times/week
-            </Text>
+            <Text style={[styles.activityLevelText, { color: isDark ? "#fff" : "#000" }]}>Hafif: haftada 1-3 kez egzersiz</Text>
             {activityLevel === "light" && (
               <MaterialCommunityIcons name="check" size={20} color="#3DCC85" style={styles.checkIcon} />
             )}
@@ -372,9 +397,7 @@ export default function ProfileEditScreen() {
               color={isDark ? "#fff" : "#000"}
               style={styles.activityLevelIcon}
             />
-            <Text style={[styles.activityLevelText, { color: isDark ? "#fff" : "#000" }]}>
-              Moderate: exercise 4-5 times/week
-            </Text>
+            <Text style={[styles.activityLevelText, { color: isDark ? "#fff" : "#000" }]}>Orta: haftada 4-5 kez egzersiz</Text>
             {activityLevel === "moderate" && (
               <MaterialCommunityIcons name="check" size={20} color="#3DCC85" style={styles.checkIcon} />
             )}
@@ -396,9 +419,7 @@ export default function ProfileEditScreen() {
               color={isDark ? "#fff" : "#000"}
               style={styles.activityLevelIcon}
             />
-            <Text style={[styles.activityLevelText, { color: isDark ? "#fff" : "#000" }]}>
-              Active: daily exercise or intense exercise 3-4 times/week
-            </Text>
+            <Text style={[styles.activityLevelText, { color: isDark ? "#fff" : "#000" }]}>Aktif: her gün egzersiz veya haftada 3-4 kez yoğun egzersiz</Text>
             {activityLevel === "active" && (
               <MaterialCommunityIcons name="check" size={20} color="#3DCC85" style={styles.checkIcon} />
             )}
@@ -420,9 +441,7 @@ export default function ProfileEditScreen() {
               color={isDark ? "#fff" : "#000"}
               style={styles.activityLevelIcon}
             />
-            <Text style={[styles.activityLevelText, { color: isDark ? "#fff" : "#000" }]}>
-              Very Active: intense exercise 6-7 times/week
-            </Text>
+            <Text style={[styles.activityLevelText, { color: isDark ? "#fff" : "#000" }]}>Çok Aktif: haftada 6-7 kez yoğun egzersiz</Text>
             {activityLevel === "veryActive" && (
               <MaterialCommunityIcons name="check" size={20} color="#3DCC85" style={styles.checkIcon} />
             )}
@@ -444,9 +463,7 @@ export default function ProfileEditScreen() {
               color={isDark ? "#fff" : "#000"}
               style={styles.activityLevelIcon}
             />
-            <Text style={[styles.activityLevelText, { color: isDark ? "#fff" : "#000" }]}>
-              Extra Active: very intense exercise daily, or physical job
-            </Text>
+            <Text style={[styles.activityLevelText, { color: isDark ? "#fff" : "#000" }]}>Ekstra Aktif: her gün çok yoğun egzersiz veya fiziksel iş</Text>
             {activityLevel === "extraActive" && (
               <MaterialCommunityIcons name="check" size={20} color="#3DCC85" style={styles.checkIcon} />
             )}
@@ -474,7 +491,7 @@ export default function ProfileEditScreen() {
                 color={isDark ? "#fff" : "#000"}
                 style={styles.goalIcon}
               />
-              <Text style={[styles.goalText, { color: isDark ? "#fff" : "#000" }]}>Lose Weight</Text>
+              <Text style={[styles.goalText, { color: isDark ? "#fff" : "#000" }]}>Kilo Ver</Text>
               {fitnessGoal === "loseWeight" && (
                 <View style={[styles.selectedIndicator, { backgroundColor: "#3DCC85" }]} />
               )}
@@ -496,7 +513,7 @@ export default function ProfileEditScreen() {
                 color={isDark ? "#fff" : "#000"}
                 style={styles.goalIcon}
               />
-              <Text style={[styles.goalText, { color: isDark ? "#fff" : "#000" }]}>Gain Muscle</Text>
+              <Text style={[styles.goalText, { color: isDark ? "#fff" : "#000" }]}>Kas Kazan</Text>
               {fitnessGoal === "gainMuscle" && (
                 <View style={[styles.selectedIndicator, { backgroundColor: "#3DCC85" }]} />
               )}
@@ -518,7 +535,7 @@ export default function ProfileEditScreen() {
                 color={isDark ? "#fff" : "#000"}
                 style={styles.goalIcon}
               />
-              <Text style={[styles.goalText, { color: isDark ? "#fff" : "#000" }]}>Stay Fit</Text>
+              <Text style={[styles.goalText, { color: isDark ? "#fff" : "#000" }]}>Formda Kal</Text>
               {fitnessGoal === "stayFit" && <View style={[styles.selectedIndicator, { backgroundColor: "#3DCC85" }]} />}
             </TouchableOpacity>
 
@@ -538,7 +555,7 @@ export default function ProfileEditScreen() {
                 color={isDark ? "#fff" : "#000"}
                 style={styles.goalIcon}
               />
-              <Text style={[styles.goalText, { color: isDark ? "#fff" : "#000" }]}>Improve Health</Text>
+              <Text style={[styles.goalText, { color: isDark ? "#fff" : "#000" }]}>Sağlığı Geliştir</Text>
               {fitnessGoal === "improveHealth" && (
                 <View style={[styles.selectedIndicator, { backgroundColor: "#3DCC85" }]} />
               )}
@@ -549,12 +566,19 @@ export default function ProfileEditScreen() {
 
       {/* Date Picker Modal */}
       <CustomDateModal
-        isVisible={isDatePickerVisible}
+        visible={isDatePickerVisible}
         onClose={hideDatePicker}
-        onSelect={handleDateSelect}
-        isDark={isDark}
-        selectedDate={getCurrentDateForPicker()}
-        maxDate={getMaxDate()}
+        onSelectDate={(date) => {
+          if (date instanceof Date && !isNaN(date.getTime())) {
+            const yyyy = date.getFullYear();
+            const mm = String(date.getMonth() + 1).padStart(2, "0");
+            const dd = String(date.getDate()).padStart(2, "0");
+            handleDateSelect(`${yyyy}/${mm}/${dd}`);
+          }
+          hideDatePicker();
+        }}
+        initialDate={getCurrentDateForPicker()}
+        mode="birthdate"
       />
     </SafeAreaView>
   )
@@ -569,11 +593,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16,
-    // paddingTop kaldırıldı, dinamik olarak yukarıda ekleniyor
-    //height: 60, // istersen kaldırabilirsin, sadece minHeight bırakabilirsin
     borderBottomWidth: 1,
     borderBottomColor: "#333",
-    backgroundColor: "transparent", // SafeAreaView ile çakışmasın
+    backgroundColor: "transparent",
   },
   headerTitle: {
     fontSize: 18,

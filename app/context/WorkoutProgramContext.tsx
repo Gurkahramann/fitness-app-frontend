@@ -19,19 +19,51 @@ export interface WorkoutProgram {
 export interface UserWorkoutProgram {
   id: string
   userId: string
-  workoutProgramId: number
+  workoutProgramId: number | null
+  customWorkoutProgramId?: number | null
   startDate: string
   savedDays: any[]
+}
+
+interface CustomWorkoutProgram {
+  id?: string;
+  userId: string;
+  title: string;
+  description: string;
+  durationWeeks: number;
+  tags?: string[];
+  coverImageUrl?: string;
+  days: {
+    dayOfWeek: number;
+    exerciseEntries: {
+      orderIndex: number;
+      exerciseId: number;
+    }[];
+  }[];
+}
+
+interface SaveProgramPayload {
+  userId: string;
+  startDate: string;
+  savedDays: any[];
+  workoutProgramId?: number;
+  customWorkoutProgramId?: number;
 }
 
 interface WorkoutProgramContextType {
   workoutPrograms: WorkoutProgram[]
   userWorkoutPrograms: UserWorkoutProgram[]
+  userCustomWorkoutPrograms: CustomWorkoutProgram[]
   loading: boolean
   error: string | null
   refetch: () => void
   fetchUserWorkoutPrograms: (userId: string) => Promise<void>
-  saveUserWorkoutProgram: (userId: string, workoutProgramId: number, startDate: string, savedDays: any[]) => Promise<string>
+  saveUserWorkoutProgram: (payload: SaveProgramPayload) => Promise<string>
+  deleteUserWorkoutProgram: (userId: string, programId: string) => Promise<void>
+  createCustomWorkoutProgram: (program: CustomWorkoutProgram) => Promise<CustomWorkoutProgram>
+  fetchUserCustomWorkoutPrograms: (userId: string) => Promise<CustomWorkoutProgram[]>
+  deleteCustomWorkoutProgram: (userId: string, programId: string) => Promise<void>
+  addUserWorkoutProgram: (program: any, userId: string, startDate: string) => Promise<void>
 }
 
 const WorkoutProgramContext = createContext<WorkoutProgramContextType | undefined>(undefined)
@@ -41,6 +73,7 @@ export const WorkoutProgramProvider = ({ children }: { children: ReactNode }) =>
   const [userWorkoutPrograms, setUserWorkoutPrograms] = useState<UserWorkoutProgram[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [userCustomWorkoutPrograms, setUserCustomWorkoutPrograms] = useState<CustomWorkoutProgram[]>([])
 
   const fetchWorkoutPrograms = async () => {
     setLoading(true)
@@ -70,11 +103,8 @@ export const WorkoutProgramProvider = ({ children }: { children: ReactNode }) =>
     }
   }
 
-  const saveUserWorkoutProgram = async (userId: string, workoutProgramId: number, startDate: string, savedDays: any[]) => {
+  const saveUserWorkoutProgram = async (payload: SaveProgramPayload) => {
     // Çakışma kontrolü
-    // 1. Tüm mevcut userWorkoutPrograms içindeki günleri ve tarihleri hesapla
-    // 2. Yeni eklenen programın günleriyle karşılaştır
-    // 3. Çakışma varsa hata fırlat
     const getAllProgramDates = (program: { startDate: string, savedDays: any[] }) => {
       const start = new Date(program.startDate);
       return program.savedDays.map((day: any, idx: number) => {
@@ -92,7 +122,7 @@ export const WorkoutProgramProvider = ({ children }: { children: ReactNode }) =>
     // Mevcut programların tüm günleri
     const existingDates = userWorkoutPrograms.flatMap(getAllProgramDates);
     // Yeni eklenen programın günleri
-    const newProgram = { startDate, savedDays };
+    const newProgram = { startDate: payload.startDate, savedDays: payload.savedDays };
     const newDates = getAllProgramDates(newProgram);
     // Çakışan gün var mı?
     const conflict = newDates.some((date: string) => existingDates.includes(date));
@@ -101,24 +131,14 @@ export const WorkoutProgramProvider = ({ children }: { children: ReactNode }) =>
     }
 
     try {
-      console.log("Sending request to backend with data:", {
-        userId,
-        workoutProgramId,
-        startDate,
-        savedDays
-      });
+      console.log("Sending request to backend with data:", payload);
 
       const res = await authFetch(`${springUrl}/user-workout-programs`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          userId,
-          workoutProgramId,
-          startDate,
-          savedDays
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!res.ok) {
@@ -130,7 +150,7 @@ export const WorkoutProgramProvider = ({ children }: { children: ReactNode }) =>
       const data = await res.json();
       console.log("Backend success response:", data);
       // Refresh user workout programs after saving
-      await fetchUserWorkoutPrograms(userId);
+      await fetchUserWorkoutPrograms(payload.userId);
       return data.message;
     } catch (err: any) {
       console.error("Backend error details:", err);
@@ -142,6 +162,130 @@ export const WorkoutProgramProvider = ({ children }: { children: ReactNode }) =>
     }
   };
 
+  const deleteUserWorkoutProgram = async (userId: string, programId: string) => {
+    try {
+      console.log("Deleting program with params:", {
+        userId,
+        programId,
+        url: `${springUrl}/user-workout-programs/${userId}/${programId}`
+      });
+
+      const res = await authFetch(`${springUrl}/user-workout-programs/${userId}/${programId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error("Delete program error response:", errorData);
+        throw new Error(errorData.message || "Program silinemedi");
+      }
+
+      console.log("Program successfully deleted");
+      // Programı başarıyla sildikten sonra listeyi güncelle
+      await fetchUserWorkoutPrograms(userId);
+    } catch (err: any) {
+      console.error("Program silme hatası detayları:", {
+        error: err,
+        message: err.message,
+        stack: err.stack
+      });
+      throw new Error(err.message || "Program silinemedi");
+    }
+  };
+
+  const createCustomWorkoutProgram = async (program: CustomWorkoutProgram) => {
+    try {
+      const res = await authFetch(`${springUrl}/custom-workout-programs`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(program),
+      });
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || 'Custom program could not be saved');
+      }
+      const data = await res.json();
+      return data;
+    } catch (err: any) {
+      throw new Error(err.message || 'Custom program could not be saved');
+    }
+  };
+
+  const fetchUserCustomWorkoutPrograms = async (userId: string) => {
+    try {
+      const res = await authFetch(`${springUrl}/custom-workout-programs/user/${userId}`);
+      if (!res.ok) throw new Error('Custom programs could not be loaded');
+      const data = await res.json();
+      setUserCustomWorkoutPrograms(Array.isArray(data) ? data : []);
+      return data;
+    } catch (err: any) {
+      setUserCustomWorkoutPrograms([]);
+      throw new Error(err.message || 'Custom programs could not be loaded');
+    }
+  };
+
+  const deleteCustomWorkoutProgram = async (userId: string, programId: string) => {
+    try {
+      const res = await authFetch(`${springUrl}/custom-workout-programs/${programId}?userId=${userId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || 'Custom program silinemedi');
+      }
+      // Başarıyla silindiyse custom programları tekrar çek
+      await fetchUserCustomWorkoutPrograms(userId);
+    } catch (err: any) {
+      throw new Error(err.message || 'Custom program silinemedi');
+    }
+  };
+
+  const addUserWorkoutProgram = async (program: any, userId: string, startDate: string) => {
+    const isCustom = !program.slug; // Slug sadece hazır programlarda var
+    
+    const body: any = {
+      userId,
+      startDate,
+      days: program.days.map((d: any) => ({
+        dayNumber: d.dayOfWeek,
+        exerciseEntries: d.exerciseEntries.map((e: any) => ({
+          exerciseId: e.exerciseId,
+          orderIndex: e.orderIndex
+        }))
+      }))
+    };
+
+    if (isCustom) {
+      body.customWorkoutProgramId = program.id;
+    } else {
+      body.workoutProgramId = program.id;
+    }
+
+    const res = await authFetch(`${springUrl}/user-workout-programs`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || "Kullanıcı programı eklenemedi");
+    }
+
+    // Listeyi yenile
+    await fetchUserWorkoutPrograms(userId);
+  };
+
   useEffect(() => {
     fetchWorkoutPrograms()
   }, [])
@@ -150,11 +294,17 @@ export const WorkoutProgramProvider = ({ children }: { children: ReactNode }) =>
     <WorkoutProgramContext.Provider value={{ 
       workoutPrograms, 
       userWorkoutPrograms,
+      userCustomWorkoutPrograms,
       loading, 
       error, 
       refetch: fetchWorkoutPrograms, 
       fetchUserWorkoutPrograms,
-      saveUserWorkoutProgram 
+      saveUserWorkoutProgram,
+      deleteUserWorkoutProgram,
+      createCustomWorkoutProgram,
+      fetchUserCustomWorkoutPrograms,
+      deleteCustomWorkoutProgram,
+      addUserWorkoutProgram,
     }}>
       {children}
     </WorkoutProgramContext.Provider>

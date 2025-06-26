@@ -2,7 +2,29 @@
 
 import React from "react"
 import { View, Text, StyleSheet, useColorScheme } from "react-native"
-import { Calendar, type DateData } from "react-native-calendars"
+import { Calendar, type DateData, LocaleConfig } from "react-native-calendars"
+
+LocaleConfig.locales["tr"] = {
+  monthNames: [
+    "Ocak",
+    "Şubat",
+    "Mart",
+    "Nisan",
+    "Mayıs",
+    "Haziran",
+    "Temmuz",
+    "Ağustos",
+    "Eylül",
+    "Ekim",
+    "Kasım",
+    "Aralık",
+  ],
+  monthNamesShort: ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"],
+  dayNames: ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"],
+  dayNamesShort: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"],
+  today: "Bugün",
+}
+LocaleConfig.defaultLocale = "tr"
 
 type CalendarCardProps = {
   onDayPress: (day: DateData) => void
@@ -28,7 +50,7 @@ export default function CalendarCard({ onDayPress, selectedDate, markedDates }: 
 
   return (
     <View style={[styles.container, { backgroundColor }]}> 
-      <Text style={[styles.title, { color: textColor }]}>Calendar</Text>
+      <Text style={[styles.title, { color: textColor }]}>Takvim</Text>
       <Calendar
         key={isDark ? "dark" : "light"}
         style={{

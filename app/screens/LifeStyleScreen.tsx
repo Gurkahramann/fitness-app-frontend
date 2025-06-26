@@ -26,20 +26,20 @@ import { defaultFormData } from "../context/FormContext"
 import React from "react"
 
 const ACTIVITY_OPTIONS = [
-  { key: "sedentary", label: "Sedentary: little or no exercise", icon: "seat-outline" },
-  { key: "light", label: "Light: exercise 1-3 times/week", icon: "walk" },
-  { key: "moderate", label: "Moderate: exercise 4-5 times/week", icon: "run" },
-  { key: "active", label: "Active: daily exercise or intense exercise 3-4 times/week", icon: "bike" },
-  { key: "veryActive", label: "Very Active: intense exercise 6-7 times/week", icon: "weight-lifter" },
-  { key: "extraActive", label: "Extra Active: very intense exercise daily, or physical job", icon: "dumbbell" },
+  { key: "sedentary", label: "Hareketsiz: hiç ya da çok az egzersiz", icon: "seat-outline" },
+  { key: "light", label: "Hafif: haftada 1-3 gün egzersiz", icon: "walk" },
+  { key: "moderate", label: "Orta: haftada 4-5 gün egzersiz", icon: "run" },
+  { key: "active", label: "Aktif: her gün veya yoğun egzersiz (haftada 3-4 gün)", icon: "bike" },
+  { key: "veryActive", label: "Çok Aktif: haftada 6-7 gün yoğun egzersiz", icon: "weight-lifter" },
+  { key: "extraActive", label: "Ekstra Aktif: her gün çok yoğun egzersiz veya fiziksel iş", icon: "dumbbell" },
 ]
 
 // Predefined goals to replace the free text input
 const GOALS = [
-  { key: "loseWeight", label: "Lose Weight", icon: "scale-bathroom" },
-  { key: "gainMuscle", label: "Gain Muscle", icon: "arm-flex" },
-  { key: "stayFit", label: "Stay Fit", icon: "heart-pulse" },
-  { key: "improveHealth", label: "Improve Health", icon: "medical-bag" },
+  { key: "loseWeight", label: "Kilo Vermek", icon: "scale-bathroom" },
+  { key: "gainMuscle", label: "Kas Kazanmak", icon: "arm-flex" },
+  { key: "stayFit", label: "Formda Kalmak", icon: "heart-pulse" },
+  { key: "improveHealth", label: "Sağlığı İyileştirmek", icon: "medical-bag" },
 ]
 
 export default function LifestyleScreen() {
@@ -65,7 +65,7 @@ export default function LifestyleScreen() {
 
   const handleSave = async () => {
     if (!formData.activityLevel || !selectedGoal) {
-      showToast("Lütfen aktivite seviyesi ve hedef seçiniz.",'error')
+      showToast("Lütfen aktivite seviyesi ve hedef seçiniz.", 'error')
       return
     }
 
@@ -91,14 +91,14 @@ export default function LifestyleScreen() {
       console.log("✅ Register yaniti:", response)
       if (response?.success) {
         setFormData(defaultFormData)
-        showToast("🎉 Kayit basarili!", 'success')
+        showToast("🎉 Kayıt başarılı!", 'success')
         router.push("/login")
       } else {
-        showToast(`❌ Kayit basarisiz: ${response?.message || "Bilinmeyen hata"}`, 'error')
+        showToast(`❌ Kayıt başarısız: ${response?.message || "Bilinmeyen hata"}`, 'error')
       }
     } catch (error) {
-      console.log("💥 Kayit hatasi:", error)
-      showToast("❌ Bir hata olustu, lütfen tekrar deneyin.",'error')
+      console.log("💥 Kayıt hatası:", error)
+      showToast("❌ Bir hata oluştu, lütfen tekrar deneyin.", 'error')
     }
   }
 
@@ -120,9 +120,7 @@ export default function LifestyleScreen() {
             <View style={localStyles.content}>
               <View style={localStyles.headerContainer}>
                 <Text style={[localStyles.title, { color: isDark ? "#fff" : "#000" }]}>Yaşam Tarzı</Text>
-                <Text style={[localStyles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>
-                  Fitness hedefleriniz için aktivite seviyenizi seçin
-                </Text>
+                <Text style={[localStyles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>Fitness hedefleriniz için aktivite seviyenizi seçin</Text>
               </View>
 
               {/* Activity Level Section */}

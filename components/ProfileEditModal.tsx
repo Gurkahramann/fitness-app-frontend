@@ -17,6 +17,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"
 import OptimizedSlider from "../components/BodyInfoSliders"
 import CustomDateModal from "../components/CustomDateModal"
 import React from "react"
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 interface ProfileEditModalProps {
   visible: boolean
@@ -26,6 +27,29 @@ interface ProfileEditModalProps {
   isDark: boolean
 }
 
+// ISO veya DD/MM/YYYY tarihini DD/MM/YYYY formatına çeviren güvenli fonksiyon
+function formatDateToDDMMYYYY(dateString: string): string {
+  if (!dateString) return "";
+  // ISO formatı mı?
+  if (dateString.includes("T")) {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return "";
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+  // DD/MM/YYYY formatı mı?
+  const parts = dateString.split("/");
+  if (parts.length === 3) {
+    const [day, month, year] = parts;
+    if (day && month && year) {
+      return `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${year}`;
+    }
+  }
+  return "";
+}
+
 export default function ProfileEditModal({ visible, onClose, onSave, userData, isDark }: ProfileEditModalProps) {
   const [name, setName] = useState(userData.name || "")
   const [height, setHeight] = useState(userData.height || 170)
@@ -33,6 +57,7 @@ export default function ProfileEditModal({ visible, onClose, onSave, userData, i
   const [birthDate, setBirthDate] = useState(userData.birthDate || "")
   const [activityLevel, setActivityLevel] = useState(userData.activityLevel || "moderate")
   const [isDatePickerVisible, setDatePickerVisible] = useState(false)
+  const insets = useSafeAreaInsets()
 
   // Update local state when userData changes
   useEffect(() => {
@@ -65,35 +90,57 @@ export default function ProfileEditModal({ visible, onClose, onSave, userData, i
     setDatePickerVisible(false)
   }
 
-  const handleDateSelect = (selectedDate: string) => {
+  const handleDateSelect = (selectedDate: Date) => {
     try {
-      // Modern DatePicker'dan gelen format: YYYY/MM/DD
-      const [year, month, day] = selectedDate.split("/")
-
+      // selectedDate is a Date object
+      const year = selectedDate.getFullYear();
+      const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
+      const day = String(selectedDate.getDate()).padStart(2, "0");
       // Türkçe format için çevir: DD/MM/YYYY
-      const formattedDate = `${day}/${month}/${year}`
-      setBirthDate(formattedDate)
+      const formattedDate = `${day}/${month}/${year}`;
+      setBirthDate(formattedDate);
     } catch (error) {
-      console.error("Error handling date selection:", error)
+      console.error("Error handling date selection:", error);
     }
   }
 
-  // Modern DatePicker için mevcut tarihi YYYY/MM/DD formatına çevir
+  // DatePicker için güvenli tarih formatı (YYYY/MM/DD)
   const getCurrentDateForPicker = (): string => {
     try {
       if (birthDate) {
-        const [day, month, year] = birthDate.split("/")
-        return `${year}/${month}/${day}`
+        // ISO formatı
+        if (birthDate.includes("T")) {
+          const date = new Date(birthDate);
+          if (isNaN(date.getTime())) throw new Error("Invalid date");
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          const day = String(date.getDate()).padStart(2, "0");
+          return `${year}/${month}/${day}`;
+        }
+        // DD/MM/YYYY formatı
+        const parts = birthDate.split("/");
+        if (parts.length === 3) {
+          const [day, month, year] = parts;
+          if (
+            day !== undefined &&
+            month !== undefined &&
+            year !== undefined &&
+            day.length > 0 &&
+            month.length > 0 &&
+            year.length > 0
+          ) {
+            return `${year.padStart(4, "0")}/${month.padStart(2, "0")}/${day.padStart(2, "0")}`;
+          }
+        }
       }
-      const today = new Date()
-      return `${today.getFullYear()}/${String(today.getMonth() + 1).padStart(2, "0")}/${String(today.getDate()).padStart(2, "0")}`
+      const today = new Date();
+      return `${today.getFullYear()}/${String(today.getMonth() + 1).padStart(2, "0")}/${String(today.getDate()).padStart(2, "0")}`;
     } catch (error) {
-      console.error("Error getting current date for picker:", error)
-      // Return today's date as fallback
-      const today = new Date()
-      return `${today.getFullYear()}/${String(today.getMonth() + 1).padStart(2, "0")}/${String(today.getDate()).padStart(2, "0")}`
+      console.error("Error getting current date for picker:", error);
+      const today = new Date();
+      return `${today.getFullYear()}/${String(today.getMonth() + 1).padStart(2, "0")}/${String(today.getDate()).padStart(2, "0")}`;
     }
-  }
+  };
 
   // Modern DatePicker için maksimum tarih (bugün)
   const getMaxDate = (): string => {
@@ -106,7 +153,7 @@ export default function ProfileEditModal({ visible, onClose, onSave, userData, i
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.modalOverlay}>
           <View style={[styles.modalContent, { backgroundColor: isDark ? "#222" : "#fff" }]}>
-            <View style={styles.modalHeader}>
+            <View style={[styles.modalHeader, { paddingTop: insets.top }]}>
               <TouchableOpacity onPress={onClose}>
                 <Text style={[styles.cancelButton, { color: isDark ? "#aaa" : "#666" }]}>İptal</Text>
               </TouchableOpacity>
@@ -178,8 +225,8 @@ export default function ProfileEditModal({ visible, onClose, onSave, userData, i
                   ]}
                   onPress={showDatePicker}
                 >
-                  <Text style={[styles.dateButtonText, { color: isDark ? "#fff" : "#000" }]}>
-                    {birthDate || "Tarih Seçin"}
+                  <Text style={[styles.dateButtonText, { color: isDark ? "#fff" : "#000" }]}> 
+                    {birthDate ? formatDateToDDMMYYYY(birthDate) : "Tarih Seçin"}
                   </Text>
                   <MaterialCommunityIcons name="calendar" size={20} color={isDark ? "#aaa" : "#666"} />
                 </TouchableOpacity>
@@ -274,12 +321,11 @@ export default function ProfileEditModal({ visible, onClose, onSave, userData, i
 
       {/* Date Picker Modal */}
       <CustomDateModal
-        isVisible={isDatePickerVisible}
+        visible={isDatePickerVisible}
         onClose={hideDatePicker}
-        onSelect={handleDateSelect}
-        isDark={isDark}
-        selectedDate={getCurrentDateForPicker()}
-        maxDate={getMaxDate()}
+        onSelectDate={handleDateSelect}
+        initialDate={getCurrentDateForPicker()}
+        mode="birthdate"
       />
     </Modal>
   )

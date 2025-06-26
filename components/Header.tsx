@@ -24,7 +24,7 @@ export default function Header({ userName, profileImageUrl }: HeaderProps) {
   return (
     <View style={[styles.container, { paddingTop: topPadding }]}>
       <View>
-        <Text style={[styles.helloText, { color: isDark ? "#aaa" : "#666" }]}>Hello!</Text>
+        <Text style={[styles.helloText, { color: isDark ? "#aaa" : "#666" }]}>Merhaba!</Text>
         <Text style={[styles.userName, { color: isDark ? "#fff" : "#000" }]}>{userName}</Text>
       </View>
 

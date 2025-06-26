@@ -58,7 +58,7 @@ export default function LoginScreen() {
   const handleEmailChange = (text: string) => {
     setEmail(text)
     if (text.length > 0) {
-      setEmailError(isValidEmail(text) ? "" : "Please enter a valid email")
+      setEmailError(isValidEmail(text) ? "" : "Geçerli bir e-posta giriniz")
     } else {
       setEmailError("")
     }
@@ -66,7 +66,7 @@ export default function LoginScreen() {
 
   const handlePasswordChange = (text: string) => {
     setPassword(text)
-    setPasswordError("") // Clear password error when user starts typing
+    setPasswordError("") // Şifre hatasını temizle
   }
 
   // Login process
@@ -77,20 +77,20 @@ export default function LoginScreen() {
 
     // Check if fields are empty
     if (!email) {
-      setEmailError("Email field cannot be empty")
-      showToast("Please enter your email")
+      setEmailError("E-posta alanı boş bırakılamaz")
+      showToast("Lütfen e-posta adresinizi giriniz")
       return
     }
 
     if (!password) {
-      setPasswordError("Password field cannot be empty")
-      showToast("Please enter your password")
+      setPasswordError("Şifre alanı boş bırakılamaz")
+      showToast("Lütfen şifrenizi giriniz")
       return
     }
 
     // Check if there are validation errors
     if (emailError || passwordError) {
-      showToast("Please fix the form errors")
+      showToast("Lütfen form hatalarını düzeltin")
       return
     }
 
@@ -101,15 +101,15 @@ export default function LoginScreen() {
         router.push("/home-page")
       } else {
         // Generic error message for any authentication failure
-        const errorMessage = "Incorrect email or password"
+        const errorMessage = "E-posta veya şifre hatalı"
         showToast(errorMessage, 'error')
-        setPassword("") // Clear only password field on auth error
+        setPassword("") // Sadece şifreyi temizle
       }
     } catch (error) {
       console.error("Login error:", error)
-      const errorMessage = "An error occurred. Please try again."
+      const errorMessage = "Bir hata oluştu. Lütfen tekrar deneyin."
       showToast(errorMessage, 'error')
-      setPassword("") // Clear only password on system error
+      setPassword("") // Sadece şifreyi temizle
     }
   }
 
@@ -144,10 +144,8 @@ export default function LoginScreen() {
           >
             <View style={styles.innerContainer}>
               <View style={styles.headerContainer}>
-                <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Login</Text>
-                <Text style={[styles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>
-                  Sign in to continue
-                </Text>
+                <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Giriş Yap</Text>
+                <Text style={[styles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>Devam etmek için giriş yapın</Text>
               </View>
 
               {/* Email Field */}
@@ -169,7 +167,7 @@ export default function LoginScreen() {
                   />
                   <TextInput
                     style={[styles.input, { color: isDark ? "#fff" : "#000" }]}
-                    placeholder="Email"
+                    placeholder="E-posta"
                     placeholderTextColor={isDark ? "#777" : "#aaa"}
                     keyboardType="email-address"
                     autoCapitalize="none"
@@ -199,7 +197,7 @@ export default function LoginScreen() {
                   />
                   <TextInput
                     style={[styles.input, { color: isDark ? "#fff" : "#000" }]}
-                    placeholder="Password"
+                    placeholder="Şifre"
                     placeholderTextColor={isDark ? "#777" : "#aaa"}
                     secureTextEntry={showPassword}
                     value={password}
@@ -227,15 +225,15 @@ export default function LoginScreen() {
                 {isLoading ? (
                   <ActivityIndicator color={isDark ? "#000" : "#fff"} />
                 ) : (
-                  <Text style={[styles.loginButtonText, { color: isDark ? "#000" : "#fff" }]}>Login</Text>
+                  <Text style={[styles.loginButtonText, { color: isDark ? "#000" : "#fff" }]}>Giriş Yap</Text>
                 )}
               </TouchableOpacity>
 
               {/* Register Link */}
               <View style={styles.registerContainer}>
-                <Text style={[styles.registerText, { color: isDark ? "#aaa" : "#666" }]}>Don't have an account?</Text>
+                <Text style={[styles.registerText, { color: isDark ? "#aaa" : "#666" }]}>Hesabınız yok mu?</Text>
                 <TouchableOpacity onPress={() => router.push("./signup")}>
-                  <Text style={[styles.registerLink, { color: isDark ? "#fff" : "#000" }]}>Sign Up</Text>
+                  <Text style={[styles.registerLink, { color: isDark ? "#fff" : "#000" }]}>Kayıt Ol</Text>
                 </TouchableOpacity>
               </View>
             </View>

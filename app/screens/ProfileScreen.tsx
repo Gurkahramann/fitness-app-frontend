@@ -10,6 +10,8 @@ import {
   SafeAreaView,
   StatusBar,
   Platform,
+  BackHandler,
+  Alert,
 } from "react-native"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { useRouter } from "expo-router"
@@ -19,27 +21,46 @@ import WeeklySummaryCard from "../../components/WeeklySummaryCard"
 import AchievementsCard from "../../components/AchievementsCard"
 import { useUserProfile } from "../context/UserProfileContext"
 import React from "react"
+import { useNavigationState } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function ProfileScreen() {
   const isDark = useColorScheme() === "dark"
   const router = useRouter()
   const { user, logout } = useAuth()
   const { userProfile, loading, error, refetch } = useUserProfile()
-  console.log(user)
-  console.log(userProfile)
+  const navState = useNavigationState(state => state);
+  const insets = useSafeAreaInsets();
 
-  // Mock user data if not available from auth context
-  // const user = user || {
-  //   name: "Tun tun tun Sahur",
-  //   email: "user@example.com",
-  //   profileImage: "https://via.placeholder.com/150",
-  //   gender: "Erkek",
-  //   height: 184,
-  //   weight: 88,
-  //   birthDate: "24/09/2001",
-  //   activityLevel: "moderate",
-  //   fitnessGoal: "stayFit",
-  // }
+  React.useEffect(() => {
+    // Navigation stack'i logla
+
+    const onBackPress = () => {
+      // Eğer stack'te geri gidilecek ekran yoksa, çıkışı engelle ve Alert göster
+      if (navState?.routes?.length === 1) {
+        Alert.alert(
+          'Çıkış Yap',
+          'Uygulamadan çıkmak ister misiniz?',
+          [
+            { text: 'Hayır', style: 'cancel' },
+            {
+              text: 'Evet',
+              onPress: () => BackHandler.exitApp(),
+            },
+          ]
+        );
+        return true;
+      } else {
+        // Stack'te başka ekran varsa, bir önceki ekrana dön
+        router.back();
+        return true;
+      }
+    };
+    const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+    return () => subscription.remove();
+  }, [navState, router]);
+
+
 
   const handleEditPress = () => {
     router.push("/profile-edit")
@@ -65,7 +86,6 @@ export default function ProfileScreen() {
     }
   }
 
-  // Get fitness goal text
   const getFitnessGoalText = (goal: string) => {
     switch (goal) {
       case "loseWeight":
@@ -81,17 +101,31 @@ export default function ProfileScreen() {
     }
   }
 
+  const formatDateForDisplay = (dateString: string | undefined): string => {
+    if (!dateString) return "Tarih belirtilmemiş";
+
+    if (dateString.includes("T")) {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) {
+        return dateString;
+      }
+      const day = String(date.getDate()).padStart(2, "0");
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
+
+    return dateString;
+  };
+
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#121212" : "#f8f9fa" }]}>
       <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View style={styles.header}>
-          <Text style={[styles.headerTitle, { color: isDark ? "#fff" : "#000" }]}>Sayfam</Text>
-          <TouchableOpacity>
-            <MaterialCommunityIcons name="dots-vertical" size={24} color={isDark ? "#fff" : "#000"} />
-          </TouchableOpacity>
+        <View style={[styles.header, { paddingTop: insets.top }]}>
+          <Text style={[styles.headerTitle, { color: isDark ? "#fff" : "#000" }]}>Profilim</Text>
         </View>
 
         {/* Profile Card */}
@@ -120,7 +154,7 @@ export default function ProfileScreen() {
               color={isDark ? "#3DCC85" : "#3DCC85"}
               style={styles.statIcon}
             />
-            <Text style={[styles.statText, { color: isDark ? "#fff" : "#000" }]}>{userProfile?.gender}</Text>
+            <Text style={[styles.statText, { color: isDark ? "#fff" : "#000" }]}>{userProfile?.gender === 'Male' ? 'Erkek' : userProfile?.gender === 'Female' ? 'Kadın' : 'Belirtilmemiş'}</Text>
           </View>
 
           <View style={styles.statItem}>
@@ -150,7 +184,7 @@ export default function ProfileScreen() {
               color={isDark ? "#3DCC85" : "#3DCC85"}
               style={styles.statIcon}
             />
-            <Text style={[styles.statText, { color: isDark ? "#fff" : "#000" }]}>{userProfile?.birthDate}</Text>
+            <Text style={[styles.statText, { color: isDark ? "#fff" : "#000" }]}>{formatDateForDisplay(userProfile?.birthDate)}</Text>
           </View>
 
           <View style={styles.statItem}>
@@ -160,9 +194,7 @@ export default function ProfileScreen() {
               color={isDark ? "#3DCC85" : "#3DCC85"}
               style={styles.statIcon}
             />
-            <Text style={[styles.statText, { color: isDark ? "#fff" : "#000" }]}>
-              {getActivityLevelText(userProfile?.activityLevel || "")}
-            </Text>
+            <Text style={[styles.statText, { color: isDark ? "#fff" : "#000" }]}>Aktivite Seviyesi: {getActivityLevelText(userProfile?.activityLevel || "")}</Text>
           </View>
 
           <View style={styles.statItem}>
@@ -172,9 +204,7 @@ export default function ProfileScreen() {
               color={isDark ? "#3DCC85" : "#3DCC85"}
               style={styles.statIcon}
             />
-            <Text style={[styles.statText, { color: isDark ? "#fff" : "#000" }]}>
-              {getFitnessGoalText(userProfile?.goal || "")}
-            </Text>
+            <Text style={[styles.statText, { color: isDark ? "#fff" : "#000" }]}>Hedef: {getFitnessGoalText(userProfile?.goal || "")}</Text>
           </View>
         </View>
 
@@ -222,7 +252,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight || 0 : 0,
     paddingBottom: 16,
   },
   headerTitle: {

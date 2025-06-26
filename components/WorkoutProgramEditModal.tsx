@@ -1,13 +1,20 @@
 import React, { useEffect, useMemo, useState } from "react"
-import { Modal, View, Text, TouchableOpacity, StyleSheet, useColorScheme, Image, FlatList } from "react-native"
+import { Modal, View, Text, TouchableOpacity, StyleSheet, useColorScheme, Image, FlatList, Alert, ScrollView } from "react-native"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import CalendarCard from "./CalendarCard"
 import { useWorkoutPrograms } from "../app/context/WorkoutProgramContext"
 import { useToast } from "../app/context/ToastContext"
+import CustomDateModal from "./CustomDateModal"
 
 interface Exercise {
   id: number
   name: string
+  type: string
+  muscleGroup: string
+  duration?: string
+  calories?: string
+  sets?: number
+  reps?: number
   imageUrl?: string
   image?: string
 }
@@ -34,56 +41,73 @@ interface WorkoutProgramEditModalProps {
   days: DayEntry[]
   exercises: Exercise[]
   userId: string
-  workoutProgramId: number
+  programId: number
+  programType: 'custom' | 'default'
 }
 
-function getFirstMondayFromToday() {
+function getToday() {
   const today = new Date();
-  const day = today.getDay(); // 0=Sun, 1=Mon, ...
-  const diff = (8 - day) % 7 || 7;
-  const firstMonday = new Date(today);
-  firstMonday.setDate(today.getDate() + diff);
-  firstMonday.setHours(0,0,0,0);
-  return firstMonday;
+  // Use local date parts to construct a UTC date to avoid timezone-off-by-one issue
+  const todayUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
+  return todayUTC;
 }
 
-function getProgramDates(firstMonday: Date, durationWeeks: number, days: DayEntry[]) {
+function getProgramDates(startDate: Date, durationWeeks: number, days: DayEntry[]) {
   const markedDates: { [date: string]: any } = {};
-  for (let week = 0; week < durationWeeks; week++) {
-    days.forEach(dayObj => {
-      const date = new Date(firstMonday);
-      const dayOffset = (dayObj.dayOfWeek + 6) % 7; // Pazartesi=0
-      date.setDate(firstMonday.getDate() + week * 7 + dayOffset);
-      const dateStr = date.toISOString().split("T")[0];
+  const programStartDate = new Date(Date.UTC(startDate.getUTCFullYear(), startDate.getUTCMonth(), startDate.getUTCDate()));
+
+  // dayOfWeek is 1-7 for Mon-Sun. We need to map it to getUTCDay's 0-6 for Sun-Mon.
+  const workoutUTCDays = days.map(day => day.dayOfWeek === 7 ? 0 : day.dayOfWeek);
+
+  for (let i = 0; i < durationWeeks * 7; i++) {
+    const currentDate = new Date(programStartDate);
+    currentDate.setUTCDate(programStartDate.getUTCDate() + i);
+
+    if (workoutUTCDays.includes(currentDate.getUTCDay())) {
+      const dateStr = currentDate.toISOString().split("T")[0];
       markedDates[dateStr] = { marked: true, dotColor: "#3DCC85" };
-    });
+    }
   }
   return markedDates;
 }
 
-function getExercisesForDate(dateStr: string, firstMonday: Date, days: DayEntry[], exercises: Exercise[], durationWeeks: number) {
-  const date = new Date(dateStr);
-  const monday = new Date(firstMonday);
-  const diffDays = Math.floor((date.getTime() - monday.getTime()) / (1000 * 60 * 60 * 24));
+function getExercisesForDate(dateStr: string, startDate: Date, days: DayEntry[], exercises: Exercise[], durationWeeks: number) {
+  const selectedDateUTC = new Date(dateStr + 'T00:00:00Z');
+  const startDateUTC = new Date(Date.UTC(startDate.getUTCFullYear(), startDate.getUTCMonth(), startDate.getUTCDate()));
+
+  const diffDays = Math.round((selectedDateUTC.getTime() - startDateUTC.getTime()) / (1000 * 60 * 60 * 24));
   if (diffDays < 0 || diffDays >= durationWeeks * 7) return [];
-  const weekIndex = Math.floor(diffDays / 7);
-  const dayOfWeek = ((date.getDay() + 6) % 7) + 1; // Pazartesi=1
-  // Haftadaki o günün programı (aynı haftadaki ilk eşleşen dayOfWeek)
-  let dayEntry: DayEntry | undefined;
-  let count = 0;
-  for (let i = 0; i < days.length; i++) {
-    if (days[i].dayOfWeek === dayOfWeek) {
-      if (count === weekIndex) {
-        dayEntry = days[i];
-        break;
-      }
-      count++;
-    }
-  }
+
+  const dayOfWeek = selectedDateUTC.getUTCDay() === 0 ? 7 : selectedDateUTC.getUTCDay();
+
+  const dayEntry = days.find(d => d.dayOfWeek === dayOfWeek);
+
   if (!dayEntry) return [];
   return dayEntry.exerciseEntries.map(entry =>
-    exercises.find(ex => ex.id === entry.exerciseId)
+    exercises.find(ex => String(ex.id) === String(entry.exerciseId))
   ).filter(Boolean);
+}
+
+const getExerciseIcon = (type: string) => {
+  switch (type?.toLowerCase()) {
+    case "cardio":
+      return "heart-pulse"
+    case "strength":
+      return "dumbbell"
+    default:
+      return "weight-lifter"
+  }
+}
+
+const getTypeColor = (type: string) => {
+  switch (type?.toLowerCase()) {
+    case "cardio":
+      return "#FF6B6B"
+    case "strength":
+      return "#4ECDC4"
+    default:
+      return "#3DCC85"
+  }
 }
 
 const WorkoutProgramEditModal: React.FC<WorkoutProgramEditModalProps> = ({
@@ -93,49 +117,54 @@ const WorkoutProgramEditModal: React.FC<WorkoutProgramEditModalProps> = ({
   days,
   exercises,
   userId,
-  workoutProgramId
+  programId,
+  programType
 }) => {
   const isDark = useColorScheme() === "dark"
   const [markedDates, setMarkedDates] = useState<{ [date: string]: any }>({})
   const [selectedDate, setSelectedDate] = useState<string>("")
   const [dayExercises, setDayExercises] = useState<Exercise[]>([])
+  const [startDate, setStartDate] = useState<Date>(getToday())
+  const [isDatePickerVisible, setDatePickerVisible] = useState(false)
   const { saveUserWorkoutProgram } = useWorkoutPrograms();
   const { showToast } = useToast();
 
   useEffect(() => {
     if (!visible) return;
-    const firstMonday = getFirstMondayFromToday();
-    const marked = getProgramDates(firstMonday, durationWeeks, days);
+    const marked = getProgramDates(startDate, durationWeeks, days);
     setMarkedDates(marked);
-    const firstMondayStr = firstMonday.toISOString().split("T")[0];
-    setSelectedDate(firstMondayStr);
-    setDayExercises(getExercisesForDate(firstMondayStr, firstMonday, days, exercises, durationWeeks).filter(Boolean) as Exercise[]);
-  }, [visible, durationWeeks, days, exercises])
+    const startDateStr = startDate.toISOString().split("T")[0];
+    setSelectedDate(startDateStr);
+    setDayExercises(getExercisesForDate(startDateStr, startDate, days, exercises, durationWeeks).filter(Boolean) as Exercise[]);
+  }, [visible, durationWeeks, days, exercises, startDate])
+
+  useEffect(() => {
+  }, [dayExercises]);
 
   const handleDayPress = (day: any) => {
     setSelectedDate(day.dateString);
-    const firstMonday = getFirstMondayFromToday();
-    setDayExercises(getExercisesForDate(day.dateString, firstMonday, days, exercises, durationWeeks).filter(Boolean) as Exercise[]);
+    setDayExercises(getExercisesForDate(day.dateString, startDate, days, exercises, durationWeeks).filter(Boolean) as Exercise[]);
+  }
+
+  const handleStartDateChange = (newStartDate: Date) => {
+    // CustomDateModal now sends a UTC date and prevents picking dates before today.
+    // This check is a safeguard.
+    const today = getToday();
+    if (newStartDate.getTime() < today.getTime()) {
+        showToast("Geçmiş bir tarih seçemezsiniz.", "error")
+        return
+    }
+    setStartDate(newStartDate);
+    setDatePickerVisible(false)
+  }
+
+  const showStartDatePicker = () => {
+    setDatePickerVisible(true)
   }
 
   const handleSave = async () => {
     try {
-      const startDate = selectedDate;
-      
-      // Debug için gelen verileri kontrol et
-      console.log("Original days data:", JSON.stringify(days, null, 2));
-      console.log("Original exercises data:", JSON.stringify(exercises, null, 2));
-
-      // Exercises listesini kontrol et
-      if (!exercises || !Array.isArray(exercises) || exercises.length === 0) {
-        console.error("Exercises list is invalid:", exercises);
-        throw new Error("Egzersiz listesi yüklenemedi");
-      }
-
-      // Exercises ID'lerini kontrol et
-      const exerciseIds = exercises.map(e => e.id);
-      console.log("Available exercise IDs:", exerciseIds);
-
+      const startDateStr = startDate.toISOString().split("T")[0];
       const savedDays = days.map(day => ({
         dayNumber: day.dayOfWeek,
         exerciseEntries: day.exerciseEntries.map(entry => ({
@@ -144,16 +173,25 @@ const WorkoutProgramEditModal: React.FC<WorkoutProgramEditModalProps> = ({
         }))
       }));
 
-      const finalData = {
-        userId,
-        workoutProgramId,
-        startDate,
-        savedDays
+      const payload: {
+        userId: string;
+        startDate: string;
+        savedDays: any[];
+        workoutProgramId?: number;
+        customWorkoutProgramId?: number;
+      } = {
+        userId: userId,
+        startDate: startDateStr,
+        savedDays: savedDays
       };
 
-      console.log("Saving workout program with data:", JSON.stringify(finalData, null, 2));
+      if (programType === 'custom') {
+        payload.customWorkoutProgramId = programId;
+      } else {
+        payload.workoutProgramId = programId;
+      }
 
-      await saveUserWorkoutProgram(userId, workoutProgramId, startDate, savedDays);
+      await saveUserWorkoutProgram(payload);
       onClose();
     } catch (error) {
       if (error instanceof Error) {
@@ -165,17 +203,84 @@ const WorkoutProgramEditModal: React.FC<WorkoutProgramEditModalProps> = ({
     }
   };
 
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString('tr-TR', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const renderExerciseItem = ({ item }: { item: Exercise }) => (
+    <View style={styles.exerciseRow}>
+      <View style={styles.exerciseContent}>
+        <View style={[styles.exerciseIconContainer, { backgroundColor: getTypeColor(item.type) + "20" }]}>
+          <MaterialCommunityIcons
+            name={getExerciseIcon(item.type) as any}
+            size={24}
+            color={getTypeColor(item.type)}
+          />
+        </View>
+
+        <View style={styles.exerciseInfo}>
+          <Text style={[styles.exerciseName, { color: isDark ? "#3DCC85" : "#2E7D32" }]}>
+            {item.name}
+          </Text>
+          <View style={styles.exerciseDetails}>
+            <View style={[styles.typeBadge, { backgroundColor: getTypeColor(item.type) + "15" }]}>
+              <Text style={[styles.typeText, { color: getTypeColor(item.type) }]}>
+                {item.type}
+              </Text>
+            </View>
+            <Text style={[styles.muscleGroupText, { color: isDark ? "#B0B0B0" : "#666666" }]}>
+              {item.muscleGroup}
+            </Text>
+          </View>
+          <Text style={[styles.exerciseStats, { color: isDark ? "#B0B0B0" : "#888888" }]}>
+            {item.type?.toLowerCase() === "cardio"
+              ? `Süre: ${item.duration} | Kalori: ${item.calories}`
+              : `${item.sets} set x ${item.reps} reps | Kalori: ${item.calories}`}
+          </Text>
+        </View>
+      </View>
+    </View>
+  )
+
   return (
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
       <View style={styles.overlay}>
         <View style={[styles.modal, { backgroundColor: isDark ? "#222" : "#fff" }]}>
-          {/* Header */}
           <View style={styles.header}>
             <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Gün Antrenmanı</Text>
             <TouchableOpacity onPress={onClose}>
               <MaterialCommunityIcons name="close" size={28} color={isDark ? "#fff" : "#000"} />
             </TouchableOpacity>
           </View>
+          <ScrollView>
+            {/* Başlangıç Tarihi Seçici */}
+            <View style={styles.startDateSection}>
+              <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Başlangıç Tarihi</Text>
+              <TouchableOpacity
+                style={[styles.startDateButton, { backgroundColor: isDark ? '#333' : '#f4f4f4' }]}
+                onPress={showStartDatePicker}
+              >
+                <MaterialCommunityIcons name="calendar" size={20} color="#3DCC85" style={{ marginRight: 8 }} />
+                <Text style={{ color: isDark ? "#fff" : "#000", fontWeight: "500" }}>
+                  {formatDate(startDate)}
+                </Text>
+                <MaterialCommunityIcons name="chevron-down" size={20} color="#3DCC85" style={{ marginLeft: 8 }} />
+              </TouchableOpacity>
+            </View>
+  
+            {/* Bilgi Notu */}
+            <View style={[styles.infoNote, { backgroundColor: isDark ? '#2a2a2a' : '#f0f8ff' }]}>
+              <MaterialCommunityIcons name="information" size={16} color="#3DCC85" style={{ marginRight: 8 }} />
+              <Text style={[styles.infoText, { color: isDark ? "#ccc" : "#666" }]}>
+                Hazır programlarda haftanın günleri bellidir. Sadece başlangıç gününü belirleyebilirsin. Eğer özelleştirmek istiyorsan kendi antrenman programını oluşturarak yapabilirsin.
+              </Text>
+            </View>
+  
           {/* Takvim */}
           <CalendarCard
             onDayPress={handleDayPress}
@@ -186,26 +291,24 @@ const WorkoutProgramEditModal: React.FC<WorkoutProgramEditModalProps> = ({
           <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Hareketler</Text>
           <FlatList
             data={dayExercises}
-            keyExtractor={item => item.id?.toString() ?? Math.random().toString()}
-            renderItem={({ item }) => (
-              <View style={[styles.exerciseItem, { backgroundColor: isDark ? '#333' : '#f4f4f4' }]}>
-                <MaterialCommunityIcons name="drag" size={20} color="#3DCC85" style={{ marginRight: 8 }} />
-                <Image source={{ uri: item.imageUrl || item.image }} style={styles.exerciseImage} />
-                <Text style={{
-                  color: isDark ? "#fff" : "#000",
-                  fontWeight: "bold",
-                  fontSize: 16,
-                  marginLeft: 12
-                }}>{item.name}</Text>
-              </View>
-            )}
+            renderItem={renderExerciseItem}
+            keyExtractor={item => item && item.id !== undefined ? String(item.id) : Math.random().toString()}
+            scrollEnabled={false}
             contentContainerStyle={{ paddingBottom: 16 }}
           />
+          </ScrollView>
           <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
             <Text style={{ color: "#fff", fontWeight: "bold" }}>Kaydet</Text>
           </TouchableOpacity>
         </View>
       </View>
+      <CustomDateModal
+        visible={isDatePickerVisible}
+        onClose={() => setDatePickerVisible(false)}
+        onSelectDate={handleStartDateChange}
+        initialDate={startDate.toISOString().split('T')[0]}
+        mode="workout"
+      />
     </Modal>
   )
 }
@@ -239,19 +342,81 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     marginTop: 16
   },
-  exerciseItem: {
+  startDateSection: {
+    marginBottom: 12
+  },
+  startDateButton: {
     flexDirection: "row",
     alignItems: "center",
     padding: 12,
     borderRadius: 8,
-    backgroundColor: "#f4f4f4",
-    marginBottom: 8
+    backgroundColor: "#f4f4f4"
   },
-  exerciseImage: {
-    width: 36,
-    height: 36,
+  infoNote: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    padding: 12,
     borderRadius: 8,
-    marginRight: 4
+    backgroundColor: "#f0f8ff",
+    marginBottom: 16
+  },
+  infoText: {
+    flex: 1,
+    fontSize: 13,
+    lineHeight: 18,
+    color: "#666"
+  },
+  exerciseRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(128,128,128,0.1)",
+  },
+  exerciseContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+  },
+  exerciseIconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+  },
+  exerciseInfo: {
+    flex: 1,
+  },
+  exerciseName: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 4,
+  },
+  exerciseDetails: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 2,
+  },
+  typeBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 8,
+    marginRight: 8,
+  },
+  typeText: {
+    fontSize: 11,
+    fontWeight: "500",
+    textTransform: "uppercase",
+  },
+  muscleGroupText: {
+    fontSize: 13,
+    fontWeight: "400",
+  },
+  exerciseStats: {
+    fontSize: 12,
+    fontStyle: "italic",
   },
   saveButton: {
     backgroundColor: "#3DCC85",

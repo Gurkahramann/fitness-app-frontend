@@ -60,7 +60,7 @@ export default function BodyInfoScreen() {
       setFormData((prev) => ({ ...prev, birthDate: formattedDate }))
     } catch (error) {
       console.error("Error handling date selection:", error)
-      Alert.alert("Error", "An error occurred while selecting the date. Please try again.")
+      Alert.alert("Hata", "Tarih seçilirken bir hata oluştu. Lütfen tekrar deneyin.")
     }
   }
 
@@ -82,7 +82,7 @@ export default function BodyInfoScreen() {
 
   const handleNext = () => {
     if (!formData.height || !formData.weight || !formData.birthDate) {
-      Alert.alert("Warning", "Please fill in all fields: Height, Weight, and Birth Date.")
+      Alert.alert("Uyarı", "Lütfen tüm alanları doldurun: Boy, Kilo ve Doğum Tarihi.")
       return
     }
     router.push("/life-style")
@@ -104,16 +104,14 @@ export default function BodyInfoScreen() {
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Body Information</Text>
-          <Text style={[styles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>
-            Enter your information for fitness goals
-          </Text>
+          <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Vücut Bilgileri</Text>
+          <Text style={[styles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>Fitness hedeflerin için bilgilerini gir</Text>
         </View>
 
         <View style={[styles.card, { backgroundColor: isDark ? "#1e1e1e" : "#fff" }]}>
           {/* Height Slider */}
           <OptimizedSlider
-            label="Height"
+            label="Boy"
             value={heightValue}
             minimumValue={100}
             maximumValue={220}
@@ -125,7 +123,7 @@ export default function BodyInfoScreen() {
 
           {/* Weight Slider */}
           <OptimizedSlider
-            label="Weight"
+            label="Kilo"
             value={weightValue}
             minimumValue={30}
             maximumValue={200}
@@ -144,7 +142,7 @@ export default function BodyInfoScreen() {
                 color={isDark ? "#fff" : "#000"}
                 style={styles.dateIcon}
               />
-              <Text style={[styles.dateLabel, { color: isDark ? "#fff" : "#000" }]}>Birth Date</Text>
+              <Text style={[styles.dateLabel, { color: isDark ? "#fff" : "#000" }]}>Doğum Tarihi</Text>
             </View>
 
             <TouchableOpacity
@@ -166,7 +164,7 @@ export default function BodyInfoScreen() {
                   },
                 ]}
               >
-                {formData.birthDate || "Select Date"}
+                {formData.birthDate || "Tarih Seç"}
               </Text>
               <MaterialCommunityIcons name="chevron-right" size={20} color={isDark ? "#aaa" : "#888"} />
             </TouchableOpacity>
@@ -178,7 +176,7 @@ export default function BodyInfoScreen() {
           style={[styles.nextButton, { backgroundColor: isDark ? "#fff" : "#000" }]}
           onPress={handleNext}
         >
-          <Text style={[styles.nextButtonText, { color: isDark ? "#000" : "#fff" }]}>Next</Text>
+          <Text style={[styles.nextButtonText, { color: isDark ? "#000" : "#fff" }]}>İleri</Text>
           <MaterialCommunityIcons name="arrow-right" size={20} color={isDark ? "#000" : "#fff"} />
         </TouchableOpacity>
       </ScrollView>

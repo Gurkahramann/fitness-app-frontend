@@ -3,6 +3,9 @@ import { getAccessToken, getRefreshToken, saveTokens,removeTokens } from "./toke
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
+let isRefreshing = false;
+let refreshPromise: Promise<string | null> | null = null;
+
 export const isTokenExpired = (token: string): boolean => {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
@@ -15,28 +18,44 @@ export const isTokenExpired = (token: string): boolean => {
   export const renewTokenIfNeeded = async (onForceLogout?: () => void): Promise<string | null> => {
     let accessToken = await getAccessToken();
     if (!accessToken || isTokenExpired(accessToken)) {
-      const refreshToken = await getRefreshToken();
-      if (!refreshToken) return null;
-  
-      const res = await fetch(`${apiUrl}/auth/refresh-token`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ refreshToken }),
-      });
-  
-      if (res.status === 403) {
-        await removeTokens();
-        if (onForceLogout) onForceLogout();
-        return null;
+      if (isRefreshing && refreshPromise) {
+        return refreshPromise;
       }
-  
-      if (!res.ok) return null;
-  
-      const data = await res.json();
-      accessToken = data.accessToken;
-      if (accessToken && refreshToken) {
-        await saveTokens(accessToken, refreshToken);
-      }
+      isRefreshing = true;
+      refreshPromise = (async () => {
+        const refreshToken = await getRefreshToken();
+        if (!refreshToken) {
+          isRefreshing = false;
+          refreshPromise = null;
+          return null;
+        }
+        const res = await fetch(`${apiUrl}/auth/refresh-token`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ refreshToken }),
+        });
+        if (res.status === 403) {
+          await removeTokens();
+          if (onForceLogout) onForceLogout();
+          isRefreshing = false;
+          refreshPromise = null;
+          return null;
+        }
+        if (!res.ok) {
+          isRefreshing = false;
+          refreshPromise = null;
+          return null;
+        }
+        const data = await res.json();
+        accessToken = data.accessToken;
+        if (accessToken && refreshToken) {
+          await saveTokens(accessToken, refreshToken);
+        }
+        isRefreshing = false;
+        refreshPromise = null;
+        return accessToken;
+      })();
+      return refreshPromise;
     }
     return accessToken;
   };

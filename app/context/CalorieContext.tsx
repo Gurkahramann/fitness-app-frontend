@@ -16,18 +16,15 @@ export const CalorieProvider = ({ children }: { children: React.ReactNode }) => 
   const [loading, setLoading] = useState(false);
 
   const fetchUserInfo = async () => {
-    if (!user || !user.id) {
-      console.error("⛔ Kullanıcı ID'si tanımsız. fetchUserInfo çalıştırılmadı.");
-      return;
-    }
-
     setLoading(true);
     try {
-      const res = await authFetch(`${process.env.EXPO_PUBLIC_SPRING_API}/auth/userinfo`);
+      const res = await authFetch(`${process.env.EXPO_PUBLIC_SPRING_API}/auth/me`);
       const data = await res.json();
-
+  
+      console.log("Backend'den dönen veri:", data);
+  
       if (!res.ok) throw new Error(data.message || "Kullanıcı verisi alınamadı");
-
+  
       const calorie = calculateCalorieNeeds(
         data.gender,
         data.weight,
@@ -36,7 +33,7 @@ export const CalorieProvider = ({ children }: { children: React.ReactNode }) => 
         data.activityLevel,
         data.goal
       );
-
+  
       setCalorieGoal(calorie);
     } catch (error) {
       console.error("🔥 Kalori verisi alınamadı:", error);
@@ -46,14 +43,14 @@ export const CalorieProvider = ({ children }: { children: React.ReactNode }) => 
   };
 
   useEffect(() => {
-    if (user?.id) {
-      console.log("✅ Kullanıcı ID bulundu, fetch başlatılıyor:", user.id);
+    if (user) {
+      console.log("✅ Kullanıcı bulundu, fetch başlatılıyor:", user);
       fetchUserInfo();
     } else {
-      console.log("⏭️ Kullanıcı ID yok, fetchUserInfo atlanıyor.");
+      console.log("⏭️ Kullanıcı yok, fetchUserInfo atlanıyor.");
       setLoading(false);
     }
-  }, [user?.id]);
+  }, [user]);
 
   return (
     <CalorieContext.Provider value={{ calorieGoal, loading }}>

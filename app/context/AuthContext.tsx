@@ -53,9 +53,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const loadUser = async () => {
+      setIsLoading(true);
       const token = await getAccessToken();
-      if (!token) return;
-
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
       try {
         const response = await authFetch(`${springUrl}/auth/me`, { method: "GET" });
         const userData = await response.json();
@@ -64,9 +67,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
       } catch (err) {
         console.log("🚫 Kullanıcı bilgisi yüklenemedi:", err);
+      } finally {
+        setIsLoading(false);
       }
     };
-
     loadUser();
   }, []);
 

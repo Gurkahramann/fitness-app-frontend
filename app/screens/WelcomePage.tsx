@@ -40,10 +40,8 @@ export default function WelcomePage() {
 
         {/* Hero Section */}
         <View style={styles.heroSection}>
-          <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Transform Your Body</Text>
-          <Text style={[styles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>
-            Stay in shape, stay healthy with personalized workouts and nutrition plans
-          </Text>
+          <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Vücudunu Dönüştür</Text>
+          <Text style={[styles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>Kişiselleştirilmiş antrenman ve beslenme planlarıyla formda ve sağlıklı kal</Text>
         </View>
 
         {/* Feature Highlights */}
@@ -56,7 +54,7 @@ export default function WelcomePage() {
                 color={isDark ? "#fff" : "#000"}
                 style={styles.featureIcon}
               />
-              <Text style={[styles.featureText, { color: isDark ? "#fff" : "#000" }]}>Workout Plans</Text>
+              <Text style={[styles.featureText, { color: isDark ? "#fff" : "#000" }]}>Antrenman Planları</Text>
             </View>
 
             <View style={[styles.featureItem, { backgroundColor: isDark ? "#1e1e1e" : "#fff" }]}>
@@ -66,11 +64,11 @@ export default function WelcomePage() {
                 color={isDark ? "#fff" : "#000"}
                 style={styles.featureIcon}
               />
-              <Text style={[styles.featureText, { color: isDark ? "#fff" : "#000" }]}>Nutrition Tracking</Text>
+              <Text style={[styles.featureText, { color: isDark ? "#fff" : "#000" }]}>Beslenme Takibi</Text>
             </View>
           </View>
 
-          <View style={styles.featureRow}>
+          <View style={[styles.featureRow, { justifyContent: "center" }]}>
             <View style={[styles.featureItem, { backgroundColor: isDark ? "#1e1e1e" : "#fff" }]}>
               <MaterialCommunityIcons
                 name="chart-line"
@@ -78,17 +76,7 @@ export default function WelcomePage() {
                 color={isDark ? "#fff" : "#000"}
                 style={styles.featureIcon}
               />
-              <Text style={[styles.featureText, { color: isDark ? "#fff" : "#000" }]}>Progress Stats</Text>
-            </View>
-
-            <View style={[styles.featureItem, { backgroundColor: isDark ? "#1e1e1e" : "#fff" }]}>
-              <MaterialCommunityIcons
-                name="account-group"
-                size={24}
-                color={isDark ? "#fff" : "#000"}
-                style={styles.featureIcon}
-              />
-              <Text style={[styles.featureText, { color: isDark ? "#fff" : "#000" }]}>Community Support</Text>
+              <Text style={[styles.featureText, { color: isDark ? "#fff" : "#000" }]}>İlerleme İstatistikleri</Text>
             </View>
           </View>
         </View>
@@ -99,14 +87,14 @@ export default function WelcomePage() {
             style={[styles.primaryButton, { backgroundColor: isDark ? "#fff" : "#000" }]}
             onPress={() => router.push("/signup")}
           >
-            <Text style={[styles.primaryButtonText, { color: isDark ? "#000" : "#fff" }]}>Sign Up</Text>
+            <Text style={[styles.primaryButtonText, { color: isDark ? "#000" : "#fff" }]}>Kayıt Ol</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[styles.secondaryButton, { borderColor: isDark ? "#fff" : "#000" }]}
             onPress={() => router.push("/login")}
           >
-            <Text style={[styles.secondaryButtonText, { color: isDark ? "#fff" : "#000" }]}>Login</Text>
+            <Text style={[styles.secondaryButtonText, { color: isDark ? "#fff" : "#000" }]}>Giriş Yap</Text>
           </TouchableOpacity>
         </View>
       </View>

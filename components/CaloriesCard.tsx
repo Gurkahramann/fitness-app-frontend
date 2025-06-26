@@ -1,3 +1,4 @@
+import React from "react"
 import { View, Text, StyleSheet, useColorScheme } from "react-native"
 import { AnimatedCircularProgress } from "react-native-circular-progress"
 
@@ -17,8 +18,8 @@ export default function CaloriesCard({ remaining, goal, consumed }: CaloriesCard
 
   return (
     <View style={[styles.container, { backgroundColor: isDark ? "#222" : "#fff" }]}>
-      <Text style={[styles.title, { color: textColor }]}>Calories</Text>
-      <Text style={[styles.subtitle, { color: subTextColor }]}>Remaining = Goal - Food</Text>
+      <Text style={[styles.title, { color: textColor }]}>Kaloriler</Text>
+      <Text style={[styles.subtitle, { color: subTextColor }]}>Kalan = Hedef - Alınan</Text>
 
       <View style={styles.progressContainer}>
         <AnimatedCircularProgress
@@ -33,7 +34,7 @@ export default function CaloriesCard({ remaining, goal, consumed }: CaloriesCard
           {() => (
             <View style={styles.progressContent}>
               <Text style={[styles.remainingValue, { color: textColor }]}>{remaining.toLocaleString()}</Text>
-              <Text style={[styles.remainingLabel, { color: subTextColor }]}>Remaining</Text>
+              <Text style={[styles.remainingLabel, { color: subTextColor }]}>Kalan</Text>
             </View>
           )}
         </AnimatedCircularProgress>
@@ -42,11 +43,11 @@ export default function CaloriesCard({ remaining, goal, consumed }: CaloriesCard
       <View style={styles.statsContainer}>
         <View style={styles.statItem}>
           <Text style={[styles.statValue, { color: textColor }]}>{goal.toLocaleString()}</Text>
-          <Text style={[styles.statLabel, { color: subTextColor }]}>Goal</Text>
+          <Text style={[styles.statLabel, { color: subTextColor }]}>Hedef</Text>
         </View>
         <View style={styles.statItem}>
           <Text style={[styles.statValue, { color: textColor }]}>{consumed.toLocaleString()}</Text>
-          <Text style={[styles.statLabel, { color: subTextColor }]}>Food</Text>
+          <Text style={[styles.statLabel, { color: subTextColor }]}>Alınan</Text>
         </View>
       </View>
     </View>

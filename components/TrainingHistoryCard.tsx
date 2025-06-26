@@ -2,57 +2,78 @@
 
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
-import React from "react"
+import React, { useEffect, useState } from "react"
+import { useAuth } from "../app/context/AuthContext"
+import { useExercises, WeeklyWorkoutHistoryItem } from "../app/context/ExerciseContext"
 
 interface TrainingHistoryCardProps {
   isDark: boolean
 }
 
 export default function TrainingHistoryCard({ isDark }: TrainingHistoryCardProps) {
-  // Mock training history data
-  const trainingHistory = [
-    {
-      id: "1",
-      type: "Cardio",
-      name: "Koşu",
-      date: "8 May",
-      duration: "30 dk",
-      calories: 320,
-    },
-    {
-      id: "2",
-      type: "Strength",
-      name: "Üst Vücut",
-      date: "6 May",
-      duration: "45 dk",
-      calories: 280,
-    },
-    {
-      id: "3",
-      type: "Flexibility",
-      name: "Yoga",
-      date: "4 May",
-      duration: "60 dk",
-      calories: 180,
-    },
-  ]
+  const { user } = useAuth();
+  const { getWeeklyHistory } = useExercises();
+  const [history, setHistory] = useState<WeeklyWorkoutHistoryItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  function getMondayOfCurrentWeek() {
+    const now = new Date();
+    const day = now.getDay();
+    const diff = now.getDate() - day + (day === 0 ? -6 : 1);
+    const monday = new Date(now.setDate(diff));
+    monday.setHours(0, 0, 0, 0);
+    return monday.toISOString().split('T')[0];
+  }
+
+  useEffect(() => {
+    (async () => {
+      if (!user?.id) return;
+      setLoading(true);
+      setError(null);
+      try {
+        const weekStart = getMondayOfCurrentWeek();
+        const data = await getWeeklyHistory(user.id, weekStart);
+        setHistory(data);
+      } catch (err: any) {
+        setError(err.message || "Bilinmeyen hata");
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [user?.id]);
 
   // Get icon based on training type
   const getTrainingIcon = (type: string) => {
-    switch (type) {
-      case "Cardio":
+    switch (type.toLowerCase()) {
+      case "cardio":
         return "run"
-      case "Strength":
+      case "strength":
         return "weight-lifter"
-      case "Flexibility":
+      case "flexibility":
         return "yoga"
       default:
         return "dumbbell"
     }
   }
 
+  if (loading) {
+    return (
+      <View style={[styles.container, { backgroundColor: isDark ? "#222" : "#fff" }]}> 
+        <Text style={{ color: isDark ? "#fff" : "#000", textAlign: "center" }}>Yükleniyor...</Text>
+      </View>
+    );
+  }
+  if (error) {
+    return (
+      <View style={[styles.container, { backgroundColor: isDark ? "#222" : "#fff" }]}> 
+        <Text style={{ color: "red", textAlign: "center" }}>{error}</Text>
+      </View>
+    );
+  }
+
   return (
-    <View style={[styles.container, { backgroundColor: isDark ? "#222" : "#fff" }]}>
+    <View style={[styles.container, { backgroundColor: isDark ? "#222" : "#fff" }]}> 
       <View style={styles.header}>
         <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Antrenman Geçmişi</Text>
         <TouchableOpacity>
@@ -61,22 +82,22 @@ export default function TrainingHistoryCard({ isDark }: TrainingHistoryCardProps
       </View>
 
       <FlatList
-        data={trainingHistory}
-        keyExtractor={(item) => item.id}
+        data={history}
+        keyExtractor={(_, idx) => idx.toString()}
         renderItem={({ item }) => (
-          <View style={[styles.trainingItem, { borderBottomColor: isDark ? "#333" : "#eee" }]}>
-            <View style={[styles.iconContainer, { backgroundColor: isDark ? "#333" : "#f5f5f5" }]}>
-              <MaterialCommunityIcons name={getTrainingIcon(item.type)} size={24} color="#3DCC85" />
+          <View style={[styles.trainingItem, { borderBottomColor: isDark ? "#333" : "#eee" }]}> 
+            <View style={[styles.iconContainer, { backgroundColor: isDark ? "#333" : "#f5f5f5" }]}> 
+              <MaterialCommunityIcons name={getTrainingIcon(item.exerciseType)} size={24} color="#3DCC85" />
             </View>
             <View style={styles.trainingDetails}>
               <View style={styles.trainingHeader}>
-                <Text style={[styles.trainingName, { color: isDark ? "#fff" : "#000" }]}>{item.name}</Text>
+                <Text style={[styles.trainingName, { color: isDark ? "#fff" : "#000" }]}>{item.exerciseName}</Text>
                 <Text style={[styles.trainingDate, { color: isDark ? "#aaa" : "#666" }]}>{item.date}</Text>
               </View>
               <View style={styles.trainingStats}>
                 <View style={styles.statItem}>
                   <MaterialCommunityIcons name="clock-outline" size={14} color={isDark ? "#aaa" : "#666"} />
-                  <Text style={[styles.statText, { color: isDark ? "#aaa" : "#666" }]}>{item.duration}</Text>
+                  <Text style={[styles.statText, { color: isDark ? "#aaa" : "#666" }]}>{item.durationMinutes} dk</Text>
                 </View>
                 <View style={styles.statItem}>
                   <MaterialCommunityIcons name="fire" size={14} color={isDark ? "#aaa" : "#666"} />
@@ -89,7 +110,7 @@ export default function TrainingHistoryCard({ isDark }: TrainingHistoryCardProps
         scrollEnabled={false}
       />
 
-      <TouchableOpacity style={[styles.viewAllButton, { backgroundColor: isDark ? "#333" : "#f5f5f5" }]}>
+      <TouchableOpacity style={[styles.viewAllButton, { backgroundColor: isDark ? "#333" : "#f5f5f5" }]}> 
         <Text style={[styles.viewAllText, { color: isDark ? "#fff" : "#000" }]}>Tümünü Görüntüle</Text>
       </TouchableOpacity>
     </View>

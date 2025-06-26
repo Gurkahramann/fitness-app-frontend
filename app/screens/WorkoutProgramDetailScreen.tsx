@@ -56,36 +56,66 @@ import { useAuth } from "../context/AuthContext"
   const WorkoutProgramDetailScreen = () => {
     
     const isDark = useColorScheme() === "dark"
-    const { workoutPrograms, loading: programsLoading } = useWorkoutPrograms();
+    const { workoutPrograms, loading: programsLoading, fetchUserCustomWorkoutPrograms, userCustomWorkoutPrograms } = useWorkoutPrograms();
     const { exercises, loading: exercisesLoading } = useExercises();
     const { user } = useAuth();
     const router = useRouter()
-    const { id } = useLocalSearchParams()
+    const { id , type } = useLocalSearchParams()
     const [selectedExercise, setSelectedExercise] = useState<any>(null)
     const [isModalVisible, setIsModalVisible] = useState(false)
     const [editModalVisible, setEditModalVisible] = useState(false)
-    const isThreeDayProgram = WORKOUT_PROGRAMS.find(p => p.id.toString() === id)?.days.length === 3 || WORKOUT_PROGRAMS[0].days.length === 3
+    const [customProgram, setCustomProgram] = useState<any>(null);
+    const [customLoading, setCustomLoading] = useState(false);
     const [selectedDay, setSelectedDay] = useState<any>(null);
     const [daysState, setDaysState] = useState<any[]>([]);
 
     // Programı bul
-    const workoutData = useMemo(
-      () => workoutPrograms.find(p => p.id.toString() === id),
-      [workoutPrograms, id]
-    );
+    const workoutData = useMemo(() => {
+      if (type === "custom") {
+        return userCustomWorkoutPrograms.find(p => p.id?.toString() === id);
+      } else {
+        return workoutPrograms.find(p => p.id.toString() === id);
+      }
+    }, [workoutPrograms, userCustomWorkoutPrograms, id, type]);
 
-    // Programdaki egzersizleri bul (id dizisi ise context'ten bul)
+    // Programdaki egzersizleri bul
     const programExercises = useMemo(() => {
       if (!workoutData) return [];
-      // Eğer exercises bir dizi id ise:
-      if (Array.isArray(workoutData.exercises) && typeof workoutData.exercises[0] === "number") {
-        return workoutData.exercises
-          .map(eid => exercises.find(e => e.id === eid))
-          .filter(Boolean);
+      if (type === "custom") {
+        // Custom programda günlerdeki exerciseId'leri topla
+        const exerciseIds = (workoutData.days || [])
+          .flatMap((day: any) => (day.exerciseEntries || []).map((entry: any) => entry.exerciseId));
+        // Tekrarları kaldır
+        const uniqueIds = Array.from(new Set(exerciseIds));
+        return uniqueIds
+          .map((eid: any) => exercises.find(e => String(e.id) === String(eid)))
+          .filter((e: Exercise | undefined): e is Exercise => !!e && e.id !== undefined);
+      } else {
+        // Sadece hazır programlarda exercises alanı var
+        const readyProgram = workoutData as any;
+        if (Array.isArray(readyProgram.exercises) && typeof readyProgram.exercises[0] === "number") {
+          return readyProgram.exercises
+            .map((eid: any) => exercises.find(e => String(e.id) === String(eid)))
+            .filter((e: Exercise | undefined): e is Exercise => !!e && e.id !== undefined);
+        }
+        return (readyProgram.exercises || []).filter((e: Exercise | undefined) => e && e.id !== undefined);
       }
-      // Eğer exercises doğrudan egzersiz objeleri ise:
-      return workoutData.exercises || [];
-    }, [workoutData, exercises]);
+    }, [workoutData, exercises, type]);
+
+    React.useEffect(() => {
+      console.log("--- WorkoutProgramDetailScreen ---");
+      console.log("Program Data:", JSON.stringify(workoutData, null, 2));
+      console.log("All Exercises (from context):", JSON.stringify(exercises.map(e => ({id: e.id, name: e.name})), null, 2));
+      console.log("Filtered Exercises for this Program:", JSON.stringify(programExercises, null, 2));
+      console.log("---------------------------------");
+    }, [programExercises, workoutData, exercises]);
+
+    React.useEffect(() => {
+      if (type === "custom") {
+        setCustomLoading(true);
+        fetchUserCustomWorkoutPrograms(user?.id || "");
+      }
+    }, [type, id]);
 
     React.useEffect(() => {
       if (workoutData) {
@@ -157,7 +187,7 @@ import { useAuth } from "../context/AuthContext"
           <FlatList
             data={programExercises}
             renderItem={renderExerciseItem}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item, index) => item && item.id !== undefined ? String(item.id) : String(index)}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.exercisesList}
           />
@@ -194,7 +224,8 @@ import { useAuth } from "../context/AuthContext"
           days={workoutData.days || []}
           exercises={programExercises as any}
           userId={user?.id || "user123"}
-          workoutProgramId={workoutData.id}
+          programId={Number(workoutData.id) || 0}
+          programType={type === "custom" ? "custom" : "default"}
         />
       </SafeAreaView>
     )

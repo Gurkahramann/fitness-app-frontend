@@ -1,14 +1,17 @@
 "use client"
 
-import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet, useColorScheme } from "react-native"
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, useColorScheme } from "react-native"
 import { useRouter } from "expo-router"
 import React from "react"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { Image as ExpoImage } from "expo-image"
 
-type WorkoutProgram = {
+export type WorkoutProgram = {
   id: string
   title: string
   image: string
+  type?: string // custom or default
+  onDelete?: () => void
 }
 
 type WorkoutProgramsCardProps = {
@@ -16,50 +19,67 @@ type WorkoutProgramsCardProps = {
   programs: WorkoutProgram[];
   showCreate?: boolean;
   onViewAllPress?: () => void;
+  onProgramPress?: (program: WorkoutProgram) => void;
 }
 
-export default function WorkoutProgramsCard({ title, programs, showCreate = true, onViewAllPress }: WorkoutProgramsCardProps) {
+export default function WorkoutProgramsCard({ title, programs, showCreate = true, onViewAllPress, onProgramPress }: WorkoutProgramsCardProps) {
   const isDark = useColorScheme() === "dark"
   const router = useRouter()
-  const handleProgramPress = (programId: string) => {
-    router.push({
-      pathname: "/workout-detail",
-      params: { id: programId }
-    })
+  const handleProgramPress = (program: WorkoutProgram) => {
+    if (onProgramPress) {
+      onProgramPress(program);
+    }
   }
 
   const handleCreatePress = () => {
     router.push("/create-program")
   }
 
+  // Eğer tüm programlar custom ise showCreate'i false yap
+  const isCustomList = programs.length > 0 && programs.every(p => p.type === "custom");
+  const shouldShowCreate = showCreate && !isCustomList; 
+
   return (
     <View style={[styles.container, { backgroundColor: isDark ? "#222" : "#fff" }]}>
       <View style={styles.header}>
         <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>{title}</Text>
-        {onViewAllPress && (
-          <TouchableOpacity onPress={onViewAllPress}>
-            <Text style={[styles.viewAllText, { color: "#3DCC85" }]}>View All</Text>
-          </TouchableOpacity>
-        )}
+        
       </View>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.programsContainer}>
-        {showCreate && (
+        {shouldShowCreate && (
           <TouchableOpacity style={[styles.programCard, styles.createCard]} onPress={handleCreatePress}>
             <View style={styles.createIconContainer}>
               <MaterialCommunityIcons name="plus" size={40} color="#3DCC85" />
             </View>
             <View style={styles.programTitleContainer}>
-              <Text style={styles.createText}>Create Your Own{"\n"}Program</Text>
+              <Text style={styles.createText}>Kendi Antrenman Programını{"\n"}Oluştur</Text>
             </View>
           </TouchableOpacity>
         )}
         {programs.map((program) => (
-          <TouchableOpacity key={program.id} style={styles.programCard} onPress={() => handleProgramPress(program.id)}>
-            <Image source={{ uri: program.image }} style={styles.programImage} resizeMode="cover" />
-            <View style={styles.programTitleContainer}>
+          <TouchableOpacity key={program.id} style={styles.programCard} onPress={() => handleProgramPress(program)}>
+              <ExpoImage
+              source={{ uri: program.image }}
+              style={{ width: 120, height: 160, backgroundColor: 'red' }}
+              contentFit="cover"
+              onError={() => console.log('Görsel yüklenemedi:', program.image)}
+              onLoad={() => console.log('Görsel yüklendi:', program.image)}
+            />
+                      <View style={styles.programTitleContainer}>
               <Text style={styles.programTitle}>{program.title}</Text>
             </View>
+            {program.onDelete && (
+              <TouchableOpacity 
+                style={styles.deleteButton}
+                onPress={(e) => {
+                  e.stopPropagation();
+                  program.onDelete?.();
+                }}
+              >
+                <MaterialCommunityIcons name="delete" size={20} color="#fff" />
+              </TouchableOpacity>
+            )}
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -142,5 +162,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginTop: 8,
+  },
+  deleteButton: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    backgroundColor: 'rgba(255, 0, 0, 0.7)',
+    borderRadius: 12,
+    padding: 4,
   },
 })

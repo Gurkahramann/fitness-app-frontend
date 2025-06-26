@@ -33,53 +33,28 @@ export const UserProfileProvider = ({ children }: { children: ReactNode }) => {
   const [error, setError] = useState<string | null>(null)
   const { user } = useAuth(); // AuthContext'ten user'ı al
 
-  const fetchProfile = async () => {
-    setLoading(true)
-    setError(null)
-    try {
-      const token = await getAccessToken()
-      console.log("token", token)
-      if (!token) {
-        // Kullanıcı giriş yapmamış, fetch atlanıyor
-        setLoading(false);
-        setError(null);
-        return;
-      }
-      const baseUrl = process.env.EXPO_PUBLIC_SPRING_API
-      const [meRes, userInfoRes] = await Promise.all([
-        authFetch(`${baseUrl}/auth/me`, { method: "GET" }),
-        authFetch(`${baseUrl}/auth/userinfo`, { method: "GET" }),
-      ])
-
-      if (!meRes.ok || !userInfoRes.ok) {
-        throw new Error("Failed to fetch user profile data.")
-      }
-
-      const me = await meRes.json()
-      const userInfo = await userInfoRes.json()
-
-      console.log("User data fetched:", { me, userInfo })
-
-      setUserProfile({
-        ...me,
-        ...userInfo,
-        profileImage: "https://via.placeholder.com/150", // Default image
-      })
-    } catch (err: any) {
-      console.error("Profile fetch error:", err, "Base URL:", process.env.EXPO_PUBLIC_SPRING_API)
-      setError(err.message || "Unknown error")
-      setUserProfile(null)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   useEffect(() => {
-    fetchProfile()
-  }, [user])
+    setLoading(true);
+    if (user) {
+      setUserProfile({
+        ...user,
+        goal: user.fitnessGoal, // Eşleşme
+      });
+      setError(null);
+    } else {
+      setUserProfile(null);
+    }
+    setLoading(false);
+  }, [user]);
+
+
+  const refetch = () => {
+    // AuthContext'teki kullanıcı verisi yenilendiğinde burası tetiklenir.
+    // Şimdilik boş bırakılabilir veya AuthContext'e bir refetch fonksiyonu eklenip o çağrılabilir.
+  };
 
   return (
-    <UserProfileContext.Provider value={{ userProfile, loading, error, refetch: fetchProfile }}>
+    <UserProfileContext.Provider value={{ userProfile, loading, error, refetch }}>
       {children}
     </UserProfileContext.Provider>
   )

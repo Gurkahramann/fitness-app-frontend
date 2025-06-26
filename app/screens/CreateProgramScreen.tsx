@@ -12,6 +12,8 @@ import {
   Alert,
   Modal,
   Image,
+  FlatList,
+  Dimensions,
 } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useRouter } from "expo-router"
@@ -19,6 +21,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"
 import React from "react"
 import { useToast, ToastProvider } from "../context/ToastContext"
 import { useExercises, Exercise } from "../context/ExerciseContext"
+import { useWorkoutPrograms } from "../context/WorkoutProgramContext"
+import { useAuth } from "../context/AuthContext"
 
 import { LinearGradient } from "expo-linear-gradient"
 import Toast from "@/components/Toast"
@@ -46,6 +50,8 @@ export default function CreateProgramScreen() {
   const router = useRouter()
   const { showToast } = useToast()
   const { exercises, loading: exercisesLoading } = useExercises()
+  const { createCustomWorkoutProgram } = useWorkoutPrograms()
+  const { user } = useAuth()
 
   const [programName, setProgramName] = useState("")
   const [programDescription, setProgramDescription] = useState("")
@@ -60,15 +66,15 @@ export default function CreateProgramScreen() {
   const exerciseCategories = useMemo(() => {
     const categoriesMap: { [key: string]: { id: string, name: string, icon: string, color: string, exercises: typeof exercises } } = {}
     const categoryMeta = [
-      { id: "chest", name: "Chest", icon: "💪", color: "#FF6B6B" },
-      { id: "back", name: "Back", icon: "🏋️", color: "#4ECDC4" },
-      { id: "shoulders", name: "Shoulders", icon: "🤸", color: "#45B7D1" },
-      { id: "legs", name: "Legs", icon: "🦵", color: "#96CEB4" },
-      { id: "core", name: "Core", icon: "🎯", color: "#FECA57" },
-      { id: "cardio", name: "Cardio", icon: "❤️", color: "#FF9FF3" },
+      { id: "chest", name: "Göğüs", icon: "💪", color: "#FF6B6B" },
+      { id: "back", name: "Sırt", icon: "🏋️", color: "#4ECDC4" },
+      { id: "shoulders", name: "Omuz", icon: "🤸", color: "#45B7D1" },
+      { id: "legs", name: "Bacak", icon: "🦵", color: "#96CEB4" },
+      { id: "core", name: "Karın", icon: "🎯", color: "#FECA57" },
+      { id: "cardio", name: "Kardiyo", icon: "❤️", color: "#FF9FF3" },
       { id: "triceps", name: "Triceps", icon: "💥", color: "#54A0FF" },
       { id: "biceps", name: "Biceps", icon: "💪", color: "#5F27CD" },
-      { id: "fullbody", name: "Full Body", icon: "🔥", color: "#00D2D3" },
+      { id: "fullbody", name: "Tüm Vücut", icon: "🔥", color: "#00D2D3" },
     ]
     categoryMeta.forEach(meta => {
       categoriesMap[meta.id] = { ...meta, exercises: [] }
@@ -141,18 +147,54 @@ export default function CreateProgramScreen() {
     })
   }
 
-  const saveProgram = () => {
+  const saveProgram = async () => {
     if (!programName.trim()) {
       showToast("Please enter a program name", "error")
       return
     }
-
     if (Object.keys(exercisesByDay).length === 0) {
       Alert.alert("Error", "Please add at least one exercise")
       return
     }
-
-    Alert.alert("Success", "Your custom program has been created!", [{ text: "OK", onPress: () => router.back() }])
+    if (!user?.id) {
+      showToast("Kullanıcı bulunamadı", "error");
+      return;
+    }
+    // CustomWorkoutProgram payload
+    const days: any[] = [];
+    for (let week = 1; week <= weeks; week++) {
+      if (!exercisesByDay[week]) continue;
+      for (const dayNum of Object.keys(exercisesByDay[week])) {
+        const dayExercises = exercisesByDay[week][Number(dayNum)];
+        if (!dayExercises || dayExercises.length === 0) continue;
+        days.push({
+          dayOfWeek: Number(dayNum),
+          exerciseEntries: dayExercises.map((ex, idx) => ({
+            orderIndex: idx + 1,
+            exerciseId: ex.id
+          }))
+        });
+      }
+    }
+    const payload = {
+      userId: user.id,
+      title: programName,
+      description: programDescription,
+      durationWeeks: weeks,
+      tags: [], // İstersen tag ekleyebilirsin
+      coverImageUrl: "https://storage.googleapis.com/fitness-app-photos/UserCover.jpg", // İstersen ekleyebilirsin
+      days
+    };
+    try {
+      console.log("[CreateProgramScreen] Sending payload:", payload);
+      const response = await createCustomWorkoutProgram(payload);
+      console.log("[CreateProgramScreen] API response:", response);
+      showToast("Program başarıyla kaydedildi!", "success");
+      router.back();
+    } catch (err: any) {
+      console.error("[CreateProgramScreen] Error while saving program:", err);
+      showToast(err.message || "Program kaydedilemedi", "error");
+    }
   }
 
   const selectedCategoryData = selectedCategory ? exerciseCategories.find((cat) => cat.id === selectedCategory) : null
@@ -186,10 +228,16 @@ export default function CreateProgramScreen() {
     }, 300)
   }
 
+  const CARD_MARGIN = 10;
+  const numColumns = 2;
+  const screenWidth = Dimensions.get("window").width;
+  const cardWidth = (screenWidth - 80 - CARD_MARGIN * (numColumns + 1)) / numColumns;
+  const cardHeight = 110; // Kart yüksekliğini küçülttüm
+
   if (exercisesLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Loading exercises...</Text>
+        <Text>Egzersizler yükleniyor...</Text>
       </View>
     )
   }
@@ -204,11 +252,11 @@ export default function CreateProgramScreen() {
               <MaterialCommunityIcons name="arrow-left" size={20} color={isDark ? "#fff" : "#334155"} />
             </View>
           </TouchableOpacity>
-          <Text style={[styles.headerTitle, { color: isDark ? "#fff" : "#1E293B" }]}>Create Program</Text>
+          <Text style={[styles.headerTitle, { color: isDark ? "#fff" : "#1E293B" }]}>Program Oluştur</Text>
           <TouchableOpacity onPress={saveProgram} style={styles.saveButton}>
             <LinearGradient colors={["#3DCC85", "#2ECC71"]} style={styles.saveButtonGradient}>
               <MaterialCommunityIcons name="check" size={16} color="#fff" />
-              <Text style={styles.saveButtonText}>Save</Text>
+              <Text style={styles.saveButtonText}>Kaydet</Text>
             </LinearGradient>
           </TouchableOpacity>
         </LinearGradient>
@@ -220,11 +268,11 @@ export default function CreateProgramScreen() {
               <View style={[styles.sectionIconContainer, { backgroundColor: "#3DCC85" }]}>
                 <MaterialCommunityIcons name="information" size={20} color="#fff" />
               </View>
-              <Text style={[styles.modernSectionTitle, { color: isDark ? "#fff" : "#1E293B" }]}>Program Information</Text>
+              <Text style={[styles.modernSectionTitle, { color: isDark ? "#fff" : "#1E293B" }]}>Program Bilgileri</Text>
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={[styles.inputLabel, { color: isDark ? "#94A3B8" : "#64748B" }]}>Program Name</Text>
+              <Text style={[styles.inputLabel, { color: isDark ? "#94A3B8" : "#64748B" }]}>Program Adı</Text>
               <TextInput
                 style={[
                   styles.modernInput,
@@ -234,7 +282,7 @@ export default function CreateProgramScreen() {
                     borderColor: isDark ? "#374151" : "#E2E8F0",
                   },
                 ]}
-                placeholder="Enter your program name"
+                placeholder="Program adınızı girin"
                 placeholderTextColor={isDark ? "#6B7280" : "#94A3B8"}
                 value={programName}
                 onChangeText={setProgramName}
@@ -242,7 +290,7 @@ export default function CreateProgramScreen() {
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={[styles.inputLabel, { color: isDark ? "#94A3B8" : "#64748B" }]}>Description</Text>
+              <Text style={[styles.inputLabel, { color: isDark ? "#94A3B8" : "#64748B" }]}>Açıklama</Text>
               <TextInput
                 style={[
                   styles.modernTextArea,
@@ -252,7 +300,7 @@ export default function CreateProgramScreen() {
                     borderColor: isDark ? "#374151" : "#E2E8F0",
                   },
                 ]}
-                placeholder="Describe your program goals and structure"
+                placeholder="Program hedeflerinizi ve yapısını açıklayın"
                 placeholderTextColor={isDark ? "#6B7280" : "#94A3B8"}
                 value={programDescription}
                 onChangeText={setProgramDescription}
@@ -268,12 +316,12 @@ export default function CreateProgramScreen() {
               <View style={[styles.sectionIconContainer, { backgroundColor: "#8B5CF6" }]}>
                 <MaterialCommunityIcons name="calendar-clock" size={20} color="#fff" />
               </View>
-              <Text style={[styles.modernSectionTitle, { color: isDark ? "#fff" : "#1E293B" }]}>Program Schedule</Text>
+              <Text style={[styles.modernSectionTitle, { color: isDark ? "#fff" : "#1E293B" }]}>Program Takvimi</Text>
             </View>
 
             {/* Week Selection */}
             <View style={styles.scheduleContainer}>
-              <Text style={[styles.scheduleLabel, { color: isDark ? "#E2E8F0" : "#475569" }]}>Duration</Text>
+              <Text style={[styles.scheduleLabel, { color: isDark ? "#E2E8F0" : "#475569" }]}>Süre</Text>
               <View style={styles.weekSelector}>
                 {[1, 2, 3, 4].map((w) => (
                   <TouchableOpacity
@@ -290,7 +338,7 @@ export default function CreateProgramScreen() {
                     <Text
                       style={[styles.weekButtonText, { color: weeks === w ? "#fff" : isDark ? "#E2E8F0" : "#64748B" }]}
                     >
-                      {w} Week{w > 1 ? "s" : ""}
+                      {w} Hafta{w > 1 ? "" : ""}
                     </Text>
                   </TouchableOpacity>
                 ))}
@@ -301,10 +349,10 @@ export default function CreateProgramScreen() {
             {[...Array(weeks)].map((_, weekIdx) => (
               <View key={weekIdx} style={styles.weekContainer}>
                 <View style={styles.weekHeader}>
-                  <Text style={[styles.weekTitle, { color: isDark ? "#fff" : "#1E293B" }]}>Week {weekIdx + 1}</Text>
+                  <Text style={[styles.weekTitle, { color: isDark ? "#fff" : "#1E293B" }]}>Hafta {weekIdx + 1}</Text>
                   <View style={[styles.weekBadge, { backgroundColor: isDark ? "#374151" : "#F1F5F9" }]}>
                     <Text style={[styles.weekBadgeText, { color: isDark ? "#9CA3AF" : "#64748B" }]}>
-                      {selectedDaysPerWeek[weekIdx + 1]?.length || 0} days
+                      {selectedDaysPerWeek[weekIdx + 1]?.length || 0} gün
                     </Text>
                   </View>
                 </View>
@@ -341,18 +389,25 @@ export default function CreateProgramScreen() {
               <View style={[styles.sectionIconContainer, { backgroundColor: "#F59E0B" }]}>
                 <MaterialCommunityIcons name="dumbbell" size={20} color="#fff" />
               </View>
-              <Text style={[styles.modernSectionTitle, { color: isDark ? "#fff" : "#1E293B" }]}>Exercise Categories</Text>
+              <Text style={[styles.modernSectionTitle, { color: isDark ? "#fff" : "#1E293B" }]}>Egzersiz Kategorileri</Text>
             </View>
-
-            <View style={styles.categoriesGrid}>
-              {exerciseCategories.map((category) => (
+            <FlatList
+              data={exerciseCategories}
+              keyExtractor={item => item.id}
+              numColumns={numColumns}
+              scrollEnabled={false}
+              contentContainerStyle={{ paddingHorizontal: CARD_MARGIN / 2 }}
+              renderItem={({ item: category }) => (
                 <TouchableOpacity
-                  key={category.id}
                   style={[
                     styles.modernCategoryCard,
                     {
+                      width: cardWidth,
+                      height: cardHeight,
                       backgroundColor: selectedCategory === category.id ? category.color : isDark ? "#2A2A2A" : "#F8FAFC",
                       borderColor: category.color,
+                      margin: CARD_MARGIN / 2,
+                      padding: 10,
                     },
                   ]}
                   onPress={() => handleCategoryPress(category.id)}
@@ -360,15 +415,15 @@ export default function CreateProgramScreen() {
                   <View
                     style={[
                       styles.categoryIconContainer,
-                      { backgroundColor: selectedCategory === category.id ? "rgba(255,255,255,0.2)" : category.color },
+                      { backgroundColor: selectedCategory === category.id ? "rgba(255,255,255,0.2)" : category.color, width: 36, height: 36, borderRadius: 18, marginBottom: 8 },
                     ]}
                   >
-                    <Text style={styles.categoryIcon}>{category.icon}</Text>
+                    <Text style={[styles.categoryIcon, { fontSize: 18 }]}>{category.icon}</Text>
                   </View>
                   <Text
                     style={[
                       styles.categoryName,
-                      { color: selectedCategory === category.id ? "#fff" : isDark ? "#E2E8F0" : "#1E293B" },
+                      { color: selectedCategory === category.id ? "#fff" : isDark ? "#E2E8F0" : "#1E293B", fontSize: 13 },
                     ]}
                   >
                     {category.name}
@@ -379,14 +434,15 @@ export default function CreateProgramScreen() {
                       {
                         color:
                           selectedCategory === category.id ? "rgba(255,255,255,0.8)" : isDark ? "#9CA3AF" : "#64748B",
+                        fontSize: 11,
                       },
                     ]}
                   >
-                    {category.exercises.length} exercises
+                    {category.exercises.length} egzersiz
                   </Text>
                 </TouchableOpacity>
-              ))}
-            </View>
+              )}
+            />
           </View>
 
           {/* Exercises List */}
@@ -397,7 +453,7 @@ export default function CreateProgramScreen() {
                   <Text style={{ fontSize: 16 }}>{selectedCategoryData.icon}</Text>
                 </View>
                 <Text style={[styles.modernSectionTitle, { color: isDark ? "#fff" : "#1E293B" }]}>
-                  {selectedCategoryData.name} Exercises
+                  {selectedCategoryData.name} Egzersizleri
                 </Text>
               </View>
 
@@ -431,12 +487,11 @@ export default function CreateProgramScreen() {
                   <MaterialCommunityIcons name="format-list-bulleted" size={20} color="#fff" />
                 </View>
                 <Text style={[styles.modernSectionTitle, { color: isDark ? "#fff" : "#1E293B" }]}>
-                  Your Program (
+                  Programınız (
                   {Object.values(exercisesByDay).reduce(
                     (acc, week) => acc + Object.values(week).reduce((a, d) => a + d.length, 0),
                     0,
-                  )}{" "}
-                  exercises)
+                  )} egzersiz)
                 </Text>
               </View>
 
@@ -446,7 +501,7 @@ export default function CreateProgramScreen() {
                     <View key={weekIdx} style={styles.programWeekContainer}>
                       <View style={styles.programWeekHeader}>
                         <Text style={[styles.programWeekTitle, { color: isDark ? "#fff" : "#1E293B" }]}>
-                          Week {weekIdx + 1}
+                          {weekIdx + 1}. Hafta
                         </Text>
                       </View>
 
@@ -476,8 +531,7 @@ export default function CreateProgramScreen() {
                                       {exercise.name}
                                     </Text>
                                     <Text style={[styles.exerciseDetails, { color: isDark ? "#9CA3AF" : "#64748B" }]}>
-                                      {exercise.sets} sets ×{" "}
-                                      {exercise.reps > 0 ? `${exercise.reps} reps` : `${exercise.duration}s`}
+                                      {exercise.sets} set × {exercise.reps > 0 ? `${exercise.reps} tekrar` : `${exercise.duration}s`}
                                       {exercise.weight > 0 && ` @ ${exercise.weight}kg`}
                                     </Text>
                                   </View>

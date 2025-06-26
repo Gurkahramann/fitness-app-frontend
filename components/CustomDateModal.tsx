@@ -1,216 +1,110 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
-import { Modal, View, Text, TouchableOpacity, StyleSheet, Platform, Dimensions } from "react-native"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
-import DateTimePicker from "@react-native-community/datetimepicker"
+import React, { useState } from 'react';
+import { Modal, View, StyleSheet, TouchableOpacity, Text, useColorScheme } from 'react-native';
+import { Calendar } from 'react-native-calendars';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 interface CustomDateModalProps {
-  isVisible: boolean
-  onClose: () => void
-  onSelect: (date: string) => void
-  isDark: boolean
-  selectedDate: string
-  maxDate: string
+  visible: boolean;
+  onClose: () => void;
+  onSelectDate: (date: Date) => void;
+  initialDate: string; // 'YYYY-MM-DD'
+  mode?: 'birthdate' | 'workout'; // yeni prop
 }
-
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const CALENDAR_WIDTH = Math.min(SCREEN_WIDTH - 32, 360);
 
 const CustomDateModal: React.FC<CustomDateModalProps> = ({
-  isVisible,
+  visible,
   onClose,
-  onSelect,
-  isDark,
-  selectedDate,
-  maxDate,
+  onSelectDate,
+  initialDate,
+  mode = 'workout',
 }) => {
-  // Convert string dates to Date objects
-  const parseDate = (dateStr: string): Date => {
-    try {
-      const [year, month, day] = dateStr.split('/')
-      return new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
-    } catch (error) {
-      console.error("Error parsing date:", error)
-      return new Date()
-    }
+  const isDark = useColorScheme() === 'dark';
+  const [selected, setSelected] = useState(initialDate);
+
+  const localDate = new Date();
+  const year = localDate.getFullYear();
+  const month = (localDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = localDate.getDate().toString().padStart(2, '0');
+  const todayStr = `${year}-${month}-${day}`;
+
+  // maxDate: doğum günü için bugün, workout için yok
+  // minDate: workout için bugün, doğum günü için yok
+  const calendarProps: any = {
+    current: initialDate,
+    onDayPress: (day: any) => {
+      setSelected(day.dateString);
+      onSelectDate(new Date(day.dateString + 'T00:00:00Z'));
+    },
+    markedDates: {
+      [selected]: { selected: true, disableTouchEvent: true, selectedColor: '#3DCC85' },
+    },
+    theme: {
+      backgroundColor: isDark ? '#222' : '#fff',
+      calendarBackground: isDark ? '#222' : '#fff',
+      textSectionTitleColor: '#3DCC85',
+      selectedDayBackgroundColor: '#3DCC85',
+      selectedDayTextColor: '#ffffff',
+      todayTextColor: '#3DCC85',
+      dayTextColor: isDark ? '#fff' : '#2d4150',
+      textDisabledColor: isDark ? '#555' : '#d9e1e8',
+      dotColor: '#3DCC85',
+      selectedDotColor: '#ffffff',
+      arrowColor: '#3DCC85',
+      monthTextColor: isDark ? '#fff' : '#000',
+      indicatorColor: 'blue',
+      textDayFontSize: 16,
+      textMonthFontSize: 16,
+      textDayHeaderFontSize: 14,
+    },
+  };
+  if (mode === 'workout') {
+    calendarProps.minDate = todayStr;
+  } else if (mode === 'birthdate') {
+    calendarProps.maxDate = todayStr;
   }
 
-  const [date, setDate] = useState<Date>(parseDate(selectedDate))
-  const [showPicker, setShowPicker] = useState(isVisible)
-
-  useEffect(() => {
-    setShowPicker(isVisible)
-    if (isVisible) {
-      setDate(parseDate(selectedDate))
-    }
-  }, [isVisible, selectedDate])
-
-  const formatDate = (date: Date): string => {
-    const year = date.getFullYear()
-    const month = String(date.getMonth() + 1).padStart(2, '0')
-    const day = String(date.getDate()).padStart(2, '0')
-    return `${year}/${month}/${day}`
-  }
-
-  const handleChange = (_: any, selectedDate?: Date) => {
-    if (selectedDate) {
-      setDate(selectedDate)
-      if (Platform.OS === 'android') {
-        setShowPicker(false)
-        onSelect(formatDate(selectedDate))
-        onClose()
-      }
-    } else if (Platform.OS === 'android') {
-      setShowPicker(false)
-      onClose()
-    }
-  }
-
-  const handleConfirm = () => {
-    onSelect(formatDate(date))
-    onClose()
-  }
-
-  // For Android, show the native picker directly
-  if (Platform.OS === 'android') {
-    if (!showPicker) return null
-    return (
-      <DateTimePicker
-        value={date}
-        mode="date"
-        display="calendar"
-        onChange={handleChange}
-        maximumDate={parseDate(maxDate)}
-      />
-    )
-  }
-
-  // For iOS, show in modal
   return (
-    <Modal
-      visible={isVisible}
-      transparent={true}
-      animationType="fade"
-      onRequestClose={onClose}
-      statusBarTranslucent={true}
-    >
-      <TouchableOpacity 
-        style={styles.modalOverlay} 
-        activeOpacity={1} 
-        onPress={onClose}
-      >
-        <View style={[styles.modalContent, { backgroundColor: isDark ? "#1e1e1e" : "#fff" }]}>
-          <TouchableOpacity activeOpacity={1} onPress={(e) => e.stopPropagation()}>
-            <View style={styles.modalHeader}>
-              <Text style={[styles.modalTitle, { color: isDark ? "#fff" : "#000" }]}>
-                {date.toLocaleDateString('en-US', { 
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </Text>
-              <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-                <MaterialCommunityIcons name="close" size={24} color={isDark ? "#fff" : "#000"} />
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.pickerContainer}>
-              <DateTimePicker
-                value={date}
-                mode="date"
-                display="spinner"
-                onChange={handleChange}
-                maximumDate={parseDate(maxDate)}
-                textColor={isDark ? "#fff" : "#000"}
-                style={styles.iOSPicker}
-              />
-            </View>
-
-            <View style={styles.modalFooter}>
-              <TouchableOpacity
-                style={[styles.cancelButton, { borderColor: isDark ? "#444" : "#ddd" }]}
-                onPress={onClose}
-              >
-                <Text style={{ color: isDark ? "#fff" : "#000" }}>Cancel</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={[styles.confirmButton, { backgroundColor: isDark ? "#fff" : "#000" }]}
-                onPress={handleConfirm}
-              >
-                <Text style={{ color: isDark ? "#000" : "#fff" }}>OK</Text>
-              </TouchableOpacity>
-            </View>
-          </TouchableOpacity>
+    <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
+      <View style={styles.overlay}>
+        <View style={[styles.modal, { backgroundColor: isDark ? '#222' : '#fff' }]}>
+          <View style={styles.header}>
+            <Text style={[styles.title, { color: isDark ? '#fff' : '#000' }]}>Başlangıç Tarihi Seç</Text>
+            <TouchableOpacity onPress={onClose}>
+              <MaterialCommunityIcons name="close" size={28} color={isDark ? '#fff' : '#000'} />
+            </TouchableOpacity>
+          </View>
+          <Calendar {...calendarProps} />
         </View>
-      </TouchableOpacity>
+      </View>
     </Modal>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  modalOverlay: {
+  overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.4)',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  modalContent: {
-    width: CALENDAR_WIDTH,
-    borderRadius: 16,
-    overflow: 'hidden',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+  modal: {
+    width: '92%',
+    borderRadius: 18,
+    padding: 20,
+    maxHeight: '90%',
   },
-  modalHeader: {
+  header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(0,0,0,0.1)',
+    marginBottom: 12,
   },
-  modalTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    flex: 1,
-    marginRight: 16,
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
-  closeButton: {
-    padding: 4,
-  },
-  pickerContainer: {
-    alignItems: 'center',
-    paddingVertical: 20,
-  },
-  iOSPicker: {
-    width: CALENDAR_WIDTH - 32,
-    height: 200,
-  },
-  modalFooter: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    padding: 16,
-    gap: 12,
-    borderTopWidth: 1,
-    borderTopColor: 'rgba(0,0,0,0.1)',
-  },
-  cancelButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-  },
-  confirmButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-  },
-})
+});
 
-export default CustomDateModal
+export default CustomDateModal;
