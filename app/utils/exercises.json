@@ -1,190 +1,181 @@
 [
   {
-    "id": 1,
     "name": "Push-ups",
     "type": "strength",
     "muscleGroup": "Chest",
     "instructions": [
-      "Start in a plank position with hands slightly wider than shoulders",
-      "Keep your body in a straight line from head to heels",
-      "Lower your chest toward the floor by bending your elbows",
-      "Push back up to the starting position",
-      "Keep your core engaged throughout the movement"
+        "Eller omuzlardan biraz daha geniş olacak şekilde plank pozisyonunda başlayın",
+        "Vücudunuzu baştan topuklara kadar düz bir çizgide tutun",
+        "Dirseklerinizi bükerek göğsünüzü yere doğru indirin",
+        "Başlangıç pozisyonuna geri itin",
+        "Hareket boyunca merkez bölgenizi meşgul tutun"
     ],
     "tips": [
-      "Don't let your hips sag or pike up",
-      "Keep elbows at 45-degree angle",
-      "Modify on knees if needed"
+        "Kalçalarınızın sarkmasına veya yukarı kalkmasına izin vermeyin",
+        "Dirseklerinizi 45 derecelik açıda tutun",
+        "Gerekirse dizler üzerinde değişiklik yapın"
     ],
     "duration": "3 sets x 10-15 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "5-8 cal/min",
-    "image": "https://via.placeholder.com/80x80/33A8FF/FFFFFF?text=PU"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Push-Up.gif"
   },
   {
-    "id": 2,
     "name": "Squats",
     "type": "strength",
     "muscleGroup": "Legs",
     "instructions": [
-      "Stand with feet shoulder-width apart",
-      "Keep your chest up and core engaged",
-      "Lower your body by bending at hips and knees",
-      "Go down until thighs are parallel to floor",
-      "Push through your heels to return to start",
-      "Keep knees in line with toes"
+        "Ayaklar omuz genişliğinde açık olacak şekilde durun",
+        "Göğsünüzü yukarıda ve karnınızı meşgul tutun",
+        "Kalça ve dizlerinizi bükerek vücudunuzu indirin",
+        "Uyluklarınız yere paralel olana kadar aşağı inin",
+        "Başlangıca dönmek için topuklarınızdan itin",
+        "Dizlerinizi ayak parmaklarınızla aynı hizada tutun"
     ],
     "tips": [
-      "Don't let knees cave inward",
-      "Keep weight on your heels",
-      "Go only as low as comfortable"
+        "Dizlerinizin içe çökmesine izin vermeyin",
+        "Ağırlığınızı topuklarınızda tutun",
+        "Sadece rahat olduğunuz kadar alçalın"
     ],
     "duration": "3 sets x 15-20 reps",
     "sets": 3,
     "reps": 15,
-    "calories": "6-10 cal/min",
-    "image": "https://via.placeholder.com/80x80/33A8FF/FFFFFF?text=SQ"
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/squat-full-version.gif"
   },
   {
-    "id": 3,
     "name": "Jumping Jacks",
     "type": "cardio",
     "muscleGroup": "Full Body",
     "instructions": [
-      "Stand upright with your legs together, arms at your sides",
-      "Bend your knees slightly, and jump into the air",
-      "As you jump, spread your legs to be about shoulder-width apart",
-      "Stretch your arms out and over your head",
-      "Jump back to starting position",
-      "Repeat for the specified duration"
+            "Bacaklarınız bitişik, kollarınız yanlarda olacak şekilde dik durun",
+            "Dizlerinizi hafifçe bükün ve havaya zıplayın",
+            "Zıplarken bacaklarınızı omuz genişliğinde açın",
+            "Kollarınızı başınızın üzerine doğru uzatın",
+            "Başlangıç pozisyonuna geri zıplayın",
+            "Belirtilen süre boyunca tekrarlayın"
     ],
     "tips": [
-      "Keep your core engaged throughout the movement",
-      "Land softly on the balls of your feet",
-      "Maintain a steady rhythm"
+        "Hareket boyunca merkez bölgenizi meşgul tutun",
+        "Ayak toplarınızın üzerine yumuşak bir şekilde inin",
+        "Sabit bir ritim tutun"
     ],
     "duration": "3 sets x 30 seconds",
     "sets": 3,
     "reps": 0,
-    "calories": "8-12 cal/min",
-    "image": "https://via.placeholder.com/80x80/FF5733/FFFFFF?text=JJ"
+    "calories": "8-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Jumping-jack.gif"
   },
   {
-    "id": 4,
     "name": "Plank",
     "type": "strength",
     "muscleGroup": "Core",
     "instructions": [
-      "Start in a push-up position",
-      "Lower down to your forearms",
-      "Keep your body in a straight line",
-      "Engage your core and glutes",
-      "Hold the position for specified time",
-      "Breathe normally throughout"
+            "Şınav pozisyonunda başlayın",
+            "Ön kollarınıza kadar alçalın",
+            "Vücudunuzu düz bir çizgide tutun",
+            "Karın ve kalça kaslarınızı çalıştırın",
+            "Belirlenen süre boyunca pozisyonu koruyun",
+            "Boyunca normal nefes alın"
     ],
     "tips": [
-      "Don't let hips sag or pike up",
-      "Keep shoulders over elbows",
-      "Focus on quality over duration"
+        "Kalçaların sarkmasına veya dikleşmesine izin vermeyin",
+        "Omuzları dirseklerin üzerinde tutun",
+        "Süre yerine kaliteye odaklanın"
     ],
     "duration": "3 sets x 30-60 seconds",
     "sets": 3,
     "reps": 0,
-    "calories": "3-5 cal/min",
-    "image": "https://via.placeholder.com/80x80/33A8FF/FFFFFF?text=PL"
+    "calories": "3-5 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/plank.gif"
   },
   {
-    "id": 5,
     "name": "Burpees",
     "type": "cardio",
     "muscleGroup": "Full Body",
     "instructions": [
-      "Start in a standing position",
-      "Drop into a squat position with hands on the ground",
-      "Kick your feet back into a plank position",
-      "Perform a push-up (optional)",
-      "Jump your feet back to squat position",
-      "Jump up with arms overhead"
+        "Ayakta durma pozisyonunda başlayın",
+        "Eller yerde olacak şekilde çömelme pozisyonuna geçin",
+        "Ayaklarınızı tekrar plank pozisyonuna getirin",
+        "Şınav çekin (isteğe bağlı)",
+        "Ayaklarınızı tekrar çömelme pozisyonuna getirin",
+        "Kollarınızı yukarı kaldırarak zıplayın"
     ],
     "tips": [
-      "Keep your core engaged throughout",
-      "Land softly when jumping",
-      "Modify by stepping back instead of jumping"
+        "Merkez bölgenizi sürekli meşgul tutun",
+        "Zıplarken yumuşak bir şekilde inin",
+        "Zıplamak yerine geri adım atarak değiştirin"
     ],
     "duration": "3 sets x 10 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "15-20 cal/min",
-    "image": "https://via.placeholder.com/80x80/FF5733/FFFFFF?text=BP"
+    "calories": "15-20 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/burpees.gif"
   },
   {
-    "id": 6,
     "name": "Mountain Climbers",
     "type": "cardio",
     "muscleGroup": "Core",
     "instructions": [
-      "Start in a plank position",
-      "Drive your knees toward your chest one at a time",
-      "Keep your core tight and back flat",
-      "Alternate legs quickly"
+        "Plank pozisyonunda başlayın",
+        "Dizlerinizi birer birer göğsünüze doğru çekin",
+        "Karnınızı sıkı ve sırtınızı düz tutun",
+        "Bacaklarınızı hızlıca değiştirin"
     ],
     "tips": [
-      "Keep hips low",
-      "Move as fast as possible while maintaining form"
+        "Kalçalarınızı aşağıda tutun",
+        "Formunuzu koruyarak mümkün olduğunca hızlı hareket edin"
     ],
     "duration": "3 sets x 30 seconds",
     "sets": 3,
     "reps": 0,
-    "calories": "10-14 cal/min",
-    "image": "https://via.placeholder.com/80x80/FF5733/FFFFFF?text=MC"
+    "calories": "10-14 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Mountain-climber.gif"
   },
   {
-    "id": 7,
     "name": "Lunges",
     "type": "strength",
     "muscleGroup": "Legs",
     "instructions": [
-      "Stand upright, step forward with one leg",
-      "Lower your hips until both knees are bent at about 90 degrees",
-      "Push back to starting position and switch legs"
+        "Dik durun, bir bacağınızla öne doğru adım atın",
+        "Her iki diziniz de yaklaşık 90 derece bükülene kadar kalçalarınızı indirin",
+        "Başlangıç pozisyonuna geri itin ve bacak değiştirin"
     ],
     "tips": [
-      "Keep your torso upright",
-      "Don't let your knee go past your toes"
+        "Gövdenizi dik tutun",
+        "Dizinizin ayak parmaklarınızı geçmesine izin vermeyin"
     ],
     "duration": "3 sets x 10 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "6-9 cal/min",
-    "image": "https://via.placeholder.com/80x80/33A8FF/FFFFFF?text=LU"
+    "calories": "6-9 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/lunges.gif"
   },
   {
-    "id": 8,
     "name": "High Knees",
     "type": "cardio",
     "muscleGroup": "Legs",
     "instructions": [
-      "Stand tall with feet hip-width apart",
-      "Place hands in front of you at hip level",
-      "Quickly drive your right knee up to meet your right hand",
-      "Bring your right foot back down and immediately drive your left knee up",
-      "Continue alternating knees as quickly as possible",
-      "Pump your arms to maintain momentum"
+        "Ayaklarınızı kalça genişliğinde açarak dik durun",
+        "Ellerinizi kalça hizasında önünüze koyun",
+        "Sağ elinizle buluşmak için sağ dizinizi hızla yukarı kaldırın",
+        "Sağ ayağınızı geri indirin ve hemen sol dizinizi yukarı kaldırın",
+        "Dizlerinizi mümkün olduğunca çabuk değiştirmeye devam edin",
+        "Momentumu korumak için kollarınızı pompalayın"
     ],
     "tips": [
-      "Keep your chest up and core tight",
-      "Stay on the balls of your feet",
-      "Drive knees up as high as possible"
+        "Göğsünüzü yukarıda ve karnınızı sıkı tutun",
+        "Ayak toplarınızın üzerinde kalın",
+        "Dizlerinizi mümkün olduğunca yukarı kaldırın"
     ],
     "duration": "3 sets x 30 seconds",
     "sets": 3,
     "reps": 0,
-    "calories": "10-15 cal/min",
-    "image": "https://via.placeholder.com/80x80/FF5733/FFFFFF?text=HK"
+    "calories": "10-15 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/High-Knee.gif"
   },
   {
-    "id": 9,
     "name": "Steady-State Cardio",
     "type": "cardio",
     "muscleGroup": "Cardiovascular",
@@ -200,10 +191,9 @@
     "sets": 3,
     "reps": 0,
     "calories": "200-350 cal",
-    "image": "https://storage.googleapis.com/fitness-app-photos/steady.jpg"
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Steady-state-cardio.gif"
   },
   {
-    "id": 10,
     "name": "Interval Cardio",
     "type": "cardio",
     "muscleGroup": "Cardiovascular",
@@ -219,10 +209,9 @@
     "sets": 3,
     "reps": 0,
     "calories": "250-400 cal",
-    "image": "https://storage.googleapis.com/fitness-app-photos/interval.jpg"
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/interval-cardio.gif"
   },
   {
-    "id": 11,
     "name": "Incline Walk",
     "type": "cardio",
     "muscleGroup": "Cardiovascular",
@@ -238,10 +227,9 @@
     "sets": 3,
     "reps": 0,
     "calories": "220-370 cal",
-    "image": "https://storage.googleapis.com/fitness-app-photos/incline.jpg"
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Incline-Walk.gif"
   },
   {
-    "id": 12,
     "name": "Dumbbell Bench Press",
     "type": "strength",
     "muscleGroup": "Chest",
@@ -257,11 +245,10 @@
     "duration": "3-4 set x 10-14 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "6-10 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/db_bench.jpg"
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Dumbbell-Bench-Press.gif"
   },
   {
-    "id": 13,
     "name": "Goblet Squat",
     "type": "strength",
     "muscleGroup": "Legs",
@@ -277,12 +264,11 @@
     "duration": "3-4 set x 10-14 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "7-11 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/goblet.jpg"
+    "calories": "7-11 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Goblet-Squat.gif"
   },
   {
-    "id": 14,
-    "name": "Bent-Over Row",
+    "name": "Bent-Over Dumbell Row",
     "type": "strength",
     "muscleGroup": "Back",
     "instructions": [
@@ -297,11 +283,10 @@
     "duration": "3-4 set x 10-14 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "6-9 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/row.jpg"
+    "calories": "6-9 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Bent-Over-Dumbbell-Row.gif"
   },
   {
-    "id": 15,
     "name": "Dumbbell Romanian Deadlift",
     "type": "strength",
     "muscleGroup": "Hamstrings/Glutes",
@@ -317,11 +302,10 @@
     "duration": "2-4 set x 10-12 reps",
     "sets": 2,
     "reps": 10,
-    "calories": "6-10 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/rdl.jpg"
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Dumbbell-Romanian-Deadlift.gif"
   },
   {
-    "id": 16,
     "name": "Dumbbell Shoulder Press",
     "type": "strength",
     "muscleGroup": "Shoulders",
@@ -337,11 +321,10 @@
     "duration": "2-4 set x 10-12 reps",
     "sets": 2,
     "reps": 10,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/shoulder_press.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Dumbbell-Shoulder-Press.gif"
   },
   {
-    "id": 17,
     "name": "Barbell Bench Press",
     "type": "strength",
     "muscleGroup": "Chest",
@@ -357,11 +340,10 @@
     "duration": "4 set x 8-10 reps",
     "sets": 4,
     "reps": 8,
-    "calories": "7-12 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/bench.jpg"
+    "calories": "7-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Barbell-Bench-Press.gif"
   },
   {
-    "id": 18,
     "name": "Bent-Over Barbell Row",
     "type": "strength",
     "muscleGroup": "Back",
@@ -377,11 +359,10 @@
     "duration": "4 set x 8-10 reps",
     "sets": 4,
     "reps": 8,
-    "calories": "7-11 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/row.jpg"
+    "calories": "7-11 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Bent-Over-Row.gif"
   },
   {
-    "id": 19,
     "name": "Dumbbell Incline Press",
     "type": "strength",
     "muscleGroup": "Chest",
@@ -396,11 +377,10 @@
     "duration": "3 set x 10-12 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "6-10 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/incline.jpg"
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Incline-Dumbbell-Press.gif"
   },
   {
-    "id": 20,
     "name": "Seated Cable Row",
     "type": "strength",
     "muscleGroup": "Back",
@@ -415,11 +395,10 @@
     "duration": "3 set x 10-12 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "6-9 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/cablerow.jpg"
+    "calories": "6-9 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Seated-Cable-Row.gif"
   },
   {
-    "id": 21,
     "name": "Dumbbell Lateral Raise",
     "type": "strength",
     "muscleGroup": "Shoulders",
@@ -434,11 +413,10 @@
     "duration": "3 set x 12-15 reps",
     "sets": 3,
     "reps": 12,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/lateralraise.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Dumbbell-Lateral-Raise.gif"
   },
   {
-    "id": 22,
     "name": "Face-Pull",
     "type": "strength",
     "muscleGroup": "Upper Back",
@@ -453,11 +431,10 @@
     "duration": "3 set x 12-15 reps",
     "sets": 3,
     "reps": 12,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/facepull.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Face-Pull.gif"
   },
   {
-    "id": 23,
     "name": "Plank Shoulder Tap",
     "type": "strength",
     "muscleGroup": "Core",
@@ -472,11 +449,10 @@
     "duration": "2 set x 40 sn",
     "sets": 2,
     "reps": 0,
-    "calories": "4-6 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/planktap.jpg"
+    "calories": "4-6 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Plank-Shoulder-Taps.gif"
   },
   {
-    "id": 24,
     "name": "Back Squat",
     "type": "strength",
     "muscleGroup": "Quads",
@@ -491,11 +467,10 @@
     "duration": "4 set x 6-8 reps",
     "sets": 4,
     "reps": 6,
-    "calories": "7-12 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/squat.jpg"
+    "calories": "7-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Back-Squat.gif"
   },
   {
-    "id": 25,
     "name": "Romanian Deadlift",
     "type": "strength",
     "muscleGroup": "Hamstrings/Glutes",
@@ -510,11 +485,10 @@
     "duration": "4 set x 8-10 reps",
     "sets": 4,
     "reps": 8,
-    "calories": "6-10 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/rdl.jpg"
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Romanian-Deadlift.gif"
   },
   {
-    "id": 26,
     "name": "Walking Lunge",
     "type": "strength",
     "muscleGroup": "Legs",
@@ -528,11 +502,10 @@
     "duration": "3 set x 12 adım",
     "sets": 3,
     "reps": 12,
-    "calories": "6-9 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/lunge.jpg"
+    "calories": "6-9 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/walking-lunge.gif"
   },
   {
-    "id": 27,
     "name": "Hip Thrust",
     "type": "strength",
     "muscleGroup": "Glutes",
@@ -547,11 +520,10 @@
     "duration": "3 set x 10-12 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "7-11 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/hipthrust.jpg"
+    "calories": "7-11 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Hip-Thrust.gif"
   },
   {
-    "id": 28,
     "name": "Leg Curl",
     "type": "strength",
     "muscleGroup": "Hamstrings",
@@ -564,11 +536,10 @@
     "duration": "3 set x 12-15 reps",
     "sets": 3,
     "reps": 12,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/legcurl.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Leg-Curl.gif"
   },
   {
-    "id": 29,
     "name": "Standing Calf Raise",
     "type": "strength",
     "muscleGroup": "Calves",
@@ -581,11 +552,10 @@
     "duration": "3 set x 15-20 reps",
     "sets": 3,
     "reps": 15,
-    "calories": "4-7 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/calfraise.jpg"
+    "calories": "4-7 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Standing-Calf-Raise.gif"
   },
   {
-    "id": 30,
     "name": "Hollow Hold",
     "type": "strength",
     "muscleGroup": "Core",
@@ -598,11 +568,10 @@
     "duration": "3 set x 30 sn",
     "sets": 3,
     "reps": 0,
-    "calories": "4-6 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/hollowhold.jpg"
+    "calories": "4-6 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/HollowHold.jpg"
   },
   {
-    "id": 31,
     "name": "HIIT Intervals",
     "type": "cardio",
     "muscleGroup": "Cardiovascular",
@@ -615,11 +584,10 @@
     "duration": "5 set x 40 sn",
     "sets": 5,
     "reps": 0,
-    "calories": "12-18 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/hiit.jpg"
+    "calories": "12-18 cal/dk",
+    "imageUrl": ""
   },
   {
-    "id": 32,
     "name": "Standing Military Press",
     "type": "strength",
     "muscleGroup": "Shoulders",
@@ -634,11 +602,10 @@
     "duration": "4 set x 6-8 reps",
     "sets": 4,
     "reps": 6,
-    "calories": "6-10 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/militarypress.jpg"
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Standing-Military-Press.gif"
   },
   {
-    "id": 33,
     "name": "Weighted Dip",
     "type": "strength",
     "muscleGroup": "Chest/Triceps",
@@ -653,11 +620,10 @@
     "duration": "3 set x 8-10 reps",
     "sets": 3,
     "reps": 8,
-    "calories": "7-12 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/dip.jpg"
+    "calories": "7-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Chest-Dips.gif"
   },
   {
-    "id": 34,
     "name": "Cable Fly",
     "type": "strength",
     "muscleGroup": "Chest",
@@ -672,11 +638,10 @@
     "duration": "3 set x 12-15 reps",
     "sets": 3,
     "reps": 12,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/cablefly.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Cable-Fly.gif"
   },
   {
-    "id": 35,
     "name": "Overhead Rope Triceps Extension",
     "type": "strength",
     "muscleGroup": "Triceps",
@@ -690,11 +655,10 @@
     "duration": "3 set x 12-15 reps",
     "sets": 3,
     "reps": 12,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/ropeext.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Cable-Rope-Overhead-Triceps-Extension.gif"
   },
   {
-    "id": 36,
     "name": "Copenhagen Plank",
     "type": "strength",
     "muscleGroup": "Core",
@@ -709,11 +673,10 @@
     "duration": "3 set x 40 sn",
     "sets": 3,
     "reps": 0,
-    "calories": "4-7 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/copenhagen.jpg"
+    "calories": "4-7 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Copenhagen-plank.gif"
   },
   {
-    "id": 37,
     "name": "Deadlift",
     "type": "strength",
     "muscleGroup": "Back/Glutes",
@@ -727,11 +690,10 @@
     "duration": "4 set x 4-6 reps",
     "sets": 4,
     "reps": 4,
-    "calories": "10-16 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/deadlift.jpg"
+    "calories": "10-16 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Deadlift.gif"
   },
   {
-    "id": 38,
     "name": "Weighted Pull-Up",
     "type": "strength",
     "muscleGroup": "Back/Biceps",
@@ -745,11 +707,10 @@
     "duration": "4 set x 6-8 reps",
     "sets": 4,
     "reps": 6,
-    "calories": "8-13 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/pullup.jpg"
+    "calories": "8-13 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Weighted-Pull-up.gif"
   },
   {
-    "id": 39,
     "name": "Pendlay Row",
     "type": "strength",
     "muscleGroup": "Back",
@@ -763,11 +724,10 @@
     "duration": "4 set x 8-10 reps",
     "sets": 4,
     "reps": 8,
-    "calories": "7-11 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/pendlay.jpg"
+    "calories": "7-11 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Pendlay-Row.gif"
   },
   {
-    "id": 40,
     "name": "Chest-Supported DB Row",
     "type": "strength",
     "muscleGroup": "Back",
@@ -781,11 +741,10 @@
     "duration": "3 set x 10-12 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "6-9 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/dbrow.jpg"
+    "calories": "6-9 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Chest-Supported-Dumbbell-Row.gif"
   },
   {
-    "id": 41,
     "name": "Barbell Curl",
     "type": "strength",
     "muscleGroup": "Biceps",
@@ -799,11 +758,10 @@
     "duration": "3 set x 10-12 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/curl.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Barbell-Curl.gif"
   },
   {
-    "id": 42,
     "name": "Hanging Leg Raise",
     "type": "strength",
     "muscleGroup": "Core",
@@ -817,11 +775,10 @@
     "duration": "3 set x 12-15 reps",
     "sets": 3,
     "reps": 12,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/legraise.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Hanging-Leg-Raises.gif"
   },
   {
-    "id": 43,
     "name": "Bulgarian Split Squat",
     "type": "strength",
     "muscleGroup": "Legs",
@@ -835,11 +792,10 @@
     "duration": "3 set x 10 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "6-10 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/bulgarian.jpg"
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Bulgarian-Split-Squat.gif"
   },
   {
-    "id": 44,
     "name": "Leg Press",
     "type": "strength",
     "muscleGroup": "Legs",
@@ -853,11 +809,10 @@
     "duration": "3 set x 12 reps",
     "sets": 3,
     "reps": 12,
-    "calories": "7-12 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/legpress.jpg"
+    "calories": "7-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Leg-Press.gif"
   },
   {
-    "id": 45,
     "name": "Seated Leg Curl",
     "type": "strength",
     "muscleGroup": "Hamstrings",
@@ -870,11 +825,10 @@
     "duration": "3 set x 12-15 reps",
     "sets": 3,
     "reps": 12,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/seatedcurl.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Seated-Leg-Curl.gif"
   },
   {
-    "id": 46,
     "name": "Ab-Wheel Roll-Out",
     "type": "strength",
     "muscleGroup": "Core",
@@ -888,11 +842,10 @@
     "duration": "3 set x 10-12 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/abwheel.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Ab-Wheel-Rollout.gif"
   },
-  {
-    "id": 47,
+  { 
     "name": "Close-Grip Bench Press",
     "type": "strength",
     "muscleGroup": "Chest/Triceps",
@@ -906,11 +859,10 @@
     "duration": "4 set x 8-10 reps",
     "sets": 4,
     "reps": 8,
-    "calories": "7-12 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/closegrip.jpg"
+    "calories": "7-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Close-Grip-Bench-Press.gif"
   },
   {
-    "id": 48,
     "name": "Arnold Press",
     "type": "strength",
     "muscleGroup": "Shoulders",
@@ -924,11 +876,10 @@
     "duration": "4 set x 8-10 reps",
     "sets": 4,
     "reps": 8,
-    "calories": "6-10 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/arnold.jpg"
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Arnold-Press.gif"
   },
   {
-    "id": 49,
     "name": "Rack Pull",
     "type": "strength",
     "muscleGroup": "Back/Glutes",
@@ -942,16 +893,15 @@
     "duration": "3 set x 3 reps",
     "sets": 3,
     "reps": 3,
-    "calories": "10-16 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/rackpull.jpg"
+    "calories": "10-16 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/barbell-rack-pull.gif"
   },
   {
-    "id": 50,
     "name": "Meadows Row",
     "type": "strength",
     "muscleGroup": "Back",
     "instructions": [
-      "Landmine bar ile tek kol row yap."
+      "Landdke bar ile tek kol row yap."
     ],
     "tips": [
       "Sırtı düz tut.",
@@ -960,11 +910,10 @@
     "duration": "3 set x 10 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "7-11 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/meadows.jpg"
+    "calories": "7-11 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Meadows-Row.gif"
   },
   {
-    "id": 51,
     "name": "HIIT Sprint",
     "type": "cardio",
     "muscleGroup": "Cardio",
@@ -977,11 +926,10 @@
     "duration": "8 set x 30 sn",
     "sets": 8,
     "reps": 0,
-    "calories": "14-20 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/hiit.jpg"
+    "calories": "14-20 cal/dk",
+    "imageUrl": ""
   },
   {
-    "id": 52,
     "name": "Cable Wood-Chop",
     "type": "strength",
     "muscleGroup": "Core",
@@ -994,11 +942,10 @@
     "duration": "3 set x 15 reps",
     "sets": 3,
     "reps": 15,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/woodchop.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/cable-woordchopper.gif"
   },
   {
-    "id": 53,
     "name": "Swiss-Ball Crunch",
     "type": "strength",
     "muscleGroup": "Core",
@@ -1011,11 +958,10 @@
     "duration": "3 set x 20 reps",
     "sets": 3,
     "reps": 20,
-    "calories": "4-7 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/swisscrunch.jpg"
+    "calories": "4-7 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/swiss-ball-crunch.jpg"
   },
   {
-    "id": 54,
     "name": "Skull Crusher",
     "type": "strength",
     "muscleGroup": "Triceps",
@@ -1031,11 +977,10 @@
     "duration": "3 set x 10-12 reps",
     "sets": 3,
     "reps": 10,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/skullcrusher.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Dumbbell-Skull-Crusher.gif"
   },
   {
-    "id": 55,
     "name": "Pallof Press",
     "type": "strength",
     "muscleGroup": "Core",
@@ -1051,11 +996,10 @@
     "duration": "3 set x 15 sn",
     "sets": 3,
     "reps": 0,
-    "calories": "3-5 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/pallof.jpg"
+    "calories": "3-5 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Cable-Half-Kneeling-Pallof-Press.gif"
   },
   {
-    "id": 56,
     "name": "Lat-Pulldown",
     "type": "strength",
     "muscleGroup": "Back",
@@ -1071,11 +1015,10 @@
     "duration": "3 set x 12-15 reps",
     "sets": 3,
     "reps": 12,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/latpulldown.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Lat-Pulldown.gif"
   },
   {
-    "id": 57,
     "name": "Hanging Knee Raise",
     "type": "strength",
     "muscleGroup": "Core",
@@ -1090,11 +1033,10 @@
     "duration": "3 set x 15 reps",
     "sets": 3,
     "reps": 15,
-    "calories": "5-8 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/kneeraise.jpg"
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Hanging-Knee-Raises.gif"
   },
   {
-    "id": 58,
     "name": "Continuous Run",
     "type": "cardio",
     "muscleGroup": "Cardio",
@@ -1110,10 +1052,9 @@
     "sets": 1,
     "reps": 0,
     "calories": "350-600 cal",
-    "image": "https://storage.googleapis.com/fitness-app-photos/run.jpg"
+    "imageUrl": ""
   },
   {
-    "id": 59,
     "name": "DB Thruster",
     "type": "strength",
     "muscleGroup": "Full Body",
@@ -1127,11 +1068,10 @@
     "duration": "4 set x 8-10 reps",
     "sets": 4,
     "reps": 8,
-    "calories": "8-12 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/thruster.jpg"
+    "calories": "8-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Kettlebell-Thruster.gif"
   },
   {
-    "id": 60,
     "name": "Push-up (plate)",
     "type": "strength",
     "muscleGroup": "Chest",
@@ -1144,11 +1084,10 @@
     ],
     "duration": "4 set x AMRAP",
     "sets": 4,
-    "calories": "6-10 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/pushup_plate.jpg"
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/plate-Push-up.gif"
   },
   {
-    "id": 61,
     "name": "Renegade Row",
     "type": "strength",
     "muscleGroup": "Back/Core",
@@ -1162,11 +1101,10 @@
     "duration": "4 set x 12 reps",
     "sets": 4,
     "reps": 12,
-    "calories": "7-11 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/renegade.jpg"
+    "calories": "7-11 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Kettlebell-Renegade-Row.gif"
   },
   {
-    "id": 62,
     "name": "Battle Rope Slam",
     "type": "cardio",
     "muscleGroup": "Full Body",
@@ -1180,11 +1118,10 @@
     "duration": "4 set x 30 sn",
     "sets": 4,
     "reps": 0,
-    "calories": "10-16 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/battlerope.jpg"
+    "calories": "10-16 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Half-Kneeling-Battling-Rope.gif"
   },
   {
-    "id": 63,
     "name": "V-Sit",
     "type": "strength",
     "muscleGroup": "Core",
@@ -1198,7 +1135,7 @@
     "duration": "3 set x 20 reps",
     "sets": 3,
     "reps": 20,
-    "calories": "4-7 cal/min",
-    "image": "https://storage.googleapis.com/fitness-app-photos/vsit.jpg"
+    "calories": "4-7 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/v-sit-on-floor.webp"
   }
 ]

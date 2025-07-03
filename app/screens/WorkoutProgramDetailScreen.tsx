@@ -103,11 +103,7 @@ import { useAuth } from "../context/AuthContext"
     }, [workoutData, exercises, type]);
 
     React.useEffect(() => {
-      console.log("--- WorkoutProgramDetailScreen ---");
-      console.log("Program Data:", JSON.stringify(workoutData, null, 2));
-      console.log("All Exercises (from context):", JSON.stringify(exercises.map(e => ({id: e.id, name: e.name})), null, 2));
-      console.log("Filtered Exercises for this Program:", JSON.stringify(programExercises, null, 2));
-      console.log("---------------------------------");
+      
     }, [programExercises, workoutData, exercises]);
 
     React.useEffect(() => {
@@ -173,9 +169,6 @@ import { useAuth } from "../context/AuthContext"
             <MaterialCommunityIcons name="arrow-left" size={24} color={isDark ? "#fff" : "#000"} />
           </TouchableOpacity>
           <Text style={[styles.headerTitle, { color: isDark ? "#fff" : "#000" }]}>{workoutData?.title}</Text>
-          <TouchableOpacity style={styles.favoriteButton}>
-            <MaterialCommunityIcons name="heart-outline" size={24} color={isDark ? "#fff" : "#000"} />
-          </TouchableOpacity>
         </View>
         {/* Workout Info Card */}
         <View style={[styles.workoutInfoCard, { backgroundColor: isDark ? "#222" : "#fff" }]}> 
@@ -251,9 +244,6 @@ import { useAuth } from "../context/AuthContext"
       fontWeight: "600",
       flex: 1,
       textAlign: "center",
-    },
-    favoriteButton: {
-      padding: 8,
     },
     workoutInfoCard: {
       marginHorizontal: 16,

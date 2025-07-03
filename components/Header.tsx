@@ -1,9 +1,10 @@
 "use client"
 
-import { View, Text, TouchableOpacity, Image, StyleSheet, Platform, StatusBar, useColorScheme } from "react-native"
+import { View, Text, TouchableOpacity, Image, StyleSheet, useColorScheme } from "react-native"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { useRouter } from "expo-router"
 import React from "react"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 type HeaderProps = {
   userName: string
@@ -13,16 +14,16 @@ type HeaderProps = {
 export default function Header({ userName, profileImageUrl }: HeaderProps) {
   const isDark = useColorScheme() === "dark"
   const router = useRouter()
-  const topPadding = Platform.OS === "android" ? (StatusBar.currentHeight || 24) + 16 : 50
+  const insets = useSafeAreaInsets()
 
   const handleProfilePress = () => {
-     router.push("/profile-page") // Profil sayfası hazırsa burayı açarsın
+    router.push("/profile-page")
   }
 
   const hasValidProfileImage = profileImageUrl && profileImageUrl.trim() !== ""
 
   return (
-    <View style={[styles.container, { paddingTop: topPadding }]}>
+    <View style={[styles.container, { paddingTop: insets.top-600, paddingBottom: 10 }]}>
       <View>
         <Text style={[styles.helloText, { color: isDark ? "#aaa" : "#666" }]}>Merhaba!</Text>
         <Text style={[styles.userName, { color: isDark ? "#fff" : "#000" }]}>{userName}</Text>
@@ -47,7 +48,6 @@ export default function Header({ userName, profileImageUrl }: HeaderProps) {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
-    paddingBottom: 16,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

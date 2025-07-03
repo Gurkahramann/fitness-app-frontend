@@ -19,13 +19,10 @@ interface WeeklySummaryData {
   totalDuration: number; // seconds
 }
 
-function getMondayOfCurrentWeek() {
+function getTodayAsStartDate() {
   const now = new Date();
-  const day = now.getDay();
-  const diff = now.getDate() - day + (day === 0 ? -6 : 1); // Pazartesi = 1, Pazar = 0
-  const monday = new Date(now.setDate(diff));
-  monday.setHours(0, 0, 0, 0);
-  return monday.toISOString().split('T')[0];
+  now.setHours(0, 0, 0, 0);
+  return now.toISOString().split('T')[0];
 }
 
 function formatDuration(seconds: number) {
@@ -48,7 +45,7 @@ export default function WeeklySummaryCard({ isDark }: WeeklySummaryCardProps) {
       setLoading(true);
       setError(null);
       try {
-        const weekStart = getMondayOfCurrentWeek();
+        const weekStart = getTodayAsStartDate();
         const summary = await getWeeklySummary(user.id, weekStart);
         setData(summary);
       } catch (err: any) {

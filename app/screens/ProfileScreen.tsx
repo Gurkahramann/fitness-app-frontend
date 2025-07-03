@@ -32,6 +32,14 @@ export default function ProfileScreen() {
   const navState = useNavigationState(state => state);
   const insets = useSafeAreaInsets();
 
+  const profileImageUrl =
+    userProfile?.profileImage ||
+    (userProfile?.gender === "Male"
+      ? "https://storage.googleapis.com/fitness-app-photos/Male%20Avatar.png"
+      : userProfile?.gender === "Female"
+      ? "https://storage.googleapis.com/fitness-app-photos/Female%20Avatar.png"
+      : "https://via.placeholder.com/150");
+
   React.useEffect(() => {
     // Navigation stack'i logla
 
@@ -124,7 +132,7 @@ export default function ProfileScreen() {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View style={[styles.header, { paddingTop: insets.top }]}>
+        <View style={styles.header}>
           <Text style={[styles.headerTitle, { color: isDark ? "#fff" : "#000" }]}>Profilim</Text>
         </View>
 
@@ -132,7 +140,7 @@ export default function ProfileScreen() {
         <View style={[styles.profileCard, { backgroundColor: isDark ? "#222" : "#fff" }]}>
           <View style={styles.profileImageContainer}>
             <Image
-              source={{ uri: "https://via.placeholder.com/150" }}
+              source={{ uri: profileImageUrl }}
               style={styles.profileImage}
             />
           </View>
@@ -230,7 +238,7 @@ export default function ProfileScreen() {
           onPress={async () => {
             try {
               await logout();
-              router.replace('/login');
+              router.replace('/');
             } catch (e) {
               // Hata yönetimi eklenebilir
             }
@@ -253,6 +261,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 16,
     paddingBottom: 16,
+    paddingTop: 16,
   },
   headerTitle: {
     fontSize: 28,

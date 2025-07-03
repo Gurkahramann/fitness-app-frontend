@@ -131,7 +131,7 @@ export const WorkoutProgramProvider = ({ children }: { children: ReactNode }) =>
     }
 
     try {
-      console.log("Sending request to backend with data:", payload);
+      
 
       const res = await authFetch(`${springUrl}/user-workout-programs`, {
         method: 'POST',
@@ -148,7 +148,7 @@ export const WorkoutProgramProvider = ({ children }: { children: ReactNode }) =>
       }
 
       const data = await res.json();
-      console.log("Backend success response:", data);
+      
       // Refresh user workout programs after saving
       await fetchUserWorkoutPrograms(payload.userId);
       return data.message;
@@ -164,12 +164,7 @@ export const WorkoutProgramProvider = ({ children }: { children: ReactNode }) =>
 
   const deleteUserWorkoutProgram = async (userId: string, programId: string) => {
     try {
-      console.log("Deleting program with params:", {
-        userId,
-        programId,
-        url: `${springUrl}/user-workout-programs/${userId}/${programId}`
-      });
-
+      
       const res = await authFetch(`${springUrl}/user-workout-programs/${userId}/${programId}`, {
         method: 'DELETE',
         headers: {
@@ -183,7 +178,7 @@ export const WorkoutProgramProvider = ({ children }: { children: ReactNode }) =>
         throw new Error(errorData.message || "Program silinemedi");
       }
 
-      console.log("Program successfully deleted");
+      
       // Programı başarıyla sildikten sonra listeyi güncelle
       await fetchUserWorkoutPrograms(userId);
     } catch (err: any) {

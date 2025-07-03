@@ -17,13 +17,10 @@ export default function TrainingHistoryCard({ isDark }: TrainingHistoryCardProps
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  function getMondayOfCurrentWeek() {
+  function getTodayAsStartDate() {
     const now = new Date();
-    const day = now.getDay();
-    const diff = now.getDate() - day + (day === 0 ? -6 : 1);
-    const monday = new Date(now.setDate(diff));
-    monday.setHours(0, 0, 0, 0);
-    return monday.toISOString().split('T')[0];
+    now.setHours(0, 0, 0, 0);
+    return now.toISOString().split('T')[0];
   }
 
   useEffect(() => {
@@ -32,7 +29,7 @@ export default function TrainingHistoryCard({ isDark }: TrainingHistoryCardProps
       setLoading(true);
       setError(null);
       try {
-        const weekStart = getMondayOfCurrentWeek();
+        const weekStart = getTodayAsStartDate();
         const data = await getWeeklyHistory(user.id, weekStart);
         setHistory(data);
       } catch (err: any) {

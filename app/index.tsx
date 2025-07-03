@@ -6,7 +6,7 @@ import BodyInfoScreen from './screens/BodyInfoScreen';
 import LoginScreen from './screens/LoginScreen';
 import PersonalInfo from './screens/PersonalInfoScreen';
 import PersonalInfoScreen from './personal-info';
-import LifestyleScreen from './screens/LifeStyleScreen';
+import LifestyleScreen from './screens/LifeStyleScreen';  
 import WelcomePage from './screens/WelcomePage';
 
 

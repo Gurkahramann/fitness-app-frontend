@@ -171,7 +171,11 @@ export default function CreateProgramScreen() {
           dayOfWeek: Number(dayNum),
           exerciseEntries: dayExercises.map((ex, idx) => ({
             orderIndex: idx + 1,
-            exerciseId: ex.id
+            exerciseId: ex.id,
+            sets: ex.sets,
+            reps: ex.reps,
+            weight: ex.weight,
+            duration: ex.duration
           }))
         });
       }
@@ -186,9 +190,7 @@ export default function CreateProgramScreen() {
       days
     };
     try {
-      console.log("[CreateProgramScreen] Sending payload:", payload);
       const response = await createCustomWorkoutProgram(payload);
-      console.log("[CreateProgramScreen] API response:", response);
       showToast("Program başarıyla kaydedildi!", "success");
       router.back();
     } catch (err: any) {

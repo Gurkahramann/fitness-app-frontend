@@ -22,6 +22,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"
 
 import { useFormData } from "../context/FormContext"
 import React from "react"
+import GenderSelectionModal from "@/components/GenderSelectionModal"
 
 // Gender options for ModalSelector
 const GENDER_OPTIONS = [
@@ -65,10 +66,10 @@ export default function PersonalInfoScreen() {
   }
   
 
-  const handleSelectGender = (option: { key: string; label: string }) => {
-    setFormData((prev) => ({ ...prev, gender: option.key }))
-    if (option.key === "") {
-      setGenderError("Cinsiyet seçimi yapmalisınız")
+  const handleSelectGender = (value: string) => {
+    setFormData((prev) => ({ ...prev, gender: value }))
+    if (value === "") {
+      setGenderError("Cinsiyet seçimi yapmalısınız")
     } else {
       setGenderError("")
     }
@@ -183,56 +184,11 @@ export default function PersonalInfoScreen() {
 
                 {/* Gender Selector */}
                 <View style={localStyles.inputContainer}>
-                  <View
-                    style={[
-                      localStyles.selectorWrapper,
-                      {
-                        borderColor: genderError ? "#ff4d4f" : isDark ? "#333" : "#e0e0e0",
-                        backgroundColor: isDark ? "#1e1e1e" : "#fff",
-                      },
-                    ]}
-                  >
-                    <MaterialCommunityIcons
-                      name="gender-male-female"
-                      size={20}
-                      color={isDark ? "#aaa" : "#666"}
-                      style={localStyles.inputIcon}
-                    />
-                    <ModalSelector
-                      data={GENDER_OPTIONS}
-                      initValue={selectedGenderLabel}
-                      onChange={handleSelectGender}
-                      style={localStyles.modalSelector}
-                      selectStyle={localStyles.selectStyle}
-                      selectTextStyle={StyleSheet.flatten([localStyles.selectTextStyle, { color: isDark ? "#fff" : "#000" }])}
-                      initValueTextStyle={StyleSheet.flatten([
-                        localStyles.initValueTextStyle,
-                        {
-                          color: formData.gender ? (isDark ? "#fff" : "#000") : isDark ? "#777" : "#aaa",
-                        },
-                      ])}
-                      optionTextStyle={{
-                        color: isDark ? "#fff" : "#000",
-                      }}
-                      optionContainerStyle={{
-                        backgroundColor: isDark ? "#333" : "#fff",
-                      }}
-                      cancelStyle={{
-                        backgroundColor: isDark ? "#222" : "#f5f5f5",
-                      }}
-                      cancelTextStyle={{
-                        color: isDark ? "#fff" : "#000",
-                      }}
-                      cancelText="Vazgeç"
-                    />
-                    <MaterialCommunityIcons
-                      name="chevron-down"
-                      size={20}
-                      color={isDark ? "#aaa" : "#666"}
-                      style={localStyles.selectorIcon}
-                    />
-                  </View>
-                  {genderError ? <Text style={localStyles.errorText}>{genderError}</Text> : null}
+                  <GenderSelectionModal
+                    selectedValue={formData.gender}
+                    onSelect={handleSelectGender}
+                    error={genderError}
+                  />
                 </View>
               </View>
 

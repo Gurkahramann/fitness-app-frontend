@@ -37,18 +37,16 @@ export default function BodyInfoScreen() {
   )
 
   const showDatePicker = () => {
-    console.log("Opening date picker")
+    
     setDatePickerVisible(true)
   }
 
   const hideDatePicker = () => {
-    console.log("Closing date picker")
     setDatePickerVisible(false)
   }
 
   const handleDateSelect = (date: Date) => {
     try {
-      console.log("Selected date:", date)
       
       // Format date as DD/MM/YYYY
       const day = String(date.getDate()).padStart(2, '0')
@@ -56,7 +54,7 @@ export default function BodyInfoScreen() {
       const year = date.getFullYear()
       const formattedDate = `${day}/${month}/${year}`
       
-      console.log("Formatted date:", formattedDate)
+        
       setFormData((prev) => ({ ...prev, birthDate: formattedDate }))
     } catch (error) {
       console.error("Error handling date selection:", error)
@@ -113,7 +111,7 @@ export default function BodyInfoScreen() {
           <OptimizedSlider
             label="Boy"
             value={heightValue}
-            minimumValue={100}
+            minimumValue={140}
             maximumValue={220}
             step={1}
             onValueChange={handleHeightChange}
@@ -125,8 +123,8 @@ export default function BodyInfoScreen() {
           <OptimizedSlider
             label="Kilo"
             value={weightValue}
-            minimumValue={30}
-            maximumValue={200}
+            minimumValue={40}
+            maximumValue={300}
             step={0.5}
             onValueChange={handleWeightChange}
             unit="kg"

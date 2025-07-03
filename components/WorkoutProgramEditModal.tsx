@@ -5,6 +5,7 @@ import CalendarCard from "./CalendarCard"
 import { useWorkoutPrograms } from "../app/context/WorkoutProgramContext"
 import { useToast } from "../app/context/ToastContext"
 import CustomDateModal from "./CustomDateModal"
+import { useRouter } from "expo-router"
 
 interface Exercise {
   id: number
@@ -128,6 +129,7 @@ const WorkoutProgramEditModal: React.FC<WorkoutProgramEditModalProps> = ({
   const [isDatePickerVisible, setDatePickerVisible] = useState(false)
   const { saveUserWorkoutProgram } = useWorkoutPrograms();
   const { showToast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     if (!visible) return;
@@ -192,7 +194,11 @@ const WorkoutProgramEditModal: React.FC<WorkoutProgramEditModalProps> = ({
       }
 
       await saveUserWorkoutProgram(payload);
+      showToast("Program takvime eklendi", "success");
       onClose();
+      setTimeout(() => {
+        router.replace("/home-page");
+      }, 600);
     } catch (error) {
       if (error instanceof Error) {
         onClose();

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react"
 import { authFetch } from "../utils/authFetch"
 import { getAccessToken } from "../utils/tokenStorage"
+import { useAuth } from "./AuthContext"
 const springUrl = process.env.EXPO_PUBLIC_SPRING_API;
 export interface Exercise {
   id: number
@@ -30,6 +31,7 @@ export interface WeeklyWorkoutHistoryItem {
   durationMinutes: number;
   calories: number;
   date: string;
+  completed: boolean;
 }
 
 interface ExerciseContextType {
@@ -42,6 +44,7 @@ interface ExerciseContextType {
     exerciseId: number
     date: string
     durationMs: number
+    completed?: boolean
   }) => Promise<void>
   getWeeklySummary: (userId: string, weekStart: string) => Promise<WeeklySummaryData>
   getWeeklyHistory: (userId: string, weekStart: string) => Promise<WeeklyWorkoutHistoryItem[]>
@@ -54,12 +57,13 @@ export const ExerciseProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  const { user } = useAuth();
+
   const fetchExercises = async () => {
     setLoading(true)
     setError(null)
     try {
       const res = await authFetch(`${springUrl}/exercises`)
-      console.log("Exercises response:", res)
       if (!res.ok) throw new Error("Egzersizler yüklenemedi")
       const data = await res.json()
       setExercises(Array.isArray(data) ? data : [])
@@ -76,11 +80,13 @@ export const ExerciseProvider = ({ children }: { children: ReactNode }) => {
     exerciseId,
     date,
     durationMs,
+    completed = true,
   }: {
     userId: string
     exerciseId: number
     date: string
     durationMs: number
+    completed?: boolean
   }) => {
     const durationSeconds = Math.floor(durationMs / 1000); // Saniyeye çevir
     const payload = {
@@ -88,8 +94,8 @@ export const ExerciseProvider = ({ children }: { children: ReactNode }) => {
       exerciseId,
       date,
       durationSeconds,
+      completed,
     };
-    console.log("Exercise log payload to backend:", payload);
     await authFetch(`${springUrl}/exercise-log`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -98,8 +104,7 @@ export const ExerciseProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const getWeeklySummary = async (userId: string, weekStart: string): Promise<WeeklySummaryData> => {
-    const res = await authFetch(`${springUrl}/exercise-log/weekly-summary?userId=${userId}&weekStart=${weekStart}`);
-    console.log("Weekly summary response:", res);
+    const res = await authFetch(`${springUrl}/exercise-log/weekly-summary?userId=${userId}&weekStart=${weekStart}`);    
     if (!res.ok) throw new Error("Veri alınamadı");
     return await res.json();
   };
@@ -110,9 +115,16 @@ export const ExerciseProvider = ({ children }: { children: ReactNode }) => {
     return await res.json();
   };
 
+  /**
+   * Fetch exercises whenever a logged-in user becomes available.
+   * This prevents unauthorized (401) responses that happen when the token
+   * has not yet been loaded while the provider mounts.
+   */
   useEffect(() => {
-    fetchExercises()
-  }, [])
+    if (user) {
+      fetchExercises();
+    }
+  }, [user])
 
   return (
     <ExerciseContext.Provider value={{ exercises, loading, error, refetch: fetchExercises, logExercise, getWeeklySummary, getWeeklyHistory }}>

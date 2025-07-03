@@ -7,15 +7,16 @@ import { useEffect } from 'react';
 import React from 'react';
 import 'react-native-reanimated';
 
-import { FormProvider } from './context/FormContext'; // FormContext konumuna dikkat edin
+import { FormProvider } from './context/FormContext';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AuthProvider } from './context/AuthContext';
 import { CalorieProvider } from './context/CalorieContext';
-import { ToastProvider, useToast } from './context/ToastContext';
+import { ToastProvider } from './context/ToastContext';
 import { UserProfileProvider } from "./context/UserProfileContext"
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { WorkoutProgramProvider } from "./context/WorkoutProgramContext";
 import { ExerciseProvider } from "./context/ExerciseContext";
+import { FoodLogProvider } from "./context/FoodLogContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,6 +41,7 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
     <AuthProvider>
     <UserProfileProvider>
+      <FoodLogProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
           <FormProvider>
           <ToastProvider>
@@ -64,9 +66,10 @@ export default function RootLayout() {
                 </CalorieProvider>
               </ExerciseProvider>
             </WorkoutProgramProvider>
-          </ToastProvider>
-          </FormProvider>
-      </ThemeProvider>
+            </ToastProvider>
+            </FormProvider>
+        </ThemeProvider>
+      </FoodLogProvider>
     </UserProfileProvider>
     </AuthProvider>
     </GestureHandlerRootView>

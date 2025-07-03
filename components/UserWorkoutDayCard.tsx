@@ -23,8 +23,13 @@ type ExerciseEntry = {
     reps: number
     instructions?: string[]
     tips?: string[]
+    weight?: string
   }
   orderIndex: number
+  sets?: number | null
+  reps?: number | null
+  weight?: number | null
+  duration?: string | null
 }
 
 type Props = {
@@ -40,17 +45,15 @@ type Props = {
 
 export default function UserWorkoutDayCard({ date, workoutDay, onStartWorkout, isAnyExerciseActive, onAnyExerciseActive }: Props) {
   const isDark = useColorScheme() === "dark"
-  const [selectedExerciseId, setSelectedExerciseId] = useState<number | null>(null)
+  const [selectedExerciseId, setSelectedExerciseId] = useState<string | null>(null)
   const [modalVisible, setModalVisible] = useState(false)
   const [modalExercise, setModalExercise] = useState<any>(null)
   const [activeExerciseId, setActiveExerciseId] = useState<number | null>(null)
   const [timer, setTimer] = useState(0) // ms
   const [isRunning, setIsRunning] = useState(false)
-  const [finishedExercises, setFinishedExercises] = useState<{
-    [date: string]: { id: number; name: string; duration: number }[]
-  }>({})
-  const { logExercise } = useExercises()
+  const { getWeeklyHistory, logExercise } = useExercises()
   const { user } = useAuth()
+  const [completedExercises, setCompletedExercises] = useState<any[]>([])
 
   useEffect(() => {
     let interval: any
@@ -67,6 +70,31 @@ export default function UserWorkoutDayCard({ date, workoutDay, onStartWorkout, i
       onAnyExerciseActive(!!activeExerciseId);
     }
   }, [activeExerciseId]);
+
+  useEffect(() => {
+    (async () => {
+      if (!user?.id || !date || !workoutDay) return;
+      // Haftanın başı olarak bugünü gönderiyoruz, ama sadece o günün completed olanlarını filtreleyeceğiz
+      const weekStart = date;
+      try {
+        const history = await getWeeklyHistory(user.id, weekStart);
+        // Sadece bugünkü ve completed olanları al
+        let completed = history.filter(item => item.date === date && item.completed);
+        // --- YENİ: Sadece bugünkü programda olan egzersizleri göster (isim ile) ---
+        const validExerciseNames = workoutDay.exerciseEntries.map(e => e.exercise.name);
+        completed = completed.filter(item => validExerciseNames.includes(item.exerciseName));
+        setCompletedExercises(completed);
+      } catch (e) {
+        setCompletedExercises([]);
+      }
+    })();
+  }, [user?.id, date, workoutDay]);
+
+  useEffect(() => {
+    if (completedExercises && completedExercises.length > 0) {
+     
+    }
+  }, [completedExercises]);
 
   const formatTime = (ms: number) => {
     const hours = Math.floor(ms / 3600000)
@@ -86,26 +114,30 @@ export default function UserWorkoutDayCard({ date, workoutDay, onStartWorkout, i
 
   const handlePauseResume = () => setIsRunning((prev) => !prev)
 
-  const handleFinish = (exercise: ExerciseEntry) => {
+  const handleFinish = async (exercise: ExerciseEntry) => {
     setIsRunning(false)
-    setFinishedExercises((prev) => ({
-      ...prev,
-      [date]: [...(prev[date] || []), { id: exercise.id, name: exercise.exercise.name, duration: timer }],
-    }))
+    setSelectedExerciseId(null)
     setActiveExerciseId(null)
     setTimer(0)
-    setSelectedExerciseId(null)
     if (user && user.id) {
-      logExercise({
+      await logExercise({
         userId: user.id,
         exerciseId: exercise.exerciseId,
         date,
         durationMs: timer,
-      })
+        completed: true,
+      });
+      // Kayıt sonrası tekrar güncelle
+      const history = await getWeeklyHistory(user.id, date);
+      const completed = history.filter(item => item.date === date && item.completed);
+      setCompletedExercises(completed);
     }
   }
 
   if (!workoutDay) return null
+
+  // Hareket listesini console'a yazdır
+  console.log('WorkoutDay Exercise Entries:', workoutDay.exerciseEntries);
 
   const handleShowDetail = (exercise: ExerciseEntry) => {
     setModalExercise({
@@ -116,8 +148,8 @@ export default function UserWorkoutDayCard({ date, workoutDay, onStartWorkout, i
     setModalVisible(true)
   }
 
-  const handleSelectExercise = (id: number) => {
-    setSelectedExerciseId((prev) => (prev === id ? null : id))
+  const handleSelectExercise = (uniqueKey: string) => {
+    setSelectedExerciseId((prev) => (prev === uniqueKey ? null : uniqueKey))
   }
 
   const formatDate = (dateString: string) => {
@@ -152,6 +184,16 @@ export default function UserWorkoutDayCard({ date, workoutDay, onStartWorkout, i
     }
   }
 
+  // Yardımcı fonksiyon: saniyeyi saat:dakika:saniye olarak formatla
+  function formatSeconds(seconds: any) {
+    const sec = Number(seconds);
+    if (isNaN(sec) || sec < 0) return "00:00";
+    const h = Math.floor(sec / 3600);
+    const m = Math.floor((sec % 3600) / 60);
+    const s = sec % 60;
+    return `${h > 0 ? h + ":" : ""}${h > 0 ? String(m).padStart(2, "0") : m}:${String(s).padStart(2, "0")}`;
+  }
+
   return (
     <View
       style={[
@@ -180,19 +222,22 @@ export default function UserWorkoutDayCard({ date, workoutDay, onStartWorkout, i
       <View style={styles.exerciseList}>
         {workoutDay.exerciseEntries.map((entry, index) => {
           if (!entry.exercise) return null;
+          // Benzersiz key ve seçme için hem id hem orderIndex kullan
+          const uniqueKey = `${entry.id}-${entry.orderIndex}`;
+          const isSelected = selectedExerciseId === uniqueKey;
           return (
             <View
-              key={entry.id}
+              key={uniqueKey}
               style={[
                 styles.exerciseItem,
                 {
                   backgroundColor:
-                    selectedExerciseId === entry.id
+                    isSelected
                       ? isDark
                         ? "rgba(61, 204, 133, 0.1)"
                         : "rgba(61, 204, 133, 0.05)"
                       : "transparent",
-                  borderRadius: selectedExerciseId === entry.id ? 12 : 0,
+                  borderRadius: isSelected ? 12 : 0,
                   borderBottomColor: isDark ? "#333333" : "#F0F0F0",
                   borderBottomWidth: index < workoutDay.exerciseEntries.length - 1 ? 1 : 0,
                 },
@@ -201,7 +246,7 @@ export default function UserWorkoutDayCard({ date, workoutDay, onStartWorkout, i
               <View style={styles.exerciseRow}>
                 <TouchableOpacity
                   style={styles.exerciseContent}
-                  onPress={() => handleSelectExercise(entry.id)}
+                  onPress={() => handleSelectExercise(uniqueKey)}
                   activeOpacity={0.7}
                   disabled={!!activeExerciseId && activeExerciseId !== entry.id}
                 >
@@ -231,8 +276,8 @@ export default function UserWorkoutDayCard({ date, workoutDay, onStartWorkout, i
                     </View>
                     <Text style={[styles.exerciseStats, { color: isDark ? "#B0B0B0" : "#888888" }]}>
                       {entry.exercise.type.toLowerCase() === "cardio"
-                        ? `Süre: ${entry.exercise.duration} | Kalori: ${entry.exercise.calories}`
-                        : `${entry.exercise.sets} set x ${entry.exercise.reps} reps | Kalori: ${entry.exercise.calories}`}
+                        ? `Süre: ${entry.duration ?? entry.exercise.duration} | Kalori: ${entry.exercise.calories}`
+                        : `${(entry.sets ?? entry.exercise.sets) || 0} set x ${(entry.reps ?? entry.exercise.reps) || 0} reps${(entry.weight ?? entry.exercise.weight) && Number(entry.weight ?? entry.exercise.weight) > 0 ? ` | Ağırlık: ${(entry.weight ?? entry.exercise.weight)} kg` : ""} | Kalori: ${entry.exercise.calories}`}
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -248,7 +293,7 @@ export default function UserWorkoutDayCard({ date, workoutDay, onStartWorkout, i
               </View>
 
               {/* Timer and Controls */}
-              {selectedExerciseId === entry.id && (
+              {selectedExerciseId === uniqueKey && (
                 <View style={styles.timerContainer}>
                   {activeExerciseId === entry.id ? (
                     <View style={styles.activeTimerSection}>
@@ -299,16 +344,16 @@ export default function UserWorkoutDayCard({ date, workoutDay, onStartWorkout, i
       </View>
 
       {/* Finished Workouts */}
-      {(finishedExercises[date] || []).length > 0 && (
+      {completedExercises.length > 0 && (
         <View style={styles.finishedSection}>
           <View style={styles.finishedHeader}>
             <MaterialCommunityIcons name="check-circle" size={20} color="#3DCC85" />
             <Text style={[styles.finishedTitle, { color: isDark ? "#3DCC85" : "#2E7D32" }]}>Biten Antrenmanlar</Text>
           </View>
           <View style={styles.finishedList}>
-            {finishedExercises[date].map((ex, index) => (
+            {completedExercises.map((ex, index) => (
               <View
-                key={`${ex.id}-${index}`}
+                key={ex.id ? `completed-${ex.id}` : ex.exerciseId ? `completed-${ex.exerciseId}` : `${ex.exerciseName}-${index}`}
                 style={[
                   styles.finishedItem,
                   {
@@ -320,13 +365,13 @@ export default function UserWorkoutDayCard({ date, workoutDay, onStartWorkout, i
                 <View style={styles.finishedItemContent}>
                   <MaterialCommunityIcons name="check-circle" size={16} color="#3DCC85" />
                   <Text style={[styles.finishedExerciseName, { color: isDark ? "#FFFFFF" : "#1A1A1A" }]}>
-                    {ex.name}
+                    {ex.exerciseName}
                   </Text>
                 </View>
                 <View style={styles.finishedDuration}>
                   <MaterialCommunityIcons name="timer-outline" size={14} color={isDark ? "#B0B0B0" : "#666666"} />
                   <Text style={[styles.finishedTime, { color: isDark ? "#B0B0B0" : "#666666" }]}>
-                    {formatTime(ex.duration)}
+                    {formatSeconds(ex.durationSeconds)}
                   </Text>
                 </View>
               </View>

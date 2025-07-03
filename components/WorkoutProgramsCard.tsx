@@ -5,6 +5,7 @@ import { useRouter } from "expo-router"
 import React from "react"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { Image as ExpoImage } from "expo-image"
+import { RECOMMENDATION_MATRIX } from "../constants/workoutData"
 
 export type WorkoutProgram = {
   id: string
@@ -12,6 +13,7 @@ export type WorkoutProgram = {
   image: string
   type?: string // custom or default
   onDelete?: () => void
+  slug?: string // for recommendation
 }
 
 type WorkoutProgramsCardProps = {
@@ -20,9 +22,12 @@ type WorkoutProgramsCardProps = {
   showCreate?: boolean;
   onViewAllPress?: () => void;
   onProgramPress?: (program: WorkoutProgram) => void;
+  userProfile?: any;
+  recommendationMatrix?: any[];
+  allPrograms?: WorkoutProgram[];
 }
 
-export default function WorkoutProgramsCard({ title, programs, showCreate = true, onViewAllPress, onProgramPress }: WorkoutProgramsCardProps) {
+export default function WorkoutProgramsCard({ title, programs, showCreate = true, onViewAllPress, onProgramPress, userProfile, recommendationMatrix = RECOMMENDATION_MATRIX, allPrograms }: WorkoutProgramsCardProps) {
   const isDark = useColorScheme() === "dark"
   const router = useRouter()
   const handleProgramPress = (program: WorkoutProgram) => {
@@ -38,6 +43,38 @@ export default function WorkoutProgramsCard({ title, programs, showCreate = true
   // Eğer tüm programlar custom ise showCreate'i false yap
   const isCustomList = programs.length > 0 && programs.every(p => p.type === "custom");
   const shouldShowCreate = showCreate && !isCustomList; 
+
+  // Recommendation filtering
+  let displayPrograms = programs;
+  if (userProfile && allPrograms && recommendationMatrix) {
+    
+    const activity = userProfile.activityLevel || "*";
+    const goal = userProfile.goal || "*";
+    const match = recommendationMatrix.find(row => (row.activity === activity || row.activity === "*") && (row.goal === goal || row.goal === "*"));
+    
+    const normalizeSlug = (slug: string | undefined) => slug?.toUpperCase().replace(/-/g, "_");
+    if (match) {
+      const seen = new Set<string>();
+      const recs = match.recommend
+        .map((slug: string) => {
+          const normalizedSlug = slug.toUpperCase();
+          const found = allPrograms.find(
+            (p: WorkoutProgram) => normalizeSlug(p.slug) === normalizedSlug
+          );
+          
+          return found;
+        })
+        .filter((p: WorkoutProgram | undefined): p is WorkoutProgram => {
+          if (!p) return false;
+          if (seen.has(p.id)) return false;
+          seen.add(p.id);
+          return true;
+        });
+      
+      if (recs.length > 0) displayPrograms = recs;
+    }
+  }
+  
 
   return (
     <View style={[styles.container, { backgroundColor: isDark ? "#222" : "#fff" }]}>
@@ -57,7 +94,7 @@ export default function WorkoutProgramsCard({ title, programs, showCreate = true
             </View>
           </TouchableOpacity>
         )}
-        {programs.map((program) => (
+        {displayPrograms.map((program) => (
           <TouchableOpacity key={program.id} style={styles.programCard} onPress={() => handleProgramPress(program)}>
               <ExpoImage
               source={{ uri: program.image }}

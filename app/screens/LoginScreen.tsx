@@ -119,13 +119,12 @@ export default function LoginScreen() {
 
   useEffect(() => {
     const onBackPress = () => {
-      // Login ekranında geri tuşu uygulamadan çıkış yapsın, başka ekrana gitmesin
-      BackHandler.exitApp();
+      router.replace("/");
       return true;
     };
     const subscription = BackHandler.addEventListener("hardwareBackPress", onBackPress);
     return () => subscription.remove();
-  }, []);
+  }, [router]);
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#121212" : "#f8f9fa" }]}>

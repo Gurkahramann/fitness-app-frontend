@@ -83,12 +83,12 @@ export default function LifestyleScreen() {
       goal: selectedGoal,
     }
 
-    console.log("📤 Kayit verisi gönderiliyor:", registerData)
+    
 
     try {
       const response = await register(registerData)
 
-      console.log("✅ Register yaniti:", response)
+          
       if (response?.success) {
         setFormData(defaultFormData)
         showToast("🎉 Kayıt başarılı!", 'success')

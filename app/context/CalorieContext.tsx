@@ -21,7 +21,6 @@ export const CalorieProvider = ({ children }: { children: React.ReactNode }) => 
       const res = await authFetch(`${process.env.EXPO_PUBLIC_SPRING_API}/auth/me`);
       const data = await res.json();
   
-      console.log("Backend'den dönen veri:", data);
   
       if (!res.ok) throw new Error(data.message || "Kullanıcı verisi alınamadı");
   
@@ -44,10 +43,8 @@ export const CalorieProvider = ({ children }: { children: React.ReactNode }) => 
 
   useEffect(() => {
     if (user) {
-      console.log("✅ Kullanıcı bulundu, fetch başlatılıyor:", user);
       fetchUserInfo();
     } else {
-      console.log("⏭️ Kullanıcı yok, fetchUserInfo atlanıyor.");
       setLoading(false);
     }
   }, [user]);

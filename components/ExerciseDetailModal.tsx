@@ -30,7 +30,33 @@ interface ExerciseDetailModalProps {
   showActions?: boolean // yeni prop, default true
 }
 
-const { width } = Dimensions.get("window")
+
+// Egzersiz ağırlık gerektiriyor mu? (isim veya instructions içinde ekipman/kuvvet/itme-çekme anahtar kelimesi varsa true)
+function requiresWeightInput(exercise: any) {
+  if (!exercise) return false;
+  const name = (exercise.name || "").toLowerCase();
+
+  // Back Squat ve Goblet Squat her zaman ağırlıklı
+  if (name.includes("back squat") || name.includes("goblet squat")) return true;
+
+  // İstisna hareketler (her zaman ağırlıksız)
+  const exceptions = [
+    "squat", // Squats, Bulgarian Split Squat, Goblet Squat vs. için (Back ve Goblet hariç)
+    "lunge", // Lunges, Walking Lunge
+    "calf raise", // Standing Calf Raise
+    "cable wood-chop"
+  ];
+  // Back Squat ve Goblet Squat hariç diğer squatlar için
+  if (exceptions.some(exception => name.includes(exception)) && !name.includes("back squat") && !name.includes("goblet squat")) return false;
+
+  // Anahtar kelimeler
+  const keywords = [
+    "dumbbell", "barbell", "kettlebell", "plate", "cable", "band", "machine",
+    "pull", "press", "row", "curl", "extension", "raise", "thruster", "fly", "crush", "deadlift", "dip", "bench"
+  ];
+  const instructions = (exercise.instructions || []).join(" ").toLowerCase();
+  return keywords.some(keyword => name.includes(keyword) || instructions.includes(keyword));
+}
 
 export default function ExerciseDetailModal({
   visible,
@@ -96,8 +122,8 @@ export default function ExerciseDetailModal({
         return
       }
       // Diğer validasyonlar (ör: ağırlık)
-      if (!isCardio && (Number.parseFloat(weight) <= 0 || isNaN(Number.parseFloat(weight)))) {
-        if (onAddToWorkout) onAddToWorkout({ error: "Please enter a weight greater than 0." })
+      if (!isCardio && requiresWeightInput(exercise) && (Number.parseFloat(weight) <= 0 || isNaN(Number.parseFloat(weight)))) {
+        if (onAddToWorkout) onAddToWorkout({ error: "Lütfen ağırlık giriniz." })
         return
       }
       onAddToWorkout?.({ sets, reps, weight, duration, selectedSchedule })
@@ -116,9 +142,6 @@ export default function ExerciseDetailModal({
             <MaterialCommunityIcons name="close" size={24} color={isDark ? "#fff" : "#000"} />
           </TouchableOpacity>
           <Text style={[styles.headerTitle, { color: isDark ? "#fff" : "#000" }]}>{exercise.name}</Text>
-          <TouchableOpacity style={styles.favoriteButton}>
-            <MaterialCommunityIcons name="heart-outline" size={24} color={isDark ? "#fff" : "#000"} />
-          </TouchableOpacity>
         </View>
 
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -257,22 +280,24 @@ export default function ExerciseDetailModal({
                         keyboardType="numeric"
                       />
                     </View>
-                    <View style={styles.configItem}>
-                      <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Ağırlık (kg)</Text>
-                      <TextInput
-                        style={[
-                          styles.configInput,
-                          {
-                            backgroundColor: isDark ? "#2A2A2A" : "#F8FAFC",
-                            color: isDark ? "#fff" : "#1E293B",
-                            borderColor: isDark ? "#374151" : "#E2E8F0",
-                          },
-                        ]}
-                        value={weight}
-                        onChangeText={setWeight}
-                        keyboardType="numeric"
-                      />
-                    </View>
+                    {requiresWeightInput(exercise) && (
+                      <View style={styles.configItem}>
+                        <Text style={[styles.configLabel, { color: isDark ? "#9CA3AF" : "#64748B" }]}>Ağırlık (kg)</Text>
+                        <TextInput
+                          style={[
+                            styles.configInput,
+                            {
+                              backgroundColor: isDark ? "#2A2A2A" : "#F8FAFC",
+                              color: isDark ? "#fff" : "#1E293B",
+                              borderColor: isDark ? "#374151" : "#E2E8F0",
+                            },
+                          ]}
+                          value={weight}
+                          onChangeText={setWeight}
+                          keyboardType="numeric"
+                        />
+                      </View>
+                    )}
                   </>
                 ) : (
                   <View style={styles.configItem}>
@@ -378,9 +403,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: "center",
   },
-  favoriteButton: {
-    padding: 8,
-  },
+
   mediaContainer: {
     position: "relative",
     height: 250,

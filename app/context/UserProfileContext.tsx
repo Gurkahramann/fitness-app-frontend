@@ -38,7 +38,7 @@ export const UserProfileProvider = ({ children }: { children: ReactNode }) => {
     if (user) {
       setUserProfile({
         ...user,
-        goal: user.fitnessGoal, // Eşleşme
+        goal: user.goal, // Eşleşme
       });
       setError(null);
     } else {

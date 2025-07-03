@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useMemo, useCallback } from "react"
-import { SafeAreaView, ScrollView, StyleSheet, useColorScheme, Text, BackHandler, Alert, View } from "react-native"
+import { SafeAreaView, ScrollView, StyleSheet, useColorScheme, Text, BackHandler, Alert, View, FlatList } from "react-native"
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { DateData } from "react-native-calendars"
 import { useRouter } from "expo-router"
@@ -16,6 +16,7 @@ import ActiveWorkoutProgramsCard from "../../components/ActiveWorkoutProgramsCar
 import type { WorkoutProgram as CardWorkoutProgram } from '../../components/WorkoutProgramsCard';
 import CustomAlert from "../../components/CustomAlert";
 import { useCustomAlert } from "../../hooks/useCustomAlert";
+import FoodLogCard from "../../components/FoodLogCard";
 
 // Import data
 import { RECOMMENDATION_MATRIX } from "../../constants/workoutData"
@@ -27,6 +28,8 @@ import { useCalorie } from "../context/CalorieContext"
 import React from "react"
 import { useUserProfile } from "../context/UserProfileContext"
 import { useExercises } from "../context/ExerciseContext"
+import { useFoodLog } from "../context/FoodLogContext"
+import { useToast } from "../context/ToastContext"
 
 export default function HomeScreen() {
   const isDark = useColorScheme() === "dark"
@@ -42,15 +45,15 @@ export default function HomeScreen() {
   const { exercises } = useExercises();
   const insets = useSafeAreaInsets();
   const { alert, alertConfig, visible, hideAlert } = useCustomAlert();
+  const { logs, totalCalories, fetchFoodLogSummary, loading: foodLogLoading, error: foodLogError } = useFoodLog();
+  const { showToast } = useToast();
 
   // Event handlers
   const handleDayPress = (day: DateData) => {
     setSelectedDate(day.dateString)
-    console.log("Selected day:", day.dateString)
   }
 
   const handleProgramPress = (program: CardWorkoutProgram) => {
-    console.log("Program selected:", program)
     router.push({
       pathname: "/workout-detail",
       params: { id: program.id, type: program.type }
@@ -76,7 +79,6 @@ export default function HomeScreen() {
   );
 
   useEffect(() => {
-    console.log("userCustomWorkoutPrograms state:", userCustomWorkoutPrograms);
   }, [userCustomWorkoutPrograms]);
   // Tarihleri işaretle
   useEffect(() => {
@@ -129,38 +131,38 @@ export default function HomeScreen() {
     const activity = userProfile.activityLevel || "*";
     const goal = userProfile.goal || "*";
     const match = RECOMMENDATION_MATRIX.find(row => (row.activity === activity || row.activity === "*") && (row.goal === goal || row.goal === "*"));
-
     if (match) {
       const seen = new Set();
       const recs = match.recommend
-        .map(slug => workoutPrograms.find(p => p.slug.toUpperCase().replace(/-/g, '_') === slug))
+        .map(slug => {
+          const found = workoutPrograms.find(p => p.slug === slug);
+          return found;
+        })
         .filter((p): p is typeof workoutPrograms[0] => {
           if (!p) return false;
           if (seen.has(p.id)) return false;
           seen.add(p.id);
           return true;
         });
+      
       if (recs.length > 0) return recs;
     }
-
     return workoutPrograms;
   }, [userProfile, workoutPrograms]);
 
-  
   const defaultPrograms = recommendedPrograms
     .filter(p => p && p.id !== undefined && p.title)
     .map(p => ({
       id: p.id.toString(),
       title: p.title,
       image: p.coverImageUrl || "",
-      type: "default"
+      type: "default",
+      slug: p.slug
     }));
-  useEffect(() => {
-    const onBackPress = () => {
-      console.log("[HomeScreen] navState:", navState);
-      console.log("[HomeScreen] navState.routes:", navState?.routes);
-      // Sadece stack'te tek ekran varsa (yani HomeScreen root ise) uyarı göster
-      if (navState?.routes?.length === 1) {
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
         alert(
           "Çıkış Yap",
           "Çıkış yapmak ister misiniz?",
@@ -170,7 +172,7 @@ export default function HomeScreen() {
               text: "Evet",
               onPress: async () => {
                 await logout();
-                router.replace("/login");
+                router.replace("/"); // veya giriş/welcome ekranı
               },
               style: "destructive"
             },
@@ -180,14 +182,12 @@ export default function HomeScreen() {
             iconColor: "#FF3B30",
           }
         );
-        return true;
-      }
-      // Aksi halde default davranış (geri git)
-      return false;
-    };
-    const subscription = BackHandler.addEventListener("hardwareBackPress", onBackPress);
-    return () => subscription.remove();
-  }, [navState, alert, logout, router]);
+        return true; // Varsayılan geri davranışı engelle
+      };
+      const subscription = BackHandler.addEventListener("hardwareBackPress", onBackPress);
+      return () => subscription.remove();
+    }, [logout, router, alert])
+  );
   
   
 
@@ -277,6 +277,12 @@ export default function HomeScreen() {
     image: p.coverImageUrl || "https://via.placeholder.com/400x300/3DCC85/FFFFFF?text=Custom+Program",
     type: "custom",
     onDelete: () => {
+      // Aktif programlarda var mı kontrol et
+      const isActive = userWorkoutPrograms.some(up => String(up.customWorkoutProgramId) === String(p.id));
+      if (isActive) {
+        showToast("Bu programı silmek için önce Aktif Antrenman Programlarım'dan kaldırmalısınız.", "warning");
+        return;
+      }
       alert(
         "Programı Kaldır",
         "Bu programı kaldırmak istediğinizden emin misiniz?",
@@ -303,7 +309,10 @@ export default function HomeScreen() {
   }, []);
 
   useEffect(() => {
-  }, [workoutPrograms]);
+    if (user?.id) {
+      fetchFoodLogSummary();
+    }
+  }, [user?.id]);
 
   if (programsLoading) {
     return (
@@ -318,7 +327,17 @@ export default function HomeScreen() {
       {/* Kullanıcı varsa adını gönderiyoruz, yoksa fallback */}
       <View style={[styles.header, { paddingTop: insets.top }]}> 
         {user ? (
-          <Header userName={user.name} />
+          <Header 
+            userName={user.name}
+            profileImageUrl={
+              userProfile?.profileImage ||
+              (userProfile?.gender === "Male"
+                ? "https://storage.googleapis.com/fitness-app-photos/Male%20Avatar.png"
+                : userProfile?.gender === "Female"
+                ? "https://storage.googleapis.com/fitness-app-photos/Female%20Avatar.png"
+                : "https://via.placeholder.com/150")
+            }
+          />
         ) : (
           <Text style={{ padding: 16, fontSize: 18, color: isDark ? "#fff" : "#000" }}>
             Yükleniyor...
@@ -332,6 +351,9 @@ export default function HomeScreen() {
         title="Antrenman Programları"
         programs={defaultPrograms}
         showCreate={true}
+        recommendationMatrix={RECOMMENDATION_MATRIX}
+        userProfile={userProfile}
+        allPrograms={defaultPrograms}
         onProgramPress={handleProgramPress}
       />
 
@@ -401,11 +423,22 @@ export default function HomeScreen() {
         isAnyExerciseActive={isAnyExerciseActive}
         onAnyExerciseActive={handleAnyExerciseActive}
       />
+      {/* Yediklerinizi Kaydedin Kartı */}
+      <FoodLogCard onImageSelected={(uri) => {
+        console.log("Image selected:", uri);
+      }} />
       {!loading && calorieGoal ? (
-      <CaloriesCard remaining={calorieGoal} goal={calorieGoal} consumed={0} />
-    ) : (
-      <Text style={{ textAlign: "center", marginTop: 16 }}>Kalori hesaplanıyor...</Text>
-    )}      
+        <CaloriesCard
+          remaining={Math.max((calorieGoal || 0) - (totalCalories || 0), 0)}
+          goal={calorieGoal || 0}
+          consumed={totalCalories || 0}
+          logs={logs}
+          loading={foodLogLoading}
+          error={foodLogError}
+        />
+      ) : (
+        <Text style={{ textAlign: "center", marginTop: 16 }}>Kalori hesaplanıyor...</Text>
+      )}
       </ScrollView>
 
       {/* CustomAlert Bileşeni */}
