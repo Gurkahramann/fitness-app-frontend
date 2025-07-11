@@ -1,0 +1,4911 @@
+[
+  {
+    "id": 1,
+    "title": "Beginner Full Body",
+    "slug": "beginner-full-body",
+    "description": "Perfect for those starting their fitness journey. A comprehensive 4-week program focusing on basic movements and building strength foundation.",
+    "difficulty": "BEGINNER",
+    "durationWeeks": 4,
+    "coverImageUrl": "https://via.placeholder.com/400x300/33FF57/FFFFFF?text=Beginner",
+    "thumbnailUrl": "https://via.placeholder.com/120x160/33FF57/FFFFFF?text=Beginner",
+    "tags": [
+      "beginner",
+      "full-body",
+      "strength",
+      "foundation"
+    ],
+    "days": [
+      {
+        "id": 1,
+        "userId": "user123",
+        "date": "2024-01-01",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 1,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 1,
+                "setNo": 1,
+                "reps": 8,
+                "weight": 0,
+                "rpe": 6,
+                "durationSec": 0
+              },
+              {
+                "id": 2,
+                "setNo": 2,
+                "reps": 8,
+                "weight": 0,
+                "rpe": 7,
+                "durationSec": 0
+              },
+              {
+                "id": 3,
+                "setNo": 3,
+                "reps": 6,
+                "weight": 0,
+                "rpe": 8,
+                "durationSec": 0
+              }
+            ],
+            "exerciseId": 1
+          },
+          {
+            "id": 2,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 4,
+                "setNo": 1,
+                "reps": 12,
+                "weight": 0,
+                "rpe": 5,
+                "durationSec": 0
+              },
+              {
+                "id": 5,
+                "setNo": 2,
+                "reps": 12,
+                "weight": 0,
+                "rpe": 6,
+                "durationSec": 0
+              },
+              {
+                "id": 6,
+                "setNo": 3,
+                "reps": 10,
+                "weight": 0,
+                "rpe": 7,
+                "durationSec": 0
+              }
+            ],
+            "exerciseId": 2
+          },
+          {
+            "id": 3,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 7,
+                "setNo": 1,
+                "reps": 0,
+                "weight": 0,
+                "rpe": 6,
+                "durationSec": 30
+              },
+              {
+                "id": 8,
+                "setNo": 2,
+                "reps": 0,
+                "weight": 0,
+                "rpe": 7,
+                "durationSec": 30
+              },
+              {
+                "id": 9,
+                "setNo": 3,
+                "reps": 0,
+                "weight": 0,
+                "rpe": 8,
+                "durationSec": 25
+              }
+            ],
+            "exerciseId": 4
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "userId": "user123",
+        "date": "2024-01-03",
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "id": 4,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 10,
+                "setNo": 1,
+                "reps": 20,
+                "weight": 0,
+                "rpe": 5,
+                "durationSec": 0
+              },
+              {
+                "id": 11,
+                "setNo": 2,
+                "reps": 20,
+                "weight": 0,
+                "rpe": 6,
+                "durationSec": 0
+              },
+              {
+                "id": 12,
+                "setNo": 3,
+                "reps": 15,
+                "weight": 0,
+                "rpe": 7,
+                "durationSec": 0
+              }
+            ],
+            "exerciseId": 3
+          },
+          {
+            "id": 5,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 13,
+                "setNo": 1,
+                "reps": 10,
+                "weight": 0,
+                "rpe": 6,
+                "durationSec": 0
+              },
+              {
+                "id": 14,
+                "setNo": 2,
+                "reps": 10,
+                "weight": 0,
+                "rpe": 7,
+                "durationSec": 0
+              },
+              {
+                "id": 15,
+                "setNo": 3,
+                "reps": 8,
+                "weight": 0,
+                "rpe": 8,
+                "durationSec": 0
+              }
+            ],
+            "exerciseId": 7
+          }
+        ]
+      }
+    ],
+    "createdById": "trainer123",
+    "likes": [
+      "user1",
+      "user2",
+      "user3"
+    ],
+    "isPublic": true,
+    "exercises": [
+      1,
+      2,
+      3,
+      4,
+      7
+    ],
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "Cardio Beginner",
+    "slug": "cardio-beginner",
+    "description": "Sedanter / hafif aktif kişiler için 4 haftalık kilo kaybı – kardiyovasküler adaptasyon programı.",
+    "difficulty": "BEGINNER",
+    "durationWeeks": 4,
+    "coverImageUrl": "https://storage.googleapis.com/fitness-app-photos/cardio_cover.jpg",
+    "thumbnailUrl": "https://storage.googleapis.com/fitness-app-photos/cardio_thumb.jpg",
+    "tags": [
+      "cardio",
+      "beginner",
+      "weightloss"
+    ],
+    "days": [
+      {
+        "id": 201,
+        "userId": "system",
+        "date": "2024-01-01",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 301,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 401,
+                "setNo": 1,
+                "durationSec": 1800
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 202,
+        "userId": "system",
+        "date": "2024-01-03",
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "id": 302,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 402,
+                "setNo": 1,
+                "durationSec": 300
+              },
+              {
+                "id": 403,
+                "setNo": 2,
+                "durationSec": 300
+              },
+              {
+                "id": 404,
+                "setNo": 3,
+                "durationSec": 300
+              },
+              {
+                "id": 405,
+                "setNo": 4,
+                "durationSec": 300
+              },
+              {
+                "id": 406,
+                "setNo": 5,
+                "durationSec": 300
+              },
+              {
+                "id": 407,
+                "setNo": 6,
+                "durationSec": 300
+              }
+            ],
+            "exerciseId": 10
+          }
+        ]
+      },
+      {
+        "id": 203,
+        "userId": "system",
+        "date": "2024-01-05",
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "id": 303,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 408,
+                "setNo": 1,
+                "durationSec": 1800
+              }
+            ],
+            "exerciseId": 11
+          }
+        ]
+      },
+      {
+        "id": 204,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 304,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 409,
+                "setNo": 1,
+                "durationSec": 1920
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 205,
+        "userId": "system",
+        "date": "2024-01-10",
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "id": 305,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 410,
+                "setNo": 1,
+                "durationSec": 320
+              },
+              {
+                "id": 411,
+                "setNo": 2,
+                "durationSec": 320
+              },
+              {
+                "id": 412,
+                "setNo": 3,
+                "durationSec": 320
+              },
+              {
+                "id": 413,
+                "setNo": 4,
+                "durationSec": 320
+              },
+              {
+                "id": 414,
+                "setNo": 5,
+                "durationSec": 320
+              },
+              {
+                "id": 415,
+                "setNo": 6,
+                "durationSec": 320
+              }
+            ],
+            "exerciseId": 10
+          }
+        ]
+      },
+      {
+        "id": 206,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "id": 306,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 416,
+                "setNo": 1,
+                "durationSec": 1920
+              }
+            ],
+            "exerciseId": 11
+          }
+        ]
+      },
+      {
+        "id": 207,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 307,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 417,
+                "setNo": 1,
+                "durationSec": 2100
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 208,
+        "userId": "system",
+        "date": "2024-01-17",
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "id": 308,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 418,
+                "setNo": 1,
+                "durationSec": 300
+              },
+              {
+                "id": 419,
+                "setNo": 2,
+                "durationSec": 300
+              },
+              {
+                "id": 420,
+                "setNo": 3,
+                "durationSec": 300
+              },
+              {
+                "id": 421,
+                "setNo": 4,
+                "durationSec": 300
+              },
+              {
+                "id": 422,
+                "setNo": 5,
+                "durationSec": 300
+              },
+              {
+                "id": 423,
+                "setNo": 6,
+                "durationSec": 300
+              },
+              {
+                "id": 424,
+                "setNo": 7,
+                "durationSec": 300
+              }
+            ],
+            "exerciseId": 10
+          }
+        ]
+      },
+      {
+        "id": 209,
+        "userId": "system",
+        "date": "2024-01-19",
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "id": 309,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 425,
+                "setNo": 1,
+                "durationSec": 2100
+              }
+            ],
+            "exerciseId": 11
+          }
+        ]
+      },
+      {
+        "id": 210,
+        "userId": "system",
+        "date": "2024-01-22",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 310,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 426,
+                "setNo": 1,
+                "durationSec": 2400
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 211,
+        "userId": "system",
+        "date": "2024-01-24",
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "id": 311,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 427,
+                "setNo": 1,
+                "durationSec": 300
+              },
+              {
+                "id": 428,
+                "setNo": 2,
+                "durationSec": 300
+              },
+              {
+                "id": 429,
+                "setNo": 3,
+                "durationSec": 300
+              },
+              {
+                "id": 430,
+                "setNo": 4,
+                "durationSec": 300
+              },
+              {
+                "id": 431,
+                "setNo": 5,
+                "durationSec": 300
+              },
+              {
+                "id": 432,
+                "setNo": 6,
+                "durationSec": 300
+              },
+              {
+                "id": 433,
+                "setNo": 7,
+                "durationSec": 300
+              },
+              {
+                "id": 434,
+                "setNo": 8,
+                "durationSec": 300
+              }
+            ],
+            "exerciseId": 10
+          }
+        ]
+      },
+      {
+        "id": 212,
+        "userId": "system",
+        "date": "2024-01-26",
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "id": 312,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 435,
+                "setNo": 1,
+                "durationSec": 2400
+              }
+            ],
+            "exerciseId": 11
+          }
+        ]
+      }
+    ],
+    "createdById": "system",
+    "likes": [],
+    "isPublic": true,
+    "exercises": [],
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": 3,
+    "title": "Strength Builder",
+    "slug": "strength-builder",
+    "description": "Advanced strength training program designed to build muscle mass and increase overall strength.",
+    "difficulty": "ADVANCED",
+    "durationWeeks": 8,
+    "coverImageUrl": "https://via.placeholder.com/400x300/33A8FF/FFFFFF?text=Strength",
+    "thumbnailUrl": "https://via.placeholder.com/120x160/33A8FF/FFFFFF?text=Strength",
+    "tags": [
+      "strength",
+      "muscle-building",
+      "advanced",
+      "powerlifting"
+    ],
+    "days": [
+      {
+        "id": 4,
+        "userId": "user123",
+        "date": "2024-01-01",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 9,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 25,
+                "setNo": 1,
+                "reps": 15,
+                "weight": 0,
+                "rpe": 7,
+                "durationSec": 0
+              },
+              {
+                "id": 26,
+                "setNo": 2,
+                "reps": 15,
+                "weight": 0,
+                "rpe": 8,
+                "durationSec": 0
+              },
+              {
+                "id": 27,
+                "setNo": 3,
+                "reps": 12,
+                "weight": 0,
+                "rpe": 9,
+                "durationSec": 0
+              },
+              {
+                "id": 28,
+                "setNo": 4,
+                "reps": 10,
+                "weight": 0,
+                "rpe": 9,
+                "durationSec": 0
+              }
+            ],
+            "exerciseId": 1
+          },
+          {
+            "id": 10,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 29,
+                "setNo": 1,
+                "reps": 20,
+                "weight": 0,
+                "rpe": 6,
+                "durationSec": 0
+              },
+              {
+                "id": 30,
+                "setNo": 2,
+                "reps": 20,
+                "weight": 0,
+                "rpe": 7,
+                "durationSec": 0
+              },
+              {
+                "id": 31,
+                "setNo": 3,
+                "reps": 18,
+                "weight": 0,
+                "rpe": 8,
+                "durationSec": 0
+              },
+              {
+                "id": 32,
+                "setNo": 4,
+                "reps": 15,
+                "weight": 0,
+                "rpe": 9,
+                "durationSec": 0
+              }
+            ],
+            "exerciseId": 2
+          }
+        ]
+      }
+    ],
+    "createdById": "trainer789",
+    "likes": [
+      "user6",
+      "user7",
+      "user8",
+      "user9"
+    ],
+    "isPublic": true,
+    "exercises": [
+      1,
+      2,
+      4,
+      7
+    ],
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": 4,
+    "title": "Full-Body Beginner",
+    "slug": "fullbody-beginner",
+    "description": "Haftada 3 gün, tam vücut direnç + hafif kardiyo ile kuvvet ve hipertrofi temelleri.",
+    "difficulty": "BEGINNER",
+    "durationWeeks": 4,
+    "coverImageUrl": "https://storage.googleapis.com/fitness-app-photos/fullbody_cover.jpg",
+    "thumbnailUrl": "https://storage.googleapis.com/fitness-app-photos/fullbody_thumb.jpg",
+    "tags": [
+      "fullbody",
+      "beginner",
+      "strength"
+    ],
+    "days": [
+      {
+        "id": 1,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 1,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 1,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 2,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 3,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 12
+          },
+          {
+            "id": 2,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 4,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 5,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 6,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 13
+          },
+          {
+            "id": 3,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 7,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 8,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 9,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 14
+          },
+          {
+            "id": 4,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 10,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 11,
+                "setNo": 2,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 16
+          },
+          {
+            "id": 5,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 12,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 13,
+                "setNo": 2,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 4
+          },
+          {
+            "id": 6,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 14,
+                "setNo": 1,
+                "durationSec": 600
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "id": 15,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 16,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 17,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 18,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 12
+          },
+          {
+            "id": 16,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 19,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 20,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 21,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 13
+          },
+          {
+            "id": 17,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 22,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 23,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 24,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 14
+          },
+          {
+            "id": 18,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 25,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 26,
+                "setNo": 2,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 16
+          },
+          {
+            "id": 19,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 27,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 28,
+                "setNo": 2,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 4
+          },
+          {
+            "id": 20,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 29,
+                "setNo": 1,
+                "durationSec": 600
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "id": 30,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 31,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 32,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 33,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 12
+          },
+          {
+            "id": 31,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 34,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 35,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 36,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 13
+          },
+          {
+            "id": 32,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 37,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 38,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 39,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 14
+          },
+          {
+            "id": 33,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 40,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 41,
+                "setNo": 2,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 16
+          },
+          {
+            "id": 34,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 42,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 43,
+                "setNo": 2,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 4
+          },
+          {
+            "id": 35,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 44,
+                "setNo": 1,
+                "durationSec": 600
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 36,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 37,
+                "setNo": 1,
+                "reps": 14
+              },
+              {
+                "id": 38,
+                "setNo": 2,
+                "reps": 14
+              },
+              {
+                "id": 39,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 12
+          },
+          {
+            "id": 37,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 40,
+                "setNo": 1,
+                "reps": 14
+              },
+              {
+                "id": 41,
+                "setNo": 2,
+                "reps": 14
+              },
+              {
+                "id": 42,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 13
+          },
+          {
+            "id": 38,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 43,
+                "setNo": 1,
+                "reps": 14
+              },
+              {
+                "id": 44,
+                "setNo": 2,
+                "reps": 14
+              },
+              {
+                "id": 45,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 14
+          },
+          {
+            "id": 39,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 46,
+                "setNo": 1,
+                "reps": 14
+              },
+              {
+                "id": 47,
+                "setNo": 2,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 16
+          },
+          {
+            "id": 40,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 48,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 49,
+                "setNo": 2,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 4
+          },
+          {
+            "id": 41,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 50,
+                "setNo": 1,
+                "durationSec": 720
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "id": 42,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 43,
+                "setNo": 1,
+                "reps": 14
+              },
+              {
+                "id": 44,
+                "setNo": 2,
+                "reps": 14
+              },
+              {
+                "id": 45,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 12
+          },
+          {
+            "id": 43,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 46,
+                "setNo": 1,
+                "reps": 14
+              },
+              {
+                "id": 47,
+                "setNo": 2,
+                "reps": 14
+              },
+              {
+                "id": 48,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 13
+          },
+          {
+            "id": 44,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 49,
+                "setNo": 1,
+                "reps": 14
+              },
+              {
+                "id": 50,
+                "setNo": 2,
+                "reps": 14
+              },
+              {
+                "id": 51,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 14
+          },
+          {
+            "id": 45,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 52,
+                "setNo": 1,
+                "reps": 14
+              },
+              {
+                "id": 53,
+                "setNo": 2,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 16
+          },
+          {
+            "id": 46,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 54,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 55,
+                "setNo": 2,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 4
+          },
+          {
+            "id": 47,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 56,
+                "setNo": 1,
+                "durationSec": 720
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "id": 48,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 49,
+                "setNo": 1,
+                "reps": 14
+              },
+              {
+                "id": 50,
+                "setNo": 2,
+                "reps": 14
+              },
+              {
+                "id": 51,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 12
+          },
+          {
+            "id": 49,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 52,
+                "setNo": 1,
+                "reps": 14
+              },
+              {
+                "id": 53,
+                "setNo": 2,
+                "reps": 14
+              },
+              {
+                "id": 54,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 13
+          },
+          {
+            "id": 50,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 55,
+                "setNo": 1,
+                "reps": 14
+              },
+              {
+                "id": 56,
+                "setNo": 2,
+                "reps": 14
+              },
+              {
+                "id": 57,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 14
+          },
+          {
+            "id": 51,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 58,
+                "setNo": 1,
+                "reps": 14
+              },
+              {
+                "id": 59,
+                "setNo": 2,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 16
+          },
+          {
+            "id": 52,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 60,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 61,
+                "setNo": 2,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 4
+          },
+          {
+            "id": 53,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 62,
+                "setNo": 1,
+                "durationSec": 720
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 54,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 55,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 56,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 57,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 58,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 12
+          },
+          {
+            "id": 55,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 59,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 60,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 61,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 62,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 13
+          },
+          {
+            "id": 56,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 63,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 64,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 65,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 66,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 14
+          },
+          {
+            "id": 57,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 67,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 68,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 69,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 70,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 16
+          },
+          {
+            "id": 58,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 71,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 72,
+                "setNo": 2,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 4
+          },
+          {
+            "id": 59,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 73,
+                "setNo": 1,
+                "durationSec": 780
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "id": 60,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 61,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 62,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 63,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 64,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 12
+          },
+          {
+            "id": 61,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 65,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 66,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 67,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 68,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 13
+          },
+          {
+            "id": 62,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 69,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 70,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 71,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 72,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 14
+          },
+          {
+            "id": 63,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 73,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 74,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 75,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 76,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 16
+          },
+          {
+            "id": 64,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 77,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 78,
+                "setNo": 2,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 4
+          },
+          {
+            "id": 65,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 79,
+                "setNo": 1,
+                "durationSec": 780
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "id": 66,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 67,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 68,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 69,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 70,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 12
+          },
+          {
+            "id": 67,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 71,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 72,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 73,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 74,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 13
+          },
+          {
+            "id": 68,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 75,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 76,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 77,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 78,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 14
+          },
+          {
+            "id": 69,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 79,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 80,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 81,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 82,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 16
+          },
+          {
+            "id": 70,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 83,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 84,
+                "setNo": 2,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 4
+          },
+          {
+            "id": 71,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 85,
+                "setNo": 1,
+                "durationSec": 780
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 72,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 73,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 74,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 75,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 76,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 12
+          },
+          {
+            "id": 73,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 77,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 78,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 79,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 80,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 13
+          },
+          {
+            "id": 74,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 81,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 82,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 83,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 84,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 14
+          },
+          {
+            "id": 75,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 85,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 86,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 87,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 88,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 16
+          },
+          {
+            "id": 76,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 89,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 90,
+                "setNo": 2,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 4
+          },
+          {
+            "id": 77,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 91,
+                "setNo": 1,
+                "durationSec": 900
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "id": 78,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 79,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 80,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 81,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 82,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 12
+          },
+          {
+            "id": 79,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 83,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 84,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 85,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 86,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 13
+          },
+          {
+            "id": 80,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 87,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 88,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 89,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 90,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 14
+          },
+          {
+            "id": 81,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 91,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 92,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 93,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 94,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 16
+          },
+          {
+            "id": 82,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 95,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 96,
+                "setNo": 2,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 4
+          },
+          {
+            "id": 83,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 97,
+                "setNo": 1,
+                "durationSec": 900
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "id": 84,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 85,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 86,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 87,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 88,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 12
+          },
+          {
+            "id": 85,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 89,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 90,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 91,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 92,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 13
+          },
+          {
+            "id": 86,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 93,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 94,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 95,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 96,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 14
+          },
+          {
+            "id": 87,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 97,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 98,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 99,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 100,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 16
+          },
+          {
+            "id": 88,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 101,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 102,
+                "setNo": 2,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 4
+          },
+          {
+            "id": 89,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 103,
+                "setNo": 1,
+                "durationSec": 900
+              }
+            ],
+            "exerciseId": 9
+          }
+        ]
+      }
+    ],
+    "createdById": "system",
+    "likes": [],
+    "isPublic": true,
+    "exercises": [
+      12,
+      13,
+      14,
+      16,
+      4,
+      9
+    ],
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": 6,
+    "title": "Split Intermediate",
+    "slug": "split-intermediate",
+    "description": "Üst/Alt bölünmüş antrenman: haftada 4 direnç + 1 kardiyo, 4 hafta boyunca güç ve kas gelişimi.",
+    "difficulty": "INTERMEDIATE",
+    "durationWeeks": 4,
+    "coverImageUrl": "https://storage.googleapis.com/fitness-app-photos/split_cover.jpg",
+    "thumbnailUrl": "https://storage.googleapis.com/fitness-app-photos/split_thumb.jpg",
+    "tags": [
+      "upperlower",
+      "intermediate",
+      "split"
+    ],
+    "days": [
+      {
+        "id": 1,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 1,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 1,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 2,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 3,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 4,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 17
+          },
+          {
+            "id": 2,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 5,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 6,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 7,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 8,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 18
+          },
+          {
+            "id": 3,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 9,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 10,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 11,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 19
+          },
+          {
+            "id": 4,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 12,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 13,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 14,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 20
+          },
+          {
+            "id": 5,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 15,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 16,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 17,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 21
+          },
+          {
+            "id": 6,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 18,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 19,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 20,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 22
+          },
+          {
+            "id": 7,
+            "orderIndex": 7,
+            "exerciseSets": [
+              {
+                "id": 21,
+                "setNo": 1,
+                "durationSec": 40
+              },
+              {
+                "id": 22,
+                "setNo": 2,
+                "durationSec": 40
+              }
+            ],
+            "exerciseId": 23
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 2,
+        "exerciseEntries": [
+          {
+            "id": 23,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 23,
+                "setNo": 1,
+                "reps": 8
+              },
+              {
+                "id": 24,
+                "setNo": 2,
+                "reps": 8
+              },
+              {
+                "id": 25,
+                "setNo": 3,
+                "reps": 8
+              },
+              {
+                "id": 26,
+                "setNo": 4,
+                "reps": 8
+              }
+            ],
+            "exerciseId": 24
+          },
+          {
+            "id": 24,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 27,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 28,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 29,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 30,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 25
+          },
+          {
+            "id": 25,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 31,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 32,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 33,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 26
+          },
+          {
+            "id": 26,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 34,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 35,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 36,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 27
+          },
+          {
+            "id": 27,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 37,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 38,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 39,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 28
+          },
+          {
+            "id": 28,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 40,
+                "setNo": 1,
+                "reps": 20
+              },
+              {
+                "id": 41,
+                "setNo": 2,
+                "reps": 20
+              },
+              {
+                "id": 42,
+                "setNo": 3,
+                "reps": 20
+              }
+            ],
+            "exerciseId": 29
+          },
+          {
+            "id": 29,
+            "orderIndex": 7,
+            "exerciseSets": [
+              {
+                "id": 43,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 44,
+                "setNo": 2,
+                "durationSec": 30
+              },
+              {
+                "id": 45,
+                "setNo": 3,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 30
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "id": 46,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 46,
+                "setNo": 1,
+                "durationSec": 40
+              },
+              {
+                "id": 47,
+                "setNo": 2,
+                "durationSec": 40
+              },
+              {
+                "id": 48,
+                "setNo": 3,
+                "durationSec": 40
+              },
+              {
+                "id": 49,
+                "setNo": 4,
+                "durationSec": 40
+              },
+              {
+                "id": 50,
+                "setNo": 5,
+                "durationSec": 40
+              }
+            ],
+            "exerciseId": 31
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 4,
+        "exerciseEntries": [
+          {
+            "id": 51,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 51,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 52,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 53,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 19
+          },
+          {
+            "id": 52,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 54,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 55,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 56,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 20
+          },
+          {
+            "id": 53,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 57,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 58,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 59,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 21
+          },
+          {
+            "id": 54,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 60,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 61,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 62,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 22
+          },
+          {
+            "id": 55,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 63,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 64,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 65,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 23
+          },
+          {
+            "id": 56,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 66,
+                "setNo": 1,
+                "reps": 8
+              },
+              {
+                "id": 67,
+                "setNo": 2,
+                "reps": 8
+              },
+              {
+                "id": 68,
+                "setNo": 3,
+                "reps": 8
+              },
+              {
+                "id": 69,
+                "setNo": 4,
+                "reps": 8
+              }
+            ],
+            "exerciseId": 24
+          },
+          {
+            "id": 57,
+            "orderIndex": 7,
+            "exerciseSets": [
+              {
+                "id": 70,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 71,
+                "setNo": 2,
+                "durationSec": 30
+              },
+              {
+                "id": 72,
+                "setNo": 3,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 30
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "id": 73,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 73,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 74,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 75,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 76,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 25
+          },
+          {
+            "id": 74,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 77,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 78,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 79,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 26
+          },
+          {
+            "id": 75,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 80,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 81,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 82,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 27
+          },
+          {
+            "id": 76,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 83,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 84,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 85,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 28
+          },
+          {
+            "id": 77,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 86,
+                "setNo": 1,
+                "reps": 20
+              },
+              {
+                "id": 87,
+                "setNo": 2,
+                "reps": 20
+              },
+              {
+                "id": 88,
+                "setNo": 3,
+                "reps": 20
+              }
+            ],
+            "exerciseId": 29
+          },
+          {
+            "id": 78,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 89,
+                "setNo": 1,
+                "durationSec": 40
+              },
+              {
+                "id": 90,
+                "setNo": 2,
+                "durationSec": 40
+              },
+              {
+                "id": 91,
+                "setNo": 3,
+                "durationSec": 40
+              }
+            ],
+            "exerciseId": 31
+          }
+        ]
+      }
+    ],
+    "createdById": "system",
+    "likes": [],
+    "isPublic": true,
+    "exercises": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": 7,
+    "title": "Split Advanced",
+    "slug": "split-advanced",
+    "description": "5 gün Push-Pull-Leg-Push-Pull, Cumartesi Cardio+Core. 4 hafta, yüksek hacim.",
+    "difficulty": "ADVANCED",
+    "durationWeeks": 4,
+    "coverImageUrl": "https://storage.googleapis.com/fitness-app-photos/adv_split_cover.jpg",
+    "thumbnailUrl": "https://storage.googleapis.com/fitness-app-photos/adv_split_thumb.jpg",
+    "tags": [
+      "split",
+      "advanced",
+      "ppl"
+    ],
+    "days": [
+      {
+        "id": 1,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 1,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 1,
+                "setNo": 1,
+                "reps": 6
+              },
+              {
+                "id": 2,
+                "setNo": 2,
+                "reps": 6
+              },
+              {
+                "id": 3,
+                "setNo": 3,
+                "reps": 6
+              },
+              {
+                "id": 4,
+                "setNo": 4,
+                "reps": 6
+              },
+              {
+                "id": 5,
+                "setNo": 5,
+                "reps": 6
+              }
+            ],
+            "exerciseId": 17
+          },
+          {
+            "id": 2,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 6,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 7,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 8,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 9,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 19
+          },
+          {
+            "id": 3,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 10,
+                "setNo": 1,
+                "reps": 8
+              },
+              {
+                "id": 11,
+                "setNo": 2,
+                "reps": 8
+              },
+              {
+                "id": 12,
+                "setNo": 3,
+                "reps": 8
+              },
+              {
+                "id": 13,
+                "setNo": 4,
+                "reps": 8
+              }
+            ],
+            "exerciseId": 32
+          },
+          {
+            "id": 4,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 14,
+                "setNo": 1,
+                "reps": 8
+              },
+              {
+                "id": 15,
+                "setNo": 2,
+                "reps": 8
+              },
+              {
+                "id": 16,
+                "setNo": 3,
+                "reps": 8
+              }
+            ],
+            "exerciseId": 33
+          },
+          {
+            "id": 5,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 17,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 18,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 19,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 34
+          },
+          {
+            "id": 6,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 20,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 21,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 22,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 35
+          },
+          {
+            "id": 7,
+            "orderIndex": 7,
+            "exerciseSets": [
+              {
+                "id": 23,
+                "setNo": 1,
+                "durationSec": 40
+              },
+              {
+                "id": 24,
+                "setNo": 2,
+                "durationSec": 40
+              },
+              {
+                "id": 25,
+                "setNo": 3,
+                "durationSec": 40
+              }
+            ],
+            "exerciseId": 36
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 2,
+        "exerciseEntries": [
+          {
+            "id": 26,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 26,
+                "setNo": 1,
+                "reps": 5
+              },
+              {
+                "id": 27,
+                "setNo": 2,
+                "reps": 5
+              },
+              {
+                "id": 28,
+                "setNo": 3,
+                "reps": 5
+              },
+              {
+                "id": 29,
+                "setNo": 4,
+                "reps": 5
+              }
+            ],
+            "exerciseId": 37
+          },
+          {
+            "id": 27,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 30,
+                "setNo": 1,
+                "reps": 8
+              },
+              {
+                "id": 31,
+                "setNo": 2,
+                "reps": 8
+              },
+              {
+                "id": 32,
+                "setNo": 3,
+                "reps": 8
+              },
+              {
+                "id": 33,
+                "setNo": 4,
+                "reps": 8
+              }
+            ],
+            "exerciseId": 38
+          },
+          {
+            "id": 28,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 34,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 35,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 36,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 37,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 39
+          },
+          {
+            "id": 29,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 38,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 39,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 40,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 40
+          },
+          {
+            "id": 30,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 41,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 42,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 43,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 22
+          },
+          {
+            "id": 31,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 44,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 45,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 46,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 41
+          },
+          {
+            "id": 32,
+            "orderIndex": 7,
+            "exerciseSets": [
+              {
+                "id": 47,
+                "setNo": 1,
+                "durationSec": 40
+              },
+              {
+                "id": 48,
+                "setNo": 2,
+                "durationSec": 40
+              },
+              {
+                "id": 49,
+                "setNo": 3,
+                "durationSec": 40
+              }
+            ],
+            "exerciseId": 42
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "id": 50,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 50,
+                "setNo": 1,
+                "reps": 6
+              },
+              {
+                "id": 51,
+                "setNo": 2,
+                "reps": 6
+              },
+              {
+                "id": 52,
+                "setNo": 3,
+                "reps": 6
+              },
+              {
+                "id": 53,
+                "setNo": 4,
+                "reps": 6
+              },
+              {
+                "id": 54,
+                "setNo": 5,
+                "reps": 6
+              }
+            ],
+            "exerciseId": 24
+          },
+          {
+            "id": 51,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 55,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 56,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 57,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 58,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 25
+          },
+          {
+            "id": 52,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 59,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 60,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 61,
+                "setNo": 3,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 43
+          },
+          {
+            "id": 53,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 62,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 63,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 64,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 44
+          },
+          {
+            "id": 54,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 65,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 66,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 67,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 45
+          },
+          {
+            "id": 55,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 68,
+                "setNo": 1,
+                "reps": 20
+              },
+              {
+                "id": 69,
+                "setNo": 2,
+                "reps": 20
+              },
+              {
+                "id": 70,
+                "setNo": 3,
+                "reps": 20
+              },
+              {
+                "id": 71,
+                "setNo": 4,
+                "reps": 20
+              }
+            ],
+            "exerciseId": 29
+          },
+          {
+            "id": 56,
+            "orderIndex": 7,
+            "exerciseSets": [
+              {
+                "id": 72,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 73,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 74,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 46
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 4,
+        "exerciseEntries": [
+          {
+            "id": 57,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 75,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 76,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 77,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 78,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 47
+          },
+          {
+            "id": 58,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 79,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 80,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 81,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 82,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 48
+          },
+          {
+            "id": 59,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 83,
+                "setNo": 1,
+                "reps": 8
+              },
+              {
+                "id": 84,
+                "setNo": 2,
+                "reps": 8
+              },
+              {
+                "id": 85,
+                "setNo": 3,
+                "reps": 8
+              },
+              {
+                "id": 86,
+                "setNo": 4,
+                "reps": 8
+              }
+            ],
+            "exerciseId": 49
+          },
+          {
+            "id": 60,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 87,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 88,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 89,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 33
+          },
+          {
+            "id": 61,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 90,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 91,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 92,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 34
+          },
+          {
+            "id": 62,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 93,
+                "setNo": 1,
+                "durationSec": 40
+              },
+              {
+                "id": 94,
+                "setNo": 2,
+                "durationSec": 40
+              },
+              {
+                "id": 95,
+                "setNo": 3,
+                "durationSec": 40
+              }
+            ],
+            "exerciseId": 35
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "id": 63,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 96,
+                "setNo": 1,
+                "reps": 3
+              },
+              {
+                "id": 97,
+                "setNo": 2,
+                "reps": 3
+              },
+              {
+                "id": 98,
+                "setNo": 3,
+                "reps": 3
+              }
+            ],
+            "exerciseId": 49
+          },
+          {
+            "id": 64,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 99,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 100,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 101,
+                "setNo": 3,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 50
+          },
+          {
+            "id": 65,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 102,
+                "setNo": 1,
+                "reps": 8
+              },
+              {
+                "id": 103,
+                "setNo": 2,
+                "reps": 8
+              },
+              {
+                "id": 104,
+                "setNo": 3,
+                "reps": 8
+              }
+            ],
+            "exerciseId": 37
+          },
+          {
+            "id": 66,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 105,
+                "setNo": 1,
+                "reps": 8
+              },
+              {
+                "id": 106,
+                "setNo": 2,
+                "reps": 8
+              },
+              {
+                "id": 107,
+                "setNo": 3,
+                "reps": 8
+              }
+            ],
+            "exerciseId": 38
+          },
+          {
+            "id": 67,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 108,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 109,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 110,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 22
+          },
+          {
+            "id": 68,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 111,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 112,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 113,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 41
+          },
+          {
+            "id": 69,
+            "orderIndex": 7,
+            "exerciseSets": [
+              {
+                "id": 114,
+                "setNo": 1,
+                "durationSec": 40
+              },
+              {
+                "id": 115,
+                "setNo": 2,
+                "durationSec": 40
+              },
+              {
+                "id": 116,
+                "setNo": 3,
+                "durationSec": 40
+              }
+            ],
+            "exerciseId": 42
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 6,
+        "exerciseEntries": [
+          {
+            "id": 70,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 117,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 118,
+                "setNo": 2,
+                "durationSec": 30
+              },
+              {
+                "id": 119,
+                "setNo": 3,
+                "durationSec": 30
+              },
+              {
+                "id": 120,
+                "setNo": 4,
+                "durationSec": 30
+              },
+              {
+                "id": 121,
+                "setNo": 5,
+                "durationSec": 30
+              },
+              {
+                "id": 122,
+                "setNo": 6,
+                "durationSec": 30
+              },
+              {
+                "id": 123,
+                "setNo": 7,
+                "durationSec": 30
+              },
+              {
+                "id": 124,
+                "setNo": 8,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 51
+          },
+          {
+            "id": 71,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 125,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 126,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 127,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 52
+          },
+          {
+            "id": 72,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 128,
+                "setNo": 1,
+                "reps": 20
+              },
+              {
+                "id": 129,
+                "setNo": 2,
+                "reps": 20
+              },
+              {
+                "id": 130,
+                "setNo": 3,
+                "reps": 20
+              }
+            ],
+            "exerciseId": 53
+          }
+        ]
+      }
+    ],
+    "createdById": "system",
+    "likes": [],
+    "isPublic": true,
+    "exercises": [
+      17,
+      19,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      22,
+      41,
+      42,
+      24,
+      25,
+      43,
+      44,
+      45,
+      29,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53
+    ],
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": 8,
+    "title": "Advanced Split + Cardio",
+    "slug": "adv-split-cardio",
+    "description": "PPL + 2 kardiyo + MetCon. Haftada 6 gün, 4 hafta.",
+    "difficulty": "ADVANCED",
+    "durationWeeks": 4,
+    "coverImageUrl": "https://storage.googleapis.com/fitness-app-photos/adv_split_cardio_cover.jpg",
+    "thumbnailUrl": "https://storage.googleapis.com/fitness-app-photos/adv_split_cardio_thumb.jpg",
+    "tags": [
+      "split",
+      "cardio",
+      "advanced"
+    ],
+    "days": [
+      {
+        "id": 1,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "id": 1,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 1,
+                "setNo": 1,
+                "reps": 6
+              },
+              {
+                "id": 2,
+                "setNo": 2,
+                "reps": 6
+              },
+              {
+                "id": 3,
+                "setNo": 3,
+                "reps": 6
+              },
+              {
+                "id": 4,
+                "setNo": 4,
+                "reps": 6
+              },
+              {
+                "id": 5,
+                "setNo": 5,
+                "reps": 6
+              }
+            ],
+            "exerciseId": 17
+          },
+          {
+            "id": 2,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 6,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 7,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 8,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 9,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 19
+          },
+          {
+            "id": 3,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 10,
+                "setNo": 1,
+                "reps": 8
+              },
+              {
+                "id": 11,
+                "setNo": 2,
+                "reps": 8
+              },
+              {
+                "id": 12,
+                "setNo": 3,
+                "reps": 8
+              },
+              {
+                "id": 13,
+                "setNo": 4,
+                "reps": 8
+              }
+            ],
+            "exerciseId": 32
+          },
+          {
+            "id": 4,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 14,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 15,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 16,
+                "setNo": 3,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 33
+          },
+          {
+            "id": 5,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 17,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 18,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 19,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 34
+          },
+          {
+            "id": 6,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 20,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 21,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 22,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 54
+          },
+          {
+            "id": 7,
+            "orderIndex": 7,
+            "exerciseSets": [
+              {
+                "id": 23,
+                "setNo": 1,
+                "durationSec": 15
+              },
+              {
+                "id": 24,
+                "setNo": 2,
+                "durationSec": 15
+              },
+              {
+                "id": 25,
+                "setNo": 3,
+                "durationSec": 15
+              }
+            ],
+            "exerciseId": 55
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 2,
+        "exerciseEntries": [
+          {
+            "id": 8,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 26,
+                "setNo": 1,
+                "reps": 8
+              },
+              {
+                "id": 27,
+                "setNo": 2,
+                "reps": 8
+              },
+              {
+                "id": 28,
+                "setNo": 3,
+                "reps": 8
+              },
+              {
+                "id": 29,
+                "setNo": 4,
+                "reps": 8
+              }
+            ],
+            "exerciseId": 38
+          },
+          {
+            "id": 9,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 30,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 31,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 32,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 33,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 39
+          },
+          {
+            "id": 10,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 34,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 35,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 36,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 20
+          },
+          {
+            "id": 11,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 37,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 38,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 39,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 56
+          },
+          {
+            "id": 12,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 40,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 41,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 42,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 22
+          },
+          {
+            "id": 13,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 43,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 44,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 45,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 41
+          },
+          {
+            "id": 14,
+            "orderIndex": 7,
+            "exerciseSets": [
+              {
+                "id": 46,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 47,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 48,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 57
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "id": 15,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 49,
+                "setNo": 1,
+                "reps": 6
+              },
+              {
+                "id": 50,
+                "setNo": 2,
+                "reps": 6
+              },
+              {
+                "id": 51,
+                "setNo": 3,
+                "reps": 6
+              },
+              {
+                "id": 52,
+                "setNo": 4,
+                "reps": 6
+              },
+              {
+                "id": 53,
+                "setNo": 5,
+                "reps": 6
+              }
+            ],
+            "exerciseId": 24
+          },
+          {
+            "id": 16,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 54,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 55,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 56,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 57,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 25
+          },
+          {
+            "id": 17,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 58,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 59,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 60,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 26
+          },
+          {
+            "id": 18,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 61,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 62,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 63,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 44
+          },
+          {
+            "id": 19,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 64,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 65,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 66,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 45
+          },
+          {
+            "id": 20,
+            "orderIndex": 6,
+            "exerciseSets": [
+              {
+                "id": 67,
+                "setNo": 1,
+                "reps": 20
+              },
+              {
+                "id": 68,
+                "setNo": 2,
+                "reps": 20
+              },
+              {
+                "id": 69,
+                "setNo": 3,
+                "reps": 20
+              },
+              {
+                "id": 70,
+                "setNo": 4,
+                "reps": 20
+              }
+            ],
+            "exerciseId": 29
+          },
+          {
+            "id": 21,
+            "orderIndex": 7,
+            "exerciseSets": [
+              {
+                "id": 71,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 72,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 73,
+                "setNo": 3,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 46
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 4,
+        "exerciseEntries": [
+          {
+            "id": 22,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 74,
+                "setNo": 1,
+                "durationSec": 2700
+              }
+            ],
+            "exerciseId": 58
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "id": 23,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 75,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 76,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 77,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 78,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 59
+          },
+          {
+            "id": 24,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 79,
+                "setNo": 1,
+                "reps": 10
+              },
+              {
+                "id": 80,
+                "setNo": 2,
+                "reps": 10
+              },
+              {
+                "id": 81,
+                "setNo": 3,
+                "reps": 10
+              },
+              {
+                "id": 82,
+                "setNo": 4,
+                "reps": 10
+              }
+            ],
+            "exerciseId": 18
+          },
+          {
+            "id": 25,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 83,
+                "setNo": 1,
+                "reps": 0
+              }
+            ],
+            "exerciseId": 60
+          },
+          {
+            "id": 26,
+            "orderIndex": 4,
+            "exerciseSets": [
+              {
+                "id": 84,
+                "setNo": 1,
+                "reps": 12
+              },
+              {
+                "id": 85,
+                "setNo": 2,
+                "reps": 12
+              },
+              {
+                "id": 86,
+                "setNo": 3,
+                "reps": 12
+              },
+              {
+                "id": 87,
+                "setNo": 4,
+                "reps": 12
+              }
+            ],
+            "exerciseId": 61
+          },
+          {
+            "id": 27,
+            "orderIndex": 5,
+            "exerciseSets": [
+              {
+                "id": 88,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 89,
+                "setNo": 2,
+                "durationSec": 30
+              },
+              {
+                "id": 90,
+                "setNo": 3,
+                "durationSec": 30
+              },
+              {
+                "id": 91,
+                "setNo": 4,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 62
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "userId": "system",
+        "date": "",
+        "dayOfWeek": 6,
+        "exerciseEntries": [
+          {
+            "id": 28,
+            "orderIndex": 1,
+            "exerciseSets": [
+              {
+                "id": 92,
+                "setNo": 1,
+                "durationSec": 30
+              },
+              {
+                "id": 93,
+                "setNo": 2,
+                "durationSec": 30
+              },
+              {
+                "id": 94,
+                "setNo": 3,
+                "durationSec": 30
+              },
+              {
+                "id": 95,
+                "setNo": 4,
+                "durationSec": 30
+              },
+              {
+                "id": 96,
+                "setNo": 5,
+                "durationSec": 30
+              },
+              {
+                "id": 97,
+                "setNo": 6,
+                "durationSec": 30
+              },
+              {
+                "id": 98,
+                "setNo": 7,
+                "durationSec": 30
+              },
+              {
+                "id": 99,
+                "setNo": 8,
+                "durationSec": 30
+              },
+              {
+                "id": 100,
+                "setNo": 9,
+                "durationSec": 30
+              },
+              {
+                "id": 101,
+                "setNo": 10,
+                "durationSec": 30
+              }
+            ],
+            "exerciseId": 51
+          },
+          {
+            "id": 29,
+            "orderIndex": 2,
+            "exerciseSets": [
+              {
+                "id": 102,
+                "setNo": 1,
+                "reps": 15
+              },
+              {
+                "id": 103,
+                "setNo": 2,
+                "reps": 15
+              },
+              {
+                "id": 104,
+                "setNo": 3,
+                "reps": 15
+              }
+            ],
+            "exerciseId": 52
+          },
+          {
+            "id": 30,
+            "orderIndex": 3,
+            "exerciseSets": [
+              {
+                "id": 105,
+                "setNo": 1,
+                "reps": 20
+              },
+              {
+                "id": 106,
+                "setNo": 2,
+                "reps": 20
+              },
+              {
+                "id": 107,
+                "setNo": 3,
+                "reps": 20
+              }
+            ],
+            "exerciseId": 63
+          }
+        ]
+      }
+    ],
+    "createdById": "system",
+    "likes": [],
+    "isPublic": true,
+    "exercises": [
+      17,
+      19,
+      32,
+      33,
+      34,
+      54,
+      55,
+      38,
+      39,
+      20,
+      56,
+      22,
+      41,
+      57,
+      24,
+      25,
+      26,
+      44,
+      45,
+      29,
+      46,
+      58,
+      59,
+      18,
+      60,
+      61,
+      62,
+      51,
+      52,
+      63
+    ],
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  }
+]

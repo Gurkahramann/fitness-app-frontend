@@ -1,0 +1,1141 @@
+[
+  {
+    "name": "Push-ups",
+    "type": "strength",
+    "muscleGroup": "Chest",
+    "instructions": [
+        "Eller omuzlardan biraz daha geniş olacak şekilde plank pozisyonunda başlayın",
+        "Vücudunuzu baştan topuklara kadar düz bir çizgide tutun",
+        "Dirseklerinizi bükerek göğsünüzü yere doğru indirin",
+        "Başlangıç pozisyonuna geri itin",
+        "Hareket boyunca merkez bölgenizi meşgul tutun"
+    ],
+    "tips": [
+        "Kalçalarınızın sarkmasına veya yukarı kalkmasına izin vermeyin",
+        "Dirseklerinizi 45 derecelik açıda tutun",
+        "Gerekirse dizler üzerinde değişiklik yapın"
+    ],
+    "duration": "3 sets x 10-15 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Push-Up.gif"
+  },
+  {
+    "name": "Squats",
+    "type": "strength",
+    "muscleGroup": "Legs",
+    "instructions": [
+        "Ayaklar omuz genişliğinde açık olacak şekilde durun",
+        "Göğsünüzü yukarıda ve karnınızı meşgul tutun",
+        "Kalça ve dizlerinizi bükerek vücudunuzu indirin",
+        "Uyluklarınız yere paralel olana kadar aşağı inin",
+        "Başlangıca dönmek için topuklarınızdan itin",
+        "Dizlerinizi ayak parmaklarınızla aynı hizada tutun"
+    ],
+    "tips": [
+        "Dizlerinizin içe çökmesine izin vermeyin",
+        "Ağırlığınızı topuklarınızda tutun",
+        "Sadece rahat olduğunuz kadar alçalın"
+    ],
+    "duration": "3 sets x 15-20 reps",
+    "sets": 3,
+    "reps": 15,
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/squat-full-version.gif"
+  },
+  {
+    "name": "Jumping Jacks",
+    "type": "cardio",
+    "muscleGroup": "Full Body",
+    "instructions": [
+            "Bacaklarınız bitişik, kollarınız yanlarda olacak şekilde dik durun",
+            "Dizlerinizi hafifçe bükün ve havaya zıplayın",
+            "Zıplarken bacaklarınızı omuz genişliğinde açın",
+            "Kollarınızı başınızın üzerine doğru uzatın",
+            "Başlangıç pozisyonuna geri zıplayın",
+            "Belirtilen süre boyunca tekrarlayın"
+    ],
+    "tips": [
+        "Hareket boyunca merkez bölgenizi meşgul tutun",
+        "Ayak toplarınızın üzerine yumuşak bir şekilde inin",
+        "Sabit bir ritim tutun"
+    ],
+    "duration": "3 sets x 30 seconds",
+    "sets": 3,
+    "reps": 0,
+    "calories": "8-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Jumping-jack.gif"
+  },
+  {
+    "name": "Plank",
+    "type": "strength",
+    "muscleGroup": "Core",
+    "instructions": [
+            "Şınav pozisyonunda başlayın",
+            "Ön kollarınıza kadar alçalın",
+            "Vücudunuzu düz bir çizgide tutun",
+            "Karın ve kalça kaslarınızı çalıştırın",
+            "Belirlenen süre boyunca pozisyonu koruyun",
+            "Boyunca normal nefes alın"
+    ],
+    "tips": [
+        "Kalçaların sarkmasına veya dikleşmesine izin vermeyin",
+        "Omuzları dirseklerin üzerinde tutun",
+        "Süre yerine kaliteye odaklanın"
+    ],
+    "duration": "3 sets x 30-60 seconds",
+    "sets": 3,
+    "reps": 0,
+    "calories": "3-5 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/plank.gif"
+  },
+  {
+    "name": "Burpees",
+    "type": "cardio",
+    "muscleGroup": "Full Body",
+    "instructions": [
+        "Ayakta durma pozisyonunda başlayın",
+        "Eller yerde olacak şekilde çömelme pozisyonuna geçin",
+        "Ayaklarınızı tekrar plank pozisyonuna getirin",
+        "Şınav çekin (isteğe bağlı)",
+        "Ayaklarınızı tekrar çömelme pozisyonuna getirin",
+        "Kollarınızı yukarı kaldırarak zıplayın"
+    ],
+    "tips": [
+        "Merkez bölgenizi sürekli meşgul tutun",
+        "Zıplarken yumuşak bir şekilde inin",
+        "Zıplamak yerine geri adım atarak değiştirin"
+    ],
+    "duration": "3 sets x 10 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "15-20 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/burpees.gif"
+  },
+  {
+    "name": "Mountain Climbers",
+    "type": "cardio",
+    "muscleGroup": "Core",
+    "instructions": [
+        "Plank pozisyonunda başlayın",
+        "Dizlerinizi birer birer göğsünüze doğru çekin",
+        "Karnınızı sıkı ve sırtınızı düz tutun",
+        "Bacaklarınızı hızlıca değiştirin"
+    ],
+    "tips": [
+        "Kalçalarınızı aşağıda tutun",
+        "Formunuzu koruyarak mümkün olduğunca hızlı hareket edin"
+    ],
+    "duration": "3 sets x 30 seconds",
+    "sets": 3,
+    "reps": 0,
+    "calories": "10-14 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Mountain-climber.gif"
+  },
+  {
+    "name": "Lunges",
+    "type": "strength",
+    "muscleGroup": "Legs",
+    "instructions": [
+        "Dik durun, bir bacağınızla öne doğru adım atın",
+        "Her iki diziniz de yaklaşık 90 derece bükülene kadar kalçalarınızı indirin",
+        "Başlangıç pozisyonuna geri itin ve bacak değiştirin"
+    ],
+    "tips": [
+        "Gövdenizi dik tutun",
+        "Dizinizin ayak parmaklarınızı geçmesine izin vermeyin"
+    ],
+    "duration": "3 sets x 10 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "6-9 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/lunges.gif"
+  },
+  {
+    "name": "High Knees",
+    "type": "cardio",
+    "muscleGroup": "Legs",
+    "instructions": [
+        "Ayaklarınızı kalça genişliğinde açarak dik durun",
+        "Ellerinizi kalça hizasında önünüze koyun",
+        "Sağ elinizle buluşmak için sağ dizinizi hızla yukarı kaldırın",
+        "Sağ ayağınızı geri indirin ve hemen sol dizinizi yukarı kaldırın",
+        "Dizlerinizi mümkün olduğunca çabuk değiştirmeye devam edin",
+        "Momentumu korumak için kollarınızı pompalayın"
+    ],
+    "tips": [
+        "Göğsünüzü yukarıda ve karnınızı sıkı tutun",
+        "Ayak toplarınızın üzerinde kalın",
+        "Dizlerinizi mümkün olduğunca yukarı kaldırın"
+    ],
+    "duration": "3 sets x 30 seconds",
+    "sets": 3,
+    "reps": 0,
+    "calories": "10-15 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/High-Knee.gif"
+  },
+  {
+    "name": "Steady-State Cardio",
+    "type": "cardio",
+    "muscleGroup": "Cardiovascular",
+    "instructions": [
+      "30 dk orta tempoda yürüyüş veya hafif koşu. RPE ~5/10.",
+      "Hafta ilerledikçe süreyi artır."
+    ],
+    "tips": [
+      "Konuşma testini geçebilecek tempoda ol.",
+      "Dik dur, nefesini kontrol et."
+    ],
+    "duration": "30-40 dk",
+    "sets": 3,
+    "reps": 0,
+    "calories": "200-350 cal",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Steady-state-cardio.gif"
+  },
+  {
+    "name": "Interval Cardio",
+    "type": "cardio",
+    "muscleGroup": "Cardiovascular",
+    "instructions": [
+      "3 dk orta tempo + 1 dk hızlı ×6-8 set.",
+      "Toplam süreyi ve set sayısını haftalara göre artır."
+    ],
+    "tips": [
+      "Orta tempoda nefesini kontrol et.",
+      "Hızlı kısımlarda formunu bozma."
+    ],
+    "duration": "30-40 dk",
+    "sets": 3,
+    "reps": 0,
+    "calories": "250-400 cal",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/interval-cardio.gif"
+  },
+  {
+    "name": "Incline Walk",
+    "type": "cardio",
+    "muscleGroup": "Cardiovascular",
+    "instructions": [
+      "30 dk %5 eğimde yürüyüş. RPE ~5-6/10.",
+      "Hafta ilerledikçe süreyi artır."
+    ],
+    "tips": [
+      "Eğimli yürüyüşte adımını kısa tut.",
+      "Dik dur, nefesini kontrol et."
+    ],
+    "duration": "30-40 dk",
+    "sets": 3,
+    "reps": 0,
+    "calories": "220-370 cal",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Incline-Walk.gif"
+  },
+  {
+    "name": "Dumbbell Bench Press",
+    "type": "strength",
+    "muscleGroup": "Chest",
+    "instructions": [
+      "Bench'e sırt üstü uzan, dumbbell'ları göğüs hizasında tut.",
+      "Dirsekleri 2 sn'de indir, 2 sn'de yukarı it.",
+      "Hareket boyunca core'u sıkı tut."
+    ],
+    "tips": [
+      "Omuzları geride ve aşağıda tut.",
+      "Ağırlıkları kontrollü indir/kaldır."
+    ],
+    "duration": "3-4 set x 10-14 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Dumbbell-Bench-Press.gif"
+  },
+  {
+    "name": "Goblet Squat",
+    "type": "strength",
+    "muscleGroup": "Legs",
+    "instructions": [
+      "Dumbbell veya kettlebell'i göğüs hizasında tut.",
+      "Topuk yerde, core sıkı, dizler dışarı.",
+      "Kalçayı geriye ve aşağıya indir."
+    ],
+    "tips": [
+      "Dizler parmak ucunu geçmesin.",
+      "Sırtı düz tut."
+    ],
+    "duration": "3-4 set x 10-14 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "7-11 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Goblet-Squat.gif"
+  },
+  {
+    "name": "Bent-Over Dumbell Row",
+    "type": "strength",
+    "muscleGroup": "Back",
+    "instructions": [
+      "Dizleri hafif bük, öne eğil, sırt düz.",
+      "Dumbbell veya bandı karına doğru çek.",
+      "Kürek kemiklerini sık."
+    ],
+    "tips": [
+      "Boyun nötr pozisyonda.",
+      "Hareketi kontrollü yap."
+    ],
+    "duration": "3-4 set x 10-14 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "6-9 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Bent-Over-Dumbbell-Row.gif"
+  },
+  {
+    "name": "Dumbbell Romanian Deadlift",
+    "type": "strength",
+    "muscleGroup": "Hamstrings/Glutes",
+    "instructions": [
+      "Dumbbell'ları uyluk önünde tut.",
+      "Kalçayı geriye vererek öne eğil.",
+      "Sırtı düz, dizler hafif bükülü."
+    ],
+    "tips": [
+      "Ağırlığı topuklara ver.",
+      "Bel çukurunu koru."
+    ],
+    "duration": "2-4 set x 10-12 reps",
+    "sets": 2,
+    "reps": 10,
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Dumbbell-Romanian-Deadlift.gif"
+  },
+  {
+    "name": "Dumbbell Shoulder Press",
+    "type": "strength",
+    "muscleGroup": "Shoulders",
+    "instructions": [
+      "Dumbbell'ları omuz hizasında tut.",
+      "Dirsekleri düz yukarı it.",
+      "Oturur pozisyonda stabiliteyi koru."
+    ],
+    "tips": [
+      "Bel boşluğunu artırma.",
+      "Ağırlıkları kontrollü indir."
+    ],
+    "duration": "2-4 set x 10-12 reps",
+    "sets": 2,
+    "reps": 10,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Dumbbell-Shoulder-Press.gif"
+  },
+  {
+    "name": "Barbell Bench Press",
+    "type": "strength",
+    "muscleGroup": "Chest",
+    "instructions": [
+      "Bench'e sırt üstü uzan, barı göğüs hizasında tut.",
+      "Dirsekleri 2 sn'de indir, 2 sn'de yukarı it.",
+      "Hareket boyunca core'u sıkı tut."
+    ],
+    "tips": [
+      "Omuzları geride ve aşağıda tut.",
+      "Ağırlıkları kontrollü indir/kaldır."
+    ],
+    "duration": "4 set x 8-10 reps",
+    "sets": 4,
+    "reps": 8,
+    "calories": "7-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Barbell-Bench-Press.gif"
+  },
+  {
+    "name": "Bent-Over Barbell Row",
+    "type": "strength",
+    "muscleGroup": "Back",
+    "instructions": [
+      "Dizleri hafif bük, öne eğil, sırt düz.",
+      "Barı karına doğru çek.",
+      "Kürek kemiklerini sık."
+    ],
+    "tips": [
+      "Boyun nötr pozisyonda.",
+      "Hareketi kontrollü yap."
+    ],
+    "duration": "4 set x 8-10 reps",
+    "sets": 4,
+    "reps": 8,
+    "calories": "7-11 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Bent-Over-Row.gif"
+  },
+  {
+    "name": "Dumbbell Incline Press",
+    "type": "strength",
+    "muscleGroup": "Chest",
+    "instructions": [
+      "Bench'i 30-45° eğime ayarla.",
+      "Dumbbell'ları göğüs hizasında tut, yukarı it."
+    ],
+    "tips": [
+      "Omuzları geride tut.",
+      "Ağırlıkları kontrollü indir."
+    ],
+    "duration": "3 set x 10-12 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Incline-Dumbbell-Press.gif"
+  },
+  {
+    "name": "Seated Cable Row",
+    "type": "strength",
+    "muscleGroup": "Back",
+    "instructions": [
+      "Makinede otur, kolları öne uzat.",
+      "Kolları karına doğru çek, sırtı düz tut."
+    ],
+    "tips": [
+      "Omuzları geride tut.",
+      "Hareketi kontrollü yap."
+    ],
+    "duration": "3 set x 10-12 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "6-9 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Seated-Cable-Row.gif"
+  },
+  {
+    "name": "Dumbbell Lateral Raise",
+    "type": "strength",
+    "muscleGroup": "Shoulders",
+    "instructions": [
+      "Dumbbell'ları yanlara doğru kaldır.",
+      "Dirsekleri hafif bükülü tut."
+    ],
+    "tips": [
+      "Ağırlığı kontrollü indir.",
+      "Omuzları sıkıştırma."
+    ],
+    "duration": "3 set x 12-15 reps",
+    "sets": 3,
+    "reps": 12,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Dumbbell-Lateral-Raise.gif"
+  },
+  {
+    "name": "Face-Pull",
+    "type": "strength",
+    "muscleGroup": "Upper Back",
+    "instructions": [
+      "Kabloyu yüz hizasına çek.",
+      "Dirsekleri dışarı aç."
+    ],
+    "tips": [
+      "Boyun nötr pozisyonda.",
+      "Hareketi kontrollü yap."
+    ],
+    "duration": "3 set x 12-15 reps",
+    "sets": 3,
+    "reps": 12,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Face-Pull.gif"
+  },
+  {
+    "name": "Plank Shoulder Tap",
+    "type": "strength",
+    "muscleGroup": "Core",
+    "instructions": [
+      "Plank pozisyonunda, bir elinle karşı omuza dokun.",
+      "Core'u sıkı tut, kalçayı sabit tut."
+    ],
+    "tips": [
+      "Kalçayı oynatma.",
+      "Nefesini kontrol et."
+    ],
+    "duration": "2 set x 40 sn",
+    "sets": 2,
+    "reps": 0,
+    "calories": "4-6 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Plank-Shoulder-Taps.gif"
+  },
+  {
+    "name": "Back Squat",
+    "type": "strength",
+    "muscleGroup": "Quads",
+    "instructions": [
+      "Barı trapez kasına yerleştir.",
+      "Kalçayı geriye ve aşağıya indir, topuk yerde."
+    ],
+    "tips": [
+      "Dizler dışarı.",
+      "Sırtı düz tut."
+    ],
+    "duration": "4 set x 6-8 reps",
+    "sets": 4,
+    "reps": 6,
+    "calories": "7-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Back-Squat.gif"
+  },
+  {
+    "name": "Romanian Deadlift",
+    "type": "strength",
+    "muscleGroup": "Hamstrings/Glutes",
+    "instructions": [
+      "Barı uyluk önünde tut.",
+      "Kalçayı geriye vererek öne eğil."
+    ],
+    "tips": [
+      "Ağırlığı topuklara ver.",
+      "Bel çukurunu koru."
+    ],
+    "duration": "4 set x 8-10 reps",
+    "sets": 4,
+    "reps": 8,
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Romanian-Deadlift.gif"
+  },
+  {
+    "name": "Walking Lunge",
+    "type": "strength",
+    "muscleGroup": "Legs",
+    "instructions": [
+      "Dumbbell'ları elinde tut, ileri adım at."
+    ],
+    "tips": [
+      "Diz yere değmesin.",
+      "Gövde dik olsun."
+    ],
+    "duration": "3 set x 12 adım",
+    "sets": 3,
+    "reps": 12,
+    "calories": "6-9 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/walking-lunge.gif"
+  },
+  {
+    "name": "Hip Thrust",
+    "type": "strength",
+    "muscleGroup": "Glutes",
+    "instructions": [
+      "Sırtını bench'e yasla, barı kalçanın üstüne yerleştir.",
+      "Kalçayı yukarı it."
+    ],
+    "tips": [
+      "Üstte 1 sn sık.",
+      "Topuklardan güç al."
+    ],
+    "duration": "3 set x 10-12 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "7-11 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Hip-Thrust.gif"
+  },
+  {
+    "name": "Leg Curl",
+    "type": "strength",
+    "muscleGroup": "Hamstrings",
+    "instructions": [
+      "Makinede veya band ile bacak bük."
+    ],
+    "tips": [
+      "Hareketi kontrollü yap."
+    ],
+    "duration": "3 set x 12-15 reps",
+    "sets": 3,
+    "reps": 12,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Leg-Curl.gif"
+  },
+  {
+    "name": "Standing Calf Raise",
+    "type": "strength",
+    "muscleGroup": "Calves",
+    "instructions": [
+      "Ayak parmak ucunda yüksel."
+    ],
+    "tips": [
+      "Üstte 1 sn bekle."
+    ],
+    "duration": "3 set x 15-20 reps",
+    "sets": 3,
+    "reps": 15,
+    "calories": "4-7 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Standing-Calf-Raise.gif"
+  },
+  {
+    "name": "Hollow Hold",
+    "type": "strength",
+    "muscleGroup": "Core",
+    "instructions": [
+      "Sırtını yere yapıştır, bacak ve kolları kaldır."
+    ],
+    "tips": [
+      "Bel boşluğunu kapat."
+    ],
+    "duration": "3 set x 30 sn",
+    "sets": 3,
+    "reps": 0,
+    "calories": "4-6 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/HollowHold.jpg"
+  },
+  {
+    "name": "HIIT Intervals",
+    "type": "cardio",
+    "muscleGroup": "Cardiovascular",
+    "instructions": [
+      "5 tur: 40 sn yüksek tempo, 80 sn düşük tempo."
+    ],
+    "tips": [
+      "Yüksek tempoda formu bozma."
+    ],
+    "duration": "5 set x 40 sn",
+    "sets": 5,
+    "reps": 0,
+    "calories": "12-18 cal/dk",
+    "imageUrl": ""
+  },
+  {
+    "name": "Standing Military Press",
+    "type": "strength",
+    "muscleGroup": "Shoulders",
+    "instructions": [
+      "Barı omuz hizasında tut, baş üstüne it.",
+      "Core'u sıkı tut."
+    ],
+    "tips": [
+      "Bel boşluğunu artırma.",
+      "Ağırlıkları kontrollü indir."
+    ],
+    "duration": "4 set x 6-8 reps",
+    "sets": 4,
+    "reps": 6,
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Standing-Military-Press.gif"
+  },
+  {
+    "name": "Weighted Dip",
+    "type": "strength",
+    "muscleGroup": "Chest/Triceps",
+    "instructions": [
+      "Paralel barlarda vücut ağırlığıyla veya ek ağırlıkla dip yap.",
+      "Dirsekleri geriye bük, gövde hafif öne."
+    ],
+    "tips": [
+      "Omuzları aşağıda tut.",
+      "Tam kilitleme yapma."
+    ],
+    "duration": "3 set x 8-10 reps",
+    "sets": 3,
+    "reps": 8,
+    "calories": "7-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Chest-Dips.gif"
+  },
+  {
+    "name": "Cable Fly",
+    "type": "strength",
+    "muscleGroup": "Chest",
+    "instructions": [
+      "Kabloyu göğüs hizasında birleştir.",
+      "Kollar hafif bükülü."
+    ],
+    "tips": [
+      "Hareketi kontrollü yap.",
+      "Omuzları sıkıştırma."
+    ],
+    "duration": "3 set x 12-15 reps",
+    "sets": 3,
+    "reps": 12,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Cable-Fly.gif"
+  },
+  {
+    "name": "Overhead Rope Triceps Extension",
+    "type": "strength",
+    "muscleGroup": "Triceps",
+    "instructions": [
+      "Kabloyu baş üstünde tut, dirsekten aç."
+    ],
+    "tips": [
+      "Dirsekleri sabit tut.",
+      "Hareketi kontrollü yap."
+    ],
+    "duration": "3 set x 12-15 reps",
+    "sets": 3,
+    "reps": 12,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Cable-Rope-Overhead-Triceps-Extension.gif"
+  },
+  {
+    "name": "Copenhagen Plank",
+    "type": "strength",
+    "muscleGroup": "Core",
+    "instructions": [
+      "Yan plank pozisyonunda üst bacağı yükselt.",
+      "Core'u sıkı tut."
+    ],
+    "tips": [
+      "Kalçayı sabit tut.",
+      "Nefesini kontrol et."
+    ],
+    "duration": "3 set x 40 sn",
+    "sets": 3,
+    "reps": 0,
+    "calories": "4-7 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Copenhagen-plank.gif"
+  },
+  {
+    "name": "Deadlift",
+    "type": "strength",
+    "muscleGroup": "Back/Glutes",
+    "instructions": [
+      "Barı yerden kaldır, sırt düz, core sıkı."
+    ],
+    "tips": [
+      "Barı vücuda yakın tut.",
+      "Hareketi kontrollü yap."
+    ],
+    "duration": "4 set x 4-6 reps",
+    "sets": 4,
+    "reps": 4,
+    "calories": "10-16 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Deadlift.gif"
+  },
+  {
+    "name": "Weighted Pull-Up",
+    "type": "strength",
+    "muscleGroup": "Back/Biceps",
+    "instructions": [
+      "Barfiks barında ağırlıkla veya vücut ağırlığıyla çekiş yap."
+    ],
+    "tips": [
+      "Çeneyi barın üstüne çıkar.",
+      "Kontrollü in."
+    ],
+    "duration": "4 set x 6-8 reps",
+    "sets": 4,
+    "reps": 6,
+    "calories": "8-13 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Weighted-Pull-up.gif"
+  },
+  {
+    "name": "Pendlay Row",
+    "type": "strength",
+    "muscleGroup": "Back",
+    "instructions": [
+      "Barı yerden çek, her tekrarda yere bırak."
+    ],
+    "tips": [
+      "Sırtı düz tut.",
+      "Patlayıcı çek."
+    ],
+    "duration": "4 set x 8-10 reps",
+    "sets": 4,
+    "reps": 8,
+    "calories": "7-11 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Pendlay-Row.gif"
+  },
+  {
+    "name": "Chest-Supported DB Row",
+    "type": "strength",
+    "muscleGroup": "Back",
+    "instructions": [
+      "Eğimli bench'te göğüs destekli dumbbell row yap."
+    ],
+    "tips": [
+      "Sırtı düz tut.",
+      "Kontrollü indir."
+    ],
+    "duration": "3 set x 10-12 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "6-9 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Chest-Supported-Dumbbell-Row.gif"
+  },
+  {
+    "name": "Barbell Curl",
+    "type": "strength",
+    "muscleGroup": "Biceps",
+    "instructions": [
+      "Barı alt koldan bükerek kaldır."
+    ],
+    "tips": [
+      "Dirsekleri sabit tut.",
+      "Hareketi kontrollü yap."
+    ],
+    "duration": "3 set x 10-12 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Barbell-Curl.gif"
+  },
+  {
+    "name": "Hanging Leg Raise",
+    "type": "strength",
+    "muscleGroup": "Core",
+    "instructions": [
+      "Barfiks barında asılıyken bacakları yukarı kaldır."
+    ],
+    "tips": [
+      "Bel boşluğunu kapat.",
+      "Kontrollü indir."
+    ],
+    "duration": "3 set x 12-15 reps",
+    "sets": 3,
+    "reps": 12,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Hanging-Leg-Raises.gif"
+  },
+  {
+    "name": "Bulgarian Split Squat",
+    "type": "strength",
+    "muscleGroup": "Legs",
+    "instructions": [
+      "Bir ayağı bench'e koy, diğeriyle squat yap."
+    ],
+    "tips": [
+      "Diz parmak ucunu geçmesin.",
+      "Dengeyi koru."
+    ],
+    "duration": "3 set x 10 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Bulgarian-Split-Squat.gif"
+  },
+  {
+    "name": "Leg Press",
+    "type": "strength",
+    "muscleGroup": "Legs",
+    "instructions": [
+      "Makinede bacakları it."
+    ],
+    "tips": [
+      "Dizleri kilitleme.",
+      "Sırtı makineye yapıştır."
+    ],
+    "duration": "3 set x 12 reps",
+    "sets": 3,
+    "reps": 12,
+    "calories": "7-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Leg-Press.gif"
+  },
+  {
+    "name": "Seated Leg Curl",
+    "type": "strength",
+    "muscleGroup": "Hamstrings",
+    "instructions": [
+      "Makinede otur, bacakları bük."
+    ],
+    "tips": [
+      "Hareketi kontrollü yap."
+    ],
+    "duration": "3 set x 12-15 reps",
+    "sets": 3,
+    "reps": 12,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Seated-Leg-Curl.gif"
+  },
+  {
+    "name": "Ab-Wheel Roll-Out",
+    "type": "strength",
+    "muscleGroup": "Core",
+    "instructions": [
+      "Ab-wheel ile ileriye doğru açıl."
+    ],
+    "tips": [
+      "Bel boşluğunu koru.",
+      "Core'u sıkı tut."
+    ],
+    "duration": "3 set x 10-12 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Ab-Wheel-Rollout.gif"
+  },
+  { 
+    "name": "Close-Grip Bench Press",
+    "type": "strength",
+    "muscleGroup": "Chest/Triceps",
+    "instructions": [
+      "Bench'te elleri dar tutarak press yap."
+    ],
+    "tips": [
+      "Dirsekleri vücuda yakın tut.",
+      "Kontrollü indir."
+    ],
+    "duration": "4 set x 8-10 reps",
+    "sets": 4,
+    "reps": 8,
+    "calories": "7-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Close-Grip-Bench-Press.gif"
+  },
+  {
+    "name": "Arnold Press",
+    "type": "strength",
+    "muscleGroup": "Shoulders",
+    "instructions": [
+      "Dumbbell'ları önde başlat, yukarı çevirerek press yap."
+    ],
+    "tips": [
+      "Bel boşluğunu artırma.",
+      "Kontrollü indir."
+    ],
+    "duration": "4 set x 8-10 reps",
+    "sets": 4,
+    "reps": 8,
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Arnold-Press.gif"
+  },
+  {
+    "name": "Rack Pull",
+    "type": "strength",
+    "muscleGroup": "Back/Glutes",
+    "instructions": [
+      "Barı diz hizasından kaldır."
+    ],
+    "tips": [
+      "Barı vücuda yakın tut.",
+      "Kontrollü yap."
+    ],
+    "duration": "3 set x 3 reps",
+    "sets": 3,
+    "reps": 3,
+    "calories": "10-16 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/barbell-rack-pull.gif"
+  },
+  {
+    "name": "Meadows Row",
+    "type": "strength",
+    "muscleGroup": "Back",
+    "instructions": [
+      "Landdke bar ile tek kol row yap."
+    ],
+    "tips": [
+      "Sırtı düz tut.",
+      "Kontrollü çek."
+    ],
+    "duration": "3 set x 10 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "7-11 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Meadows-Row.gif"
+  },
+  {
+    "name": "HIIT Sprint",
+    "type": "cardio",
+    "muscleGroup": "Cardio",
+    "instructions": [
+      "8 tur: 30 sn sprint, 60 sn yürüyüş."
+    ],
+    "tips": [
+      "Yüksek tempoda formu bozma."
+    ],
+    "duration": "8 set x 30 sn",
+    "sets": 8,
+    "reps": 0,
+    "calories": "14-20 cal/dk",
+    "imageUrl": ""
+  },
+  {
+    "name": "Cable Wood-Chop",
+    "type": "strength",
+    "muscleGroup": "Core",
+    "instructions": [
+      "Kabloyu çapraz çekerek core'u çalıştır."
+    ],
+    "tips": [
+      "Bel boşluğunu koru."
+    ],
+    "duration": "3 set x 15 reps",
+    "sets": 3,
+    "reps": 15,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/cable-woordchopper.gif"
+  },
+  {
+    "name": "Swiss-Ball Crunch",
+    "type": "strength",
+    "muscleGroup": "Core",
+    "instructions": [
+      "Swiss ball üzerinde crunch yap."
+    ],
+    "tips": [
+      "Core'u sıkı tut."
+    ],
+    "duration": "3 set x 20 reps",
+    "sets": 3,
+    "reps": 20,
+    "calories": "4-7 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/swiss-ball-crunch.jpg"
+  },
+  {
+    "name": "Skull Crusher",
+    "type": "strength",
+    "muscleGroup": "Triceps",
+    "instructions": [
+      "Bench'e sırt üstü uzan, barı baş hizasında tut.",
+      "Dirsekten bükerek barı başa doğru indir.",
+      "Dirsekleri sabit tutarak tekrar yukarı kaldır."
+    ],
+    "tips": [
+      "Dirsekleri sabit tut.",
+      "Ağırlığı kontrollü indir/kaldır."
+    ],
+    "duration": "3 set x 10-12 reps",
+    "sets": 3,
+    "reps": 10,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Dumbbell-Skull-Crusher.gif"
+  },
+  {
+    "name": "Pallof Press",
+    "type": "strength",
+    "muscleGroup": "Core",
+    "instructions": [
+      "Kabloyu göğüs hizasında iki elle tut.",
+      "Kolları öne doğru uzat, core'u sıkı tut.",
+      "Yavaşça geri çek."
+    ],
+    "tips": [
+      "Kalçayı sabit tut.",
+      "Nefesini kontrol et."
+    ],
+    "duration": "3 set x 15 sn",
+    "sets": 3,
+    "reps": 0,
+    "calories": "3-5 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Cable-Half-Kneeling-Pallof-Press.gif"
+  },
+  {
+    "name": "Lat-Pulldown",
+    "type": "strength",
+    "muscleGroup": "Back",
+    "instructions": [
+      "Makinede barı geniş tutuşla kavra.",
+      "Barı göğüs hizasına çek.",
+      "Kontrollü bırak."
+    ],
+    "tips": [
+      "Omuzları aşağıda tut.",
+      "Sırtı düz tut."
+    ],
+    "duration": "3 set x 12-15 reps",
+    "sets": 3,
+    "reps": 12,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Lat-Pulldown.gif"
+  },
+  {
+    "name": "Hanging Knee Raise",
+    "type": "strength",
+    "muscleGroup": "Core",
+    "instructions": [
+      "Barfiks barında asılıyken dizleri yukarı çek.",
+      "Kontrollü indir."
+    ],
+    "tips": [
+      "Bel boşluğunu kapat.",
+      "Sallanmadan yap."
+    ],
+    "duration": "3 set x 15 reps",
+    "sets": 3,
+    "reps": 15,
+    "calories": "5-8 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Hanging-Knee-Raises.gif"
+  },
+  {
+    "name": "Continuous Run",
+    "type": "cardio",
+    "muscleGroup": "Cardio",
+    "instructions": [
+      "Koşu bandında/parkurda 45 dk orta tempoda koş.",
+      "%70 HR_max hedefle."
+    ],
+    "tips": [
+      "Dik dur.",
+      "Nefesini kontrol et."
+    ],
+    "duration": "1 set x 45 dk",
+    "sets": 1,
+    "reps": 0,
+    "calories": "350-600 cal",
+    "imageUrl": ""
+  },
+  {
+    "name": "DB Thruster",
+    "type": "strength",
+    "muscleGroup": "Full Body",
+    "instructions": [
+      "Dumbbell'ları omuzda tut, squat yap ve yukarı kalkarken press yap."
+    ],
+    "tips": [
+      "Core'u sıkı tut.",
+      "Hareketi akıcı yap."
+    ],
+    "duration": "4 set x 8-10 reps",
+    "sets": 4,
+    "reps": 8,
+    "calories": "8-12 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Kettlebell-Thruster.gif"
+  },
+  {
+    "name": "Push-up (plate)",
+    "type": "strength",
+    "muscleGroup": "Chest",
+    "instructions": [
+      "Sırtına plate koyarak şınav çek."
+    ],
+    "tips": [
+      "Core'u sıkı tut.",
+      "Plate'i sabit tut."
+    ],
+    "duration": "4 set x AMRAP",
+    "sets": 4,
+    "calories": "6-10 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/plate-Push-up.gif"
+  },
+  {
+    "name": "Renegade Row",
+    "type": "strength",
+    "muscleGroup": "Back/Core",
+    "instructions": [
+      "Plank pozisyonunda dumbbell ile tek kolla row yap."
+    ],
+    "tips": [
+      "Core'u sıkı tut.",
+      "Kalçayı sabit tut."
+    ],
+    "duration": "4 set x 12 reps",
+    "sets": 4,
+    "reps": 12,
+    "calories": "7-11 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Kettlebell-Renegade-Row.gif"
+  },
+  {
+    "name": "Battle Rope Slam",
+    "type": "cardio",
+    "muscleGroup": "Full Body",
+    "instructions": [
+      "Battle rope'u iki elle yere vur."
+    ],
+    "tips": [
+      "Dizleri hafif bük.",
+      "Core'u sıkı tut."
+    ],
+    "duration": "4 set x 30 sn",
+    "sets": 4,
+    "reps": 0,
+    "calories": "10-16 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/Half-Kneeling-Battling-Rope.gif"
+  },
+  {
+    "name": "V-Sit",
+    "type": "strength",
+    "muscleGroup": "Core",
+    "instructions": [
+      "Yere otur, bacakları ve gövdeyi V pozisyonunda kaldır."
+    ],
+    "tips": [
+      "Bel boşluğunu kapat.",
+      "Dizleri bükmeden yap."
+    ],
+    "duration": "3 set x 20 reps",
+    "sets": 3,
+    "reps": 20,
+    "calories": "4-7 cal/dk",
+    "imageUrl": "https://storage.googleapis.com/fitness-app-photos/v-sit-on-floor.webp"
+  }
+]

@@ -1,0 +1,1412 @@
+[
+  {
+    "title": "Beginner Full Body",
+    "slug": "beginner-full-body",
+    "description": "Perfect for those starting their fitness journey. A comprehensive 4-week program focusing on basic movements and building strength foundation.",
+    "difficulty": "BEGINNER",
+    "durationWeeks": 4,
+    "days": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 1
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 2
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 4
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 3
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 7
+          }
+        ]
+      }
+    ],
+    "exercises": [
+      1,
+      2,
+      3,
+      4,
+      7
+    ],
+    "coverImageUrl": "https://via.placeholder.com/400x300/33A8FF/FFFFFF?text=Beginner+Full+Body",
+    "tags": [
+      "beginner",
+      "full",
+      "body"
+    ]
+  },
+  {
+    "title": "Cardio Beginner",
+    "slug": "cardio-beginner",
+    "description": "Sedanter / hafif aktif kişiler için 4 haftalık kilo kaybı – kardiyovasküler adaptasyon programı.",
+    "difficulty": "BEGINNER",
+    "durationWeeks": 4,
+    "days": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 10
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 11
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 9,
+            "overrides": {
+              "durationSec": 1920
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 10,
+            "overrides": {
+              "durationSec": 320
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 11,
+            "overrides": {
+              "durationSec": 1920
+            }
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 9,
+            "overrides": {
+              "durationSec": 2100
+            }
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 10,
+            "overrides": {
+              "sets": 7
+            }
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 11,
+            "overrides": {
+              "durationSec": 2100
+            }
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 9,
+            "overrides": {
+              "durationSec": 2400
+            }
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 10,
+            "overrides": {
+              "sets": 8
+            }
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 11,
+            "overrides": {
+              "durationSec": 2400
+            }
+          }
+        ]
+      }
+    ],
+    "exercises": [
+      9,
+      10,
+      11
+    ],
+    "coverImageUrl": "https://via.placeholder.com/400x300/33A8FF/FFFFFF?text=Cardio+Beginner",
+    "tags": [
+      "cardio",
+      "beginner"
+    ]
+  },
+  {
+    "title": "Strength Builder",
+    "slug": "strength-builder",
+    "description": "Advanced strength training program designed to build muscle mass and increase overall strength.",
+    "difficulty": "ADVANCED",
+    "durationWeeks": 8,
+    "days": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 1
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 2
+          }
+        ]
+      }
+    ],
+    "exercises": [
+      1,
+      2
+    ],
+    "coverImageUrl": "https://via.placeholder.com/400x300/33A8FF/FFFFFF?text=Strength+Builder",
+    "tags": [
+      "strength",
+      "builder"
+    ]
+  },
+  {
+    "title": "Full-Body Beginner",
+    "slug": "fullbody-beginner",
+    "description": "Haftada 3 gün, tam vücut direnç + hafif kardiyo ile kuvvet ve hipertrofi temelleri.",
+    "difficulty": "BEGINNER",
+    "durationWeeks": 4,
+    "days": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 12
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 13
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 14
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 16
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 4
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 12
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 13
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 14
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 16
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 4
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 12
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 13
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 14
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 16
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 4
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 9
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 12,
+            "overrides": {
+              "reps": 14
+            }
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 13,
+            "overrides": {
+              "reps": 14
+            }
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 14,
+            "overrides": {
+              "reps": 14
+            }
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 16,
+            "overrides": {
+              "reps": 14
+            }
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 4
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 9,
+            "overrides": {
+              "durationSec": 720
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 12,
+            "overrides": {
+              "reps": 14
+            }
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 13,
+            "overrides": {
+              "reps": 14
+            }
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 14,
+            "overrides": {
+              "reps": 14
+            }
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 16,
+            "overrides": {
+              "reps": 14
+            }
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 4
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 9,
+            "overrides": {
+              "durationSec": 720
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 12,
+            "overrides": {
+              "reps": 14
+            }
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 13,
+            "overrides": {
+              "reps": 14
+            }
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 14,
+            "overrides": {
+              "reps": 14
+            }
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 16,
+            "overrides": {
+              "reps": 14
+            }
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 4
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 9,
+            "overrides": {
+              "durationSec": 720
+            }
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 12,
+            "overrides": {
+              "sets": 4,
+              "reps": 10
+            }
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 13,
+            "overrides": {
+              "sets": 4,
+              "reps": 10
+            }
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 14,
+            "overrides": {
+              "sets": 4,
+              "reps": 10
+            }
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 16,
+            "overrides": {
+              "sets": 4,
+              "reps": 10
+            }
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 4
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 9,
+            "overrides": {
+              "durationSec": 780
+            }
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 12,
+            "overrides": {
+              "sets": 4,
+              "reps": 10
+            }
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 13,
+            "overrides": {
+              "sets": 4,
+              "reps": 10
+            }
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 14,
+            "overrides": {
+              "sets": 4,
+              "reps": 10
+            }
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 16,
+            "overrides": {
+              "sets": 4,
+              "reps": 10
+            }
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 4
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 9,
+            "overrides": {
+              "durationSec": 780
+            }
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 12,
+            "overrides": {
+              "sets": 4,
+              "reps": 10
+            }
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 13,
+            "overrides": {
+              "sets": 4,
+              "reps": 10
+            }
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 14,
+            "overrides": {
+              "sets": 4,
+              "reps": 10
+            }
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 16,
+            "overrides": {
+              "sets": 4,
+              "reps": 10
+            }
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 4
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 9,
+            "overrides": {
+              "durationSec": 780
+            }
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 12,
+            "overrides": {
+              "sets": 4
+            }
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 13,
+            "overrides": {
+              "sets": 4
+            }
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 14,
+            "overrides": {
+              "sets": 4
+            }
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 16,
+            "overrides": {
+              "sets": 4
+            }
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 4
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 9,
+            "overrides": {
+              "durationSec": 900
+            }
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 12,
+            "overrides": {
+              "sets": 4
+            }
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 13,
+            "overrides": {
+              "sets": 4
+            }
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 14,
+            "overrides": {
+              "sets": 4
+            }
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 16,
+            "overrides": {
+              "sets": 4
+            }
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 4
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 9,
+            "overrides": {
+              "durationSec": 900
+            }
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 12,
+            "overrides": {
+              "sets": 4
+            }
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 13,
+            "overrides": {
+              "sets": 4
+            }
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 14,
+            "overrides": {
+              "sets": 4
+            }
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 16,
+            "overrides": {
+              "sets": 4
+            }
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 4
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 9,
+            "overrides": {
+              "durationSec": 900
+            }
+          }
+        ]
+      }
+    ],
+    "exercises": [
+      4,
+      9,
+      12,
+      13,
+      14,
+      16
+    ],
+    "coverImageUrl": "https://via.placeholder.com/400x300/33A8FF/FFFFFF?text=Full+Body+Beginner",
+    "tags": [
+      "full",
+      "body",
+      "beginner"
+    ]
+  },
+  {
+    "title": "Split Intermediate",
+    "slug": "split-intermediate",
+    "description": "Üst/Alt bölünmüş antrenman: haftada 4 direnç + 1 kardiyo, 4 hafta boyunca güç ve kas gelişimi.",
+    "difficulty": "INTERMEDIATE",
+    "durationWeeks": 4,
+    "days": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 17
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 18
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 19
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 20
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 21
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 22
+          },
+          {
+            "orderIndex": 7,
+            "exerciseId": 23
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "dayOfWeek": 2,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 24
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 25
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 26
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 27
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 28
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 29
+          },
+          {
+            "orderIndex": 7,
+            "exerciseId": 30
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 31
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "dayOfWeek": 4,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 19
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 20
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 21
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 22
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 23,
+            "overrides": {
+              "sets": 3,
+              "reps": 15
+            }
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 24
+          },
+          {
+            "orderIndex": 7,
+            "exerciseId": 30
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 25
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 26
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 27
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 28
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 29
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 31,
+            "overrides": {
+              "sets": 3
+            }
+          }
+        ]
+      }
+    ],
+    "exercises": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "coverImageUrl": "https://via.placeholder.com/400x300/33A8FF/FFFFFF?text=Split+Intermediate",
+    "tags": [
+      "split",
+      "intermediate"
+    ]
+  },
+  {
+    "title": "Split Advanced",
+    "slug": "split-advanced",
+    "description": "5 gün Push-Pull-Leg-Push-Pull, Cumartesi Cardio+Core. 4 hafta, yüksek hacim.",
+    "difficulty": "ADVANCED",
+    "durationWeeks": 4,
+    "days": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 17
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 19
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 32
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 33
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 34
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 35
+          },
+          {
+            "orderIndex": 7,
+            "exerciseId": 36
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "dayOfWeek": 2,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 37
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 38
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 39
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 40
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 22
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 41
+          },
+          {
+            "orderIndex": 7,
+            "exerciseId": 42
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 24
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 25
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 43
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 44
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 45
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 29
+          },
+          {
+            "orderIndex": 7,
+            "exerciseId": 46
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "dayOfWeek": 4,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 47
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 48
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 49
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 33,
+            "overrides": {
+              "reps": 15
+            }
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 34
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 35,
+            "overrides": {
+              "durationSec": 40
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 49,
+            "overrides": {
+              "sets": 3,
+              "reps": 3
+            }
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 50
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 37,
+            "overrides": {
+              "sets": 3,
+              "reps": 8
+            }
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 38,
+            "overrides": {
+              "sets": 3
+            }
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 22
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 41
+          },
+          {
+            "orderIndex": 7,
+            "exerciseId": 42
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "dayOfWeek": 6,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 51
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 52
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 53
+          }
+        ]
+      }
+    ],
+    "exercises": [
+      17,
+      19,
+      22,
+      24,
+      25,
+      29,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53
+    ],
+    "coverImageUrl": "https://via.placeholder.com/400x300/33A8FF/FFFFFF?text=Split+Advanced",
+    "tags": [
+      "split",
+      "advanced"
+    ]
+  },
+  {
+    "title": "Advanced Split + Cardio",
+    "slug": "adv-split-cardio",
+    "description": "PPL + 2 kardiyo + MetCon. Haftada 6 gün, 4 hafta.",
+    "difficulty": "ADVANCED",
+    "durationWeeks": 4,
+    "days": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 17
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 19
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 32
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 33
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 34
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 54
+          },
+          {
+            "orderIndex": 7,
+            "exerciseId": 55
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "dayOfWeek": 2,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 38
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 39
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 20
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 56
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 22
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 41
+          },
+          {
+            "orderIndex": 7,
+            "exerciseId": 57
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "dayOfWeek": 3,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 24
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 25
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 26
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 44
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 45
+          },
+          {
+            "orderIndex": 6,
+            "exerciseId": 29
+          },
+          {
+            "orderIndex": 7,
+            "exerciseId": 46
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "dayOfWeek": 4,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 58
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "dayOfWeek": 5,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 59
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 18
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 60
+          },
+          {
+            "orderIndex": 4,
+            "exerciseId": 61
+          },
+          {
+            "orderIndex": 5,
+            "exerciseId": 62
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "dayOfWeek": 6,
+        "exerciseEntries": [
+          {
+            "orderIndex": 1,
+            "exerciseId": 51
+          },
+          {
+            "orderIndex": 2,
+            "exerciseId": 52
+          },
+          {
+            "orderIndex": 3,
+            "exerciseId": 63
+          }
+        ]
+      }
+    ],
+    "exercises": [
+      17,
+      18,
+      19,
+      20,
+      22,
+      24,
+      25,
+      26,
+      29,
+      32,
+      33,
+      34,
+      38,
+      39,
+      41,
+      44,
+      45,
+      46,
+      51,
+      52,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "coverImageUrl": "https://via.placeholder.com/400x300/33A8FF/FFFFFF?text=Advanced+Split+Cardio",
+    "tags": [
+      "advanced",
+      "split",
+      "cardio"
+    ]
+  }
+]
