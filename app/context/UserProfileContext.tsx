@@ -23,6 +23,7 @@ type UserProfileContextType = {
   loading: boolean
   error: string | null
   refetch: () => void
+  updateProfile: (data: Partial<UserProfile> & { fitnessGoal?: string }) => Promise<boolean>
 }
 
 const UserProfileContext = createContext<UserProfileContextType | undefined>(undefined)
@@ -53,8 +54,38 @@ export const UserProfileProvider = ({ children }: { children: ReactNode }) => {
     // Şimdilik boş bırakılabilir veya AuthContext'e bir refetch fonksiyonu eklenip o çağrılabilir.
   };
 
+  // Profil güncelleme fonksiyonu
+  const updateProfile = async (data: Partial<UserProfile> & { fitnessGoal?: string }) => {
+    setLoading(true)
+    setError(null)
+    try {
+      const response = await authFetch(
+        `${process.env.EXPO_PUBLIC_API_URL}/auth/update-profile`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      )
+      if (response.ok) {
+        const updated = await response.json()
+        setUserProfile(updated.user)
+        setLoading(false)
+        return true
+      } else {
+        setError("Profil güncellenemedi")
+        setLoading(false)
+        return false
+      }
+    } catch (err) {
+      setError("Profil güncellenirken bir hata oluştu")
+      setLoading(false)
+      return false
+    }
+  }
+
   return (
-    <UserProfileContext.Provider value={{ userProfile, loading, error, refetch }}>
+    <UserProfileContext.Provider value={{ userProfile, loading, error, refetch, updateProfile }}>
       {children}
     </UserProfileContext.Provider>
   )
