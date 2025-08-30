@@ -12,7 +12,6 @@ import WorkoutProgramsCard from "../../components/WorkoutProgramsCard"
 import CalendarCard from "../../components/CalendarCard"
 import CaloriesCard from "../../components/CaloriesCard"
 import UserWorkoutDayCard from '../../components/UserWorkoutDayCard'; 
-import ActiveWorkoutProgramsCard from "../../components/ActiveWorkoutProgramsCard"
 import type { WorkoutProgram as CardWorkoutProgram } from '../../components/WorkoutProgramsCard';
 import CustomAlert from "../../components/CustomAlert";
 import { useCustomAlert } from "../../hooks/useCustomAlert";

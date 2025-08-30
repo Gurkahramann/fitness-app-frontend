@@ -1,9 +1,9 @@
-import { StyleSheet, Dimensions } from "react-native"
+import { StyleSheet, Dimensions } from "react-native";
 
-const { width } = Dimensions.get("window")
-const featureItemWidth = (width - 64) / 2
+const { width } = Dimensions.get("window");
+const featureItemWidth = (width - 64) / 2;
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -97,5 +97,7 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
   },
-})
+});
+
+export default styles;
 

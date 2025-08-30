@@ -6,14 +6,12 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   useColorScheme,
   SafeAreaView,
   StatusBar,
-  Platform,
 } from "react-native"
-import { SafeAreaInsetsContext, useSafeAreaInsets } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { useRouter } from "expo-router"
 import { useAuth } from "../../hooks/useAuth"
@@ -22,8 +20,8 @@ import { useUserProfile } from "../context/UserProfileContext"
 import CustomDateModal from "../../components/CustomDateModal"
 import React from "react"
 import type { User } from "../context/AuthContext"
-import { authFetch } from "../utils/authFetch"
 import OptimizedSlider from "../../components/BodyInfoSliders"
+import styles from "../styles/ProfileEditScreen.styles";
 
 export default function ProfileEditScreen() {
   const isDark = useColorScheme() === "dark"
@@ -106,11 +104,7 @@ export default function ProfileEditScreen() {
     }
   }
 
-  // Modern DatePicker için maksimum tarih (bugün)
-  const getMaxDate = (): string => {
-    const today = new Date()
-    return `${today.getFullYear()}/${String(today.getMonth() + 1).padStart(2, "0")}/${String(today.getDate()).padStart(2, "0")}`
-  }
+  const { updateProfile } = useUserProfile()
 
   // Handle save
   const handleSave = async () => {
@@ -127,40 +121,20 @@ export default function ProfileEditScreen() {
         isoBirthDate = ""; // veya null gönder
       }
     }
-    try {
-      const updatedData = {
-        ...user,
-        name,
-        height,
-        weight,
-        birthDate: isoBirthDate,
-        activityLevel,
-        fitnessGoal,
-      }
-      const response = await authFetch(
-        `${process.env.EXPO_PUBLIC_API_URL}/auth/update-profile`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedData),
-        }
-      );
-      if (response.ok) {
-        // Backend'den dönen güncel kullanıcı bilgisini state'e kaydet
-        if (setUser) setUser(updatedData as User);
-        showToast("Profil başarıyla güncellendi", "success");
-        router.back();
-      } else {
-        showToast("Profil güncellenemedi", "error");
-      }
-      // Optionally, send updatedData to backend here
-      if (setUser) setUser(updatedData as User)
+    const updatedData = {
+      name,
+      height,
+      weight,
+      birthDate: isoBirthDate,
+      activityLevel,
+      fitnessGoal,
+    }
+    const success = await updateProfile(updatedData)
+    if (success) {
+      showToast("Profil başarıyla güncellendi", "success")
       router.back()
-    } catch (error) {
-      console.error("Error updating profile:", error)
-      showToast("Profil güncellenirken bir hata oluştu", "error")
+    } else {
+      showToast("Profil güncellenemedi", "error")
     }
   }
 
@@ -263,77 +237,6 @@ export default function ProfileEditScreen() {
             <MaterialCommunityIcons name="calendar" size={20} color={isDark ? "#aaa" : "#666"} />
           </TouchableOpacity>
         </View>
-
-        {/* Activity Level */}
-        {/* <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Aktivite Seviyesi</Text>
-
-          <View style={styles.activityOptions}>
-            <TouchableOpacity
-              style={[
-                styles.activityOption,
-                activityLevel === "sedentary" && {
-                  backgroundColor: isDark ? "#3DCC85" : "#3DCC85",
-                },
-              ]}
-              onPress={() => setActivityLevel("sedentary")}
-            >
-              <MaterialCommunityIcons
-                name="seat-outline"
-                size={24}
-                color={activityLevel === "sedentary" ? (isDark ? "#000" : "#fff") : isDark ? "#fff" : "#000"}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.activityOption,
-                activityLevel === "light" && {
-                  backgroundColor: isDark ? "#3DCC85" : "#3DCC85",
-                },
-              ]}
-              onPress={() => setActivityLevel("light")}
-            >
-              <MaterialCommunityIcons
-                name="walk"
-                size={24}
-                color={activityLevel === "light" ? (isDark ? "#000" : "#fff") : isDark ? "#fff" : "#000"}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.activityOption,
-                activityLevel === "moderate" && {
-                  backgroundColor: isDark ? "#3DCC85" : "#3DCC85",
-                },
-              ]}
-              onPress={() => setActivityLevel("moderate")}
-            >
-              <MaterialCommunityIcons
-                name="run"
-                size={24}
-                color={activityLevel === "moderate" ? (isDark ? "#000" : "#fff") : isDark ? "#fff" : "#000"}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.activityOption,
-                activityLevel === "active" && {
-                  backgroundColor: isDark ? "#3DCC85" : "#3DCC85",
-                },
-              ]}
-              onPress={() => setActivityLevel("active")}
-            >
-              <MaterialCommunityIcons
-                name="bike"
-                size={24}
-                color={activityLevel === "active" ? (isDark ? "#000" : "#fff") : isDark ? "#fff" : "#000"}
-              />
-            </TouchableOpacity>
-          </View>
-        </View> */}
 
         {/* Activity Level Details */}
         <View style={styles.activityLevelDetails}>
@@ -583,178 +486,3 @@ export default function ProfileEditScreen() {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#333",
-    backgroundColor: "transparent",
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-  },
-  cancelButton: {
-    fontSize: 16,
-  },
-  saveButton: {
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  scrollContent: {
-    paddingBottom: 40,
-  },
-  section: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#333",
-  },
-  sectionHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: "500",
-    marginLeft: 8,
-    flex: 1,
-  },
-  valueText: {
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  textInput: {
-    height: 50,
-    borderRadius: 10,
-    borderWidth: 1,
-    paddingHorizontal: 12,
-    fontSize: 16,
-    marginTop: 8,
-  },
-  sliderContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 8,
-  },
-  sliderWrapper: {
-    flex: 1,
-    height: 4,
-    marginHorizontal: 10,
-    position: "relative",
-  },
-  sliderTrack: {
-    height: 4,
-    width: "100%",
-    borderRadius: 2,
-    position: "absolute",
-  },
-  sliderFill: {
-    height: 4,
-    borderRadius: 2,
-    position: "absolute",
-  },
-  sliderThumb: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    position: "absolute",
-    top: -8,
-    marginLeft: -10,
-  },
-  sliderMin: {
-    fontSize: 12,
-  },
-  sliderMax: {
-    fontSize: 12,
-  },
-  dateButton: {
-    height: 50,
-    borderRadius: 10,
-    borderWidth: 1,
-    paddingHorizontal: 12,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginTop: 8,
-  },
-  dateButtonText: {
-    fontSize: 16,
-  },
-  activityOptions: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginTop: 16,
-  },
-  activityOption: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#333",
-  },
-  activityLevelDetails: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#333",
-  },
-  activityLevelItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 12,
-    borderRadius: 10,
-    marginBottom: 8,
-    borderWidth: 2,
-  },
-  activityLevelIcon: {
-    marginRight: 12,
-  },
-  activityLevelText: {
-    flex: 1,
-    fontSize: 14,
-  },
-  checkIcon: {
-    marginLeft: 8,
-  },
-  goalsContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    marginTop: 16,
-  },
-  goalItem: {
-    width: "48%",
-    padding: 16,
-    borderRadius: 10,
-    marginBottom: 12,
-    alignItems: "center",
-    position: "relative",
-    borderWidth: 2,
-  },
-  goalIcon: {
-    marginBottom: 8,
-  },
-  goalText: {
-    fontSize: 14,
-    fontWeight: "500",
-    textAlign: "center",
-  },
-  selectedIndicator: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    width: 20,
-    height: 20,
-    borderBottomLeftRadius: 10,
-  },
-})

@@ -22,6 +22,7 @@ import { useAuth } from "@/hooks/useAuth"
 import { useRouter } from "expo-router"
 import { useToast } from "../context/ToastContext"
 import { defaultFormData } from "../context/FormContext"
+import styles from "../styles/LifeStyleScreen.styles";
 
 import React from "react"
 
@@ -103,7 +104,7 @@ export default function LifestyleScreen() {
   }
 
   return (
-    <SafeAreaView style={[localStyles.container, { backgroundColor: isDark ? "#121212" : "#f8f9fa" }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#121212" : "#f8f9fa" }]}>
       <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
 
       <KeyboardAvoidingView
@@ -117,22 +118,22 @@ export default function LifestyleScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            <View style={localStyles.content}>
-              <View style={localStyles.headerContainer}>
-                <Text style={[localStyles.title, { color: isDark ? "#fff" : "#000" }]}>Yaşam Tarzı</Text>
-                <Text style={[localStyles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>Fitness hedefleriniz için aktivite seviyenizi seçin</Text>
+            <View style={styles.content}>
+              <View style={styles.headerContainer}>
+                <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Yaşam Tarzı</Text>
+                <Text style={[styles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>Fitness hedefleriniz için aktivite seviyenizi seçin</Text>
               </View>
 
               {/* Activity Level Section */}
-              <View style={localStyles.sectionContainer}>
-                <Text style={[localStyles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Aktivite Seviyesi</Text>
+              <View style={styles.sectionContainer}>
+                <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Aktivite Seviyesi</Text>
 
-                <View style={localStyles.optionsContainer}>
+                <View style={styles.optionsContainer}>
                   {ACTIVITY_OPTIONS.map((activity) => (
                     <TouchableOpacity
                       key={activity.key}
                       style={[
-                        localStyles.optionItem,
+                        styles.optionItem,
                         {
                           backgroundColor: isDark ? "#1e1e1e" : "#fff",
                           borderColor:
@@ -147,7 +148,7 @@ export default function LifestyleScreen() {
                       ]}
                       onPress={() => handleSelectActivity(activity.key)}
                     >
-                      <View style={localStyles.optionIconContainer}>
+                      <View style={styles.optionIconContainer}>
                         <MaterialCommunityIcons
                           name={activity.icon as any}
                           size={24}
@@ -162,8 +163,8 @@ export default function LifestyleScreen() {
                           }
                         />
                       </View>
-                      <View style={localStyles.optionTextContainer}>
-                        <Text style={[localStyles.optionText, { color: isDark ? "#fff" : "#000" }]}>
+                      <View style={styles.optionTextContainer}>
+                        <Text style={[styles.optionText, { color: isDark ? "#fff" : "#000" }]}>
                           {activity.label}
                         </Text>
                       </View>
@@ -172,7 +173,7 @@ export default function LifestyleScreen() {
                           name="check"
                           size={20}
                           color={isDark ? "#fff" : "#000"}
-                          style={localStyles.checkIcon}
+                          style={styles.checkIcon}
                         />
                       )}
                     </TouchableOpacity>
@@ -181,15 +182,15 @@ export default function LifestyleScreen() {
               </View>
 
               {/* Goals Section */}
-              <View style={localStyles.sectionContainer}>
-                <Text style={[localStyles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Fitness Hedefi</Text>
+              <View style={styles.sectionContainer}>
+                <Text style={[styles.sectionTitle, { color: isDark ? "#fff" : "#000" }]}>Fitness Hedefi</Text>
 
-                <View style={localStyles.goalsContainer}>
+                <View style={styles.goalsContainer}>
                   {GOALS.map((goal) => (
                     <TouchableOpacity
                       key={goal.key}
                       style={[
-                        localStyles.goalItem,
+                        styles.goalItem,
                         {
                           backgroundColor: isDark ? "#1e1e1e" : "#fff",
                           borderColor:
@@ -202,11 +203,11 @@ export default function LifestyleScreen() {
                         name={goal.icon as any}
                         size={28}
                         color={selectedGoal === goal.key ? (isDark ? "#fff" : "#000") : isDark ? "#aaa" : "#666"}
-                        style={localStyles.goalIcon}
+                        style={styles.goalIcon}
                       />
-                      <Text style={[localStyles.goalText, { color: isDark ? "#fff" : "#000" }]}>{goal.label}</Text>
+                      <Text style={[styles.goalText, { color: isDark ? "#fff" : "#000" }]}>{goal.label}</Text>
                       {selectedGoal === goal.key && (
-                        <View style={[localStyles.selectedIndicator, { backgroundColor: isDark ? "#fff" : "#000" }]} />
+                        <View style={[styles.selectedIndicator, { backgroundColor: isDark ? "#fff" : "#000" }]} />
                       )}
                     </TouchableOpacity>
                   ))}
@@ -215,14 +216,14 @@ export default function LifestyleScreen() {
 
               {/* Save Button */}
               <TouchableOpacity
-                style={[localStyles.saveButton, { backgroundColor: isDark ? "#fff" : "#000" }]}
+                style={[styles.saveButton, { backgroundColor: isDark ? "#fff" : "#000" }]}
                 onPress={handleSave}
                 disabled={isLoading}
               >
                 {isLoading ? (
                   <ActivityIndicator color={isDark ? "#000" : "#fff"} />
                 ) : (
-                  <Text style={[localStyles.saveButtonText, { color: isDark ? "#000" : "#fff" }]}>Kaydet</Text>
+                  <Text style={[styles.saveButtonText, { color: isDark ? "#000" : "#fff" }]}>Kaydet</Text>
                 )}
               </TouchableOpacity>
             </View>
@@ -232,103 +233,6 @@ export default function LifestyleScreen() {
     </SafeAreaView>
   )
 }
-
-const localStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  content: {
-    flex: 1,
-    padding: 24,
-  },
-  headerContainer: {
-    marginBottom: 32,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-  },
-  sectionContainer: {
-    marginBottom: 24,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    marginBottom: 16,
-  },
-  optionsContainer: {
-    width: "100%",
-  },
-  optionItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 16,
-    borderRadius: 12,
-    borderWidth: 1,
-    marginBottom: 12,
-  },
-  optionIconContainer: {
-    width: 40,
-    alignItems: "center",
-  },
-  optionTextContainer: {
-    flex: 1,
-    marginLeft: 8,
-  },
-  optionText: {
-    fontSize: 16,
-  },
-  checkIcon: {
-    marginLeft: 8,
-  },
-  goalsContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-  },
-  goalItem: {
-    width: "48%",
-    padding: 16,
-    borderRadius: 12,
-    borderWidth: 1,
-    marginBottom: 12,
-    alignItems: "center",
-    position: "relative",
-    overflow: "hidden",
-  },
-  goalIcon: {
-    marginBottom: 8,
-  },
-  goalText: {
-    fontSize: 14,
-    fontWeight: "500",
-    textAlign: "center",
-  },
-  selectedIndicator: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    width: 20,
-    height: 20,
-    borderBottomLeftRadius: 10,
-  },
-  saveButton: {
-    height: 56,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "auto",
-    marginBottom: 24,
-  },
-  saveButtonText: {
-    fontSize: 16,
-    fontWeight: "600",
-  },
-})
 
 function calculateAge(birthDateStr: string): number {
   const [day, month, year] = birthDateStr.split("/").map(Number)

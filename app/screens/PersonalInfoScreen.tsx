@@ -23,6 +23,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { useFormData } from "../context/FormContext"
 import React from "react"
 import GenderSelectionModal from "@/components/GenderSelectionModal"
+import styles from "../styles/PersonalInfoScreen.styles";
 
 // Gender options for ModalSelector
 const GENDER_OPTIONS = [
@@ -103,7 +104,7 @@ export default function PersonalInfoScreen() {
   }
 
   return (
-    <SafeAreaView style={[localStyles.container, { backgroundColor: isDark ? "#121212" : "#f8f9fa" }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#121212" : "#f8f9fa" }]}>
       <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
 
       <KeyboardAvoidingView
@@ -117,20 +118,20 @@ export default function PersonalInfoScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            <View style={localStyles.content}>
-              <View style={localStyles.headerContainer}>
-                <Text style={[localStyles.title, { color: isDark ? "#fff" : "#000" }]}>Kişisel Bilgiler</Text>
-                <Text style={[localStyles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>
+            <View style={styles.content}>
+              <View style={styles.headerContainer}>
+                <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>Kişisel Bilgiler</Text>
+                <Text style={[styles.subtitle, { color: isDark ? "#aaa" : "#666" }]}>
                   Lütfen kişisel bilgilerinizi giriniz
                 </Text>
               </View>
 
-              <View style={localStyles.formContainer}>
+              <View style={styles.formContainer}>
                 {/* First Name Input */}
-                <View style={localStyles.inputContainer}>
+                <View style={styles.inputContainer}>
                   <View
                     style={[
-                      localStyles.inputWrapper,
+                      styles.inputWrapper,
                       {
                         borderColor: firstNameError ? "#ff4d4f" : isDark ? "#333" : "#e0e0e0",
                         backgroundColor: isDark ? "#1e1e1e" : "#fff",
@@ -141,24 +142,24 @@ export default function PersonalInfoScreen() {
                       name="account-outline"
                       size={20}
                       color={isDark ? "#aaa" : "#666"}
-                      style={localStyles.inputIcon}
+                      style={styles.inputIcon}
                     />
                     <TextInput
-                      style={[localStyles.input, { color: isDark ? "#fff" : "#000" }]}
+                      style={[styles.input, { color: isDark ? "#fff" : "#000" }]}
                       placeholder="Adınız"
                       placeholderTextColor={isDark ? "#777" : "#aaa"}
                       value={formData.firstName}
                       onChangeText={handleFirstNameChange}
                     />
                   </View>
-                  {firstNameError ? <Text style={localStyles.errorText}>{firstNameError}</Text> : null}
+                  {firstNameError ? <Text style={styles.errorText}>{firstNameError}</Text> : null}
                 </View>
 
                 {/* Last Name Input */}
-                <View style={localStyles.inputContainer}>
+                <View style={styles.inputContainer}>
                   <View
                     style={[
-                      localStyles.inputWrapper,
+                      styles.inputWrapper,
                       {
                         borderColor: lastNameError ? "#ff4d4f" : isDark ? "#333" : "#e0e0e0",
                         backgroundColor: isDark ? "#1e1e1e" : "#fff",
@@ -169,21 +170,21 @@ export default function PersonalInfoScreen() {
                       name="account-outline"
                       size={20}
                       color={isDark ? "#aaa" : "#666"}
-                      style={localStyles.inputIcon}
+                      style={styles.inputIcon}
                     />
                     <TextInput
-                      style={[localStyles.input, { color: isDark ? "#fff" : "#000" }]}
+                      style={[styles.input, { color: isDark ? "#fff" : "#000" }]}
                       placeholder="Soyadınız"
                       placeholderTextColor={isDark ? "#777" : "#aaa"}
                       value={formData.lastName}
                       onChangeText={handleLastNameChange}
                     />
                   </View>
-                  {lastNameError ? <Text style={localStyles.errorText}>{lastNameError}</Text> : null}
+                  {lastNameError ? <Text style={styles.errorText}>{lastNameError}</Text> : null}
                 </View>
 
                 {/* Gender Selector */}
-                <View style={localStyles.inputContainer}>
+                <View style={styles.inputContainer}>
                   <GenderSelectionModal
                     selectedValue={formData.gender}
                     onSelect={handleSelectGender}
@@ -194,10 +195,10 @@ export default function PersonalInfoScreen() {
 
               {/* Next Button */}
               <TouchableOpacity
-                style={[localStyles.nextButton, { backgroundColor: isDark ? "#fff" : "#000" }]}
+                style={[styles.nextButton, { backgroundColor: isDark ? "#fff" : "#000" }]}
                 onPress={handleNext}
               >
-                <Text style={[localStyles.nextButtonText, { color: isDark ? "#000" : "#fff" }]}>İleri</Text>
+                <Text style={[styles.nextButtonText, { color: isDark ? "#000" : "#fff" }]}>İleri</Text>
                 <MaterialCommunityIcons name="arrow-right" size={20} color={isDark ? "#000" : "#fff"} />
               </TouchableOpacity>
             </View>
@@ -207,97 +208,4 @@ export default function PersonalInfoScreen() {
     </SafeAreaView>
   )
 }
-
-const localStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  content: {
-    flex: 1,
-    padding: 24,
-    justifyContent: "center",
-  },
-  headerContainer: {
-    marginBottom: 40,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-  },
-  formContainer: {
-    width: "100%",
-  },
-  inputContainer: {
-    marginBottom: 20,
-  },
-  inputWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
-    borderRadius: 12,
-    height: 56,
-    paddingHorizontal: 16,
-  },
-  selectorWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
-    borderRadius: 12,
-    height: 56,
-    paddingLeft: 16,
-    paddingRight: 8,
-  },
-  inputIcon: {
-    marginRight: 12,
-  },
-  selectorIcon: {
-    marginLeft: "auto",
-  },
-  input: {
-    flex: 1,
-    height: "100%",
-    fontSize: 16,
-  },
-  modalSelector: {
-    flex: 1,
-    height: "100%",
-  },
-  selectStyle: {
-    borderWidth: 0,
-    height: "100%",
-    justifyContent: "center",
-    backgroundColor: "transparent",
-  },
-  selectTextStyle: {
-    fontSize: 16,
-    textAlign: "left",
-  },
-  initValueTextStyle: {
-    fontSize: 16,
-    textAlign: "left",
-  },
-  errorText: {
-    color: "#ff4d4f",
-    fontSize: 12,
-    marginTop: 4,
-    marginLeft: 4,
-  },
-  nextButton: {
-    flexDirection: "row",
-    height: 56,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 20,
-  },
-  nextButtonText: {
-    fontSize: 16,
-    fontWeight: "600",
-    marginRight: 8,
-  },
-})
 
