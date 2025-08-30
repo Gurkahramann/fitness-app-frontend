@@ -19,41 +19,41 @@ Uygulama, kullanıcıların fitness hedeflerine ulaşmalarını kolaylaştırmak
 ### Karşılama Ekranı
 Uygulama ilk açıldığında kullanıcıyı karşılayan ekrandır. Giriş yapma ve kayıt olma seçenekleri sunar.
 
-![Karşılama Ekranı](screenshots/WelcomePage.jpg)
+<img src="screenshots/WelcomePage.jpg" alt="Karşılama Ekranı" width="300"/>
 
 ### Ana Ekran
 Kullanıcının giriş yaptıktan sonra gördüğü ana ekrandır. Oluşturulan programlar, günlük hedefler ve genel ilerleme durumu burada görüntülenir.
 
-![Ana Ekran](screenshots/Homescreen.jpg)
+<img src="screenshots/Homescreen.jpg" alt="Ana Ekran" width="300"/>
 
 ### Program Oluşturma
 Kullanıcıların kendi antrenman programlarını oluşturabildikleri ekrandır. Egzersiz seçimi, set ve tekrar sayıları gibi detaylar burada belirlenir.
 
-![Program Oluşturma](screenshots/CreateProgramScreen.jpg)
+<img src="screenshots/CreateProgramScreen.jpg" alt="Program Oluşturma" width="300"/>
 
 Program oluşturma ekranında daha fazla detay ve egzersiz ekleme seçenekleri de mevcuttur.
 
-![Detaylı Program Oluşturma](screenshots/CreateProgramExtended.jpg)
+<img src="screenshots/CreateProgramExtended.jpg" alt="Detaylı Program Oluşturma" width="300"/>
 
 ### Antrenman Ekranı
 Aktif bir antrenman sırasında kullanılan ekrandır. Egzersizler, zamanlayıcı ve set takibi gibi işlevleri içerir.
 
-![Antrenman Ekranı](screenshots/TrainingFunction.jpg)
+<img src="screenshots/TrainingFunction.jpg" alt="Antrenman Ekranı" width="300"/>
 
 ### Yapay Zeka Desteği
 Uygulama, kullanıcıların programlarını optimize etmelerine yardımcı olmak için yapay zeka destekli öneriler sunar.
 
-![Yapay Zeka Desteği](screenshots/PartOfAI.jpg)
+<img src="screenshots/PartOfAI.jpg" alt="Yapay Zeka Desteği" width="300"/>
 
 ### Profil Ekranı
 Kullanıcının kişisel bilgilerini, istatistiklerini ve başarılarını görüntülediği ekrandır.
 
-![Profil Ekranı](screenshots/ProfileScreen.jpg)
+<img src="screenshots/ProfileScreen.jpg" alt="Profil Ekranı" width="300"/>
 
 ### Profili Düzenleme
 Kullanıcılar bu ekrandan kişisel bilgilerini (boy, kilo, yaş vb.) güncelleyebilirler.
 
-![Profili Düzenleme](screenshots/ProfileEditScreen.jpg)
+<img src="screenshots/ProfileEditScreen.jpg" alt="Profili Düzenleme" width="300"/>
 
 ## İletişim
 Herhangi bir hata durumunda [Gurkahramann](https://github.com/Gurkahramann) ile iletişime geçebilirsiniz. 
