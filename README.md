@@ -57,6 +57,7 @@ Kullanıcılar bu ekrandan kişisel bilgilerini (boy, kilo, yaş vb.) güncelley
 
 ## İletişim
 Herhangi bir hata durumunda [Gurkahramann](https://github.com/Gurkahramann) ile iletişime geçebilirsiniz. 
+Projeye katkılarından dolayı özellikle yapay zeka entegrasyonu konusunda [Muhammet Ali Şahal'a](https://github.com/Muhammet-842) teşekkür ederim.
 ## Get started
 
 1. Install dependencies
